@@ -1,5 +1,5 @@
-#ifndef CONSOLA_H_
-#define CONSOLA_H_
+#ifndef KERNEL_H_
+#define KERNEL_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,9 +10,7 @@
 #include <string.h>
 #include <unistd.h>
 
-void pushearInstruccion(char* instruccion, char*** listaInstrucciones);
-t_config* inicializarConfigs(void);
-int crear_conexion(char* ip_kernel, char* puerto_kernel);
+int iniciar_servidor(char* ip, char* puerto);
 
 typedef struct {
 	uint32_t tamanioDirecciones;
