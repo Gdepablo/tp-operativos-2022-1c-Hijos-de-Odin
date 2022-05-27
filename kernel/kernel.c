@@ -5,12 +5,27 @@
 
 // VARIABLES GLOBALES
 sem_t mutex_cola_new;
+
 t_queue* cola_new;
+t_queue cola_ready;
+t_queue cola_blocked;
+t_queue cola_suspendedBlocked;
+t_queue cola_suspendedReady;
+
+t_info_proceso executing;
 
 int main(void){
-	sem_init(&mutex_cola_new, 0, 1);
 	int socket_escucha;
-	cola_new = queue_create();
+
+	// SEMÁFOROS
+	sem_init(&mutex_cola_new, 0, 1);
+
+	// COLAS capaz no sean todas colas al imprementar SRT
+	cola_new     = queue_create();
+	cola_ready   = queue_create();
+	cola_blocked = queue_create();
+	cola_suspendedBlocked = queue_create();
+	cola_suspendedReady   = queue_create();
 
 	t_config* config = inicializarConfigs();
 	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
