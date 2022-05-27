@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <commons/string.h>
 #include <commons/config.h>
+#include <commons/collections/queue.h>
+#include <semaphore.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <string.h>
@@ -32,6 +34,7 @@ typedef struct {
 	t_buffer* buffer;
 } t_paquete;
 
+// PCB
 typedef struct {
 	uint32_t id_proceso;
 	uint32_t tamanio_direcciones;
@@ -43,5 +46,6 @@ typedef struct {
 
 t_info_proceso* desserializarProceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
+void* planificador_largo_plazo();
 
 #endif

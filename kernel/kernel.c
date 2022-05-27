@@ -1,8 +1,13 @@
 #include "kernel.h"
 
+// VARIABLES GLOBALES
+sem_t mutex_cola_new;
+t_queue* cola_new;
 
 int main(void){
+	sem_init(&mutex_cola_new, 0, 1);
 	int socket_escucha;
+	cola_new = queue_create();
 
 	t_config* config = inicializarConfigs();
 	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
@@ -13,6 +18,7 @@ int main(void){
 	char* ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	int ESTIMACION_INICIAL = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
 	int ALFA = atoi( config_get_string_value(config, "ALFA") );
+	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
 	socket_escucha = iniciar_servidor("127.0.0.1", "8000");
 
@@ -33,7 +39,6 @@ int main(void){
 				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
 				pthread_create(&thread, NULL, (void*)atender_cliente, socket_cliente );
 				pthread_join(thread, NULL);
-
 				break;
 			}
 			default:
@@ -120,15 +125,15 @@ t_info_proceso* desserializarProceso(t_buffer* buffer){
 
 
 /*
- DESCRIPCION:
+ DESCRIPCION: CREA LA PCB Y LA PUSHEA A cola_new
 
- PARAMETROS:
+ PARAMETROS: socket del cliente
 */
 void* atender_cliente(int* socket_cliente){
 	t_buffer* buffer = malloc(sizeof(buffer));
 
 	recv(*socket_cliente, &(buffer->size), sizeof(uint32_t), 0);
-	printf("size recibido en el hilo lol: %d \n", buffer->size);
+	printf("size recibido en el hilo: %d \n", buffer->size);
 	buffer -> stream = malloc(buffer->size);
 	recv(*socket_cliente, buffer->stream, buffer->size, 0);
 
@@ -136,5 +141,109 @@ void* atender_cliente(int* socket_cliente){
 	printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso -> listaInstrucciones);
 	printf("\n");
 
+	sem_wait(mutex_cola_new);
+	queue_push(cola_new, proceso);
+	sem_post(mutex_cola_new);
+
 	return 0;
 }
+
+/*
+ DESCRIPCION:
+
+ PARAMETROS:
+*/
+void* planificador_largo_plazo_inicializador(int GRADO_MULTIPROGRAMACION){
+
+	sem = GRADO_MULTIPROGRAMACION;
+
+	//espera activa hasta que lleguen los primeros 4 procesos
+	while(1){
+		wait(sem)
+		if( procesos_en_memoria <= GRADO_MULTIPROGRAMACION) {
+			if( !queue_is_empty(cola_new) ){
+				//pasar un proceso de new a ready
+				wait(unmutex);
+				procesos_en_memoria++;
+				signal(unmutex);
+			}
+			else{
+				signal(sem)
+			}
+		}
+	}
+
+	return "";
+}
+
+/*
+ DESCRIPCION:
+
+ PARAMETROS:
+*/
+void* planificador_largo_plazo_finalizador(){
+	while(1){
+		wait(finalizar);
+
+		free(proceso_ejecutandose);
+
+		wait(unmutex);
+		procesos_en_memoria--;
+		signal(unmutex);
+	}
+
+	return "";
+}
+
+/*
+ DESCRIPCION:
+
+ PARAMETROS:
+*/
+void* planificador_corto_plazo_fifo(){
+	//logica fifo
+
+	return "";
+}
+
+/*
+ DESCRIPCION:
+
+ PARAMETROS:
+*/
+void* planificador_corto_plazo_srt(){
+	//logica srt
+
+	return "";
+}
+
+/*
+ DESCRIPCION:
+
+ PARAMETROS:
+*/
+void* hilo_bloqueador(){
+
+
+	return "";
+}
+
+
+void* planificador_mediano_plazo(){
+
+
+	return "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
