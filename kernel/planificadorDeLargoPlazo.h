@@ -3,18 +3,11 @@
 
  PARAMETROS:
 */
-void* planificador_largo_plazo_new_a_ready(int GRADO_MULTIPROGRAMACION);
+void* new_a_ready(int GRADO_MULTIPROGRAMACION);
 
 /*
  DESCRIPCION:
 
  PARAMETROS:
 */
-void* planificador_largo_plazo_finalizador();
-
-/*
- DESCRIPCION:
-
- PARAMETROS:
-*/
-void* planificador_corto_plazo_fifo();
+void* executing_a_exit();

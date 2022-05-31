@@ -2,51 +2,52 @@
 #include <semaphore.h>
 #include "planificadorDeLargoPlazo.h"
 
-/*
 
-*/
-void* planificador_largo_plazo_new_a_ready(int GRADO_MULTIPROGRAMACION){
-	//espera activa hasta que lleguen los primeros 4 procesos
+void* ingreso_a_new(pcb) {
+	sem_wait(&mx_cola_new);
+	queue_push(cola_new, pcb);
+	sem_post(&mx_cola_new);
 
-	while(1){
-		wait(&semaforo_inicializador); // = 0;
-		wait(&grado_multiprogramacion); // = GRADO_MULTIPROGRAMACION;
-
-		//pasar un proceso de new a ready
-		wait(mx_colaReady);
-		pasarloaready();
-		signal(mx_colaReady);
-	}
+	sem_post(&procesos_en_ready);
 
 	return "";
 }
 
-void* planificador_mediano_plazo_suspended_a_ready(){
-	//espera activa hasta que lleguen los primeros 4 procesos
-
-
+void* new_a_ready_fifo(){
 	while(1){
-		wait(&grado_multiprogramacion); // = GRADO_MULTIPROGRAMACION;
+		sem_wait(&procesos_en_ready);
+		sem_wait(&grado_multiprogramacion);
 
-		//pasar un proceso de new a ready
-		wait(mx_colaReady);
-		pasarloaready();
-		signal(mx_colaReady);
+		sem_wait(&mx_lista_ready);
+		sem_wait(&mx_cola_new);
+		queue_push(lista_ready, queue_pop(&cola_new));
+		sem_post(&mx_cola_new);
+		sem_signal(&mx_lista_ready);
 	}
-
 	return "";
 }
 
-void* planificador_largo_plazo_finalizador(){
+void* new_a_ready_srt(){
 	while(1){
-		wait(finalizar);
+		sem_wait(&procesos_en_ready);
+		sem_wait(&grado_multiprogramacion);
 
-		free(proceso_ejecutandose);
-
-		wait(unmutex);
-		procesos_en_memoria--;
-		signal(unmutex);
+		sem_wait(&mx_lista_ready);
+		sem_wait(&mx_cola_new);
+		list_add(lista_ready, queue_pop(&cola_new));
+		sem_post(&mx_cola_new);
+		sem_signal(&mx_lista_ready);
 	}
+	return "";
+}
 
+void* executing_a_exit(){
+	while(1){
+		sem_wait(&proceso_finalizado);
+
+		free(executing);
+
+		sem_post(&grado_multiprogramacion);
+	}
 	return "";
 }

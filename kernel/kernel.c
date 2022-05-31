@@ -4,20 +4,28 @@
 #include "planificadorDeLargoPlazo.h"
 
 // VARIABLES GLOBALES
-sem_t mutex_cola_new; // = 1
-sem_t procesosEsperando; // = 0
-sem_t finDeEjecucion; // = 0
-sem_t mx_colaReady; // = 1
-sem_t ejecutar; // = 0
+
+// MUTEX
+sem_t mx_cola_new; // = 1
+sem_t mx_lista_ready; // = 1
+sem_t mx_lista_blocked; // = 1
+sem_t mx_lista_suspended_blocked; // = 1
+// CONTADORES
+sem_t procesos_en_ready; // = 0
 sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
+// SINCRONIZADORES
+sem_t proceso_finalizado; // = 0
+sem_t fin_de_ejecucion; // = 0
 
+// COLAS Y LISTAS
 t_queue* cola_new;
-t_queue* cola_ready;
-t_queue* cola_blocked;
-t_queue* cola_suspendedBlocked;
-t_queue* cola_suspendedReady;
+t_queue* cola_ready; // FIFO
+t_list*  lista_ready; // SRT
+t_list*  lista_blocked;
+t_list*  lista_suspended_blocked;
+t_list*  lista_suspended_ready;
 
-t_info_proceso executing;
+t_pcb executing;
 
 int ESTIMACION_INICIAL;
 
@@ -37,19 +45,21 @@ int main(void){
 	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
 	// SEMÁFOROS
-	sem_init(&mutex_cola_new, 0, 1);
+	sem_init(&mx_cola_new, 0, 1);
 	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
 
-	// COLAS capaz no sean todas colas al imprementar SRT
+	// COLAS
 	cola_new     = queue_create();
 	cola_ready   = queue_create();
-	cola_blocked = queue_create();
-	cola_suspendedBlocked = queue_create();
-	cola_suspendedReady   = queue_create();
+	list_ready   = list_create();
+	list_blocked = list_create();
+	list_suspendedBlocked = list_create();
+	list_suspendedReady   = list_create();
 
 
 
 	socket_escucha = iniciar_servidor("127.0.0.1", "8000");
+
 
 	// ARRANCA EL WHILE
 	while(1){
@@ -78,6 +88,7 @@ int main(void){
 		}
 	}
 
+
 	return 0;
 }
 
@@ -86,8 +97,7 @@ int main(void){
 
  PARAMETROS:
 */
-int iniciar_servidor(char* ip, char* puerto)
-{
+int iniciar_servidor(char* ip, char* puerto) {
 	int socket_servidor;
 
 	struct addrinfo hints;
@@ -186,40 +196,9 @@ void* atender_cliente(int* socket_cliente){
 	free(proceso->listaInstrucciones);
 	free(proceso);
 
-	sem_wait(&mutex_cola_new);
-	queue_push(cola_new, pcb);
-	sem_post(&mutex_cola_new);
+	ingreso_a_new(pcb);
 
 	return 0;
-}
-
-void blocked_a_suspended_o_ready(){
-
-	inputoutput(pcb, x);
-	usleep(tiempoMaximo);
-	if(sigueBloqueado(pcb)) {
-		suspender(pcb); // <- poner signal(&grado_multiprogramacion);
-	}
-	else{
-		wait(mx_colaReady);
-		pasarloaready();
-		signal(mx_colaReady);
-	}
-}
-
-
-void suspender(pcb){
-	wait(&mx_lista_bloqueados);
-	t_pcb* pcb_a_suspender = queue_pop(cola_blocked);
-	signal(&mx_lista_bloqueados);
-
-	// LOGICA PARA COMUNICARSE CON MEMORIA
-
-	wait(&mx_cola_suspended_bloqueados);
-	queue_push(cola_suspendedBlocked, pcb_a_suspender);
-	signal(&mx_cola_suspended_bloqueados);
-
-	signal(&grado_multiprogramacion);
 }
 
 

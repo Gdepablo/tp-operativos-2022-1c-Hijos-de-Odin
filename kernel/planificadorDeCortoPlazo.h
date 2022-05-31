@@ -15,7 +15,7 @@ void* planificador_corto_plazo_srt();
 
 
 
-void* enviar_a_cpu_fifo();
+void* enviar_a_cpu();
 
 
 
