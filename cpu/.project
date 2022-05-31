@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kernel</name>
+	<name>cpu</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -28,6 +28,5 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>org.eclipse.cdt.autotools.core.autotoolsNatureV2</nature>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
 </projectDescription>

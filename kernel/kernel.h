@@ -41,7 +41,7 @@ typedef struct {
 	char** lista_instrucciones;
 	uint32_t program_counter;
 	uint32_t tabla_paginas;
-	uint32_t estimacion_rafagas;
+	uint32_t estimacion_rafagas; // para el SRT
 } t_pcb;
 
 t_info_proceso* desserializarProceso(t_buffer* buffer);

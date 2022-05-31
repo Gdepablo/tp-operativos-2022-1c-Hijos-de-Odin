@@ -1,24 +1,44 @@
 #include "kernel.h"
-#include "planificadorDeCortoPlazo"
-#include "planificadorDeMedianoPlazo"
-#include "planificadorDeLargoPlazo"
+#include "planificadorDeCortoPlazo.h"
+#include "planificadorDeMedianoPlazo.h"
+#include "planificadorDeLargoPlazo.h"
 
 // VARIABLES GLOBALES
-sem_t mutex_cola_new;
+sem_t mutex_cola_new; // = 1
+sem_t procesosEsperando; // = 0
+sem_t finDeEjecucion; // = 0
+sem_t mx_colaReady; // = 1
+sem_t ejecutar; // = 0
+sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
 
 t_queue* cola_new;
-t_queue cola_ready;
-t_queue cola_blocked;
-t_queue cola_suspendedBlocked;
-t_queue cola_suspendedReady;
+t_queue* cola_ready;
+t_queue* cola_blocked;
+t_queue* cola_suspendedBlocked;
+t_queue* cola_suspendedReady;
 
 t_info_proceso executing;
+
+int ESTIMACION_INICIAL;
 
 int main(void){
 	int socket_escucha;
 
+	// VARIABLES DEL CONFIG
+	t_config* config = inicializarConfigs();
+	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
+	char* PUERTO_MEMORIA = config_get_string_value(config, "PUERTO_MEMORIA");
+	char* IP_CPU = config_get_string_value(config, "IP_CPU");
+	char* PUERTO_CPU_DISPATCH = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+	char* PUERTO_CPU_INTERRUPT = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+	char* ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
+	ESTIMACION_INICIAL = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
+	int ALFA = atoi( config_get_string_value(config, "ALFA") );
+	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
+
 	// SEMÁFOROS
 	sem_init(&mutex_cola_new, 0, 1);
+	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
 
 	// COLAS capaz no sean todas colas al imprementar SRT
 	cola_new     = queue_create();
@@ -27,16 +47,7 @@ int main(void){
 	cola_suspendedBlocked = queue_create();
 	cola_suspendedReady   = queue_create();
 
-	t_config* config = inicializarConfigs();
-	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
-	char* PUERTO_MEMORIA = config_get_string_value(config, "PUERTO_MEMORIA");
-	char* IP_CPU = config_get_string_value(config, "IP_CPU");
-	char* PUERTO_CPU_DISPATCH = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
-	char* PUERTO_CPU_INTERRUPT = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
-	char* ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
-	int ESTIMACION_INICIAL = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
-	int ALFA = atoi( config_get_string_value(config, "ALFA") );
-	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
+
 
 	socket_escucha = iniciar_servidor("127.0.0.1", "8000");
 
@@ -44,6 +55,7 @@ int main(void){
 	while(1){
 		uint32_t codOp;
 
+		// liberar? no afecta al avisar el exit a la consola?
 		int* socket_cliente = malloc(sizeof(int));
 		*socket_cliente = accept(socket_escucha, NULL, NULL);
 
@@ -57,6 +69,7 @@ int main(void){
 				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
 				pthread_create(&thread, NULL, (void*)atender_cliente, socket_cliente );
 				pthread_join(thread, NULL);
+				free(socket_cliente); // ya copie el numero con el que identifica al socket en atender_cliente()
 				break;
 			}
 			default:
@@ -159,25 +172,55 @@ void* atender_cliente(int* socket_cliente){
 	printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso -> listaInstrucciones);
 	printf("\n");
 
-	sem_wait(mutex_cola_new);
-	queue_push(cola_new, proceso);
-	sem_post(mutex_cola_new);
+	t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largoListaInstrucciones + sizeof(char**) );
+
+	pcb->id_proceso = *socket_cliente;
+	pcb->tamanio_direcciones = proceso->tamanioDirecciones;
+	pcb->lista_instrucciones = string_split( proceso->listaInstrucciones, "\n");
+	pcb->program_counter = 0;
+	pcb->tabla_paginas = 0;
+	pcb->estimacion_rafagas = ESTIMACION_INICIAL;
+
+	free(buffer->stream);
+	free(buffer);
+	free(proceso->listaInstrucciones);
+	free(proceso);
+
+	sem_wait(&mutex_cola_new);
+	queue_push(cola_new, pcb);
+	sem_post(&mutex_cola_new);
 
 	return 0;
 }
 
+void blocked_a_suspended_o_ready(){
+
+	inputoutput(pcb, x);
+	usleep(tiempoMaximo);
+	if(sigueBloqueado(pcb)) {
+		suspender(pcb); // <- poner signal(&grado_multiprogramacion);
+	}
+	else{
+		wait(mx_colaReady);
+		pasarloaready();
+		signal(mx_colaReady);
+	}
+}
 
 
+void suspender(pcb){
+	wait(&mx_lista_bloqueados);
+	t_pcb* pcb_a_suspender = queue_pop(cola_blocked);
+	signal(&mx_lista_bloqueados);
 
+	// LOGICA PARA COMUNICARSE CON MEMORIA
 
+	wait(&mx_cola_suspended_bloqueados);
+	queue_push(cola_suspendedBlocked, pcb_a_suspender);
+	signal(&mx_cola_suspended_bloqueados);
 
-
-
-
-
-
-
-
+	signal(&grado_multiprogramacion);
+}
 
 
 
