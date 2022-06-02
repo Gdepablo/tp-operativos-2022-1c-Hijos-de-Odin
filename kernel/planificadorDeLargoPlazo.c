@@ -19,7 +19,6 @@ void* new_a_ready_fifo(){
 	while(1){
 		sem_wait(&procesos_en_ready);
 		sem_wait(&grado_multiprogramacion);
-		int a = 2;
 		sem_wait(&mx_lista_ready);
 		sem_wait(&mx_cola_new);
 		queue_push(lista_ready, queue_pop(cola_new));

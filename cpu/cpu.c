@@ -25,8 +25,8 @@ int main(void){
 	char* puerto_dispatch = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH"); // aca se comunica el kernel para mensajes de dispatch
 	char* puerto_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT"); // aca se comunica con el kernel para enviar interrupciones
 	char* reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB");
-	int retardo_noop = atoi(config_get_string_value(config, "RETARDO_NOOP"));
-	int entradas_tlb = atoi(config_get_string_value(config, "ENTRADAS_TLB"));
+	int retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") );
+	int entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
 	//FIN CONFIG
 
 	//SOCKETS

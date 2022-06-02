@@ -13,6 +13,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+
+
 #define CREAR_PROCESO 1
 
 int iniciar_servidor(char* ip, char* puerto);
@@ -48,5 +50,6 @@ typedef struct {
 t_info_proceso* desserializarProceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
 void* planificador_largo_plazo();
+int crear_conexion(char *ip, char* puerto);
 
 #endif

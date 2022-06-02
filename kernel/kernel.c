@@ -35,6 +35,7 @@ pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
 pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
 
 int ESTIMACION_INICIAL;
+char* ALGORITMO_PLANIFICACION;
 
 int main(void){
 	int socket_escucha;
@@ -42,6 +43,8 @@ int main(void){
 	// INICIALIZACION DE SEMÁFOROS
 	sem_init(&mx_cola_new, 0, 1);
 	sem_init(&se_inicio_el_hilo, 0, 0);
+	sem_init(&procesos_en_ready, 0, 0);
+
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, (void*)new_a_ready_fifo, NULL);
@@ -63,21 +66,24 @@ int main(void){
 		sem_wait(&se_inicio_el_hilo);
 	}
 
-	usleep(10000000);
+	printf("se iniciaron todos los hilos \n");
+
+	usleep(10000000); // 10 segundos
 
 	// VARIABLES DEL CONFIG
 	t_config* config = inicializarConfigs();
 	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
 	char* PUERTO_MEMORIA = config_get_string_value(config, "PUERTO_MEMORIA");
 	char* IP_CPU = config_get_string_value(config, "IP_CPU");
+	char* PUERTO_ESCUCHA = config_get_string_value(config, "PUERTO_ESCUCHA");
 	char* PUERTO_CPU_DISPATCH = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
 	char* PUERTO_CPU_INTERRUPT = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
-	char* ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
+	ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	ESTIMACION_INICIAL = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
 	int ALFA = atoi( config_get_string_value(config, "ALFA") );
 	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
-	// COLAS
+	// COLAS Y LISTAS
 	cola_new     = queue_create();
 	cola_ready   = queue_create();
 	lista_ready   = list_create();
@@ -85,9 +91,11 @@ int main(void){
 	lista_suspended_blocked = list_create();
 	lista_suspended_ready   = list_create();
 
-
-
-	socket_escucha = iniciar_servidor("127.0.0.1", "8000");
+	// SOCKETS
+	socket_escucha = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA); // por aca se comunican las consolas XD
+	int socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH);		// se conecta a cpu
+	int socket_cpu_interrupt = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT);	// se conecta a cpu
+	int socket_cpu_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);		// se conecta a memoria
 
 
 	// ARRANCA EL WHILE
@@ -114,7 +122,7 @@ int main(void){
 				break;
 			}
 			default:
-				printf("codigo erroneo \n");
+				printf("codigo de operacion erroneo \n");
 				break;
 		}
 	}
@@ -123,11 +131,32 @@ int main(void){
 	return 0;
 }
 
-/*
- DESCRIPCION:
+int crear_conexion(char *ip, char* puerto)
+{
+	struct addrinfo hints;
+	struct addrinfo *server_info;
 
- PARAMETROS:
-*/
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_PASSIVE;
+
+	getaddrinfo(ip, puerto, &hints, &server_info);
+
+	// Ahora vamos a crear el socket. LISTO
+	int socket_cliente = socket( server_info -> ai_family,
+								 server_info -> ai_socktype,
+								 server_info -> ai_protocol);
+
+	// Ahora que tenemos el socket, vamos a conectarlo LISTO
+
+	connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
+
+	freeaddrinfo(server_info);
+
+	return socket_cliente;
+}
+
 int iniciar_servidor(char* ip, char* puerto) {
 	int socket_servidor;
 
@@ -160,11 +189,6 @@ int iniciar_servidor(char* ip, char* puerto) {
 	return socket_servidor;
 }
 
-/*
- DESCRIPCION:
-
- PARAMETROS:
-*/
 t_config* inicializarConfigs(void) {
 	t_config* nuevo_config;
 
@@ -173,11 +197,7 @@ t_config* inicializarConfigs(void) {
 	return nuevo_config;
 }
 
-/*
- DESCRIPCION:
 
- PARAMETROS:
-*/
 t_info_proceso* desserializarProceso(t_buffer* buffer){
 	t_info_proceso* procesoNuevo = malloc(sizeof(t_info_proceso));
 	int offset = 0;
