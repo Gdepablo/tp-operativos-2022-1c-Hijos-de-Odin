@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <netdb.h>
 #include <string.h>
+#include <stdlib.h>
+#include <netdb.h>
 #include <sys/socket.h>
 #include <commons/string.h>
 #include <commons/config.h>

@@ -4,7 +4,7 @@
 /*
  * TODO
  * COPIAR EL CONFIG - LISTO
- * HACER LOS SOCKETS:
+ * HACER LOS SOCKETS: - LISTOS
  * 	- ESCUCHAR la conexion del kernel DISPATCH (ip 127.0.0.1, puerto 15001)
  * 	- ESCUCHAR la conexion del kernel INTERRUPT (ip 127.0.0.1, puerto 15005)
  * 	- CONECTARSE a memoria (ip 127.0.0.1, puerto 15002)
@@ -32,9 +32,12 @@ int main(void){
 	//SOCKETS
 	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
 	int socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
+	printf("se conecto el kernel al dispatch \n");
 	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
 	int socket_interrupt = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
+	printf("se conecto el kernel al interrupt \n");
 	int socket_memoria = crear_conexion(ip, puerto_memoria); // se conecta a memoria, el que acepta es memoria
+	printf("conexion con memoria establecida \n");
 	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS
 
 
