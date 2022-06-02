@@ -96,9 +96,9 @@ int main(int argc, char** argv){
 t_config* inicializarConfigs(void) {
 			t_config* nuevo_config;
 
-			nuevo_config = config_create("/home/utnso/tp/tp/consola/consola.config");
+			nuevo_config = config_create("/home/utnso/workspace/tp-2022-1c-Hijos-de-Odin/consola/consola.config");
 
-			return nuevo_config; //Creo que esto funciona así igual pero no estoy seguro
+			return nuevo_config;
 }
 
 

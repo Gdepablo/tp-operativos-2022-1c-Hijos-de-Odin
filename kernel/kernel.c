@@ -169,7 +169,7 @@ int iniciar_servidor(char* ip, char* puerto) {
 t_config* inicializarConfigs(void) {
 	t_config* nuevo_config;
 
-	nuevo_config = config_create("/home/utnso/tp/tp/kernel/kernel.config");
+	nuevo_config = config_create("/home/utnso/workspace/tp-2022-1c-Hijos-de-Odin/kernel/kernel.config");
 
 	return nuevo_config;
 }
