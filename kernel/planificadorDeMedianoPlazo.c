@@ -18,8 +18,9 @@ void* blocked_a_ready() {
 	return "";
 }
 
-void blocked_a_suspended_blocked(pcb){
+void blocked_a_suspended_blocked(t_pcb* pcb){
 	wait(&mx_lista_blocked);
+	// ver bien esto XD
 	t_pcb* pcb_a_suspender = list_add(lista_blocked);
 	signal(&mx_lista_blocked);
 
@@ -38,7 +39,7 @@ void* suspended_blocked_a_suspended_ready() {
 }
 
 void* suspended_ready_a_ready(){
-
+	sem_post(&se_inicio_el_hilo);
 	while(1){
 		wait(&grado_multiprogramacion); // = GRADO_MULTIPROGRAMACION;
 

@@ -18,7 +18,7 @@
 					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.1793251564.525026513" name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.base.2094240613" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="cdt.managedbuild.target.gnu.platform.base.1984758827" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-							<builder buildPath="${workspace_loc:/kernel}/Default" id="cdt.managedbuild.target.gnu.builder.base.83361067" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<builder buildPath="${workspace_loc:/kernel}/Default" enableAutoBuild="false" id="cdt.managedbuild.target.gnu.builder.base.83361067" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="false" stopOnErr="true" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.171488234" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.746931650" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.include.paths.2086808297" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -28,7 +28,7 @@
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.916139191" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1818596387" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
-								<option id="gnu.c.compiler.option.include.paths.1205042168" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+								<option id="gnu.c.compiler.option.include.paths.1205042168" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="pthreads"/>
 									<listOptionValue builtIn="false" value="commons"/>
 								</option>
@@ -46,6 +46,15 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.toolchain.gnu.base.1793251564.1001950914" name="planificadorDeLargoPlazo.c" rcbsApplicability="disable" resourcePath="planificadorDeLargoPlazo.c" toolsToInvoke="cdt.managedbuild.tool.gnu.c.compiler.base.1818596387.321163596">
+						<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1818596387.321163596" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.1818596387">
+							<option id="gnu.c.compiler.option.warnings.extrawarn.1556727782" name="Extra warnings (-Wextra)" superClass="gnu.c.compiler.option.warnings.extrawarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+							<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1674270604" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+						</tool>
+					</fileInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

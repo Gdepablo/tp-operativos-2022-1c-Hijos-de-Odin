@@ -1,4 +1,5 @@
 #include "kernel.h"
+
 #include "planificadorDeCortoPlazo.h"
 #include "planificadorDeMedianoPlazo.h"
 #include "planificadorDeLargoPlazo.h"
@@ -16,6 +17,7 @@ sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
 // SINCRONIZADORES
 sem_t proceso_finalizado; // = 0
 sem_t fin_de_ejecucion; // = 0
+sem_t se_inicio_el_hilo; // = 0
 
 // COLAS Y LISTAS
 t_queue* cola_new;
@@ -27,10 +29,41 @@ t_list*  lista_suspended_ready;
 
 t_pcb executing;
 
+// HILOS
+pthread_t lp_new_ready_fifo, lp_new_ready_srt, lp_exec_exit; // HILOS LARGO PLAZO
+pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
+pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
+
 int ESTIMACION_INICIAL;
 
 int main(void){
 	int socket_escucha;
+
+	// INICIALIZACION DE SEMÁFOROS
+	sem_init(&mx_cola_new, 0, 1);
+	sem_init(&se_inicio_el_hilo, 0, 0);
+
+	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
+	pthread_create(&lp_new_ready_fifo, NULL, (void*)new_a_ready_fifo, NULL);
+	pthread_create(&lp_new_ready_srt, NULL, (void*)new_a_ready_srt, NULL);
+	pthread_create(&lp_exec_exit, NULL, (void*)executing_a_exit, NULL);
+	pthread_create(&mp_suspendedready_ready, NULL, (void*)suspended_ready_a_ready, NULL);
+	pthread_create(&cp_ready_exec_fifo, NULL, (void*)ready_a_executing_fifo, NULL);
+	pthread_create(&cp_ready_exec_srt, NULL, (void*)ready_a_executing_srt, NULL);
+	pthread_create(&cp_sacar_exec, NULL, (void*)executing_a_ready_o_blocked, NULL);
+	pthread_detach(lp_new_ready_fifo);
+	pthread_detach(lp_new_ready_srt);
+	pthread_detach(lp_exec_exit);
+	pthread_detach(mp_suspendedready_ready);
+	pthread_detach(cp_ready_exec_fifo);
+	pthread_detach(cp_ready_exec_srt);
+	pthread_detach(cp_sacar_exec);
+
+	for(int i = 0; i < 7; i++){
+		sem_wait(&se_inicio_el_hilo);
+	}
+
+	usleep(10000000);
 
 	// VARIABLES DEL CONFIG
 	t_config* config = inicializarConfigs();
@@ -44,17 +77,15 @@ int main(void){
 	int ALFA = atoi( config_get_string_value(config, "ALFA") );
 	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
-	// SEMÁFOROS
-	sem_init(&mx_cola_new, 0, 1);
-	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
+
 
 	// COLAS
 	cola_new     = queue_create();
 	cola_ready   = queue_create();
-	list_ready   = list_create();
-	list_blocked = list_create();
-	list_suspendedBlocked = list_create();
-	list_suspendedReady   = list_create();
+	lista_ready   = list_create();
+	lista_blocked = list_create();
+	lista_suspended_blocked = list_create();
+	lista_suspended_ready   = list_create();
 
 
 
@@ -74,6 +105,7 @@ int main(void){
 		// SE FIJA EL CODIGO DE OPERACION
 		switch(codOp){
 			case CREAR_PROCESO:{
+				// HACE FALTA UN HILO O PUEDO LLAMAR A LA FUNCION atender_cliente() Y LISTO?
 				pthread_t thread;
 
 				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
@@ -103,7 +135,6 @@ int iniciar_servidor(char* ip, char* puerto) {
 	struct addrinfo hints;
 	struct addrinfo *servinfo;
 	int activado =1;
-
 
 
 	memset(&hints, 0, sizeof(hints));
@@ -196,7 +227,7 @@ void* atender_cliente(int* socket_cliente){
 	free(proceso->listaInstrucciones);
 	free(proceso);
 
-	ingreso_a_new(pcb);
+	ingreso_a_new(pcb); // planificador largo plazo
 
 	return 0;
 }

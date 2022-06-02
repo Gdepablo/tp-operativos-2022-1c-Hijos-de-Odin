@@ -5,6 +5,7 @@
 // enviando funciones como parámetro se podrían ahorrar algunos duplicados
 
 void* ready_a_executing_fifo(){
+	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_ready);
 		sem_wait(&fin_de_ejecucion);
@@ -16,6 +17,7 @@ void* ready_a_executing_fifo(){
 }
 
 void* ready_a_executing_srt(){
+	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_ready);
 		// lógica SRT
@@ -24,6 +26,8 @@ void* ready_a_executing_srt(){
 	return "";
 }
 void* executing_a_ready_o_blocked() {
+	// este le tiene que avisar al de ready a executing
+	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		// espera el fin de ejecución
 		if(/*se fue a I/O*/) {
@@ -37,6 +41,7 @@ void* executing_a_ready_o_blocked() {
 }
 
 void* executing_a_ready_fifo(){
+	// HACE FALTA ESTA FUNCION?
 
 	sem_wait(&mx_lista_ready);
 	queue_push(cola_ready, /*proceso ejecutando*/);
@@ -54,6 +59,7 @@ void* executing_a_ready_srt(){
 }
 
 void * executing_a_blocked_srt() {
+	// no podemos usar el mismo para srt y fifo?
 
 	sem_wait(&mx_lista_blocked);
 	list_add(&lista_blocked, /*proceso ejecutando*/);

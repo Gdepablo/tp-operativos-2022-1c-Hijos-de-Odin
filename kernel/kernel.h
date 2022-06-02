@@ -6,6 +6,7 @@
 #include <commons/string.h>
 #include <commons/config.h>
 #include <commons/collections/queue.h>
+#include <commons/collections/list.h>
 #include <semaphore.h>
 #include <sys/socket.h>
 #include <netdb.h>
