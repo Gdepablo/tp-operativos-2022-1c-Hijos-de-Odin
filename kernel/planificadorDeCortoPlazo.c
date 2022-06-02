@@ -42,6 +42,7 @@ void* executing_a_ready_o_blocked() {
 
 void* executing_a_ready_fifo(){
 	// HACE FALTA ESTA FUNCION?
+	//luca: respondo abajo
 
 	sem_wait(&mx_lista_ready);
 	queue_push(cola_ready, /*proceso ejecutando*/);
@@ -60,6 +61,7 @@ void* executing_a_ready_srt(){
 
 void * executing_a_blocked_srt() {
 	// no podemos usar el mismo para srt y fifo?
+	// luca: no porque fifo usa colas y srt usa listas, pero si pasamos las funciones por parámetro no haría falta.
 
 	sem_wait(&mx_lista_blocked);
 	list_add(&lista_blocked, /*proceso ejecutando*/);

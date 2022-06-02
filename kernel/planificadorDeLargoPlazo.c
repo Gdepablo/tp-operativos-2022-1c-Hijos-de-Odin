@@ -49,7 +49,7 @@ void* executing_a_exit(){
 	while(1){
 		sem_wait(&proceso_finalizado);
 		//tenemos que liberar los punteros que hayan dentro del pcb antes de liberar el puntero al pcb
-		free(executing);
+		free(executing); // luca: creo que esto no se libera hasta el fin de ejecución porque cada proceso que ejecuta sobreescribe ese espacio en memoria
 
 		sem_post(&grado_multiprogramacion);
 	}

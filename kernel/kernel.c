@@ -77,8 +77,6 @@ int main(void){
 	int ALFA = atoi( config_get_string_value(config, "ALFA") );
 	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
-
-
 	// COLAS
 	cola_new     = queue_create();
 	cola_ready   = queue_create();
@@ -106,6 +104,7 @@ int main(void){
 		switch(codOp){
 			case CREAR_PROCESO:{
 				// HACE FALTA UN HILO O PUEDO LLAMAR A LA FUNCION atender_cliente() Y LISTO?
+				// luca: podemos llamar directamente a atender cliente
 				pthread_t thread;
 
 				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
