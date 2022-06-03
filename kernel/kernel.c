@@ -38,13 +38,11 @@ int ESTIMACION_INICIAL;
 char* ALGORITMO_PLANIFICACION;
 
 int main(void){
-	int socket_escucha;
 
 	// INICIALIZACION DE SEMÁFOROS
 	sem_init(&mx_cola_new, 0, 1);
 	sem_init(&se_inicio_el_hilo, 0, 0);
 	sem_init(&procesos_en_ready, 0, 0);
-
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, (void*)new_a_ready_fifo, NULL);
@@ -54,6 +52,7 @@ int main(void){
 	pthread_create(&cp_ready_exec_fifo, NULL, (void*)ready_a_executing_fifo, NULL);
 	pthread_create(&cp_ready_exec_srt, NULL, (void*)ready_a_executing_srt, NULL);
 	pthread_create(&cp_sacar_exec, NULL, (void*)executing_a_ready_o_blocked, NULL);
+
 	pthread_detach(lp_new_ready_fifo);
 	pthread_detach(lp_new_ready_srt);
 	pthread_detach(lp_exec_exit);
@@ -69,36 +68,37 @@ int main(void){
 	printf("se iniciaron todos los hilos \n");
 
 	usleep(10000000); // 10 segundos
+	// luca: por que esperamos?
 
 	// VARIABLES DEL CONFIG
-	t_config* config = inicializarConfigs();
-	char* IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
-	char* PUERTO_MEMORIA = config_get_string_value(config, "PUERTO_MEMORIA");
-	char* IP_CPU = config_get_string_value(config, "IP_CPU");
-	char* PUERTO_ESCUCHA = config_get_string_value(config, "PUERTO_ESCUCHA");
-	char* PUERTO_CPU_DISPATCH = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
-	char* PUERTO_CPU_INTERRUPT = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
-	ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
-	ESTIMACION_INICIAL = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
-	int ALFA = atoi( config_get_string_value(config, "ALFA") );
+	t_config* config            = inicializarConfigs();
+	char* IP_MEMORIA            = config_get_string_value(config, "IP_MEMORIA");
+	char* PUERTO_MEMORIA        = config_get_string_value(config, "PUERTO_MEMORIA");
+	char* IP_CPU                = config_get_string_value(config, "IP_CPU");
+	char* PUERTO_ESCUCHA        = config_get_string_value(config, "PUERTO_ESCUCHA");
+	char* PUERTO_CPU_DISPATCH   = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+	char* PUERTO_CPU_INTERRUPT  = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+	ALGORITMO_PLANIFICACION     = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
+	ESTIMACION_INICIAL          = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
+	int ALFA                    = atoi( config_get_string_value(config, "ALFA") );
 	int GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 
 	// COLAS Y LISTAS
-	cola_new     = queue_create();
-	cola_ready   = queue_create();
-	lista_ready   = list_create();
-	lista_blocked = list_create();
+	cola_new                = queue_create();
+	cola_ready              = queue_create();
+	lista_ready             = list_create();
+	lista_blocked           = list_create();
 	lista_suspended_blocked = list_create();
 	lista_suspended_ready   = list_create();
 
 	// SOCKETS
-	socket_escucha = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA); // por aca se comunican las consolas XD
-	int socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH);		// se conecta a cpu
-	int socket_cpu_interrupt = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT);	// se conecta a cpu
-	int socket_cpu_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);		// se conecta a memoria
+	int socket_escucha = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA);      // por aca se comunican las consolas XD
+	int socket_cpu_syscall = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA_SYSCALLS); // cpu se conecta a kernelSS
+	int socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH);	 // se conecta a cpu
+	int socket_cpu_interrupt = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT); // se conecta a cpu
+	int socket_cpu_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);	 // se conecta a memoria
 
 
-	// ARRANCA EL WHILE
 	while(1){
 		uint32_t codOp;
 
@@ -143,12 +143,9 @@ int crear_conexion(char *ip, char* puerto)
 
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
-	// Ahora vamos a crear el socket. LISTO
 	int socket_cliente = socket( server_info -> ai_family,
 								 server_info -> ai_socktype,
 								 server_info -> ai_protocol);
-
-	// Ahora que tenemos el socket, vamos a conectarlo LISTO
 
 	connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
 
@@ -249,6 +246,22 @@ void* atender_cliente(int* socket_cliente){
 	ingreso_a_new(pcb); // planificador largo plazo
 
 	return 0;
+}
+
+void* esperar_syscall() {
+	while(1) {
+		t_syscall una_syscall = recibirSyscall(); // espera por una sycall, la deserializa y la devuelve
+		switch(una_syscall.instruccion) {
+		case 0: // IO
+			executing_a_blocked(una_syscall.pcb, una_syscall.tiempo_de_bloqueo);
+			break;
+		case 1: // EXIT
+			executing_a_exit(una_syscall.pcb);
+			break;
+		default:
+			printf("Error de código de instrucción \n");
+		}
+	}
 }
 
 

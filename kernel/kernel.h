@@ -47,6 +47,12 @@ typedef struct {
 	uint32_t estimacion_rafagas; // para el SRT
 } t_pcb;
 
+typedef struct {
+	t_pcb pcb;
+	int instruccion; // 0==IO, 1==EXIT
+	int tiempo_de_bloqueo; // para IO
+} t_syscall;
+
 t_info_proceso* desserializarProceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
 void* planificador_largo_plazo();
