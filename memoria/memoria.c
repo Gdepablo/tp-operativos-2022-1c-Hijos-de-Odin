@@ -19,10 +19,47 @@ int main(void){
 	//FIN CONFIG
 
 	//SOCKETS: MEMORIA ESCUCHA TANTO EL KERNEL COMO EL CPU POR EL MISMO SOCKET
+	uint32_t handshake = 0;
+	uint32_t todo_ok = 1;
+	uint32_t todo_mal = 0;
+
 	int socket_escucha = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA);
-	int socket = accept(socket_escucha, 0, 0);
+
+	// HANDSHAKE CON KERNEL
+	int socket_kernel = accept(socket_escucha, 0, 0);
+	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);
+		if(handshake == 555){
+			printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
+			send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
+		}
+		else
+		{
+			printf("HANDSHAKE RECIBIDO DE KERNEL ERRONEO, TERMINANDO PROCESO (MEMORIA) \n");
+			send(socket_kernel, &todo_mal, sizeof(uint32_t), 0);
+			return 1;
+		}
+
+
+	// HANDSHAKE CON CPU / TODAVIA NO SE LE ENVIA INFO PARA TRADUCCION LOGICA A REAL
+	int socket_cpu = accept(socket_escucha, 0, 0);
+	recv(socket_cpu, &handshake, sizeof(uint32_t), MSG_WAITALL);
+	if(handshake == 222){
+		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (CPU)\n");
+		send(socket_cpu, &todo_ok, sizeof(uint32_t), 0);
+	}
+	else
+	{
+		printf("HANDSHAKE RECIBIDO ERRONEO DE CPU, TERMINANDO PROCESO (MEMORIA) \n");
+		send(socket_cpu, &todo_mal, sizeof(uint32_t), 0);
+		return 1;
+	}
 	//FIN SOCKETS
 
+	printf("Conexiones con Kernel y CPU establecidas correctamente. \n");
+
+	close(socket_escucha);
+	close(socket_cpu);
+	close(socket_kernel);
 	return 0;
 }
 

@@ -1,18 +1,5 @@
 #include "cpu.h"
 
-
-/*
- * TODO
- * COPIAR EL CONFIG - LISTO
- * HACER LOS SOCKETS: - LISTOS
- * 	- ESCUCHAR la conexion del kernel DISPATCH (ip 127.0.0.1, puerto 15001)
- * 	- ESCUCHAR la conexion del kernel INTERRUPT (ip 127.0.0.1, puerto 15005)
- * 	- CONECTARSE a memoria (ip 127.0.0.1, puerto 15002)
- *
- */
-
-
-
 int main(void){
 	printf("HOLA SOY EL CPU \n");
 
@@ -29,19 +16,68 @@ int main(void){
 	int entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
 	//FIN CONFIG
 
+	uint32_t handshake = 0;
+
 	//SOCKETS
 	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
 	int socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
 	printf("se conecto el kernel al dispatch \n");
+	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
+	printf("handshake recibido: %i \n", handshake);
+	if(handshake == 333){
+		printf("HANDSHAKE DEL KERNEL CORRECTO (DISPATCH) \n");
+	}
+	else
+	{
+		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (DISPATCH) \n");
+		return 1;
+	}
+
+	// METER UN SLEEP(1) EN KERNEL SINO NO LLEGA A CONECTAR XD;
+
 	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
-	int socket_interrupt = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
+	int socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
 	printf("se conecto el kernel al interrupt \n");
+	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
+	if(handshake == 111){
+		printf("HANDSHAKE DEL KERNEL CORRECTO (INTERRUPT) \n");
+	}
+	else
+	{
+		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (INTERRUPT) \n");
+		return 1;
+	}
+
+	uint32_t handshake_memoria = 222;
+	uint32_t respuesta_memoria = 0;
+
 	int socket_memoria = crear_conexion(ip, puerto_memoria); // se conecta a memoria, el que acepta es memoria
-	printf("conexion con memoria establecida \n");
-	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS
+	send(socket_memoria, &handshake_memoria, sizeof(uint32_t), 0);
+	recv(socket_memoria, &respuesta_memoria, sizeof(uint32_t), MSG_WAITALL);
+	if(respuesta_memoria == 1)
+	{
+		printf("HANDSHAKE INICIAL CON MEMORIA CORRECTO \n");
+	}
+	else
+	{
+		printf("HANDSHAKE INICIAL CON MEMORIA ERRONEO, TERMINANDO PROCESO \n");
+		return 1;
+	}
 
+	// BORRAR
+	sleep(5);
+	// BORRAR
 
+	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si todo esta correcto)
 
+	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
+
+	//momento liberacion de memoria
+	close(socket_escucha_interrupt);
+	close(socket_interrupt);
+	close(socket_escucha_dispatch);
+	close(socket_dispatch);
+	close(socket_memoria);
 	config_destroy(config);
 	return 0;
 }
@@ -113,6 +149,7 @@ int iniciar_servidor(char* ip, char* puerto) {
 	return socket_servidor;
 }
 /*
+
 void pushearInstruccion(char* instruccion, char*** listaInstrucciones){
 	char* aux = malloc(1024);
 	aux = string_new();
