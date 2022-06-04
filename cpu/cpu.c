@@ -68,9 +68,16 @@ int main(void){
 	sleep(5);
 	// BORRAR
 
+	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
+
 	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si todo esta correcto)
 
-	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
+	info_traduccion_t info_traduccion;
+
+	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
+	recv(socket_memoria, &(info_traduccion), sizeof(info_traduccion_t), MSG_WAITALL);
+	//YA RECIBI LA INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
+
 
 	//momento liberacion de memoria
 	close(socket_escucha_interrupt);

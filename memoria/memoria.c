@@ -53,9 +53,19 @@ int main(void){
 		send(socket_cpu, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
-	//FIN SOCKETS
 
 	printf("Conexiones con Kernel y CPU establecidas correctamente. \n");
+	//FIN SOCKETS
+
+	//COMIENZO HANDSHAKE CON CPU (para que cpu traduzca las direcciones)
+	info_traduccion_t info_traduccion;
+	info_traduccion.entradas_por_tabla = ENTRADAS_POR_TABLA;
+	info_traduccion.tamanio_paginas = TAMANIO_PAGINA;
+
+	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
+	//FIN HANDSHAKE
+
+	sleep(5);
 
 	close(socket_escucha);
 	close(socket_cpu);
