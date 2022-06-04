@@ -98,38 +98,85 @@ int main(void){
 	int socket_cpu_interrupt = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT); // se conecta a cpu
 	int socket_cpu_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);	 // se conecta a memoria
 
-
-	while(1){
-		uint32_t codOp;
-
-		// liberar? no afecta al avisar el exit a la consola?
-		int* socket_cliente = malloc(sizeof(int));
-		*socket_cliente = accept(socket_escucha, NULL, NULL);
-
-		recv(*socket_cliente, &(codOp), sizeof(uint32_t), 0);
-
-		// SE FIJA EL CODIGO DE OPERACION
-		switch(codOp){
-			case CREAR_PROCESO:{
-				// HACE FALTA UN HILO O PUEDO LLAMAR A LA FUNCION atender_cliente() Y LISTO?
-				// luca: podemos llamar directamente a atender cliente
-				pthread_t thread;
-
-				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
-				pthread_create(&thread, NULL, (void*)atender_cliente, socket_cliente );
-				pthread_join(thread, NULL);
-				free(socket_cliente); // ya copie el numero con el que identifica al socket en atender_cliente()
-				break;
-			}
-			default:
-				printf("codigo de operacion erroneo \n");
-				break;
-		}
 	}
 
 
 	return 0;
 }
+
+void* esperar_syscall() {
+	while(1) {
+		t_syscall una_syscall = recibirSyscall(); // espera por una sycall, la deserializa y la devuelve
+		switch(una_syscall.instruccion) {
+		case 0: // IO
+			executing_a_blocked(una_syscall.pcb, una_syscall.tiempo_de_bloqueo);
+			break;
+		case 1: // EXIT
+			executing_a_exit(una_syscall.pcb);
+			break;
+		default:
+			printf("Error de código de instrucción \n");
+		}
+	}
+}
+
+// RECEPCIÓN DE PROCESOS DESDE CONSOLA
+
+void* recibir_procesos() {
+	while(1) {
+		recibir_proceso();
+	}
+	return "";
+}
+
+void* recibir_proceso(int* socket_proceso) {
+	t_buffer* buffer = malloc(sizeof(buffer));
+
+	recv(*socket_proceso, &(buffer->size), sizeof(uint32_t), 0);
+	buffer -> stream = malloc(buffer->size);
+	recv(*socket_proceso, buffer->stream, buffer->size, 0);
+
+	t_info_proceso* proceso = deserializar_proceso(buffer);
+	printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso -> lista_instrucciones);
+	printf("\n");
+
+	t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largo_lista_instrucciones + sizeof(char**) );
+
+	pcb->id_proceso = *socket_proceso;
+	pcb->tamanio_direcciones = proceso->tamanio_direcciones;
+	pcb->lista_instrucciones = string_split( proceso->lista_instrucciones, "\n");
+	pcb->program_counter = 0;
+	pcb->tabla_paginas = 0;
+	pcb->estimacion_rafagas = ESTIMACION_INICIAL;
+
+	free(buffer->stream);
+	free(buffer);
+	free(proceso->lista_instrucciones);
+	free(proceso);
+
+	ingreso_a_new(pcb); // planificador largo plazo
+
+	return "";
+}
+
+t_info_proceso* deserializar_proceso(t_buffer* buffer) {
+	t_info_proceso* procesoNuevo = malloc(sizeof(t_info_proceso));
+	int offset = 0;
+	void* stream = buffer -> stream;
+
+	memcpy(&(procesoNuevo->tamanio_direcciones), stream, sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(&(procesoNuevo->largo_lista_instrucciones), stream+offset, sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	procesoNuevo -> lista_instrucciones = malloc(procesoNuevo->largo_lista_instrucciones);
+	memcpy(procesoNuevo->lista_instrucciones, stream+offset, procesoNuevo->largo_lista_instrucciones);
+
+
+	return procesoNuevo;
+}
+
+
+
 
 int crear_conexion(char *ip, char* puerto)
 {
@@ -195,74 +242,34 @@ t_config* inicializarConfigs(void) {
 }
 
 
-t_info_proceso* desserializarProceso(t_buffer* buffer){
-	t_info_proceso* procesoNuevo = malloc(sizeof(t_info_proceso));
-	int offset = 0;
-	void* stream = buffer -> stream;
-
-	memcpy(&(procesoNuevo->tamanioDirecciones), stream, sizeof(uint32_t));
-	offset += sizeof(uint32_t);
-	memcpy(&(procesoNuevo->largoListaInstrucciones), stream+offset, sizeof(uint32_t));
-	offset += sizeof(uint32_t);
-	procesoNuevo -> listaInstrucciones = malloc(procesoNuevo->largoListaInstrucciones);
-	memcpy(procesoNuevo->listaInstrucciones, stream+offset, procesoNuevo->largoListaInstrucciones);
-
-
-	return procesoNuevo;
-}
-
-
 /*
- DESCRIPCION: CREA LA PCB Y LA PUSHEA A cola_new
+   while(1){
+		uint32_t codOp;
 
- PARAMETROS: socket del cliente
-*/
-void* atender_cliente(int* socket_cliente){
-	t_buffer* buffer = malloc(sizeof(buffer));
+		// liberar? no afecta al avisar el exit a la consola?
+		int* socket_cliente = malloc(sizeof(int));
+		*socket_cliente = accept(socket_escucha, NULL, NULL);
 
-	recv(*socket_cliente, &(buffer->size), sizeof(uint32_t), 0);
-	printf("size recibido en el hilo: %d \n", buffer->size);
-	buffer -> stream = malloc(buffer->size);
-	recv(*socket_cliente, buffer->stream, buffer->size, 0);
+		recv(*socket_cliente, &(codOp), sizeof(uint32_t), 0);
 
-	t_info_proceso* proceso = desserializarProceso(buffer);
-	printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso -> listaInstrucciones);
-	printf("\n");
+		// SE FIJA EL CODIGO DE OPERACION
+		switch(codOp){
+			case CREAR_PROCESO:{
+				// HACE FALTA UN HILO O PUEDO LLAMAR A LA FUNCION atender_cliente() Y LISTO?
+				// luca: podemos llamar directamente a atender cliente
+				pthread_t thread;
 
-	t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largoListaInstrucciones + sizeof(char**) );
-
-	pcb->id_proceso = *socket_cliente;
-	pcb->tamanio_direcciones = proceso->tamanioDirecciones;
-	pcb->lista_instrucciones = string_split( proceso->listaInstrucciones, "\n");
-	pcb->program_counter = 0;
-	pcb->tabla_paginas = 0;
-	pcb->estimacion_rafagas = ESTIMACION_INICIAL;
-
-	free(buffer->stream);
-	free(buffer);
-	free(proceso->listaInstrucciones);
-	free(proceso);
-
-	ingreso_a_new(pcb); // planificador largo plazo
-
-	return 0;
-}
-
-void* esperar_syscall() {
-	while(1) {
-		t_syscall una_syscall = recibirSyscall(); // espera por una sycall, la deserializa y la devuelve
-		switch(una_syscall.instruccion) {
-		case 0: // IO
-			executing_a_blocked(una_syscall.pcb, una_syscall.tiempo_de_bloqueo);
-			break;
-		case 1: // EXIT
-			executing_a_exit(una_syscall.pcb);
-			break;
-		default:
-			printf("Error de código de instrucción \n");
+				// crea un hilo y le envia el socket del cliente que entro, en este caso de un proceso
+				pthread_create(&thread, NULL, (void*)atender_cliente, socket_cliente );
+				pthread_join(thread, NULL);
+				free(socket_cliente); // ya copie el numero con el que identifica al socket en atender_cliente()
+				break;
+			}
+			default:
+				printf("codigo de operacion erroneo \n");
+				break;
 		}
-	}
-}
+ */
 
 
 

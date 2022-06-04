@@ -22,9 +22,9 @@ t_config* inicializarConfigs(void);
 
 
 typedef struct {
-	uint32_t tamanioDirecciones;
-	uint32_t largoListaInstrucciones;
-	char* listaInstrucciones;
+	uint32_t tamanio_direcciones;
+	uint32_t largo_lista_instrucciones;
+	char* lista_instrucciones;
 } t_info_proceso;
 
 typedef struct {
