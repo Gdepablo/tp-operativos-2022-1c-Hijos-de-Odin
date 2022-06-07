@@ -1,93 +1,49 @@
 #include <stdio.h>
 #include "planificadorDeMedianoPlazo.h"
 
-void blocked_a_ready_o_suspended_blocked(){
+void* blocked_a_ready_o_suspended_blocked(pcb){
 
-	inputoutput(pcb, x);
-	usleep(tiempoMaximo);
+	usleep(TIEMPO_MAXIMO_BLOQUEADO);
 	if(sigueBloqueado(pcb)) {
 		blocked_a_suspended_blocked(pcb); // <- poner signal(&grado_multiprogramacion);
 	}
 	else{
 		blocked_a_ready();
 	}
+	return "";
 }
 
-// el hilo de i/o va a ser quien mande a comenzar esto
-// esto es del corto plazo, hay que pasarlo alla
-void* blocked_a_ready(t_pcb* pcb) {
-	/* VERSION 1 (LA FEA)
-	if( !strcmp("FIFO", ALGORITMO_PLANIFICACION)){
-		// sacar el pcb de lista_blocked y mandarlo a cola_ready
-		// buscar id del pcb en la lista de blocked y mandarlo a cola_ready
-		// preguntar de list_find para ver si asi se puede evitar todo el lio del pcbaux y el if
-		int posicion;
-		t_pcb* pcbaux = malloc(sizeof(t_pcb));
-		pcbaux->lista_instrucciones = malloc( string_array_size(pcb->lista_instrucciones) );
-		int size = list_size(lista_blocked);
+void blocked_a_ready() {
 
-		for(int i = 0; i < size; i++){
-			posicion = i;
-			*pcbaux = list_get(lista_blocked, i);
-
-			if( (pcbaux -> id_proceso) == (pcb -> id_proceso) ){
-				break;
-			}
+	sem_wait(&mx_cola_blocked);
+		if(algoritmo()) {
+			queue_push(&cola_ready, queue_pop(&cola_blocked));
+		} else {
+			list_add(&lista_ready, queue_pop(&cola_blocked));
 		}
-
-		*pcbaux = list_remove(lista_blocked, posicion);
-		queue_push(cola_ready, pcbaux);
-	}
-	else //entra aca si es SRT
-	{
-		//sacar el pcb de lista_blocked y mandarlo a lista_ready
-		int posicion;
-		t_pcb* pcbaux = malloc(sizeof(t_pcb));
-		pcbaux->lista_instrucciones = malloc( string_array_size(pcb->lista_instrucciones) );
-		int size = list_size(lista_blocked);
-
-		for(int i = 0; i < size; i++){
-			posicion = i;
-			*pcbaux = list_get(lista_blocked, i);
-
-			if( (pcbaux -> id_proceso) == (pcb -> id_proceso) ){
-				break;
-			}
-		}
-
-		*pcbaux = list_remove(lista_blocked, posicion);
-		list_add(lista_ready, pcbaux);
-	}
-	*/
-
-	// ##############################################
-
-	// VERSION 2 (LA MAX POWER)
-	int posicion;
-	t_pcb* pcbaux = malloc(sizeof(t_pcb));
-	pcbaux->lista_instrucciones = malloc( string_array_size(pcb->lista_instrucciones) );
+	sem_post(&mx_cola_blocked);
+	/*int posicion;
+	t_pcb* pcbaux;
 	int size = list_size(lista_blocked);
 
-	for(int i = 0; i < size; i++){
+	for(int i = 0; i < size; i++) {
 		posicion = i;
-		*pcbaux = list_get(lista_blocked, i);
+		pcbaux = list_get(lista_blocked, i);
 
-		if( (pcbaux -> id_proceso) == (pcb -> id_proceso) ){
+		if( (pcbaux -> id_proceso) == (pcb -> id_proceso) ) {
 			break;
 		}
 	}
 
-	*pcbaux = list_remove(lista_blocked, posicion);
-	if( !strcmp("FIFO", ALGORITMO_PLANIFICACION) )
-	{
+	list_remove(lista_blocked, posicion);
+	if(algoritmo()) {
+		// FIFO
 		queue_push(cola_ready, pcbaux);
-	}
-	else
-	{
+	} else {
+		// SJF
 		list_add(lista_ready, pcbaux);
 	}
-
-	return "";
+*/
 }
 
 void blocked_a_suspended_blocked(t_pcb* pcb){
@@ -122,3 +78,66 @@ void* suspended_ready_a_ready(){
 
 	return "";
 }
+// SE EJECUTA AL RECIBIR UNA SYSCALL
+void* executing_a_blocked_o_exit() {
+	sem_post(&se_inicio_el_hilo);
+	while(1) {
+		t_syscall una_syscall = malloc(executing);
+		recv(*socket_cpu_pcb, una_syscall, sizeof(una_syscall), MSG_WAITALL); // ver sizeof
+		if(una_syscall.instruccion) {
+			// EXIT
+			executing_a_exit(una_syscall.pcb); // largo plazo
+		} else {
+			// IO
+			executing_a_blocked(una_syscall); // mediano plazo
+		}
+		sem_post(&fin_de_ejecucion);
+	}
+	return "";
+}
+
+void executing_a_blocked(t_syscall una_syscall) {
+	sem_wait(&mx_cola_blocked);
+		queue_push(&cola_blocked, una_syscall.pcb);
+	sem_post(&mx_cola_blocked);
+
+	t_io* io;
+	io->id_proceso = una_syscall.pcb->id_proceso;
+	io->tiempo_de_bloqueo = una_syscall.tiempo_de_bloqueo;
+
+	sem_wait(&mx_cola_io);
+		queue_push(&cola_io, io);
+	sem_post(&mx_cola_io);
+
+	sem_post(&proceso_bloqueado);
+}
+
+void* inputOuput() {
+	t_io io;
+	while(1) {
+		sem_wait(&proceso_bloqueado);
+		io = queue_pop(&cola_io);
+		if(io.tiempo_de_bloqueo < TIEMPO_MAXIMO_BLOQUEADO) {
+			usleep(io.tiempo_de_bloqueo);
+			blocked_a_ready();
+		}
+	}
+	return "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

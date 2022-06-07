@@ -29,7 +29,7 @@ void* new_a_ready_fifo(){
 	return "";
 }
 
-void* new_a_ready_srt(){
+void* new_a_ready(){
 	sem_post(&se_inicio_el_hilo);
 	while(1){
 		sem_wait(&procesos_en_ready);
@@ -45,13 +45,14 @@ void* new_a_ready_srt(){
 }
 
 void* executing_a_exit(t_pcb* pcb){
-	sem_post(&se_inicio_el_hilo);
-	while(1){
-		sem_wait(&proceso_finalizado);
-		//tenemos que liberar los punteros que hayan dentro del pcb antes de liberar el puntero al pcb
-		free(executing); // luca: creo que esto no se libera hasta el fin de ejecución porque cada proceso que ejecuta sobreescribe ese espacio en memoria
+	free(pcb->id_proceso);
+	free(pcb->tamanio_direcciones);
+	free(pcb->instrucciones);
+	free(pcb->program_counter);
+	free(pcb->tabla_paginas);
+	free(pcb->estimacion_rafagas);
+	free(pcb);
 
-		sem_post(&grado_multiprogramacion);
-	}
+	sem_post(&grado_multiprogramacion);
 	return "";
 }

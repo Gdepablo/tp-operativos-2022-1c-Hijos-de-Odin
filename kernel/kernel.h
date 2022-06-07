@@ -23,8 +23,8 @@ t_config* inicializarConfigs(void);
 
 typedef struct {
 	uint32_t tamanio_direcciones;
-	uint32_t largo_lista_instrucciones;
-	char* lista_instrucciones;
+	uint32_t largo_instrucciones;
+	char* instrucciones;
 } t_info_proceso;
 
 typedef struct {
@@ -41,7 +41,8 @@ typedef struct {
 typedef struct {
 	uint32_t id_proceso;
 	uint32_t tamanio_direcciones;
-	char** lista_instrucciones;
+	uint32_t size_instrucciones;
+	char*    instrucciones;
 	uint32_t program_counter;
 	uint32_t tabla_paginas;
 	uint32_t estimacion_rafagas; // para el SRT
@@ -49,9 +50,14 @@ typedef struct {
 
 typedef struct {
 	t_pcb pcb;
-	int instruccion; // 0==IO, 1==EXIT
-	int tiempo_de_bloqueo; // para IO
+	uint32_t instruccion; // 0==IO, 1==EXIT
+	uint32_t tiempo_de_bloqueo; // para IO
 } t_syscall;
+
+typedef struct {
+	uint32_t id_proceso;
+	uint32_t tiempo_de_bloqueo;
+} t_io;
 
 t_info_proceso* desserializarProceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);

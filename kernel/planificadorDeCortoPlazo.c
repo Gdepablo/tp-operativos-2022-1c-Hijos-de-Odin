@@ -4,41 +4,26 @@
 // Las versiones FIFO y SRT de las funciones pueden llegar a ser iguales salvo que usan colas o listas según corresponda
 // enviando funciones como parámetro se podrían ahorrar algunos duplicados
 
-void* ready_a_executing_fifo(){
+void* ready_a_executing(){
 	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_ready);
 		sem_wait(&fin_de_ejecucion);
 		sem_wait(&mx_lista_ready);
-		enviar_a_CPU(queue_pop(&cola_ready)); // ENVIAR A CPU POR SOCKET
+		if(algoritmo()) {
+			enviar_a_CPU(queue_pop(&cola_ready)); // ENVIAR A CPU POR SOCKET
+		} else {
+			// algotirmo SJF
+		}
 		sem_post(&mx_lista_ready);
 	}
 	return "";
 }
 
-void* ready_a_executing_srt(){
-	sem_post(&se_inicio_el_hilo);
-	while(1) {
-		sem_wait(&procesos_en_ready);
-		// lógica SRT
+void enviar_a_CPU(t_pcb pcb) {
 
-		}
-	return "";
 }
-void* executing_a_ready_o_blocked() {
-	// este le tiene que avisar al de ready a executing
-	sem_post(&se_inicio_el_hilo);
-	while(1) {
-		// espera el fin de ejecución
-		if(/*se fue a I/O*/) {
-			executing_a_blocked();
-		} else {
-			executing_a_ready();
-		}
-	}
 
-	return "";
-}
 
 void* executing_a_ready_fifo(){
 	// HACE FALTA ESTA FUNCION?
@@ -59,13 +44,19 @@ void* executing_a_ready_srt(){
 	return "";
 }
 
-void * executing_a_blocked_srt() {
-	// no podemos usar el mismo para srt y fifo?
-	// luca: no porque fifo usa colas y srt usa listas, pero si pasamos las funciones por parámetro no haría falta.
+void executing_a_blocked(t_syscall syscall) {
+	while(1) {
+		queue_push(&cola_blocked, syscall.pcb);
+		pthread_t hilo;
+		pthread_create(&hilo, NULL, contador_tiempo_bloqueado(), );
+	}
+}
 
-	sem_wait(&mx_lista_blocked);
-	list_add(&lista_blocked, /*proceso ejecutando*/);
-	sem_post(&mx_lista_blocked);
+void* contador_tiempo_bloqueado(uint32_t id) {
+	usleep(TIEMPO_MAXIMO_BLOQUEADO);
 
 	return "";
 }
+
+
+
