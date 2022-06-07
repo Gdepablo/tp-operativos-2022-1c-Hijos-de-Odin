@@ -10,27 +10,29 @@
 sem_t mx_cola_new; // = 1
 sem_t mx_lista_ready; // = 1
 sem_t mx_cola_blocked; // = 1
-sem_t mx_lista_suspended_blocked; // = 1
-sem_t mx_cola_io; // = 1
+sem_t mx_cola_suspended_blocked; // = 1
+smet_t mx_cola_suspended_ready; // = 1
+
 // CONTADORES
+sem_t procesos_en_new; // = 0
 sem_t procesos_en_ready; // = 0
 sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
+sem_t io_terminada;
+sem_t procesos_en_suspended_ready;
+sem_t proceso_nuevo_en_ready;
 // SINCRONIZADORES
 sem_t proceso_finalizado; // = 0
 sem_t fin_de_ejecucion; // = 0
 sem_t se_inicio_el_hilo; // = 0
-sem_t proceso_bloqueado; // = 0
+sem_t proceso_en_io; // = 0
 
 // COLAS Y LISTAS
 t_queue* cola_new;
 t_queue* cola_ready; // FIFO
 t_list*  lista_ready; // SRT
-t_list*  cola_blocked;
-t_list*  lista_suspended_blocked;
-t_list*  lista_suspended_ready;
-t_queue* cola_io;
-
-t_pcb executing;
+t_queue*  cola_blocked;
+t_queue*  colsa_suspended_blocked;
+t_queue*  cola_suspended_ready;
 
 // SOCKETS
 
@@ -85,10 +87,12 @@ int main(void){
 	// COLAS Y LISTAS
 	cola_new                = queue_create();
 	cola_ready              = queue_create();
+	cola_io                 = queue_create();
 	lista_ready             = list_create();
-	lista_blocked           = list_create();
+	cola_blocked            = list_create();
 	lista_suspended_blocked = list_create();
 	lista_suspended_ready   = list_create();
+
 
 	// SOCKETS
 	uint32_t handshake;

@@ -9,6 +9,7 @@ void* ready_a_executing(){
 	while(1) {
 		sem_wait(&procesos_en_ready);
 		sem_wait(&fin_de_ejecucion);
+
 		sem_wait(&mx_lista_ready);
 		if(algoritmo()) {
 			enviar_a_CPU(queue_pop(&cola_ready)); // ENVIAR A CPU POR SOCKET
@@ -24,38 +25,28 @@ void enviar_a_CPU(t_pcb pcb) {
 
 }
 
-
-void* executing_a_ready_fifo(){
-	// HACE FALTA ESTA FUNCION?
-	//luca: respondo abajo
-
-	sem_wait(&mx_lista_ready);
-	queue_push(cola_ready, /*proceso ejecutando*/);
-	sem_post(&mx_lista_ready);
-
-	return "";
-}
-
-void* executing_a_ready_srt(){
-	sem_wait(&mx_lista_ready);
-	list_add(lista_ready, /*proceso ejecutando*/);
-	sem_post(&mx_lista_ready);
-
-	return "";
-}
-
-void executing_a_blocked(t_syscall syscall) {
+void* desalojar() {
 	while(1) {
-		queue_push(&cola_blocked, syscall.pcb);
-		pthread_t hilo;
-		pthread_create(&hilo, NULL, contador_tiempo_bloqueado(), );
+		if(algoritmo()) {
+			// FIFO
+		} else {
+
+		}
 	}
+	return "";
 }
 
-void* contador_tiempo_bloqueado(uint32_t id) {
-	usleep(TIEMPO_MAXIMO_BLOQUEADO);
+// Se ejecuta en SJF al desalojar un proceso
+void executing_a_ready(t_pcb pcb){ // le falta
+	sem_wait(&proceso_nuevo_en_ready);
 
-	return "";
+	send(socket_cpu_interrupcion, algo, sizeof(algo), 0);
+	recv(*socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL);
+
+	sem_wait(&mx_lista_ready);
+		list_add(&lista_ready, pcb);
+	sem_post(&mx_lista_ready);
+
 }
 
 

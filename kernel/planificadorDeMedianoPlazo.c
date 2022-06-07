@@ -1,127 +1,122 @@
 #include <stdio.h>
 #include "planificadorDeMedianoPlazo.h"
 
-void* blocked_a_ready_o_suspended_blocked(pcb){
-
-	usleep(TIEMPO_MAXIMO_BLOQUEADO);
-	if(sigueBloqueado(pcb)) {
-		blocked_a_suspended_blocked(pcb); // <- poner signal(&grado_multiprogramacion);
-	}
-	else{
-		blocked_a_ready();
-	}
-	return "";
-}
-
-void blocked_a_ready() {
-
-	sem_wait(&mx_cola_blocked);
-		if(algoritmo()) {
-			queue_push(&cola_ready, queue_pop(&cola_blocked));
-		} else {
-			list_add(&lista_ready, queue_pop(&cola_blocked));
-		}
-	sem_post(&mx_cola_blocked);
-	/*int posicion;
-	t_pcb* pcbaux;
-	int size = list_size(lista_blocked);
-
-	for(int i = 0; i < size; i++) {
-		posicion = i;
-		pcbaux = list_get(lista_blocked, i);
-
-		if( (pcbaux -> id_proceso) == (pcb -> id_proceso) ) {
-			break;
-		}
-	}
-
-	list_remove(lista_blocked, posicion);
-	if(algoritmo()) {
-		// FIFO
-		queue_push(cola_ready, pcbaux);
-	} else {
-		// SJF
-		list_add(lista_ready, pcbaux);
-	}
-*/
-}
-
-void blocked_a_suspended_blocked(t_pcb* pcb){
-	wait(&mx_lista_blocked);
-	// ver bien esto XD
-	t_pcb* pcb_a_suspender = list_add(lista_blocked);
-	signal(&mx_lista_blocked);
-
-	// LOGICA PARA COMUNICARSE CON MEMORIA
-
-	wait(&mx_lista_suspended_blocked);
-	list_add(lista_suspended_blocked, pcb_a_suspender);
-	signal(&mx_lista_suspended_blocked);
-
-	signal(&grado_multiprogramacion);
-}
-
-void* suspended_blocked_a_suspended_ready() {
-
-	return "";
-}
-
-void* suspended_ready_a_ready(){
-	sem_post(&se_inicio_el_hilo);
-	while(1){
-		wait(&grado_multiprogramacion); // = GRADO_MULTIPROGRAMACION;
-
-		wait(mx_lista_ready);
-		pasarloaready();
-		signal(mx_lista_ready);
-	}
-
-	return "";
-}
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {
 	sem_post(&se_inicio_el_hilo);
+	t_syscall syscall; // hay que hacer malloc?
+
 	while(1) {
-		t_syscall una_syscall = malloc(executing);
-		recv(*socket_cpu_pcb, una_syscall, sizeof(una_syscall), MSG_WAITALL); // ver sizeof
-		if(una_syscall.instruccion) {
+		recv(*socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
+		sem_post(&fin_de_ejecucion);
+		if(syscall.instruccion) {
 			// EXIT
-			executing_a_exit(una_syscall.pcb); // largo plazo
+			executing_a_exit(); // largo plazo
 		} else {
 			// IO
-			executing_a_blocked(una_syscall); // mediano plazo
+			executing_a_blocked(syscall); // mediano plazo
 		}
 		sem_post(&fin_de_ejecucion);
 	}
 	return "";
 }
 
-void executing_a_blocked(t_syscall una_syscall) {
+void executing_a_blocked(t_syscall syscall) {
+	t_bloqueado proceso;
+	proceso.pcb = syscall.pcb;
+	proceso.tiempo_de_bloqueo = syscall.tiempo_de_bloqueo;
+	pthread_create(&proceso.hilo_suspensor, NULL, (void)blocked_a_suspended_blocked, &proceso);
+	proceso.esta_suspendido = 0;
+
 	sem_wait(&mx_cola_blocked);
-		queue_push(&cola_blocked, una_syscall.pcb);
+		queue_push(&cola_blocked, proceso);
 	sem_post(&mx_cola_blocked);
 
-	t_io* io;
-	io->id_proceso = una_syscall.pcb->id_proceso;
-	io->tiempo_de_bloqueo = una_syscall.tiempo_de_bloqueo;
+	pthread_detach(proceso.hilo_suspensor);
+	sem_post(&proceso_en_io);
+}
 
-	sem_wait(&mx_cola_io);
-		queue_push(&cola_io, io);
-	sem_post(&mx_cola_io);
+// HILO QUE SUSPENDE CUANDO ESPERA MÁS DEL TIEMPO MÁXIMO
+void* blocked_a_suspended_blocked(t_bloqueado* proceso){
+	usleep(TIEMPO_MAXIMO_BLOQUEADO);
+	proceso->esta_suspendido = 1;
 
-	sem_post(&proceso_bloqueado);
+	// LOGICA PARA GUARDAR PCB EN MEMORIA
+
+	signal(&grado_multiprogramacion);
+
+	return "";
+}
+
+void* blocked_y_suspended_a_suspended_ready_o_ready() {
+	while(1) {
+		sem_wait(&io_terminada);
+		t_bloqueado proceso;
+		proceso = queue_pop(&cola_blocked);
+		if(proceso.esta_suspendido) {
+			suspended_blocked_a_suspended_ready(proceso.pcb);
+		} else {
+			blocked_a_ready(proceso.pcb);
+		}
+	}
+	return "";
+}
+
+void suspended_blocked_a_suspended_ready(t_pcb pcb) {
+	sem_wait(&mx_cola_suspended_ready);
+		queue_push(&cola_suspended_ready, pcb);
+	sem_post(&mx_cola_suspended_ready);
+
+	sem_post(&procesos_en_suspended_ready);
+}
+
+void blocked_a_ready(t_pcb pcb) {
+	sem_wait(&mx_lista_ready);
+		if(algoritmo()) {
+			queue_push(&cola_ready, &pcb);
+		} else {
+			list_add(&lista_ready, &pcb);
+		}
+	sem_post(&mx_lista_ready);
+
+	if(!algoritmo()) {
+		sem_post(&proceso_nuevo_en_ready);
+	}
 }
 
 void* inputOuput() {
-	t_io io;
+	t_bloqueado proceso;
+
 	while(1) {
-		sem_wait(&proceso_bloqueado);
-		io = queue_pop(&cola_io);
-		if(io.tiempo_de_bloqueo < TIEMPO_MAXIMO_BLOQUEADO) {
-			usleep(io.tiempo_de_bloqueo);
-			blocked_a_ready();
-		}
+		sem_wait(&proceso_en_io);
+
+		proceso = queue_peek(&cola_blocked);
+		usleep(proceso.tiempo_de_bloqueo);
+		pthread_cancel(proceso.hilo_suspensor);
+
+		sem_post(&io_terminada);
 	}
+	return "";
+}
+
+// hay que sincronizar que suspended ready tenga mayor prioridad que de new a ready
+void* suspended_ready_a_ready() {
+	while(1) {
+		sem_wait(&procesos_en_suspended_ready);
+		sem_wait(&grado_multiprogramacion);
+
+		if(algoritmo()) {
+			queue_push(&cola_ready, queue_pop(&cola_suspended_ready));
+		} else {
+			list_add(&lista_ready, queue_pop(&cola_suspended_ready));
+		}
+
+		if(!algoritmo()) {
+			sem_post(&proceso_nuevo_en_ready);
+		}
+
+	}
+
 	return "";
 }
 

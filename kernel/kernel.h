@@ -55,9 +55,11 @@ typedef struct {
 } t_syscall;
 
 typedef struct {
-	uint32_t id_proceso;
+	t_pcb pcb;
 	uint32_t tiempo_de_bloqueo;
-} t_io;
+	pthread_t hilo_suspensor;
+	int esta_suspendido; // 0==NO, 1==SI
+} t_bloqueado;
 
 t_info_proceso* desserializarProceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
