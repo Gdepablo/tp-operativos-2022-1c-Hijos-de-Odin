@@ -22,6 +22,8 @@ int main(void){
 	//FIN CONFIG
 
 	uint32_t handshake = 0;
+	uint32_t todo_ok = 1;
+	uint32_t todo_mal = 0;
 
 	//SOCKETS
 	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
@@ -31,10 +33,12 @@ int main(void){
 	printf("handshake recibido: %i \n", handshake);
 	if(handshake == 333){
 		printf("HANDSHAKE DEL KERNEL CORRECTO (DISPATCH) \n");
+		send(socket_dispatch, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (DISPATCH) \n");
+		send(socket_dispatch, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
 
@@ -46,10 +50,12 @@ int main(void){
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
 		printf("HANDSHAKE DEL KERNEL CORRECTO (INTERRUPT) \n");
+		send(socket_interrupt, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (INTERRUPT) \n");
+		send(socket_interrupt, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
 

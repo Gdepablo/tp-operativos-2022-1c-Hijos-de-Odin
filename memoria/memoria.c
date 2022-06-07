@@ -28,17 +28,16 @@ int main(void){
 	// HANDSHAKE CON KERNEL
 	int socket_kernel = accept(socket_escucha, 0, 0);
 	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);
-		if(handshake == 555){
-			printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
-			send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
-		}
-		else
-		{
-			printf("HANDSHAKE RECIBIDO DE KERNEL ERRONEO, TERMINANDO PROCESO (MEMORIA) \n");
-			send(socket_kernel, &todo_mal, sizeof(uint32_t), 0);
-			return 1;
-		}
-
+	if(handshake == 555){
+		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
+		send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
+	}
+	else
+	{
+		printf("HANDSHAKE RECIBIDO DE KERNEL ERRONEO, TERMINANDO PROCESO (MEMORIA) \n");
+		send(socket_kernel, &todo_mal, sizeof(uint32_t), 0);
+		return 1;
+	}
 
 	// HANDSHAKE CON CPU / TODAVIA NO SE LE ENVIA INFO PARA TRADUCCION LOGICA A REAL
 	int socket_cpu = accept(socket_escucha, 0, 0);
