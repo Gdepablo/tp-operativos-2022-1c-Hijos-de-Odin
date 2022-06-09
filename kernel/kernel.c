@@ -5,13 +5,15 @@
 #include "planificadorDeLargoPlazo.h"
 
 // VARIABLES GLOBALES
+t_pcb PCB_EJECUCION;
+struct timeval HORA_INICIO_EJECUCION;
 
 // MUTEX
 sem_t mx_cola_new; // = 1
 sem_t mx_lista_ready; // = 1
 sem_t mx_cola_blocked; // = 1
 sem_t mx_cola_suspended_blocked; // = 1
-smet_t mx_cola_suspended_ready; // = 1
+sem_t mx_cola_suspended_ready; // = 1
 
 // CONTADORES
 sem_t procesos_en_new; // = 0
@@ -31,7 +33,7 @@ t_queue* cola_new;
 t_queue* cola_ready; // FIFO
 t_list*  lista_ready; // SRT
 t_queue*  cola_blocked;
-t_queue*  colsa_suspended_blocked;
+t_queue*  cola_suspended_blocked;
 t_queue*  cola_suspended_ready;
 
 // SOCKETS
@@ -65,6 +67,7 @@ int GRADO_MULTIPROGRAMACION;
 int TIEMPO_MAXIMO_BLOQUEADO;
 
 int main(void){
+	PCB_EJECUCION.id_proceso = -1;
 
 	// VARIABLES DEL CONFIG
 	t_config* config = inicializarConfigs();
@@ -87,11 +90,10 @@ int main(void){
 	// COLAS Y LISTAS
 	cola_new                = queue_create();
 	cola_ready              = queue_create();
-	cola_io                 = queue_create();
 	lista_ready             = list_create();
 	cola_blocked            = list_create();
-	lista_suspended_blocked = list_create();
-	lista_suspended_ready   = list_create();
+	cola_suspended_blocked  = queue_create();
+	cola_suspended_ready    = queue_create();
 
 
 	// SOCKETS
@@ -298,7 +300,7 @@ t_config* inicializarConfigs(void) {
 	return nuevo_config;
 }
 
-int algoritmo() {
+int es_FIFO() {
 	return strcmp(ALGORITMO_PLANIFICACION, "FIFO") != 0;
 }
 

@@ -4,12 +4,13 @@
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {
 	sem_post(&se_inicio_el_hilo);
-	t_syscall syscall; // hay que hacer malloc?
+	t_syscall* syscall = malloc(sizeof(t_syscall));
+	syscall->pcb = malloc(sizeof(t_pcb));
 
 	while(1) {
 		recv(*socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
 		sem_post(&fin_de_ejecucion);
-		if(syscall.instruccion) {
+		if(syscall->instruccion) {
 			// EXIT
 			executing_a_exit(); // largo plazo
 		} else {
@@ -72,14 +73,14 @@ void suspended_blocked_a_suspended_ready(t_pcb pcb) {
 
 void blocked_a_ready(t_pcb pcb) {
 	sem_wait(&mx_lista_ready);
-		if(algoritmo()) {
+		if(es_FIFO()) {
 			queue_push(&cola_ready, &pcb);
 		} else {
 			list_add(&lista_ready, &pcb);
 		}
 	sem_post(&mx_lista_ready);
 
-	if(!algoritmo()) {
+	if(!es_FIFO()) {
 		sem_post(&proceso_nuevo_en_ready);
 	}
 }
@@ -105,13 +106,13 @@ void* suspended_ready_a_ready() {
 		sem_wait(&procesos_en_suspended_ready);
 		sem_wait(&grado_multiprogramacion);
 
-		if(algoritmo()) {
+		if(es_FIFO()) {
 			queue_push(&cola_ready, queue_pop(&cola_suspended_ready));
 		} else {
 			list_add(&lista_ready, queue_pop(&cola_suspended_ready));
 		}
 
-		if(!algoritmo()) {
+		if(!es_FIFO()) {
 			sem_post(&proceso_nuevo_en_ready);
 		}
 

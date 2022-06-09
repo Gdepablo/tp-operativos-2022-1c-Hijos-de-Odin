@@ -9,6 +9,7 @@
 #include <commons/collections/list.h>
 #include <semaphore.h>
 #include <sys/socket.h>
+#include <sys/time.h>
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
