@@ -6,7 +6,7 @@
 
 // VARIABLES GLOBALES
 t_pcb PCB_EJECUCION;
-struct timeval HORA_INICIO_EJECUCION;
+struct timeval HORA_INICIO_EJECUCION, HORA_FIN_EJECUCION;
 
 // MUTEX
 sem_t mx_cola_new; // = 1
@@ -62,7 +62,7 @@ char* PUERTO_CPU_SYSCALL;
 
 char* ALGORITMO_PLANIFICACION;
 int ESTIMACION_INICIAL;
-int ALFA;
+float ALFA;
 int GRADO_MULTIPROGRAMACION;
 int TIEMPO_MAXIMO_BLOQUEADO;
 
@@ -83,7 +83,7 @@ int main(void){
 
 	ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	ESTIMACION_INICIAL      = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
-	ALFA                    = atoi( config_get_string_value(config, "ALFA") );
+	ALFA                    = atof( config_get_string_value(config, "ALFA") );
 	GRADO_MULTIPROGRAMACION = atoi(config_get_string_value(config, "GRADO_MULTIPROGRAMACION"));
 	TIEMPO_MAXIMO_BLOQUEADO = atoi(config_get_string_value(config, "TIEMPO_MAXIMO_BLOQUEADO"));
 

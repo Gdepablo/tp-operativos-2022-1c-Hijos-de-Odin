@@ -41,6 +41,7 @@ void executing_a_ready(t_pcb pcb){ // le falta
 
 	send(socket_cpu_interrupcion, 0, sizeof(pcb), 0); //aca toqueteamos tambien
 	recv(*socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL);
+	pcb.estimacion_rafagas = calcular_rafaga(pcb.estimacion_rafagas);
 
 	sem_wait(&mx_lista_ready);
 		list_add(&lista_ready, pcb);

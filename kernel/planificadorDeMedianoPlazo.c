@@ -4,6 +4,7 @@
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {
 	sem_post(&se_inicio_el_hilo);
+	gettimeofday(&HORA_FIN_EJECUCION, NULL);
 	t_syscall* syscall = malloc(sizeof(t_syscall));
 	syscall->pcb = malloc(sizeof(t_pcb));
 
@@ -22,9 +23,14 @@ void* executing_a_blocked_o_exit() {
 	return "";
 }
 
+
+
 void executing_a_blocked(t_syscall syscall) {
 	t_bloqueado proceso;
 	proceso.pcb = syscall.pcb;
+	if(!es_FIFO()){
+		proceso.pcb.estimacion_rafagas = calcular_rafaga(proceso.pcb.estimacion_rafagas);
+	}
 	proceso.tiempo_de_bloqueo = syscall.tiempo_de_bloqueo;
 	pthread_create(&proceso.hilo_suspensor, NULL, (void)blocked_a_suspended_blocked, &proceso);
 	proceso.esta_suspendido = 0;
@@ -122,7 +128,16 @@ void* suspended_ready_a_ready() {
 }
 
 
+uint32_t calcular_rafaga(t_pcb pcb){
+	uint32_t rafaga;
 
+	long seconds = HORA_FIN_EJECUCION.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
+	long milisegundos = (((seconds * 1000000) + HORA_FIN_EJECUCION.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
+
+	rafaga = ALFA * (uint32_t)milisegundos + (1.0-ALFA) * pcb.estimacion_rafagas;
+
+	return rafaga;
+}
 
 
 

@@ -75,10 +75,6 @@ int main(void){
 		return 1;
 	}
 
-	// BORRAR
-	sleep(5);
-	// BORRAR
-
 	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
 
 	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si todo esta correcto)
@@ -91,16 +87,18 @@ int main(void){
 
 
 	// CREAR POOL DE HILOS
-	pthread_t executerThread, interruptsThread;
+	pthread_t executerThread, interruptsThread, tlbThread;
 	sem_init(&hiloCreado, 0, 0);
 
-	pthread_create(&executerThread, NULL, (void*)executer, NULL);
-	pthread_create(&interruptsThread, NULL, (void*)interrupt, NULL);
+	pthread_create(&executerThread, NULL, executer, NULL);
+	pthread_create(&interruptsThread, NULL, interrupt, NULL);
+	pthread_create(&tlbThread, NULL, tlb, NULL);
 
 	pthread_detach(executerThread);
 	pthread_detach(interruptsThread);
+	pthread_detach(tlbThread);
 
-	for(int i = 0; i < 2; i++){
+	for(int i = 0; i < 3; i++){
 		sem_wait(&hiloCreado);
 	}
 
@@ -117,7 +115,7 @@ int main(void){
 		pcb_ejecutando = recibir_pcb(socket_dispatch); // debe recibir la lista de instrucciones como char*
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
-
+		sem_post(&ejecutar);
 	}
 	// FIN DE RECIBIR COSAS POR DISPATCH
 
@@ -134,15 +132,98 @@ int main(void){
 // ejecuta las instrucciones del pcb
 void* executer(){
 	sem_post(&hiloCreado);
-	sem_wait(&ejecutar);
+	char* siguiente_instruccion;
+	char** instruccion_spliteada;
+	uint32_t operando;
+
+	while(1){
+		sem_wait(&ejecutar);
+		//FETCH
+		siguiente_instruccion = malloc(string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]));
+		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
+
+		//DECODE
+		instruccion_spliteada = string_array_new();
+		instruccion_spliteada = string_split(siguiente_instruccion, " ");
+		if(!strcmp(instruccion_spliteada[0], "COPY")){
+			operando = fetchOperand();
+		}
+
+
+		//EXECUTE
+		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // 0,1,2,3,4,5
+		switch(numOperacion){
+			case NO_OP:
+				instr_no_op();
+				break;
+			case IO:
+				instr_io();
+				break;
+			case READ:
+				instr_read();
+				break;
+			case WRITE:
+				instr_write();
+				break;
+			case COPY:
+				instr_copy();
+				break;
+			case EXIT:
+				instr_exit();
+				break;
+			default:
+				romper(); // dudoso
+		}
+
+
+		// CHECK INTERRUPT
+		if(hayInterrupcion()){
+			enviarPCB(); // a CPU
+		}
+		else
+		{
+			// NO HAY INTERRUPCION => COMIENZA OTRO CICLO DE INSTRUCCION
+			sem_post(&ejecutar);
+		}
+	}
+
+	return 0;
+}
+
+
+int seleccionarOperacion(char* nombre_instruccion){
+	if(!strcmp(nombre_instruccion, "NO_OP")) {
+		return 0;
+	}
+	if(!strcmp(nombre_instruccion, "IO")) {
+		return 1;
+	}
+	if(!strcmp(nombre_instruccion, "READ")){
+		return 2;
+	}
+	if(!strcmp(nombre_instruccion, "WRITE")){
+		return 3;
+	}
+	if(!strcmp(nombre_instruccion, "COPY")){
+		return 4;
+	}
+	if(!strcmp(nombre_instruccion, "EXIT")){
+		return 5;
+	}
+
+	return -1;
+}
+
+// recibe el aviso del kernel de que hay que desalojar
+void* interrupt(){
+	sem_post(&hiloCreado);
 
 	while(1);
 
 	return 0;
 }
 
-// recibe el aviso del kernel de que hay que desalojar
-void* interrupt(){
+void* tlb(){
 	sem_post(&hiloCreado);
 
 	while(1);

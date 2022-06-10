@@ -12,7 +12,7 @@
 #include <commons/config.h>
 #include "funcionesSocketsyConfig.h"
 
-
+typedef enum operaciones{ NO_OP, IO, READ, WRITE, COPY, EXIT };
 
 typedef struct{
 	uint32_t tamanio_paginas;
@@ -42,6 +42,12 @@ int iniciar_servidor(char* ip, char* puerto);
 t_pcb recibir_pcb(int socket_dispatch);
 void* executer();
 void* interrupt();
-
+void instr_no_op();
+void instr_io();
+void instr_read();
+void instr_write();
+void instr_copy();
+void instr_exit();
+void rompertodoalamierda();
 
 #endif
