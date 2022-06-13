@@ -1,4 +1,15 @@
 #include "memoria.h"
+paginas_segundo_nivel_t tabla_segundo_nivel = list_create();
+uint32_t tabla_primer_nivel; // Array de uint32_t;
+char* PUERTO_ESCUCHA;
+int TAMANIO_MEMORIA;
+int TAMANIO_PAGINA;
+int ENTRADAS_POR_TABLA;
+int RETARDO_MEMORIA;
+char* ALGORITMO_REEMPLAZO;
+int MARCOS_POR_PROCESO;
+int RETARDO_SWAP;
+char* PATH_SWAP;
 
 int main(void){
 	printf("MEMORIA \n");
@@ -7,15 +18,15 @@ int main(void){
 	t_config* config;
 	config = inicializarConfigs();
 
-	char* PUERTO_ESCUCHA = config_get_string_value(config, "PUERTO_ESCUCHA");
-	int TAMANIO_MEMORIA = atoi(config_get_string_value(config, "TAM_MEMORIA"));
-	int TAMANIO_PAGINA = atoi(config_get_string_value(config, "TAM_PAGINA"));
-	int ENTRADAS_POR_TABLA = atoi(config_get_string_value(config, "ENTRADAS_POR_TABLA"));
-	int RETARDO_MEMORIA = atoi(config_get_string_value(config, "RETARDO_MEMORIA"));
-	char* ALGORITMO_REEMPLAZO = config_get_string_value(config, "ALGORITMO_REEMPLAZO");
-	int MARCOS_POR_PROCESO = atoi(config_get_string_value(config, "MARCOS_POR_PROCESO"));
-	int RETARDO_SWAP = atoi(config_get_string_value(config, "RETARDO_SWAP"));
-	char* PATH_SWAP = config_get_string_value(config, "PATH_SWAP");
+	PUERTO_ESCUCHA = config_get_string_value(config, "PUERTO_ESCUCHA");
+	TAMANIO_MEMORIA = atoi(config_get_string_value(config, "TAM_MEMORIA"));
+	TAMANIO_PAGINA = atoi(config_get_string_value(config, "TAM_PAGINA"));
+	ENTRADAS_POR_TABLA = atoi(config_get_string_value(config, "ENTRADAS_POR_TABLA"));
+	RETARDO_MEMORIA = atoi(config_get_string_value(config, "RETARDO_MEMORIA"));
+	ALGORITMO_REEMPLAZO = config_get_string_value(config, "ALGORITMO_REEMPLAZO");
+	MARCOS_POR_PROCESO = atoi(config_get_string_value(config, "MARCOS_POR_PROCESO"));
+	RETARDO_SWAP = atoi(config_get_string_value(config, "RETARDO_SWAP"));
+	PATH_SWAP = config_get_string_value(config, "PATH_SWAP");
 	//FIN CONFIG
 
 	//SOCKETS: MEMORIA ESCUCHA TANTO EL KERNEL COMO EL CPU POR EL MISMO SOCKET
@@ -60,6 +71,8 @@ int main(void){
 	info_traduccion_t info_traduccion;
 	info_traduccion.entradas_por_tabla = ENTRADAS_POR_TABLA;
 	info_traduccion.tamanio_paginas = TAMANIO_PAGINA;
+
+
 
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
@@ -137,4 +150,55 @@ int iniciar_servidor(char* ip, char* puerto) {
 
 	freeaddrinfo(servinfo);
 	return socket_servidor;
+}
+
+uint32_t clock(uint32_t numero_pagina, uint32_t num_frame_buscado) {
+	if(list_size(tabla_segundo_nivel) <= ENTRADAS_POR_TABLA){
+		uint32_t aux2;
+		//Preguntar si la pag no esta
+		if(list_find(tabla_segundo_nivel[numero_pagina].paginas,es_igual_a())) {
+
+		}
+
+	while(tabla_segundo_nivel[numero_pagina] -> paginas[aux2].numero_frame != num_frame_buscado
+			 && aux2 <= MARCOS_POR_PROCESO) {
+		if (tabla_segundo_nivel[numero_pagina] -> paginas[aux2].numero_frame == num_frame_buscado)
+		{return num_frame_buscado;}
+		else if (aux2 >= MARCOS_POR_PROCESO)
+		{return -1;}
+		aux2++;
+
+	}
+		pagina pagina =buscarPaginaEnSwap(num_frame_buscado);
+		list_add(tabla_segundo_nivel[numero_pagina],pagina);}
+		else{
+			uint32_t aux;
+			while(tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso != 0
+					&& aux <= MARCOS_POR_PROCESO) {
+				tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso = 0;
+				aux++;}
+		if(tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso == 0) {
+			pagina y = buscar_pagina_en_swap();
+				list_replace(tabla_segundo_nivel[numero_pagina].paginas,
+				tabla_segundo_nivel[numero_pagina] -> paginas[aux],y);
+			}
+
+		}
+
+}
+
+pagina buscar_pagina_en_swap() {
+	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
+	char a[500];
+	pagina y;
+	while(!eof(tuvieja)) {
+			fread(a,sizeof(tuvieja)+1,1,tuvieja);
+			//Mecanism de lectura para el swap y que me devuelva la pag
+		return elemento;
+		}
+}
+
+bool es_igual_a(pagina paginaPedida) {
+	return tabla_segundo_nivel.paginas == paginaPedida;
+
 }

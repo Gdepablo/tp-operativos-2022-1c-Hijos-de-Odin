@@ -18,12 +18,18 @@ int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
 
 
-typedef struct {
+/*typedef struct {
 	uint32_t num_tabla;
 	// Numero que apunta a la segunda tabla. Se supone q estan
 	//Sincronizados y el indice 5 de acá debería ser el 5 de la otra tabla.
-	pagina* paginas; // No puede ser mas de 4 (Lo sacas del config)
-} tabla_paginas_segundo_nivel_t;
+} tabla_paginas_primer_nivel_t;*/
+
+uint32_t tabla_primer_nivel [];
+
+typedef struct {
+	uint32_t num_tabla;
+	pagina* paginas = list_create(); // No puede ser mas de 4 (Lo sacas del config)
+} paginas_segundo_nivel_t;
 
 
 typedef struct {
@@ -33,6 +39,7 @@ typedef struct {
 	bool bit_uso;
 	bool bit_modificacion; // P U M
 } pagina;
+
 
 typedef struct {
 	char* direccion_fisica; // 0x000...etc
