@@ -12,26 +12,6 @@
 #include <stdbool.h>
 
 
-
-t_config* inicializarConfigs(void);
-int crear_conexion(char *ip, char* puerto);
-int iniciar_servidor(char* ip, char* puerto);
-
-
-/*typedef struct {
-	uint32_t num_tabla;
-	// Numero que apunta a la segunda tabla. Se supone q estan
-	//Sincronizados y el indice 5 de acá debería ser el 5 de la otra tabla.
-} tabla_paginas_primer_nivel_t;*/
-
-uint32_t tabla_primer_nivel [];
-
-typedef struct {
-	uint32_t num_tabla;
-	pagina* paginas = list_create(); // No puede ser mas de 4 (Lo sacas del config)
-} paginas_segundo_nivel_t;
-
-
 typedef struct {
 	uint32_t numero_frame;
 	uint32_t data_pagina;
@@ -40,11 +20,32 @@ typedef struct {
 	bool bit_modificacion; // P U M
 } pagina;
 
+typedef struct {
+	uint32_t num_tabla;
+	pagina *paginas = list_create(); // No puede ser mas de 4 (Lo sacas del config)
+} paginas_segundo_nivel_t;
 
 typedef struct {
 	char* direccion_fisica; // 0x000...etc
 	uint32_t data; //Lo que lleva adentro, es decir el dato
 } memoria;
+
+t_config* inicializarConfigs(void);
+int crear_conexion(char *ip, char* puerto);
+int iniciar_servidor(char* ip, char* puerto);
+pagina buscar_pagina_en_swap();
+void algoritmo_clock(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado);
+void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado);
+bool es_igual_a(pagina paginaPedida);
+bool esta_presente(pagina pagina);
+bool primer_paso_clock(pagina una_pagina);
+bool segundo_paso_clock(pagina una_pagina);
+
+typedef struct{
+	uint32_t tamanio_paginas;
+	uint32_t entradas_por_tabla;
+} info_traduccion_t;
+
 
 /** LEER ACLARACIONES mientras se mira el dibujo pasado al grupo*/
 

@@ -1,6 +1,5 @@
 #include "memoria.h"
-paginas_segundo_nivel_t tabla_segundo_nivel = list_create();
-uint32_t tabla_primer_nivel; // Array de uint32_t;
+
 char* PUERTO_ESCUCHA;
 int TAMANIO_MEMORIA;
 int TAMANIO_PAGINA;
@@ -10,6 +9,8 @@ char* ALGORITMO_REEMPLAZO;
 int MARCOS_POR_PROCESO;
 int RETARDO_SWAP;
 char* PATH_SWAP;
+tabla_segundo_nivel_t tabla_segundo_nivel= list_create();
+uint32_t *tabla_primer_nivel; // Array de uint32_t;
 
 int main(void){
 	printf("MEMORIA \n");
@@ -152,53 +153,105 @@ int iniciar_servidor(char* ip, char* puerto) {
 	return socket_servidor;
 }
 
-uint32_t clock(uint32_t numero_pagina, uint32_t num_frame_buscado) {
-	if(list_size(tabla_segundo_nivel) <= ENTRADAS_POR_TABLA){
-		uint32_t aux2;
-		//Preguntar si la pag no esta
-		if(list_find(tabla_segundo_nivel[numero_pagina].paginas,es_igual_a())) {
+void algoritmo_clock(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
+	// Ver como es el tema socket
+	// Algo tipo filter que filtre por el bit de presencia
 
-		}
+	list_filter(tabla_segundo_nivel[numero_tabla_pagina] -> paginas, estaPresente());
+	if(list_size(tabla_segundo_nivel) == ENTRADAS_POR_TABLA){
+		//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
+		if(!list_find(tabla_segundo_nivel[numero_tabla_pagina].paginas,es_igual_a())) {
+			uint32_t iterador_pagina_2 = 0;
+			while(iterador_pagina_2 <= MARCOS_POR_PROCESO) {
+				if(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso == 0) {
+				pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
+				list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
+				tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
+				} else
+				{tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso = 0;}
+				iterador_pagina_2++;}}
+		} else
+	{pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
+	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
 
-	while(tabla_segundo_nivel[numero_pagina] -> paginas[aux2].numero_frame != num_frame_buscado
-			 && aux2 <= MARCOS_POR_PROCESO) {
-		if (tabla_segundo_nivel[numero_pagina] -> paginas[aux2].numero_frame == num_frame_buscado)
-		{return num_frame_buscado;}
-		else if (aux2 >= MARCOS_POR_PROCESO)
-		{return -1;}
-		aux2++;
-
-	}
-		pagina pagina =buscarPaginaEnSwap(num_frame_buscado);
-		list_add(tabla_segundo_nivel[numero_pagina],pagina);}
-		else{
-			uint32_t aux;
-			while(tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso != 0
-					&& aux <= MARCOS_POR_PROCESO) {
-				tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso = 0;
-				aux++;}
-		if(tabla_segundo_nivel[numero_pagina] -> paginas[aux].bit_uso == 0) {
-			pagina y = buscar_pagina_en_swap();
-				list_replace(tabla_segundo_nivel[numero_pagina].paginas,
-				tabla_segundo_nivel[numero_pagina] -> paginas[aux],y);
-			}
-
-		}
-
-}
+// 0 1 0 1
+// 1 1 1 0
 
 pagina buscar_pagina_en_swap() {
 	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
 	char a[500];
+	int elemento = 0; //Esto esta mal pero para test
 	pagina y;
 	while(!eof(tuvieja)) {
 			fread(a,sizeof(tuvieja)+1,1,tuvieja);
 			//Mecanism de lectura para el swap y que me devuelva la pag
-		return elemento;
+		return y; // mal pero para test
 		}
-}
+};
 
 bool es_igual_a(pagina paginaPedida) {
-	return tabla_segundo_nivel.paginas == paginaPedida;
+	uint32_t iterador_tabla = 0;
+	while (iterador_tabla <= ENTRADAS_POR_TABLA) {
+		if (tabla_segundo_nivel.paginas[iterador_tabla].numero_frame == paginaPedida.numero_frame) {
+			return true;}
+		iterador_tabla++;
+	} return false;}
 
+
+pagina buscar_pagina_en_swap() {
+	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
+	char a[500];
+	int elemento = 0; //Esto esta mal pero para test
+	pagina y;
+	while(!eof(tuvieja)) {
+			fread(a,sizeof(tuvieja)+1,1,tuvieja);
+			//Mecanism de lectura para el swap y que me devuelva la pag
+		return y; // mal pero para test
+		}
+};
+
+void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
+	// Ver como es el tema socket
+	// Algo tipo filter que filtre por el bit de presencia
+
+	list_filter(tabla_segundo_nivel[numero_tabla_pagina] -> paginas, estaPresente);
+	if(list_size(tabla_segundo_nivel) == ENTRADAS_POR_TABLA){
+		//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
+		if(!list_find(tabla_segundo_nivel[numero_tabla_pagina].paginas,es_igual_a)) {
+			uint32_t iterador_pagina_2 = 0;
+			uint32_t iterador_pagina = 0;
+			while(iterador_pagina_2 <= MARCOS_POR_PROCESO) {
+				if(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso == 0) {
+					pagina findear_pagina = list_find(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],primer_paso_clock);
+					if( findear_pagina != NULL){
+						pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
+						list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
+						tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
+				}}
+					pagina pagina_findeada = list_find(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],segundo_paso_clock);
+					if(pagina_findeada != NULL) {
+					pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
+					escribir_en_swap();
+					list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
+					tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
+				}
+				tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso = 0;
+				pagina_findeada.bit_uso =1; // Si no es NULL explota en 40 millones de pedazos
+				iterador_pagina_2++;}}
+		} else
+	{pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
+	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
+
+bool esta_presente(pagina pagina) {
+	return pagina.bit_presencia ==1;
+}
+
+bool primer_paso_clock(pagina una_pagina) {
+	return una_pagina.bit_modificacion == 0 && una_pagina.bit_uso==0;
+}
+
+/* Primero nos falta crear la funcion escribir_en_swap() */
+
+bool segundo_paso_clock(pagina una_pagina) {
+	return una_pagina.bit_modificacion ==1 && una_pagina.bit_uso==0;
 }
