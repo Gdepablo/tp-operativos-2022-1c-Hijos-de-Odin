@@ -4,6 +4,8 @@
 sem_t hiloCreado, ejecutar;
 t_pcb pcb_ejecutando;
 char** lista_de_instrucciones_actual;
+//uint32_t retardo_noop;
+int a = 0;
 
 int main(void){
 	printf("HOLA SOY EL CPU \n");
@@ -17,8 +19,9 @@ int main(void){
 	char* puerto_dispatch = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH"); // aca se comunica el kernel para mensajes de dispatch
 	char* puerto_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT"); // aca se comunica con el kernel para enviar interrupciones
 	char* reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB");
-	uint32_t retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") );
+	retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") );
 	uint32_t entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
+
 	//FIN CONFIG
 
 	uint32_t handshake = 0;
@@ -92,7 +95,7 @@ int main(void){
 
 	pthread_create(&executerThread, NULL, executer, NULL);
 	pthread_create(&interruptsThread, NULL, interrupt, NULL);
-	pthread_create(&tlbThread, NULL, tlb, NULL);
+	// pthread_create(&tlbThread, NULL, tlb, NULL); toDo
 
 	pthread_detach(executerThread);
 	pthread_detach(interruptsThread);
@@ -146,7 +149,7 @@ void* executer(){
 		instruccion_spliteada = string_array_new();
 		instruccion_spliteada = string_split(siguiente_instruccion, " ");
 		if(!strcmp(instruccion_spliteada[0], "COPY")){
-			operando = fetchOperand();
+			operando = fetchOperand(); //toDo
 		}
 
 
@@ -154,64 +157,47 @@ void* executer(){
 		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // 0,1,2,3,4,5
 		switch(numOperacion){
 			case NO_OP:
-				instr_no_op();
+				instr_no_op(atoi(instruccion_spliteada[1])); // DONE
+				pcb_ejecutando.program_counter++;
 				break;
 			case IO:
-				instr_io();
+				instr_io(); //toDo
+				pcb_ejecutando.program_counter++;
 				break;
 			case READ:
-				instr_read();
+				instr_read(); //toDo
+				pcb_ejecutando.program_counter++;
 				break;
 			case WRITE:
-				instr_write();
+				instr_write(); //toDo
+				pcb_ejecutando.program_counter++;
 				break;
 			case COPY:
-				instr_copy();
+				instr_copy(); //toDo
+				pcb_ejecutando.program_counter++;
 				break;
 			case EXIT:
-				instr_exit();
+				instr_exit(); //toDo
+				pcb_ejecutando.program_counter++;
 				break;
 			default:
-				romper(); // dudoso
+				romperTodo(); // toDo
 		}
 
-
 		// CHECK INTERRUPT
-		if(hayInterrupcion()){
-			enviarPCB(); // a CPU
+
+		if(hayInterrupcion() /*toDo*/){
+			enviarPCB(); // a CPU - toDo
 		}
 		else
 		{
 			// NO HAY INTERRUPCION => COMIENZA OTRO CICLO DE INSTRUCCION
 			sem_post(&ejecutar);
 		}
+
 	}
 
 	return 0;
-}
-
-
-int seleccionarOperacion(char* nombre_instruccion){
-	if(!strcmp(nombre_instruccion, "NO_OP")) {
-		return 0;
-	}
-	if(!strcmp(nombre_instruccion, "IO")) {
-		return 1;
-	}
-	if(!strcmp(nombre_instruccion, "READ")){
-		return 2;
-	}
-	if(!strcmp(nombre_instruccion, "WRITE")){
-		return 3;
-	}
-	if(!strcmp(nombre_instruccion, "COPY")){
-		return 4;
-	}
-	if(!strcmp(nombre_instruccion, "EXIT")){
-		return 5;
-	}
-
-	return -1;
 }
 
 // recibe el aviso del kernel de que hay que desalojar
@@ -230,6 +216,23 @@ void* tlb(){
 
 	return 0;
 }
+
+int fetchOperand(){
+	printf("FETCH OPERAND \n");
+
+	return 4;
+}
+
+int hayInterrupcion(){
+	printf("HAY INTERRUPCION \n");
+
+	return 0;
+}
+
+void enviarPCB(){
+	printf("enviar PCB \n");
+}
+
 
 t_pcb recibir_pcb(int socket_dispatch){
 	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
@@ -271,52 +274,3 @@ t_pcb recibir_pcb(int socket_dispatch){
 	free (pcb_buffer);
 	return nuevo_pcb;
 }
-
-/*
-
-void pushearInstruccion(char* instruccion, char*** listaInstrucciones){
-	char* aux = malloc(1024);
-	aux = string_new();
-	aux = string_duplicate(instruccion);
-
-	char* identificador = string_new();
-	identificador = strtok(aux, " ");
-
-	if( !strcmp("NO_OP", identificador) )
-	{
-		int parametro = atoi((strtok(NULL, " ")));
-		for( int i = 0; i < parametro; i++) {
-			string_array_push(listaInstrucciones, "NO_OP");
-		}
-	}
-	else
-	{
-		string_array_push(listaInstrucciones, instruccion);
-	}
-
-	free(aux);
-
-	return;
-} */
-
-/*
-while( c != EOF ) {
-	while ( ((c = fgetc(archivo)) != '\n') ){ //se carga una linea en el buffer
-		if(c != EOF)
-		{
-			char caracter[1];
-			caracter[0] = c;
-			string_append(&buffer, caracter);
-		}
-		else
-		{
-			break;
-		}
-	}
-
-	pushearInstruccion(buffer, &instrucciones);
-	printf("buffer: %s \n", buffer);
-	printf("%p \n", buffer);
-	free(buffer);
-	buffer = string_new();
-	} */
