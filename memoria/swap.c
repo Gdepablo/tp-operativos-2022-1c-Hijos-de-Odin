@@ -25,16 +25,3 @@ uint32_t es_igual_a(pagina paginaPedida) {
 	}
 	return 0;
 }
-
-
-pagina buscar_pagina_en_swap() {
-	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
-	char a[500];
-	int elemento = 0; //Esto esta mal pero para test
-	pagina y;
-	while(!eof(tuvieja)) {
-			fread(a,sizeof(tuvieja)+1,1,tuvieja);
-			//Mecanism de lectura para el swap y que me devuelva la pag
-		return y; // mal pero para test
-		}
-};
