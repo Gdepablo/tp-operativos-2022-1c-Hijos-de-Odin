@@ -77,8 +77,52 @@ void instr_exit(){
 }
 
 void enviar_syscall(t_syscall* syscall_a_enviar){
-	// envia por el socket_dispatch
-	// trabajo para batata aka el gordo printf
+	extern int socket_dispatch;
+
+	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
+	buffer->size = sizeof(uint32_t) * 7 + strlen(syscall_a_enviar->pcb.lista_instrucciones);
+	buffer->size_instrucciones = strlen(syscall_a_enviar->pcb.lista_instrucciones);
+	buffer->stream = malloc(buffer->size);
+
+	int offset = 0;
+	// COPY DEL NUMERO DE INSTRUCCION
+	memcpy(buffer->stream+offset, &(syscall_a_enviar->instruccion), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	// COPY DEL TIEMPO DE BLOQUEO
+	memcpy(buffer->stream+offset, &(syscall_a_enviar->tiempo_de_bloqueo), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	// COPY DEL PCB
+	memcpy(buffer->stream + offset, &(syscall_a_enviar->pcb.id_proceso), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	memcpy(buffer->stream + offset, &(syscall_a_enviar->pcb.tamanio_direcciones), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	// ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO
+	memcpy(buffer->stream + offset, syscall_a_enviar->pcb.lista_instrucciones, buffer->size_instrucciones);
+	offset+=buffer->size_instrucciones;
+	// FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO
+	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.program_counter), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.tabla_paginas), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.estimacion_rafagas), sizeof(uint32_t));
+
+
+	offset = 0;
+	int tamanio_stream = sizeof(uint32_t) * 2 + buffer->size;
+	void* a_enviar = malloc(tamanio_stream);
+	memcpy(a_enviar + offset, &(buffer->size), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	memcpy(a_enviar + offset, &(buffer->size_instrucciones), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	memcpy(a_enviar+offset, buffer->stream, buffer->size);
+
+
+	send(socket_dispatch, a_enviar, buffer->size + sizeof(uint32_t) * 2, 0);
+
+	free(buffer->stream);
+	free(buffer);
+	free(syscall_a_enviar->pcb.lista_instrucciones);
+	free(syscall_a_enviar);
 }
 
 void romperTodo(){

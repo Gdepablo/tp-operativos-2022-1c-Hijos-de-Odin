@@ -63,6 +63,7 @@ void instr_no_op(int cant_de_no_op);
 t_pcb recibir_pcb(int socket_dispatch);
 int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
+void enviar_syscall(t_syscall* syscall_a_enviar);
 int seleccionarOperacion(char* nombre_instruccion);
 
 #endif

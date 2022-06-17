@@ -5,7 +5,8 @@ sem_t hiloCreado, ejecutar;
 t_pcb pcb_ejecutando;
 char** lista_de_instrucciones_actual;
 //uint32_t retardo_noop;
-int a = 0;
+int socket_dispatch;
+
 
 int main(void){
 	printf("HOLA SOY EL CPU \n");
@@ -30,7 +31,7 @@ int main(void){
 
 	//SOCKETS
 	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
-	int socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
+	socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
 	printf("se conecto el kernel al dispatch \n");
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	printf("handshake recibido: %i \n", handshake);
@@ -160,7 +161,7 @@ void* executer(){
 				instr_no_op(atoi(instruccion_spliteada[1])); // DONE
 				pcb_ejecutando.program_counter++;
 				break;
-			case IO:
+			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
 				instr_io(); //toDo
 				pcb_ejecutando.program_counter++;
 				break;
@@ -185,6 +186,7 @@ void* executer(){
 		}
 
 		// CHECK INTERRUPT
+		// VER
 
 		if(hayInterrupcion() /*toDo*/){
 			enviarPCB(); // a CPU - toDo
