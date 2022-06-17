@@ -1,5 +1,6 @@
 #include "cpu.h"
 #include <commons/collections/list.h>
+#include <math.h>
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
 		return NO_OP;
@@ -55,9 +56,10 @@ void instr_io(int tiempo_en_milisegundos){
 
 
 void instr_read(uint32_t dir_logica){
-	extern tlbs;
-	//if(){}
-	printf();
+	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
+	printf("%d \n",frame_a_utilizar);
+	//pedir a la mula, TODO
+	send();
 }
 
 
@@ -131,14 +133,28 @@ void romper_todo(){
 	//todo
 }
 
-void decidir_fulbo(uint32_t dir_logica){
-	uint32_t num_pagina = floor(dir_logica/tamanio_de_pagina);
-	if(list_any_satisfy(tlbs,encontrar_pagina(num_pagina))){
-		list_find(tlbs, encontrar_pagina(num_pagina));
+uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
+	numero_pagina= floor(dir_logica/tamanio_de_pagina);
+	if(list_is_empty(tlbs)){
+		send();
+		recieve();
+		return 0;
+	}
+	else{
+		if(list_any_satisfy(tlbs,encontrar_pagina)){
+			t_tlb* tlb_a_retornar=list_find(tlbs, encontrar_pagina);
+			return tlb_a_retornar->marco;
+			}
+		else{
+			return 0;
+		}
 	}
 }
 
-void encontrar_pagina(uint32_t num){
+bool encontrar_pagina(void* tlb){
 	//todo
+	t_tlb* tlb_en_uso = tlb;
+	return (numero_pagina == tlb_en_uso->pagina);
+
 }
 

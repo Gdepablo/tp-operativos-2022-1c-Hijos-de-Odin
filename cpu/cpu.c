@@ -183,7 +183,7 @@ void* executer(){
 				pcb_ejecutando.program_counter++;
 				break;
 			default:
-				romperTodo(); // toDo
+				romper_todo(); // toDo
 		}
 
 		// CHECK INTERRUPT

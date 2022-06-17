@@ -51,13 +51,14 @@ typedef struct {
 uint32_t retardo_noop;
 uint32_t tamanio_de_pagina;
 t_list* tlbs;
+uint32_t numero_pagina;
 // FUNCIONES (mantener el orden o hay tabla)
 void instr_io();
 void* executer();
 void enviarPCB();
 void* interrupt();
 void instr_read();
-void romperTodo();
+void romper_todo();
 void instr_copy();
 void instr_exit();
 void instr_write();
@@ -70,5 +71,7 @@ int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
 void enviar_syscall(t_syscall* syscall_a_enviar);
 int seleccionarOperacion(char* nombre_instruccion);
+bool encontrar_pagina(void* tlb);
+uint32_t buscar_frame(uint32_t dir_logica);
 
 #endif
