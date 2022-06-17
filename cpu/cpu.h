@@ -12,6 +12,7 @@
 #include <commons/string.h>
 #include <commons/config.h>
 #include "funcionesSocketsyConfig.h"
+#include <commons/collections/list.h>
 
 enum operaciones{ NO_OP, IO, READ, WRITE, COPY, EXIT };
 
@@ -35,7 +36,10 @@ typedef struct{
 	uint32_t entradas_por_tabla;
 } info_traduccion_t; 	// Necesario para hacer la traduccion de logica a real
 
-
+typedef struct{
+	uint32_t pagina;
+	uint32_t marco;
+}t_tlb;
 
 typedef struct {
 	uint32_t size;
@@ -45,7 +49,8 @@ typedef struct {
 
 // VAR GLOBALES
 uint32_t retardo_noop;
-
+uint32_t tamanio_de_pagina;
+t_list* tlbs;
 // FUNCIONES (mantener el orden o hay tabla)
 void instr_io();
 void* executer();

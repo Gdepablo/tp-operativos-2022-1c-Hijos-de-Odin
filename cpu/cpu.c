@@ -8,9 +8,10 @@ char** lista_de_instrucciones_actual;
 int socket_dispatch;
 
 
+
 int main(void){
 	printf("HOLA SOY EL CPU \n");
-
+	tlbs = list_create();
 	//CONFIG
 	t_config* config;
 	config = inicializarConfigs();
@@ -162,7 +163,7 @@ void* executer(){
 				pcb_ejecutando.program_counter++;
 				break;
 			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
-				instr_io(); //toDo
+				instr_io(); //DONE
 				pcb_ejecutando.program_counter++;
 				break;
 			case READ:

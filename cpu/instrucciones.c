@@ -1,5 +1,5 @@
 #include "cpu.h"
-
+#include <commons/collections/list.h>
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
 		return NO_OP;
@@ -54,8 +54,10 @@ void instr_io(int tiempo_en_milisegundos){
 }
 
 
-void instr_read(){
-	//todo
+void instr_read(uint32_t dir_logica){
+	extern tlbs;
+	//if(){}
+	printf();
 }
 
 
@@ -125,6 +127,18 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	free(syscall_a_enviar);
 }
 
-void romperTodo(){
+void romper_todo(){
 	//todo
 }
+
+void decidir_fulbo(uint32_t dir_logica){
+	uint32_t num_pagina = floor(dir_logica/tamanio_de_pagina);
+	if(list_any_satisfy(tlbs,encontrar_pagina(num_pagina))){
+		list_find(tlbs, encontrar_pagina(num_pagina));
+	}
+}
+
+void encontrar_pagina(uint32_t num){
+	//todo
+}
+
