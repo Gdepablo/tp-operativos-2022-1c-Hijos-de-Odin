@@ -174,8 +174,6 @@ void algoritmo_clock(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
 	{pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
 	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
 
-// 0 1 0 1
-// 1 1 1 0
 
 pagina buscar_pagina_en_swap() {
 	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
@@ -196,19 +194,6 @@ bool es_igual_a(pagina paginaPedida) {
 			return true;}
 		iterador_tabla++;
 	} return false;}
-
-
-pagina buscar_pagina_en_swap() {
-	FILE* tuvieja = fopen("swap_proceso_x.swap","a+");
-	char a[500];
-	int elemento = 0; //Esto esta mal pero para test
-	pagina y;
-	while(!eof(tuvieja)) {
-			fread(a,sizeof(tuvieja)+1,1,tuvieja);
-			//Mecanism de lectura para el swap y que me devuelva la pag
-		return y; // mal pero para test
-		}
-};
 
 void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
 	// Ver como es el tema socket
