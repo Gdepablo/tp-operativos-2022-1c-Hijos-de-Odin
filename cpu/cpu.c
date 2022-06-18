@@ -171,7 +171,7 @@ void* executer(){
 				pcb_ejecutando.program_counter++;
 				break;
 			case WRITE:
-				instr_write(); //toDo
+				//instr_write(); //toDo
 				pcb_ejecutando.program_counter++;
 				break;
 			case COPY:
@@ -185,7 +185,6 @@ void* executer(){
 			default:
 				romper_todo(); // toDo
 		}
-
 		// CHECK INTERRUPT
 		// VER
 
