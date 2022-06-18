@@ -268,12 +268,50 @@ t_tlb elegir_pagina_a_reemplazar_TLB(){ // TODO
 	return pagina_a_retornar;
 }
 
-void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){
+void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // TODO
 
 }
 
-void enviar_PCB(){ // TODO
-	printf("enviar PCB \n");
+void enviar_PCB(){
+    t_pcb* pcb_a_enviar = &pcb_ejecutando;
+    t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
+    buffer->size = sizeof(uint32_t) * 5 + strlen(pcb_a_enviar->lista_instrucciones);
+    buffer->size_instrucciones = strlen(pcb_a_enviar->lista_instrucciones);
+    buffer->stream = malloc(buffer->size);
+
+    int offset = 0;
+    // COPY DEL ID DE PROCESO
+    memcpy(buffer->stream+offset, &(pcb_a_enviar->id_proceso), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    // COPY DE TAMANIO DE DIRECCIONES
+    memcpy(buffer->stream+offset, &(pcb_a_enviar->tamanio_direcciones), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    // COPY LISTA DE INSTRUCCIONES
+    memcpy(buffer->stream+offset, pcb_a_enviar->lista_instrucciones, buffer->size_instrucciones);
+    offset+=buffer->size_instrucciones;
+    // COPY PROGRAM COUNTER
+    memcpy(buffer->stream+offset, &(pcb_a_enviar->program_counter), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    // COPY TABLA DE PAGINAS
+    memcpy(buffer->stream+offset, &(pcb_a_enviar->tabla_paginas), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    // COPY ESTIMACION DE RAFAGA
+    memcpy(buffer->stream+offset, &(pcb_a_enviar->estimacion_rafagas), sizeof(uint32_t));
+
+    offset=0;
+    int tamanio_a_enviar = sizeof(uint32_t) * 2 + buffer->size;
+    void* a_enviar = malloc( tamanio_a_enviar );
+
+    memcpy(a_enviar+offset, &(buffer->size), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    memcpy(a_enviar+offset, &(buffer->size_instrucciones), sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    memcpy(a_enviar+offset, buffer->stream, tamanio_a_enviar);
+
+    send(socket_dispatch, a_enviar, tamanio_a_enviar, 0);
+
+    free(buffer->stream);
+    free(buffer);
 }
 
 t_pcb recibir_pcb(int socket_dispatch){
