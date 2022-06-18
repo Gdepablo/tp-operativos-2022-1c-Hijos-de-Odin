@@ -103,6 +103,8 @@ int main(void){
 	pthread_detach(executerThread);
 	pthread_detach(interruptsThread);
 
+	crear_TLB();
+
 	for(int i = 0; i < 3; i++){
 		sem_wait(&hiloCreado);
 	}
@@ -157,7 +159,7 @@ void* executer(){
 
 
 		//EXECUTE - DONE
-		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // 0,1,2,3,4,5
+		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // retorna 0,1,2,3,4,5
 
 		switch(numOperacion){
 			case NO_OP:				//CANTIDAD DE NO_OP
@@ -180,7 +182,7 @@ void* executer(){
 				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
 				break;
-			case EXIT:
+			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION todo
 				instr_exit();
 				break;
 			default:
@@ -230,6 +232,7 @@ void* interrupt(){
 	return 0;
 }
 
+// va a buscar el contenido de operando a memoria - DONE
 uint32_t fetchOperand(uint32_t dir_logica){
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
 	uint32_t contenido_del_frame = pedir_contenido_frame(frame_a_buscar);
@@ -237,26 +240,41 @@ uint32_t fetchOperand(uint32_t dir_logica){
 	return contenido_del_frame;
 }
 
+// debe fijarse si la var global 'interrupcion' == 1 // TODO
 int hay_interrupcion(){
 	printf("HAY INTERRUPCION \n");
 
 	return 0;
 }
 
+// debe fijarse si se hizo una syscall bloqueante // TODO
 int se_hizo_una_syscall_bloqueante(){
 	printf("SE HIZO UNA SYSCALL BLOQUEANTE \n");
 
 	return 0;
 }
 
-void enviar_PCB(){
-	printf("enviar PCB \n");
+void crear_TLB(){ // TODO
+
 }
 
-void limpiar_TLB(){
+void limpiar_TLB(){ // TODO
 	printf("limpiar TLB \n");
 }
 
+t_tlb elegir_pagina_a_reemplazar_TLB(){ // TODO
+	t_tlb pagina_a_retornar;
+
+	return pagina_a_retornar;
+}
+
+void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){
+
+}
+
+void enviar_PCB(){ // TODO
+	printf("enviar PCB \n");
+}
 
 t_pcb recibir_pcb(int socket_dispatch){
 	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));

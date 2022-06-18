@@ -1,6 +1,7 @@
 #include "cpu.h"
 #include <commons/collections/list.h>
 #include <math.h>
+
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
 		return NO_OP;
@@ -67,7 +68,6 @@ void instr_read(uint32_t dir_logica){
 
 
 void instr_write(uint32_t dir_logica, uint32_t valor){
-	//todo
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 	escribir_frame(frame_a_utilizar, valor);
 }
@@ -83,7 +83,6 @@ void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 
 
 void instr_exit(){
-	//todo
 	t_syscall* exit=malloc(sizeof(t_syscall));
 	exit->pcb.lista_instrucciones= malloc(string_length(pcb_ejecutando.lista_instrucciones));
 	exit->pcb= pcb_ejecutando;
@@ -141,15 +140,11 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	free(syscall_a_enviar);
 }
 
-void romper_todo(){
-	//todo
-}
-
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_is_empty(tlbs)){
 		uint32_t numero_frame=pedir_todo_memoria();
-		//devolver a TLB TODO
+		guardar_en_TLB(numero_pagina, numero_frame);
 		return numero_frame;
 	}
 	else{
@@ -159,14 +154,13 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 			}
 		else{
 			uint32_t numero_frame=pedir_todo_memoria();
-			//devolver a TLB TODO
+			guardar_en_TLB(numero_pagina, numero_frame);
 			return numero_frame;
 		}
 	}
 }
 
 bool encontrar_pagina(void* tlb){
-	//todo
 	t_tlb* tlb_en_uso = tlb;
 	return (numero_pagina == tlb_en_uso->pagina);
 
