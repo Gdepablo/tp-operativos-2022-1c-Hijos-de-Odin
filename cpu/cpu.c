@@ -82,7 +82,7 @@ int main(void){
 
 	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
 
-	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si todo esta correcto)
+	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si toodo esta correcto)
 
 
 	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
@@ -97,11 +97,9 @@ int main(void){
 
 	pthread_create(&executerThread, NULL, executer, NULL);
 	pthread_create(&interruptsThread, NULL, interrupt, NULL);
-	// pthread_create(&tlbThread, NULL, tlb, NULL); toDo
 
 	pthread_detach(executerThread);
 	pthread_detach(interruptsThread);
-	pthread_detach(tlbThread);
 
 	for(int i = 0; i < 3; i++){
 		sem_wait(&hiloCreado);
@@ -134,69 +132,76 @@ int main(void){
 	return 0;
 }
 
-// ejecuta las instrucciones del pcb
+// ejecuta las instrucciones del pcb - DONE
 void* executer(){
 	sem_post(&hiloCreado);
+
 	char* siguiente_instruccion;
 	char** instruccion_spliteada;
-	uint32_t operando;
+	uint32_t operando = 0;
 
 	while(1){
 		sem_wait(&ejecutar);
-		//FETCH
+		//FETCH - DONE
 		siguiente_instruccion = malloc(string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]));
 		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
-
-		//DECODE
 		instruccion_spliteada = string_array_new();
 		instruccion_spliteada = string_split(siguiente_instruccion, " ");
+
+		//DECODE - ETAPA OPCIONAL - DONE
 		if(!strcmp(instruccion_spliteada[0], "COPY")){
-			operando = fetchOperand(); //toDo
+			operando = fetchOperand(atoi(instruccion_spliteada[2])); //instruccion_spliteada[2] = dir_logica_origen
 		}
 
 
-		//EXECUTE
+		//EXECUTE - DONE
 		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // 0,1,2,3,4,5
+
 		switch(numOperacion){
-			case NO_OP:
-				instr_no_op(atoi(instruccion_spliteada[1])); // DONE
+			case NO_OP:				//CANTIDAD DE NO_OP
+				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
 				break;
-			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
-				instr_io(); //DONE
+			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION todo
+				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
 				break;
-			case READ:
-				instr_read(); //toDo
+			case READ:				//DIR LOGICA
+				instr_read(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
 				break;
-			case WRITE:
-				//instr_write(); //toDo
+			case WRITE:				//DIR LOGICA					VALOR
+				instr_write( atoi(instruccion_spliteada[1]), atoi(instruccion_spliteada[2]) );
 				pcb_ejecutando.program_counter++;
 				break;
-			case COPY:
-				instr_copy(); //toDo
+			case COPY:				//DIR LOGICA DESTINO			VALOR
+				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
 				break;
 			case EXIT:
-				instr_exit(); //toDo
-				pcb_ejecutando.program_counter++;
+				instr_exit();
 				break;
 			default:
-				romper_todo(); // toDo
+				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);
 		}
-		// CHECK INTERRUPT
-		// VER
 
-		if(hayInterrupcion() /*toDo*/){
-			enviarPCB(); // a CPU - toDo
+
+
+		// CHECK INTERRUPT - DONE
+
+		if( hay_interrupcion() ){
+			// LIMPIAR TLB, DEVOLVER PCB.
+			limpiar_TLB();
+			enviar_PCB();
 		}
-		else
-		{
-			// NO HAY INTERRUPCION => COMIENZA OTRO CICLO DE INSTRUCCION
+		else if (se_hizo_una_syscall_bloqueante()){
+			limpiar_TLB();
+		} else {
 			sem_post(&ejecutar);
 		}
 
+		free(siguiente_instruccion);
+		free(instruccion_spliteada);
 	}
 
 	return 0;
@@ -211,28 +216,31 @@ void* interrupt(){
 	return 0;
 }
 
-void* tlb(){
-	sem_post(&hiloCreado);
+uint32_t fetchOperand(uint32_t dir_logica){
+	uint32_t frame_a_buscar = buscar_frame(dir_logica);
+	uint32_t contenido_del_frame = pedir_contenido_frame(frame_a_buscar);
 
-	while(1);
-
-	return 0;
+	return contenido_del_frame;
 }
 
-int fetchOperand(){
-	printf("FETCH OPERAND \n");
-
-	return 4;
-}
-
-int hayInterrupcion(){
+int hay_interrupcion(){
 	printf("HAY INTERRUPCION \n");
 
 	return 0;
 }
 
-void enviarPCB(){
+int se_hizo_una_syscall_bloqueante(){
+	printf("SE HIZO UNA SYSCALL BLOQUEANTE \n");
+
+	return 0;
+}
+
+void enviar_PCB(){
 	printf("enviar PCB \n");
+}
+
+void limpiar_TLB(){
+	printf("limpiar TLB \n");
 }
 
 

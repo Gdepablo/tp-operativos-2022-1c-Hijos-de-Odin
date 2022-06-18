@@ -56,30 +56,46 @@ int socket_memoria;
 t_pcb pcb_ejecutando;
 info_traduccion_t info_traduccion;
 // FUNCIONES (mantener el orden o hay tabla)
-void instr_io();
+// INSTRUCCIONES
+
+// COMUNICACION CON MEMORIA
+
+
 void* executer();
-void enviarPCB();
+void enviar_PCB();
+void limpiar_TLB();
 void* interrupt();
-void instr_read();
-void romper_todo();
-void instr_copy();
 void instr_exit();
-int fetchOperand();
-int hayInterrupcion();
+int se_hizo_una_syscall_bloqueante();
+uint32_t fetchOperand(uint32_t dir_logica);
+int hay_interrupcion();
+int se_hizo_una_syscall_bloqueante();
+uint32_t pedir_todo_memoria();
+bool encontrar_pagina(void* tlb);
 t_config* inicializarConfigs(void);
 void instr_no_op(int cant_de_no_op);
+void instr_read(uint32_t dir_logica);
 t_pcb recibir_pcb(int socket_dispatch);
+void instr_io(int tiempo_en_milisegundos);
 int crear_conexion(char *ip, char* puerto);
+uint32_t buscar_frame(uint32_t dir_logica);
 int iniciar_servidor(char* ip, char* puerto);
 void enviar_syscall(t_syscall* syscall_a_enviar);
 int seleccionarOperacion(char* nombre_instruccion);
 void instr_write(uint32_t dir_logica, uint32_t valor);
-void escribir_frame(uint32_t numero_de_frame, uint32_t valor);
-bool encontrar_pagina(void* tlb);
-uint32_t buscar_frame(uint32_t dir_logica);
-uint32_t pedir_todo_memoria();
-uint32_t pedir_contenido_frame(uint32_t numero_de_frame);
-uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
 uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla);
+uint32_t pedir_contenido_frame(uint32_t numero_de_frame);
+void instr_copy(uint32_t dir_logica_destino, uint32_t valor);
+void escribir_frame(uint32_t numero_de_frame, uint32_t valor);
+uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
+
 
 #endif
+
+
+
+
+
+
+
+
