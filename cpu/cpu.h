@@ -52,6 +52,9 @@ uint32_t retardo_noop;
 uint32_t tamanio_de_pagina;
 t_list* tlbs;
 uint32_t numero_pagina;
+int socket_memoria;
+t_pcb pcb_ejecutando;
+info_traduccion_t info_traduccion;
 // FUNCIONES (mantener el orden o hay tabla)
 void instr_io();
 void* executer();
@@ -73,5 +76,9 @@ void enviar_syscall(t_syscall* syscall_a_enviar);
 int seleccionarOperacion(char* nombre_instruccion);
 bool encontrar_pagina(void* tlb);
 uint32_t buscar_frame(uint32_t dir_logica);
+uint32_t pedir_todo_memoria();
+uint32_t pedir_contenido_frame(uint32_t numero_de_frame);
+uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
+uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla);
 
 #endif

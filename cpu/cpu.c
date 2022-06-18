@@ -2,7 +2,7 @@
 
 
 sem_t hiloCreado, ejecutar;
-t_pcb pcb_ejecutando;
+
 char** lista_de_instrucciones_actual;
 //uint32_t retardo_noop;
 int socket_dispatch;
@@ -67,7 +67,7 @@ int main(void){
 	uint32_t handshake_memoria = 222;
 	uint32_t respuesta_memoria = 0;
 
-	int socket_memoria = crear_conexion(ip, puerto_memoria); // se conecta a memoria, el que acepta es memoria
+	socket_memoria = crear_conexion(ip, puerto_memoria); // se conecta a memoria, el que acepta es memoria
 	send(socket_memoria, &handshake_memoria, sizeof(uint32_t), 0);
 	recv(socket_memoria, &respuesta_memoria, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta_memoria == 1)
@@ -86,7 +86,7 @@ int main(void){
 
 
 	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
-	info_traduccion_t info_traduccion;
+
 	recv(socket_memoria, &(info_traduccion), sizeof(info_traduccion_t), MSG_WAITALL);
 	//YA RECIBI LA INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
 

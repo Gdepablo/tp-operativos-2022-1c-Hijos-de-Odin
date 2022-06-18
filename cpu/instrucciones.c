@@ -57,9 +57,11 @@ void instr_io(int tiempo_en_milisegundos){
 
 void instr_read(uint32_t dir_logica){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
-	printf("%d \n",frame_a_utilizar);
-	//pedir a la mula, TODO
-	send();
+
+	//pedir a la mula
+	uint32_t contenido_frame = pedir_contenido_frame(frame_a_utilizar);
+	printf("%d \n",contenido_frame);
+	//send();
 }
 
 
@@ -134,11 +136,10 @@ void romper_todo(){
 }
 
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
-	numero_pagina= floor(dir_logica/tamanio_de_pagina);
+	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_is_empty(tlbs)){
-		send();
-		recieve();
-		return 0;
+		uint32_t numero_frame=pedir_todo_memoria();
+		return numero_frame;
 	}
 	else{
 		if(list_any_satisfy(tlbs,encontrar_pagina)){
@@ -146,7 +147,8 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 			return tlb_a_retornar->marco;
 			}
 		else{
-			return 0;
+			uint32_t numero_frame=pedir_todo_memoria();
+			return numero_frame;
 		}
 	}
 }
@@ -158,3 +160,37 @@ bool encontrar_pagina(void* tlb){
 
 }
 
+uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
+    //ENVIAR NUMERO TABLA DE PAGINAS 1
+    send(socket_memoria, &(pcb_ejecutando.tabla_paginas), sizeof(uint32_t), 0);
+    //ENVIAR ENTRADA DE TABLA 1
+    send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
+    uint32_t num_tabla_2;
+    recv(socket_memoria, &num_tabla_2, sizeof(uint32_t), MSG_WAITALL);
+    return num_tabla_2;
+}
+uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
+    //ENVIAR NUMERO TABLA DE PAGINAS 2
+    send(socket_memoria, &(num_tabla_2), sizeof(uint32_t), 0);
+    //ENVIAR ENTRADA DE TABLA 2
+    send(socket_memoria, &entrada_2da_tabla, sizeof(uint32_t), 0);
+
+    uint32_t num_frame;
+    recv(socket_memoria, &num_frame, sizeof(uint32_t), MSG_WAITALL);
+    return num_frame;
+}
+uint32_t pedir_contenido_frame(uint32_t numero_de_frame){
+    //ENVIAR NUMERO DE FRAME
+    send(socket_memoria, &numero_de_frame, sizeof(uint32_t), 0);
+
+    uint32_t contenido;
+    recv(socket_memoria, &contenido, sizeof(uint32_t), MSG_WAITALL);
+    return contenido;
+}
+uint32_t pedir_todo_memoria(){
+	uint32_t entrada_1er_tabla = floor(numero_pagina/info_traduccion.entradas_por_tabla);
+	uint32_t num_tabla_2 =pedir_num_tabla_2(entrada_1er_tabla);
+	uint32_t entrada_2da_tabla = numero_pagina % info_traduccion.entradas_por_tabla;
+	uint32_t numero_frame = pedir_num_frame(entrada_2da_tabla, num_tabla_2);
+	return numero_frame;
+}
