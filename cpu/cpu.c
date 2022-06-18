@@ -1,12 +1,13 @@
 #include "cpu.h"
 
 
-sem_t hiloCreado, ejecutar;
+sem_t hiloCreado, ejecutar, sem_interrupcion;
 
 char** lista_de_instrucciones_actual;
 //uint32_t retardo_noop;
 int socket_dispatch;
-
+int socket_interrupt;
+int interrupcion = 0;
 
 
 int main(void){
@@ -50,7 +51,7 @@ int main(void){
 	// METER UN SLEEP(1) EN KERNEL SINO NO LLEGA A CONECTAR XD;
 
 	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
-	int socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
+	socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
 	printf("se conecto el kernel al interrupt \n");
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
@@ -92,8 +93,9 @@ int main(void){
 
 
 	// CREAR POOL DE HILOS
-	pthread_t executerThread, interruptsThread, tlbThread;
+	pthread_t executerThread, interruptsThread;
 	sem_init(&hiloCreado, 0, 0);
+	sem_init(&sem_interrupcion, 0, 0);
 
 	pthread_create(&executerThread, NULL, executer, NULL);
 	pthread_create(&interruptsThread, NULL, interrupt, NULL);
@@ -193,6 +195,9 @@ void* executer(){
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 			enviar_PCB();
+			sem_wait(&sem_interrupcion);
+			interrupcion = 0;
+			sem_post(&sem_interrupcion);
 		}
 		else if (se_hizo_una_syscall_bloqueante()){
 			limpiar_TLB();
@@ -207,11 +212,20 @@ void* executer(){
 	return 0;
 }
 
-// recibe el aviso del kernel de que hay que desalojar
+// recibe el aviso del kernel de que hay que desalojar - DONE
 void* interrupt(){
 	sem_post(&hiloCreado);
 
-	while(1);
+	uint32_t valor_recibido = -1;
+	while(1){
+		recv(socket_interrupt, &valor_recibido, sizeof(uint32_t), MSG_WAITALL);
+
+		if(valor_recibido == 55){
+			sem_wait(&sem_interrupcion);
+			interrupcion = 1;
+			sem_post(&sem_interrupcion);
+		}
+	}
 
 	return 0;
 }
