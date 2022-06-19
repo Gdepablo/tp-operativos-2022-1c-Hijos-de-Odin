@@ -22,25 +22,27 @@ char* PATH_SWAP;
 t_list* tabla_de_paginas_global;
 // Guarda todas las páginas de forma contigua
 
-t_list* tabla_de_tablas_de_primer_nivel;
-/* Guarda las tablas de primer nivel de todos los procesos
+
+t_list* tabla_de_paginas_de_primer_nivel;
+/* Hay una lista de uint32_t por cada proceso
  * Éstas guardan una lista de uint32_t que representa el número de tabla de segundo nivel a la cual dirigirse
  */
 
-t_list* tabla_de_tablas_de_segundo_nivel;
+t_list* tabla_de_paginas_de_segundo_nivel;
 /* Guarda las tablas de segundo nivel de todos los procesos
  * Éstas guardan una lista de páginas
  */
 
 uint32_t vector_de_disponibilidad[/*cantidad de frames*/];
 
-
-
+void* memoria;
 
 int main(){
 	printf("MEMORIA \n");
 
-	mx_tabla_de_paginas_global = list_create();
+
+
+	mx_tabla_de_paginas_global = ;
 
 	//CONFIG
 	t_config* config;
@@ -56,6 +58,8 @@ int main(){
 	RETARDO_SWAP = atoi(config_get_string_value(config, "RETARDO_SWAP"));
 	PATH_SWAP = config_get_string_value(config, "PATH_SWAP");
 	//FIN CONFIG
+
+	memoria = malloc(TAMANIO_MEMORIA);
 
 	//SOCKETS: MEMORIA ESCUCHA TANTO EL KERNEL COMO EL CPU POR EL MISMO SOCKET
 	uint32_t handshake = 0;

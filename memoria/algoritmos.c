@@ -17,26 +17,27 @@ void* enviar_a_swap() {
 }
 
 
-void algoritmo_clock(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
-	// Ver como es el tema socket
-	// Algo tipo filter que filtre por el bit de presencia
+void algoritmo_clock(t_list* lista_paginas, pagina pagina_buscada) {
 
-	list_filter(tabla_segundo_nivel[numero_tabla_pagina] -> paginas, estaPresente());
-	if(list_size(tabla_segundo_nivel) == ENTRADAS_POR_TABLA){
+	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
 		//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
-		if(!list_find(tabla_segundo_nivel[numero_tabla_pagina].paginas,es_igual_a())) {
 			uint32_t iterador_pagina_2 = 0;
-			while(iterador_pagina_2 <= MARCOS_POR_PROCESO) {
-				if(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso == 0) {
-				pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
-				list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
-				tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
-				} else
-				{tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso = 0;}
-				iterador_pagina_2++;}}
-		} else
-	{pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
-	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
+			pagina unaPagina;
+			for(int i=0; i <= list_size(lista_paginas); i++) {
+				unaPagina = list_get(lista_paginas, i);
+				if(unaPagina.bit_uso == 0) {
+					list_replace(lista_paginas, i, unaPagina);
+				} else {
+					unaPagina.bit_uso = 0;
+
+				}
+			}
+		}
+	} else {
+			pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
+	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);
+		}
+	}
 
 void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
 	// Ver como es el tema socket
@@ -71,7 +72,7 @@ void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame
 	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
 
 bool esta_presente(pagina pagina) {
-	return pagina.bit_presencia ==1;
+	return pagina.bit_presencia == 1;
 }
 
 bool primer_paso_clock(pagina una_pagina) {
