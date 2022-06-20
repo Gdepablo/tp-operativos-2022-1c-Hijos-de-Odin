@@ -18,58 +18,84 @@ void* enviar_a_swap() {
 
 
 void algoritmo_clock(t_list* lista_paginas, pagina pagina_buscada) {
+	pagina unaPagina;
 
 	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
 		//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
-			uint32_t iterador_pagina_2 = 0;
-			pagina unaPagina;
+	//Hay que hacer otro for para re-recorrer la lista y buscar los que tengan bit uso =0
 			for(int i=0; i <= list_size(lista_paginas); i++) {
-				unaPagina = list_get(lista_paginas, i);
-				if(unaPagina.bit_uso == 0) {
-					list_replace(lista_paginas, i, unaPagina);
+				unaPagina = list_get(lista_paginas, i); // ESTA PORONGA ROMPE
+				if(unaPagina.bit_uso == 0 ) {
+					if(unaPagina.bit_presencia != 1) {
+						escribirEnSwap(unaPagina);
+						//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+						unaPagina.bit_presencia = 1;
+					}
 				} else {
 					unaPagina.bit_uso = 0;
-
 				}
 			}
 		}
-	} else {
-			pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
-	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);
+	 else if (list_size(lista_paginas) < ENTRADAS_POR_TABLA){
+			unaPagina = buscarPaginaEnSwap(pagina_buscada);
+			list_add(lista_paginas,unaPagina);
 		}
-	}
+		for(int j=0; j <= list_size(lista_paginas); j++) {
+		unaPagina = list_get(lista_paginas, j);// ESTA PORONGA ROMPE
+		if(unaPagina.bit_presencia == 1)
+			if(unaPagina.bit_uso == 0) {
+			list_replace(lista_paginas, j, unaPagina);
+			break;}
+		else  {
+			escribirEnSwap(unaPagina);
+			//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+			unaPagina.bit_presencia = 1;};
+		}
 
-void algoritmo_clock_modificado(uint32_t numero_tabla_pagina, uint32_t num_frame_buscado) {
-	// Ver como es el tema socket
-	// Algo tipo filter que filtre por el bit de presencia
+		}
 
-	list_filter(tabla_segundo_nivel[numero_tabla_pagina] -> paginas, estaPresente);
-	if(list_size(tabla_segundo_nivel) == ENTRADAS_POR_TABLA){
-		//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
-		if(!list_find(tabla_segundo_nivel[numero_tabla_pagina].paginas,es_igual_a)) {
-			uint32_t iterador_pagina_2 = 0;
-			uint32_t iterador_pagina = 0;
-			while(iterador_pagina_2 <= MARCOS_POR_PROCESO) {
-				if(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso == 0) {
-					pagina findear_pagina = list_find(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],primer_paso_clock);
-					if( findear_pagina != NULL){
-						pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
-						list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
-						tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
-				}}
-					pagina pagina_findeada = list_find(tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],segundo_paso_clock);
-					if(pagina_findeada != NULL) {
-					pagina pagina_buscada = buscar_pagina_en_swap(num_frame_buscado);
-					escribir_en_swap();
-					list_replace(tabla_segundo_nivel[numero_tabla_pagina].paginas,
-					tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2],pagina_buscada);
+
+void algoritmo_clock_modificado(t_list* lista_paginas, pagina pagina_buscada) {
+pagina unaPagina;
+
+	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
+	//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
+		for(int i=0; i <= list_size(lista_paginas); i++) {
+			unaPagina = list_get(lista_paginas, i); // ESTA PORONGA ROMPE
+			if(unaPagina.bit_uso == 0 ) {
+				if(unaPagina.bit_presencia != 1 || unaPagina.bit_modificacion == 1) {
+					escribirEnSwap(unaPagina);
+					//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+					unaPagina.bit_presencia = 1;
+					unaPagina.bit_modificacion =0;
 				}
-				tabla_segundo_nivel[numero_tabla_pagina] -> paginas[iterador_pagina_2].bit_uso = 0;
-				pagina_findeada.bit_uso =1; // Si no es NULL explota en 40 millones de pedazos
-				iterador_pagina_2++;}}
-		} else
-	{pagina una_pagina =buscarPaginaEnSwap(num_frame_buscado);
-	list_add(tabla_segundo_nivel[numero_tabla_pagina],una_pagina);}}
+			} else {
+				unaPagina.bit_uso = 0;
+			}
+		}
+		}
+	 else if (list_size(lista_paginas) < ENTRADAS_POR_TABLA){
+			unaPagina = buscarPaginaEnSwap(pagina_buscada);
+			list_add(lista_paginas,unaPagina);
+		}
+		for(int j=0; j <= list_size(lista_paginas); j++) {
+		unaPagina = list_get(lista_paginas, j);// ESTA PORONGA ROMPE
+		if(unaPagina.bit_presencia == 1)
+			if(unaPagina.bit_uso == 0 && unaPagina.bit_modificacion == 0){
+			list_replace(lista_paginas, j, unaPagina);
+			break;}
+		else  {
+			escribirEnSwap(unaPagina);
+			//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+			unaPagina.bit_presencia = 1;
+			unaPagina.bit_modificacion = 0;};
+		}
+		}
+
+/*
+ * 2 OPCIONES: 1 : Una funcion buscarPagina que si no la encuentra se fija en el algoritmo
+ * y hace todoo el reemplazo y la marencoche y sino ponerlo adentro de los algoritmos
+ * y que ellos pregunten si la pagina ya esta cargada de por si */
 
 bool esta_presente(pagina pagina) {
 	return pagina.bit_presencia == 1;
