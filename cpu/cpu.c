@@ -8,6 +8,8 @@ char** lista_de_instrucciones_actual;
 int socket_dispatch;
 int socket_interrupt;
 int interrupcion = 0;
+uint32_t entradas_tlb;
+char* reemplazo_tlb;
 
 
 int main(void){
@@ -21,9 +23,9 @@ int main(void){
 	char* puerto_memoria = config_get_string_value(config, "PUERTO_MEMORIA"); // puerto al cual el cpu se va a conectar con la memoria
 	char* puerto_dispatch = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH"); // aca se comunica el kernel para mensajes de dispatch
 	char* puerto_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT"); // aca se comunica con el kernel para enviar interrupciones
-	char* reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB");
+	reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB");
 	retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") );
-	uint32_t entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
+	entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
 
 	//FIN CONFIG
 
@@ -241,21 +243,26 @@ uint32_t fetchOperand(uint32_t dir_logica){
 }
 
 // debe fijarse si la var global 'interrupcion' == 1 // TODO
-int hay_interrupcion(){
-	printf("HAY INTERRUPCION \n");
+bool hay_interrupcion(){
+	return interrupcion==1;
 
-	return 0;
+
+
 }
 
 // debe fijarse si se hizo una syscall bloqueante // TODO
-int se_hizo_una_syscall_bloqueante(){
-	printf("SE HIZO UNA SYSCALL BLOQUEANTE \n");
+bool se_hizo_una_syscall_bloqueante(){
 
-	return 0;
+	return syscall_bloqueante ==1;
+
 }
 
 void crear_TLB(){ // TODO
-
+	t_list* lista_tlb = list_create();
+	for(int i=0;entradas_tlb > i;i++){
+		t_tlb* tlb = malloc (sizeof(t_tlb));
+		list_add(lista_tlb, tlb);
+	}
 }
 
 void limpiar_TLB(){ // TODO
@@ -354,3 +361,4 @@ t_pcb recibir_pcb(int socket_dispatch){
 	free (pcb_buffer);
 	return nuevo_pcb;
 }
+

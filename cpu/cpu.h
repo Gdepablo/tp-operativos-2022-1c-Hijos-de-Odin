@@ -59,6 +59,8 @@ uint32_t numero_pagina;
 int socket_memoria;
 t_pcb pcb_ejecutando;
 info_traduccion_t info_traduccion;
+uint32_t interrupcion;
+uint32_t syscall_bloqueante;
 
 
 // FUNCIONES (mantener el orden o hay tabla)
@@ -69,9 +71,9 @@ void crear_TLB();
 void limpiar_TLB();
 void reemplazar_TLB();
 void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame);
-int hay_interrupcion();
+bool hay_interrupcion();
 t_config* inicializarConfigs(void);
-int se_hizo_una_syscall_bloqueante();
+bool se_hizo_una_syscall_bloqueante();
 uint32_t fetchOperand(uint32_t dir_logica);
 int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
