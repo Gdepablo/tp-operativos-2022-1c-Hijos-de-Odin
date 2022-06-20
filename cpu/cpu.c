@@ -272,13 +272,15 @@ void limpiar_TLB(){ // DONE
 }
 
 t_tlb elegir_pagina_a_reemplazar_TLB(){ // TODO
-	t_tlb pagina_a_retornar;
+	t_tlb* pagina_a_retornar;
 
 	return pagina_a_retornar;
 }
 
 void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // TODO
-
+	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
+	pagina_a_reemplazar->pagina = numero_de_pagina;
+	pagina_a_reemplazar->marco = numero_de_frame;
 }
 
 void enviar_PCB(){

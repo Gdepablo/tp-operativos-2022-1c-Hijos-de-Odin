@@ -144,22 +144,16 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
-	if(list_is_empty(tlbs)){
+	if(list_any_satisfy(tlbs,encontrar_pagina)){
+		t_tlb* tlb_a_retornar=list_find(tlbs, encontrar_pagina);
+		return tlb_a_retornar->marco;
+	}
+	else{
 		uint32_t numero_frame=pedir_todo_memoria();
 		guardar_en_TLB(numero_pagina, numero_frame);
 		return numero_frame;
 	}
-	else{
-		if(list_any_satisfy(tlbs,encontrar_pagina)){
-			t_tlb* tlb_a_retornar=list_find(tlbs, encontrar_pagina);
-			return tlb_a_retornar->marco;
-			}
-		else{
-			uint32_t numero_frame=pedir_todo_memoria();
-			guardar_en_TLB(numero_pagina, numero_frame);
-			return numero_frame;
-		}
-	}
+
 }
 
 bool encontrar_pagina(void* tlb){
