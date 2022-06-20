@@ -53,6 +53,7 @@ void instr_io(int tiempo_en_milisegundos){
 	strcpy(syscall_a_enviar->pcb.lista_instrucciones, pcb_ejecutando.lista_instrucciones);
 
 	enviar_syscall(syscall_a_enviar);
+	syscall_bloqueante=1;
 }
 
 
@@ -89,6 +90,7 @@ void instr_exit(){
 	exit->instruccion=1;
 	exit->tiempo_de_bloqueo=0;
 	enviar_syscall(exit);
+	syscall_bloqueante=1;
 }
 
 void enviar_syscall(t_syscall* syscall_a_enviar){

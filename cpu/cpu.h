@@ -106,6 +106,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar);
 
 // MISCELLANEOUS
 bool encontrar_pagina(void* tlb);
+void cambiar_puntero_tlb(void* tlb);
 
 #endif
 

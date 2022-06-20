@@ -7,7 +7,7 @@ char** lista_de_instrucciones_actual;
 //uint32_t retardo_noop;
 int socket_dispatch;
 int socket_interrupt;
-int interrupcion = 0;
+uint32_t interrupcion = 0;
 uint32_t entradas_tlb;
 char* reemplazo_tlb;
 t_list* lista_tlb;
@@ -169,7 +169,7 @@ void* executer(){
 				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
 				break;
-			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION todo
+			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
 				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
 				break;
@@ -185,7 +185,7 @@ void* executer(){
 				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
 				break;
-			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION todo
+			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
 				instr_exit();
 				break;
 			default:
@@ -206,6 +206,7 @@ void* executer(){
 		}
 		else if (se_hizo_una_syscall_bloqueante()){
 			limpiar_TLB();
+			syscall_bloqueante=0;
 		} else {
 			sem_post(&ejecutar);
 		}
@@ -243,7 +244,7 @@ uint32_t fetchOperand(uint32_t dir_logica){
 	return contenido_del_frame;
 }
 
-// debe fijarse si la var global 'interrupcion' == 1 // TODO
+// debe fijarse si la var global 'interrupcion' == 1 // DONE
 bool hay_interrupcion(){
 	return interrupcion==1;
 
@@ -251,14 +252,14 @@ bool hay_interrupcion(){
 
 }
 
-// debe fijarse si se hizo una syscall bloqueante // TODO
+// debe fijarse si se hizo una syscall bloqueante // DONE
 bool se_hizo_una_syscall_bloqueante(){
 
 	return syscall_bloqueante ==1;
 
 }
 
-void crear_TLB(){ // TODO
+void crear_TLB(){ // DONE
 	lista_tlb = list_create();
 	for(int i=0;entradas_tlb > i;i++){
 		t_tlb* tlb = malloc (sizeof(t_tlb));
@@ -266,8 +267,8 @@ void crear_TLB(){ // TODO
 	}
 }
 
-void limpiar_TLB(){ // TODO
-	printf("limpiar TLB \n");
+void limpiar_TLB(){ // DONE
+	list_iterate(lista_tlb,cambiar_puntero_tlb);
 }
 
 t_tlb elegir_pagina_a_reemplazar_TLB(){ // TODO
@@ -362,4 +363,8 @@ t_pcb recibir_pcb(int socket_dispatch){
 	free (pcb_buffer);
 	return nuevo_pcb;
 }
-
+void cambiar_puntero_tlb(void* tlb){
+	t_tlb* tlb_puntero= tlb;
+	tlb_puntero->pagina=0;
+	tlb_puntero->marco=0;
+}
