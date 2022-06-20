@@ -10,6 +10,7 @@ int socket_interrupt;
 int interrupcion = 0;
 uint32_t entradas_tlb;
 char* reemplazo_tlb;
+t_list* lista_tlb;
 
 
 int main(void){
@@ -258,7 +259,7 @@ bool se_hizo_una_syscall_bloqueante(){
 }
 
 void crear_TLB(){ // TODO
-	t_list* lista_tlb = list_create();
+	lista_tlb = list_create();
 	for(int i=0;entradas_tlb > i;i++){
 		t_tlb* tlb = malloc (sizeof(t_tlb));
 		list_add(lista_tlb, tlb);
