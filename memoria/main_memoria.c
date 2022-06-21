@@ -18,6 +18,7 @@ char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
 uint32_t RETARDO_SWAP;
 char* PATH_SWAP;
+FILE *lista_de_swap[ENTRADAS_POR_TABLA];
 
 t_list* tabla_de_paginas_global;
 // Guarda todas las páginas de forma contigua
@@ -42,7 +43,7 @@ int main(){
 
 
 
-	mx_tabla_de_paginas_global = ;
+	//mx_tabla_de_paginas_global = ;
 
 	//CONFIG
 	t_config* config;

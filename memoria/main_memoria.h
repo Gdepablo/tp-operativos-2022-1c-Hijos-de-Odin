@@ -10,6 +10,8 @@
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
 #include <stdbool.h>
+#include <netdb.h>
+#include <sys/time.h>
 
 
 typedef struct {
