@@ -1,6 +1,8 @@
 #include "cpu.h"
 #include <commons/collections/list.h>
 #include <math.h>
+#include <time.h>
+#include <unistd.h>
 
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {

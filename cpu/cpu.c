@@ -1,4 +1,6 @@
 #include "cpu.h"
+#include <time.h>
+#include <unistd.h>
 
 
 sem_t hiloCreado, ejecutar, sem_interrupcion;
@@ -263,6 +265,8 @@ void crear_TLB(){ // DONE
 	lista_tlb = list_create();
 	for(int i=0;entradas_tlb > i;i++){
 		t_tlb* tlb = malloc (sizeof(t_tlb));
+		tlb->marco=0;
+		tlb->pagina=0;
 		list_add(lista_tlb, tlb);
 	}
 }
@@ -271,9 +275,19 @@ void limpiar_TLB(){ // DONE
 	list_iterate(lista_tlb,cambiar_puntero_tlb);
 }
 
-t_tlb elegir_pagina_a_reemplazar_TLB(){ // TODO
+t_tlb* elegir_pagina_a_reemplazar_TLB(){ // TODO
 	t_tlb* pagina_a_retornar;
 
+	//Algoritmo LRU
+	if(!strcmp(reemplazo_tlb,"LRU")){
+
+	}
+
+	//Como el unico algoritmo alternativo es fifo no se aclaran nuevas condiciones para esta entrada.
+	//Algoritmo FIFO
+	else{
+		pagina_a_retornar= list_get_maximum(tlbs,tlb_mas_viejo);
+	}
 	return pagina_a_retornar;
 }
 
@@ -281,6 +295,7 @@ void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // TOD
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
+	pagina_a_reemplazar->ultima_referencia=clock();
 }
 
 void enviar_PCB(){
@@ -369,4 +384,18 @@ void cambiar_puntero_tlb(void* tlb){
 	t_tlb* tlb_puntero= tlb;
 	tlb_puntero->pagina=0;
 	tlb_puntero->marco=0;
+}
+
+void* tlb_mas_viejo(void* tlba,void* tlbb){
+	t_tlb* tlb1= tlba;
+	t_tlb* tlb2= tlbb;
+	clock_t tiempo_de_cambio=(float)clock();
+	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->ultima_referencia;
+	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->ultima_referencia;
+	if(tiempo_tlb1 > tiempo_tlb2 ){
+		return tlb1;
+	}
+	else{
+		return tlb2;
+	}
 }

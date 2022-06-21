@@ -3,6 +3,8 @@
 
 // LIBRARIES
 #include <stdio.h>
+#include <time.h>
+#include <unistd.h>
 #include <netdb.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -42,6 +44,7 @@ typedef struct{
 typedef struct{
 	uint32_t pagina;
 	uint32_t marco;
+	clock_t ultima_referencia;
 }t_tlb;
 
 typedef struct {
@@ -80,7 +83,7 @@ int iniciar_servidor(char* ip, char* puerto);
 int seleccionarOperacion(char* nombre_instruccion);
 void crear_TLB();
 void limpiar_TLB();
-t_tlb elegir_pagina_a_reemplazar_TLB();
+t_tlb* elegir_pagina_a_reemplazar_TLB();
 void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame);
 
 // INSTRUCCIONES
@@ -107,6 +110,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar);
 // MISCELLANEOUS
 bool encontrar_pagina(void* tlb);
 void cambiar_puntero_tlb(void* tlb);
+void* tlb_mas_viejo(void* tlba,void* tlbb);
 
 #endif
 
