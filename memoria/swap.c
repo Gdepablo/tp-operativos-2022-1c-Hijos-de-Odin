@@ -2,7 +2,8 @@
 
 /** Lee una pagina desde su archivo de SWAP
  Lee hasta encontrar el final del archivo
- * TODO: No hardcodear ese 1?*/
+ * TODO: No hardcodear ese 1?*
+ * agregar retardo de swap*/
 pagina leer_de_swap(int posicion) {
     char *extension = ".dat";
     char numero[50];
@@ -40,12 +41,11 @@ void escribir_en_swap(pagina *una_pagina) {
 
 uint32_t es_igual_a(t_list* lista_paginas,pagina paginaPedida) {
 	uint32_t iterador_tabla = 0;
-	while (iterador_tabla <= ENTRADAS_POR_TABLA) {
-		pagina aux = list_get(lista_paginas,iterador_tabla);
+	for(int i=0; i<list_size(lista_paginas); i++) {
+		pagina *aux = list_get(lista_paginas,iterador_tabla);
 		if (aux -> numero_frame == paginaPedida.numero_frame) {
 			return 1;
 		}
-		iterador_tabla++;
 	}
 	return 0;
 }

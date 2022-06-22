@@ -51,7 +51,7 @@ void algoritmo_clock(t_list* lista_paginas, pagina pagina_buscada) {
 
 		}
 
-
+/** TODO REVISAR ALGORITMOS*/
 void algoritmo_clock_modificado(t_list* lista_paginas, pagina pagina_buscada) {
 pagina *unaPagina;
 
@@ -76,7 +76,7 @@ pagina *unaPagina;
 			list_add(lista_paginas,unaPagina);
 		}
 		for(int j=0; j <= list_size(lista_paginas); j++) {
-		unaPagina = list_get(lista_paginas, j);// ESTA PORONGA ROMPE
+		unaPagina = list_get(lista_paginas, j);
 		if(unaPagina -> bit_presencia == 1)
 			if(unaPagina -> bit_uso == 0 && unaPagina -> bit_modificacion == 0){
 			list_replace(lista_paginas, j, unaPagina);

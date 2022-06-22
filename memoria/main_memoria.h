@@ -12,9 +12,11 @@
 #include <stdbool.h>
 #include <netdb.h>
 #include <sys/time.h>
+#include <semaphore.h>
 
 
 typedef struct {
+	uint32_t id_pagina;
 	uint32_t numero_frame;
 	uint32_t data_pagina;
 	uint32_t bit_presencia;
