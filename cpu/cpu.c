@@ -1,6 +1,5 @@
 #include "cpu.h"
 #include <time.h>
-#include <unistd.h>
 
 
 sem_t hiloCreado, ejecutar, sem_interrupcion;

@@ -2,7 +2,6 @@
 #include <commons/collections/list.h>
 #include <math.h>
 #include <time.h>
-#include <unistd.h>
 
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
@@ -156,7 +155,6 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 		guardar_en_TLB(numero_pagina, numero_frame);
 		return numero_frame;
 	}
-
 }
 
 bool encontrar_pagina(void* tlb){
