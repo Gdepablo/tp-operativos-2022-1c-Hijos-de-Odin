@@ -58,12 +58,11 @@ typedef struct {
 // VAR GLOBALES
 uint32_t retardo_noop;
 uint32_t tamanio_de_pagina;
-t_list* tlbs;
+t_list* lista_tlb;
 uint32_t numero_pagina;
 int socket_memoria;
 t_pcb pcb_ejecutando;
 info_traduccion_t info_traduccion;
-uint32_t interrupcion;
 uint32_t syscall_bloqueante;
 
 

@@ -5,18 +5,16 @@
 sem_t hiloCreado, ejecutar, sem_interrupcion;
 
 char** lista_de_instrucciones_actual;
-//uint32_t retardo_noop;
 int socket_dispatch;
 int socket_interrupt;
 uint32_t interrupcion = 0;
 uint32_t entradas_tlb;
 char* reemplazo_tlb;
-t_list* lista_tlb;
 
 
 int main(void){
 	printf("HOLA SOY EL CPU \n");
-	tlbs = list_create();
+	lista_tlb = list_create();
 	//CONFIG
 	t_config* config;
 	config = inicializarConfigs();
@@ -131,15 +129,21 @@ int main(void){
 	// FIN DE RECIBIR COSAS POR DISPATCH
 
 	//momento liberacion de memoria
+	free(ip);
+	free(puerto_memoria);
+	free(puerto_dispatch);
+	free(puerto_interrupt);
 	close(socket_escucha_interrupt);
 	close(socket_interrupt);
 	close(socket_escucha_dispatch);
 	close(socket_dispatch);
 	close(socket_memoria);
 	config_destroy(config);
+	list_destroy(lista_tlb);
 	return 0;
 }
 
+// HILOS
 // ejecuta las instrucciones del pcb - DONE
 void* executer(){
 	sem_post(&hiloCreado);
@@ -201,12 +205,15 @@ void* executer(){
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 			enviar_PCB();
+			free(pcb_ejecutando.lista_instrucciones);
 			sem_wait(&sem_interrupcion);
 			interrupcion = 0;
 			sem_post(&sem_interrupcion);
 		}
 		else if (se_hizo_una_syscall_bloqueante()){
+			// el pcb se envia en la instruccion IO o EXIT
 			limpiar_TLB();
+			free(pcb_ejecutando.lista_instrucciones);
 			syscall_bloqueante=0;
 		} else {
 			sem_post(&ejecutar);
@@ -232,32 +239,22 @@ void* interrupt(){
 			interrupcion = 1;
 			sem_post(&sem_interrupcion);
 		}
+		else
+		{
+			printf("EL HANDSHAKE RECIBIDO EN INTERRUPCION NO FUE 55 \n NO CAMBIO EL VALOR DE INTERRUPCION XD \n");
+		}
 	}
 
 	return 0;
 }
 
+// FUNCIONES
 // va a buscar el contenido de operando a memoria - DONE
 uint32_t fetchOperand(uint32_t dir_logica){
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
 	uint32_t contenido_del_frame = pedir_contenido_frame(frame_a_buscar);
 
 	return contenido_del_frame;
-}
-
-// debe fijarse si la var global 'interrupcion' == 1 // DONE
-bool hay_interrupcion(){
-	return interrupcion==1;
-
-
-
-}
-
-// debe fijarse si se hizo una syscall bloqueante // DONE
-bool se_hizo_una_syscall_bloqueante(){
-
-	return syscall_bloqueante ==1;
-
 }
 
 void crear_TLB(){ // DONE
@@ -276,28 +273,77 @@ void limpiar_TLB(){ // DONE
 	list_iterate(lista_tlb,cambiar_puntero_tlb);
 }
 
-t_tlb* elegir_pagina_a_reemplazar_TLB(){ // TODO
+t_tlb* elegir_pagina_a_reemplazar_TLB(){ // DONE
 	t_tlb* pagina_a_retornar;
 
 	//Algoritmo LRU
 	if(!strcmp(reemplazo_tlb,"LRU")){
-		pagina_a_retornar=list_get_maximum(tlbs,tlb_menos_referenciado);
+		pagina_a_retornar=list_get_maximum(lista_tlb,tlb_menos_referenciado);
 	}
 
 	//Como el unico algoritmo alternativo es fifo no se aclaran nuevas condiciones para esta entrada.
 	//Algoritmo FIFO
 	else{
-		pagina_a_retornar= list_get_maximum(tlbs,tlb_mas_viejo);
+		pagina_a_retornar= list_get_maximum(lista_tlb,tlb_mas_viejo);
 	}
 	return pagina_a_retornar;
 }
 
-void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // TODO
+void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // DONE
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
 	pagina_a_reemplazar->primera_referencia=clock();
 	pagina_a_reemplazar->ultima_referencia=clock();
+}
+
+void cambiar_puntero_tlb(void* tlb){
+	t_tlb* tlb_puntero= tlb;
+	tlb_puntero->pagina=0;
+	tlb_puntero->marco=0;
+	tlb_puntero->primera_referencia=clock();
+	tlb_puntero->ultima_referencia=clock();
+}
+
+void* tlb_mas_viejo(void* tlbA,void* tlbB){
+	t_tlb* tlb1 = tlbA;
+	t_tlb* tlb2 = tlbB;
+	clock_t tiempo_de_cambio=(float)clock();
+	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->primera_referencia;
+	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->primera_referencia;
+	if(tiempo_tlb1 > tiempo_tlb2 ){
+		return tlb1;
+	}
+	else{
+		return tlb2;
+	}
+}
+
+void* tlb_menos_referenciado(void* tlbA, void* tlbB){
+	t_tlb* tlb1 = tlbA;
+	t_tlb* tlb2 = tlbB;
+	clock_t tiempo_de_cambio=(float)clock();
+	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->ultima_referencia;
+	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->ultima_referencia;
+	if(tiempo_tlb1 > tiempo_tlb2 ){
+		return tlb1;
+	}
+	else{
+		return tlb2;
+	}
+
+}
+
+// debe fijarse si la var global 'interrupcion' == 1 // DONE
+bool hay_interrupcion(){
+	return interrupcion==1;
+}
+
+// debe fijarse si se hizo una syscall bloqueante // DONE
+bool se_hizo_una_syscall_bloqueante(){
+
+	return syscall_bloqueante ==1;
+
 }
 
 void enviar_PCB(){
@@ -381,38 +427,4 @@ t_pcb recibir_pcb(int socket_dispatch){
 
 	free (pcb_buffer);
 	return nuevo_pcb;
-}
-void cambiar_puntero_tlb(void* tlb){
-	t_tlb* tlb_puntero= tlb;
-	tlb_puntero->pagina=0;
-	tlb_puntero->marco=0;
-}
-
-void* tlb_mas_viejo(void* tlba,void* tlbb){
-	t_tlb* tlb1= tlba;
-	t_tlb* tlb2= tlbb;
-	clock_t tiempo_de_cambio=(float)clock();
-	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->primera_referencia;
-	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->primera_referencia;
-	if(tiempo_tlb1 > tiempo_tlb2 ){
-		return tlb1;
-	}
-	else{
-		return tlb2;
-	}
-}
-
-void* tlb_menos_referenciado(void* tlba, void* tlbb){
-	t_tlb* tlb1= tlba;
-	t_tlb* tlb2= tlbb;
-	clock_t tiempo_de_cambio=(float)clock();
-	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->ultima_referencia;
-	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->ultima_referencia;
-	if(tiempo_tlb1 > tiempo_tlb2 ){
-		return tlb1;
-	}
-	else{
-		return tlb2;
-	}
-
 }
