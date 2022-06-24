@@ -1,3 +1,4 @@
+#include "kernel.h"
 /*
  TIPO: FUNCION
 
@@ -7,7 +8,7 @@
 
  CUANDO ACTUA: cuando se lo llama en la funcion atender_cliente()
 */
-void* ingreso_a_new(t_pcb* pcb);
+void ingreso_a_new(t_pcb* pcb);
 
 /*
  TIPO: HILO

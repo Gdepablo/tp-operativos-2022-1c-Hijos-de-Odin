@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "planificadorDeMedianoPlazo.h"
 #include "semaforos.h"
-#include "kernel.h"
+
 
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {
 	sem_post(&se_inicio_el_hilo);
 	gettimeofday(&HORA_FIN_EJECUCION, NULL);
 	t_syscall* syscall = malloc(sizeof(t_syscall));
-	syscall->pcb = malloc(sizeof(t_pcb));
+	//syscall->pcb.instrucciones = malloc(sizeof(t_pcb)); Esto aca no iba
 
 	while(1) {
-		recv(*socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
+		recv(socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
 		sem_post(&fin_de_ejecucion);
 		if(syscall->instruccion) {
 			// EXIT
@@ -27,18 +27,18 @@ void* executing_a_blocked_o_exit() {
 
 
 
-void executing_a_blocked(t_syscall syscall) {
+void executing_a_blocked(t_syscall* syscall) {
 	t_bloqueado proceso;
-	proceso.pcb = syscall.pcb;
+	proceso.pcb = syscall->pcb;
 	if(!es_FIFO()){
-		proceso.pcb.estimacion_rafagas = calcular_rafaga(proceso.pcb.estimacion_rafagas);
+		proceso.pcb.estimacion_rafagas = calcular_rafaga(&syscall->pcb);
 	}
-	proceso.tiempo_de_bloqueo = syscall.tiempo_de_bloqueo;
+	proceso.tiempo_de_bloqueo = syscall->tiempo_de_bloqueo;
 	pthread_create(&proceso.hilo_suspensor, NULL, (void)blocked_a_suspended_blocked, &proceso);
 	proceso.esta_suspendido = 0;
 
 	sem_wait(&mx_cola_blocked);
-		queue_push(&cola_blocked, proceso);
+	queue_push(cola_blocked, &proceso);
 	sem_post(&mx_cola_blocked);
 
 	pthread_detach(proceso.hilo_suspensor);
@@ -52,7 +52,7 @@ void* blocked_a_suspended_blocked(t_bloqueado* proceso){
 
 	// LOGICA PARA GUARDAR PCB EN MEMORIA
 
-	signal(&grado_multiprogramacion);
+	sem_post(&grado_multiprogramacion);
 
 	return "";
 }
@@ -60,31 +60,31 @@ void* blocked_a_suspended_blocked(t_bloqueado* proceso){
 void* blocked_y_suspended_a_suspended_ready_o_ready() {
 	while(1) {
 		sem_wait(&io_terminada);
-		t_bloqueado proceso;
-		proceso = queue_pop(&cola_blocked);
-		if(proceso.esta_suspendido) {
-			suspended_blocked_a_suspended_ready(proceso.pcb);
+		t_bloqueado* proceso;
+		proceso = queue_pop(cola_blocked);
+		if(proceso->esta_suspendido) {
+			suspended_blocked_a_suspended_ready(&proceso->pcb);
 		} else {
-			blocked_a_ready(proceso.pcb);
+			blocked_a_ready(&proceso->pcb);
 		}
 	}
 	return "";
 }
 
-void suspended_blocked_a_suspended_ready(t_pcb pcb) {
+void suspended_blocked_a_suspended_ready(t_pcb* pcb) {
 	sem_wait(&mx_cola_suspended_ready);
-		queue_push(&cola_suspended_ready, pcb);
+		queue_push(cola_suspended_ready, pcb);
 	sem_post(&mx_cola_suspended_ready);
 
 	sem_post(&procesos_en_suspended_ready);
 }
 
-void blocked_a_ready(t_pcb pcb) {
+void blocked_a_ready(t_pcb* pcb){
 	sem_wait(&mx_lista_ready);
 		if(es_FIFO()) {
-			queue_push(&cola_ready, &pcb);
+			queue_push(cola_ready, pcb);
 		} else {
-			list_add(&lista_ready, &pcb);
+			list_add(lista_ready, pcb);
 		}
 	sem_post(&mx_lista_ready);
 
@@ -94,14 +94,14 @@ void blocked_a_ready(t_pcb pcb) {
 }
 
 void* inputOuput() {
-	t_bloqueado proceso;
+	t_bloqueado* proceso;
 
 	while(1) {
 		sem_wait(&proceso_en_io);
 
-		proceso = queue_peek(&cola_blocked);
-		usleep(proceso.tiempo_de_bloqueo);
-		pthread_cancel(proceso.hilo_suspensor);
+		proceso = queue_peek(cola_blocked);
+		usleep(proceso->tiempo_de_bloqueo);
+		pthread_cancel(proceso->hilo_suspensor);
 
 		sem_post(&io_terminada);
 	}
@@ -115,9 +115,10 @@ void* suspended_ready_a_ready() {
 		sem_wait(&grado_multiprogramacion);
 
 		if(es_FIFO()) {
-			queue_push(&cola_ready, queue_pop(&cola_suspended_ready));
+
+			queue_push(cola_ready, queue_pop(cola_suspended_ready));
 		} else {
-			list_add(&lista_ready, queue_pop(&cola_suspended_ready));
+			list_add(lista_ready, queue_pop(cola_suspended_ready));
 		}
 
 		if(!es_FIFO()) {
@@ -130,13 +131,13 @@ void* suspended_ready_a_ready() {
 }
 
 
-uint32_t calcular_rafaga(t_pcb pcb){
+uint32_t calcular_rafaga(t_pcb* pcb){
 	uint32_t rafaga;
 
 	long seconds = HORA_FIN_EJECUCION.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
 	long milisegundos = (((seconds * 1000000) + HORA_FIN_EJECUCION.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
 
-	rafaga = ALFA * (uint32_t)milisegundos + (1.0-ALFA) * pcb.estimacion_rafagas;
+	rafaga = ALFA * (uint32_t)milisegundos + (1.0-ALFA) * pcb->estimacion_rafagas;
 
 	return rafaga;
 }

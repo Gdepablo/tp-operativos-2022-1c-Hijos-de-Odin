@@ -1,3 +1,4 @@
+#include "kernel.h"
 /*
  TIPO:
 
@@ -29,7 +30,7 @@ void blocked_a_ready_o_suspended_blocked();
 
  CUANDO SE EJECUTA:
 */
-void* blocked_a_ready();
+void blocked_a_ready(t_pcb* pcb);
 
 /*
  TIPO:
@@ -40,7 +41,7 @@ void* blocked_a_ready();
 
  CUANDO SE EJECUTA:
 */
-void blocked_a_suspended_blocked(t_pcb* pcb);
+void* blocked_a_suspended_blocked(t_bloqueado* proceso);
 
 /*
  TIPO:
@@ -51,7 +52,7 @@ void blocked_a_suspended_blocked(t_pcb* pcb);
 
  CUANDO SE EJECUTA:
 */
-void* suspended_blocked_a_suspended_ready();
+void suspended_blocked_a_suspended_ready(t_pcb* pcb);
 
 /*
  TIPO:
@@ -74,4 +75,5 @@ void* suspended_ready_a_ready();
  CUANDO SE EJECUTA:
 */
 
-void executing_a_blocked(t_syscall syscall);
+void executing_a_blocked(t_syscall* syscall);
+uint32_t calcular_rafaga(t_pcb* pcb);

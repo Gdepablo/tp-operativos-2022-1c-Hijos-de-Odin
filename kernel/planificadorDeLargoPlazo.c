@@ -2,7 +2,7 @@
 #include <semaphore.h>
 #include "planificadorDeLargoPlazo.h"
 #include "semaforos.h"
-#include "kernel.h"
+
 
 void ingreso_a_new(t_pcb* pcb) {
 	// guardar en memoria XD
@@ -25,10 +25,12 @@ void* new_a_ready(){
 		sem_wait(&mx_cola_new);
 		if(es_FIFO()) {
 			// FIFO
-				queue_push(&cola_ready, queue_pop(&cola_new));
+
+				queue_push(cola_ready, queue_pop(cola_new));
 		} else {
 			// SJF
-				list_add(&lista_ready, queue_pop(&cola_new));
+
+				list_add(lista_ready, queue_pop(cola_new));
 		}
 		sem_post(&mx_cola_new);
 		sem_post(&mx_lista_ready);

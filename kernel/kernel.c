@@ -9,43 +9,7 @@
 
 
 
-// COLAS Y LISTAS
-t_queue* cola_new;
-t_queue* cola_ready; // FIFO
 
-t_queue*  cola_blocked;
-t_queue*  cola_suspended_blocked;
-t_queue*  cola_suspended_ready;
-
-// SOCKETS
-
-int socket_consola_proceso;
-int socket_cpu_syscall;
-int socket_cpu_pcb;
-int socket_cpu_interrupcion;
-
-// HILOS
-pthread_t lp_new_ready_fifo, lp_new_ready_srt, lp_exec_exit; // HILOS LARGO PLAZO
-pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
-pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
-
-// VARIABLES PARA LOS SOCKETS
-char* IP_CONSOLA;
-char* IP_KERNEL;
-char* IP_CPU;
-char* IP_MEMORIA;
-
-char* PUERTO_CONSOLA_PROCESO;
-char* PUERTO_MEMORIA;
-char* PUERTO_CPU_DISPATCH;
-char* PUERTO_CPU_INTERRUPT;
-char* PUERTO_CPU_SYSCALL;
-
-char* ALGORITMO_PLANIFICACION;
-int ESTIMACION_INICIAL;
-float ALFA;
-int GRADO_MULTIPROGRAMACION;
-int TIEMPO_MAXIMO_BLOQUEADO;
 
 int main(void){
 	PCB_EJECUCION.id_proceso = -1;
@@ -188,9 +152,9 @@ void* recibir_procesos() {
 
 void* esperar_syscall() {
 	while(1) {
-		t_syscall una_syscall = recibirSyscall(); 	// espera por una sycall, la deserializa y la devuelve
+		t_syscall* una_syscall = recibirSyscall(); 	// espera por una sycall, la deserializa y la devuelve
 													// TODO por batata
-		switch(una_syscall.instruccion) {
+		switch(una_syscall->instruccion) {
 		case 0: // IO
 			executing_a_blocked(una_syscall);
 			break;
@@ -203,8 +167,8 @@ void* esperar_syscall() {
 	}
 }
 
-t_syscall recibirSyscall(){
-	t_syscall CAMBIAR_NOMBRE;
+t_syscall* recibirSyscall(){ //ToDO
+	t_syscall* CAMBIAR_NOMBRE;
 
 	return CAMBIAR_NOMBRE;
 }

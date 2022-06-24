@@ -69,13 +69,51 @@ struct timeval HORA_INICIO_EJECUCION, HORA_FIN_EJECUCION;
 t_list*  lista_ready; // SRT
 t_pcb PCB_EJECUCION;
 
+// SOCKETS
+
+int socket_consola_proceso;
+int socket_cpu_syscall;
+int socket_cpu_pcb;
+int socket_cpu_interrupcion;
+// COLAS Y LISTAS
+t_queue* cola_new;
+t_queue* cola_ready; // FIFO
+
+t_queue*  cola_blocked;
+t_queue*  cola_suspended_blocked;
+t_queue*  cola_suspended_ready;
+
+
+// HILOS
+pthread_t lp_new_ready_fifo, lp_new_ready_srt, lp_exec_exit; // HILOS LARGO PLAZO
+pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
+pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
+
+// VARIABLES PARA LOS SOCKETS
+char* IP_CONSOLA;
+char* IP_KERNEL;
+char* IP_CPU;
+char* IP_MEMORIA;
+
+char* PUERTO_CONSOLA_PROCESO;
+char* PUERTO_MEMORIA;
+char* PUERTO_CPU_DISPATCH;
+char* PUERTO_CPU_INTERRUPT;
+char* PUERTO_CPU_SYSCALL;
+
+char* ALGORITMO_PLANIFICACION;
+int ESTIMACION_INICIAL;
+float ALFA;
+int GRADO_MULTIPROGRAMACION;
+int TIEMPO_MAXIMO_BLOQUEADO;
+
 
 // FUNCIONES
 t_info_proceso* deserializar_proceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
 void* planificador_largo_plazo();
 int crear_conexion(char *ip, char* puerto);
-t_syscall recibirSyscall();
+t_syscall* recibirSyscall();
 
 int es_FIFO();
 
