@@ -148,6 +148,7 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_any_satisfy(tlbs,encontrar_pagina)){
 		t_tlb* tlb_a_retornar=list_find(tlbs, encontrar_pagina);
+		tlb_a_retornar->ultima_referencia=clock();
 		return tlb_a_retornar->marco;
 	}
 	else{

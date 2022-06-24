@@ -44,6 +44,7 @@ typedef struct{
 typedef struct{
 	uint32_t pagina;
 	uint32_t marco;
+	clock_t primera_referencia;
 	clock_t ultima_referencia;
 }t_tlb;
 
@@ -111,7 +112,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar);
 bool encontrar_pagina(void* tlb);
 void cambiar_puntero_tlb(void* tlb);
 void* tlb_mas_viejo(void* tlba,void* tlbb);
-
+void* tlb_menos_referenciado(void* tlba, void* tlbb);
 #endif
 
 

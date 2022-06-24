@@ -267,6 +267,8 @@ void crear_TLB(){ // DONE
 		t_tlb* tlb = malloc (sizeof(t_tlb));
 		tlb->marco=0;
 		tlb->pagina=0;
+		tlb->primera_referencia = clock();
+		tlb->ultima_referencia=clock();
 		list_add(lista_tlb, tlb);
 	}
 }
@@ -280,7 +282,7 @@ t_tlb* elegir_pagina_a_reemplazar_TLB(){ // TODO
 
 	//Algoritmo LRU
 	if(!strcmp(reemplazo_tlb,"LRU")){
-
+		pagina_a_retornar=list_get_maximum(tlbs,tlb_menos_referenciado);
 	}
 
 	//Como el unico algoritmo alternativo es fifo no se aclaran nuevas condiciones para esta entrada.
@@ -295,6 +297,7 @@ void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // TOD
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
+	pagina_a_reemplazar->primera_referencia=clock();
 	pagina_a_reemplazar->ultima_referencia=clock();
 }
 
@@ -390,6 +393,20 @@ void* tlb_mas_viejo(void* tlba,void* tlbb){
 	t_tlb* tlb1= tlba;
 	t_tlb* tlb2= tlbb;
 	clock_t tiempo_de_cambio=(float)clock();
+	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->primera_referencia;
+	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->primera_referencia;
+	if(tiempo_tlb1 > tiempo_tlb2 ){
+		return tlb1;
+	}
+	else{
+		return tlb2;
+	}
+}
+
+void* tlb_menos_referenciado(void* tlba, void* tlbb){
+	t_tlb* tlb1= tlba;
+	t_tlb* tlb2= tlbb;
+	clock_t tiempo_de_cambio=(float)clock();
 	float tiempo_tlb1= tiempo_de_cambio - (float)tlb1->ultima_referencia;
 	float tiempo_tlb2= tiempo_de_cambio - (float)tlb2->ultima_referencia;
 	if(tiempo_tlb1 > tiempo_tlb2 ){
@@ -398,4 +415,5 @@ void* tlb_mas_viejo(void* tlba,void* tlbb){
 	else{
 		return tlb2;
 	}
+
 }
