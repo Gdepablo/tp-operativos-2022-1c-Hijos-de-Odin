@@ -38,7 +38,6 @@ int main(void){
 	socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
 	printf("se conecto el kernel al dispatch \n");
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
-	printf("handshake recibido: %i \n", handshake);
 	if(handshake == 333){
 		printf("HANDSHAKE DEL KERNEL CORRECTO (DISPATCH) \n");
 		send(socket_dispatch, &todo_ok, sizeof(uint32_t), 0);
@@ -75,7 +74,7 @@ int main(void){
 	recv(socket_memoria, &respuesta_memoria, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta_memoria == 1)
 	{
-		printf("HANDSHAKE INICIAL CON MEMORIA CORRECTO \n");
+		printf("HANDSHAKE DE MEMORIA CORRECTO \n");
 	}
 	else
 	{
@@ -89,9 +88,8 @@ int main(void){
 
 
 	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
-
 	recv(socket_memoria, &(info_traduccion), sizeof(info_traduccion_t), MSG_WAITALL);
-	//YA RECIBI LA INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
+	printf("YA RECIBI LA INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA \n");
 
 
 	// CREAR POOL DE HILOS
@@ -100,16 +98,17 @@ int main(void){
 	sem_init(&sem_interrupcion, 0, 0);
 
 	pthread_create(&executerThread, NULL, executer, NULL);
-	pthread_create(&interruptsThread, NULL, interrupt, NULL);
-
 	pthread_detach(executerThread);
+	pthread_create(&interruptsThread, NULL, interrupt, NULL);
 	pthread_detach(interruptsThread);
 
-	crear_TLB();
 
 	for(int i = 0; i < 2; i++){
 		sem_wait(&hiloCreado);
+		printf("hili %i creado \n", i);
 	}
+
+	crear_TLB();
 
 	sem_destroy(&hiloCreado);
 	// FIN DE CREACION DE HILO
