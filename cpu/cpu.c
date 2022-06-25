@@ -107,7 +107,7 @@ int main(void){
 
 	crear_TLB();
 
-	for(int i = 0; i < 3; i++){
+	for(int i = 0; i < 2; i++){
 		sem_wait(&hiloCreado);
 	}
 
