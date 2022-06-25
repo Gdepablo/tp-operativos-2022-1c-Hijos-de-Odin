@@ -1,3 +1,4 @@
+
 /*
  TIPO: HILO
 
@@ -64,7 +65,19 @@ void* executing_a_ready_srt();
 */
 void * executing_a_blocked_srt();
 
+/*
+ TIPO:
 
+ DESCRIPCION:
+
+ PARAMETROS: NINGUNO
+
+ CUANDO SE EJECUTA:
+*/
+extern struct t_pcb;
+t_pcb* algoritmo_sjf();
+
+void* comparar_rafagas(void* pcb1, void* pcb2);
 
 
 

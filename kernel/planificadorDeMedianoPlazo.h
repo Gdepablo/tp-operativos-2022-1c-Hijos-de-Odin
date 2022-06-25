@@ -63,3 +63,15 @@ void* suspended_blocked_a_suspended_ready();
  CUANDO SE EJECUTA:
 */
 void* suspended_ready_a_ready();
+
+/*
+ TIPO:
+
+ DESCRIPCION:
+
+ PARAMETROS:
+
+ CUANDO SE EJECUTA:
+*/
+
+void executing_a_blocked(t_syscall syscall);

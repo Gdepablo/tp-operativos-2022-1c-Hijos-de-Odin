@@ -40,4 +40,4 @@ void* new_a_ready_srt();
 
  CUANDO ACTUA: CUANDO SE RECIBE LA INSTRUCCION DEL CPU PARA TERMINAR EL PROCESO
 */
-void* executing_a_exit(t_pcb* pcb);
+void executing_a_exit();

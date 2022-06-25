@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <semaphore.h>
 #include "planificadorDeLargoPlazo.h"
+#include "semaforos.h"
+#include "kernel.h"
 
 void ingreso_a_new(t_pcb* pcb) {
 	// guardar en memoria XD
@@ -36,7 +38,7 @@ void* new_a_ready(){
 	return "";
 }
 
-void executing_a_exit(t_pcb* pcb){
+void executing_a_exit(/*t_pcb* pcb*/){
 	sem_post(&grado_multiprogramacion);
 	// liberar memoria XD
 	if(!es_FIFO()) {

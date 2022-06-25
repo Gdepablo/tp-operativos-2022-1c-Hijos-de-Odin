@@ -22,6 +22,7 @@ int iniciar_servidor(char* ip, char* puerto);
 t_config* inicializarConfigs(void);
 
 
+
 typedef struct {
 	uint32_t tamanio_direcciones;
 	uint32_t largo_instrucciones;
@@ -62,9 +63,20 @@ typedef struct {
 	int esta_suspendido; // 0==NO, 1==SI
 } t_bloqueado;
 
-t_info_proceso* desserializarProceso(t_buffer* buffer);
+
+// VARIABLES
+struct timeval HORA_INICIO_EJECUCION, HORA_FIN_EJECUCION;
+t_list*  lista_ready; // SRT
+t_pcb PCB_EJECUCION;
+
+
+// FUNCIONES
+t_info_proceso* deserializar_proceso(t_buffer* buffer);
 void* atender_cliente(int* socket_cliente);
 void* planificador_largo_plazo();
 int crear_conexion(char *ip, char* puerto);
+t_syscall recibirSyscall();
+
+int es_FIFO();
 
 #endif

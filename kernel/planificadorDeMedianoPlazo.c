@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "planificadorDeMedianoPlazo.h"
+#include "semaforos.h"
+#include "kernel.h"
 
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {

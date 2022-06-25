@@ -1,37 +1,18 @@
 #include "kernel.h"
-
+#include "semaforos.h"
 #include "planificadorDeCortoPlazo.h"
 #include "planificadorDeMedianoPlazo.h"
 #include "planificadorDeLargoPlazo.h"
 
 // VARIABLES GLOBALES
-t_pcb PCB_EJECUCION;
-struct timeval HORA_INICIO_EJECUCION, HORA_FIN_EJECUCION;
 
-// MUTEX
-sem_t mx_cola_new; // = 1
-sem_t mx_lista_ready; // = 1
-sem_t mx_cola_blocked; // = 1
-sem_t mx_cola_suspended_blocked; // = 1
-sem_t mx_cola_suspended_ready; // = 1
 
-// CONTADORES
-sem_t procesos_en_new; // = 0
-sem_t procesos_en_ready; // = 0
-sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
-sem_t io_terminada;
-sem_t procesos_en_suspended_ready;
-sem_t proceso_nuevo_en_ready;
-// SINCRONIZADORES
-sem_t proceso_finalizado; // = 0
-sem_t fin_de_ejecucion; // = 0
-sem_t se_inicio_el_hilo; // = 0
-sem_t proceso_en_io; // = 0
+
 
 // COLAS Y LISTAS
 t_queue* cola_new;
 t_queue* cola_ready; // FIFO
-t_list*  lista_ready; // SRT
+
 t_queue*  cola_blocked;
 t_queue*  cola_suspended_blocked;
 t_queue*  cola_suspended_ready;
@@ -91,7 +72,7 @@ int main(void){
 	cola_new                = queue_create();
 	cola_ready              = queue_create();
 	lista_ready             = list_create();
-	cola_blocked            = list_create();
+	cola_blocked            = queue_create();
 	cola_suspended_blocked  = queue_create();
 	cola_suspended_ready    = queue_create();
 
@@ -100,7 +81,7 @@ int main(void){
 	uint32_t handshake;
 	uint32_t respuesta;
 
-	int socket_consola_proceso  = iniciar_servidor(IP_KERNEL, PUERTO_CONSOLA_PROCESO); // por aca se comunican las consolas XD
+	socket_consola_proceso  = iniciar_servidor(IP_KERNEL, PUERTO_CONSOLA_PROCESO); // por aca se comunican las consolas XD
 
 	int socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
 	handshake = 555;
@@ -175,9 +156,9 @@ void* recibir_procesos() {
 	while(1) {
 		t_buffer* buffer = malloc(sizeof(buffer));
 
-		recv(*socket_consola_proceso, &(buffer->size), sizeof(uint32_t), 0);
+		recv(socket_consola_proceso, &(buffer->size), sizeof(uint32_t), 0);
 		buffer -> stream = malloc(buffer->size);
-		recv(*socket_consola_proceso, buffer->stream, buffer->size, 0);
+		recv(socket_consola_proceso, buffer->stream, buffer->size, 0);
 
 		t_info_proceso* proceso = deserializar_proceso(buffer);
 		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
@@ -185,7 +166,7 @@ void* recibir_procesos() {
 
 		t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largo_instrucciones + sizeof(char*) );
 
-		pcb->id_proceso = *socket_consola_proceso;
+		pcb->id_proceso = socket_consola_proceso;
 		pcb->tamanio_direcciones = proceso->tamanio_direcciones;
 		pcb->instrucciones = proceso->instrucciones;
 		pcb->program_counter = 0;
@@ -207,18 +188,25 @@ void* recibir_procesos() {
 
 void* esperar_syscall() {
 	while(1) {
-		t_syscall una_syscall = recibirSyscall(); // espera por una sycall, la deserializa y la devuelve
+		t_syscall una_syscall = recibirSyscall(); 	// espera por una sycall, la deserializa y la devuelve
+													// TODO por batata
 		switch(una_syscall.instruccion) {
 		case 0: // IO
-			executing_a_blocked(una_syscall.pcb, una_syscall.tiempo_de_bloqueo);
+			executing_a_blocked(una_syscall);
 			break;
 		case 1: // EXIT
-			executing_a_exit(una_syscall.pcb);
+			executing_a_exit();
 			break;
 		default:
 			printf("Error de código de instrucción \n");
 		}
 	}
+}
+
+t_syscall recibirSyscall(){
+	t_syscall CAMBIAR_NOMBRE;
+
+	return CAMBIAR_NOMBRE;
 }
 
 t_info_proceso* deserializar_proceso(t_buffer* buffer) {
@@ -300,7 +288,7 @@ t_config* inicializarConfigs(void) {
 	return nuevo_config;
 }
 
-int es_FIFO() {
+int es_FIFO(){
 	return strcmp(ALGORITMO_PLANIFICACION, "FIFO") != 0;
 }
 
