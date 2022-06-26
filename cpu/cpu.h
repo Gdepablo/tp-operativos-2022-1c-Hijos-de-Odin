@@ -104,7 +104,7 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
 
 // COMUNICACION CON KERNEL
 void enviar_PCB();
-t_pcb recibir_pcb(int socket_dispatch);
+t_pcb recibir_PCB();
 void enviar_syscall(t_syscall* syscall_a_enviar);
 
 // MISCELLANEOUS

@@ -31,7 +31,7 @@
 								<option id="gnu.c.link.option.libs.554014517" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="commons"/>
 								</option>
-								<option id="gnu.c.link.option.ldflags.518383608" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="-pthread -lm" valueType="string"/>
+								<option id="gnu.c.link.option.ldflags.518383608" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="-pthread" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1794168702" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

@@ -39,7 +39,7 @@ int main(void){
 	printf("se conecto el kernel al dispatch \n");
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 333){
-		printf("HANDSHAKE DEL KERNEL CORRECTO (DISPATCH) \n");
+		printf("Conexion con kernel realizada con exito... (DISPATCH) \n");
 		send(socket_dispatch, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
@@ -56,7 +56,7 @@ int main(void){
 	printf("se conecto el kernel al interrupt \n");
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
-		printf("HANDSHAKE DEL KERNEL CORRECTO (INTERRUPT) \n");
+		printf("Conexion con kernel realizada con exito... (INTERRUPT) \n");
 		send(socket_interrupt, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
@@ -74,11 +74,11 @@ int main(void){
 	recv(socket_memoria, &respuesta_memoria, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta_memoria == 1)
 	{
-		printf("HANDSHAKE DE MEMORIA CORRECTO \n");
+		printf("Conexion con memoria realizada con exito... \n");
 	}
 	else
 	{
-		printf("HANDSHAKE INICIAL CON MEMORIA ERRONEO, TERMINANDO PROCESO \n");
+		printf("ERROR: HANDSHAKE INICIAL CON MEMORIA ERRONEO, TERMINANDO PROCESO \n");
 		return 1;
 	}
 
@@ -89,7 +89,7 @@ int main(void){
 
 	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
 	recv(socket_memoria, &(info_traduccion), sizeof(info_traduccion_t), MSG_WAITALL);
-	printf("YA RECIBI LA INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA \n");
+	printf("Informacion para la traduccion de memoria recibida... \n");
 
 
 	// CREAR POOL DE HILOS
@@ -105,8 +105,9 @@ int main(void){
 
 	for(int i = 0; i < 2; i++){
 		sem_wait(&hiloCreado);
-		printf("hili %i creado \n", i);
 	}
+
+	printf("Hilo executer creado... \nHilo interruptor creado... \n");
 
 	crear_TLB();
 
@@ -120,7 +121,7 @@ int main(void){
 
 
 	while(1){
-		pcb_ejecutando = recibir_pcb(socket_dispatch); // debe recibir la lista de instrucciones como char*
+		pcb_ejecutando = recibir_PCB(); // debe recibir la lista de instrucciones como char*
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
 		sem_post(&ejecutar);
@@ -153,6 +154,9 @@ void* executer(){
 
 	while(1){
 		sem_wait(&ejecutar);
+
+		getchar();
+
 		//FETCH - DONE
 		siguiente_instruccion = malloc(string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]));
 		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
@@ -387,7 +391,8 @@ void enviar_PCB(){
     free(buffer);
 }
 
-t_pcb recibir_pcb(int socket_dispatch){
+// puede ser una funcion void que directamente modifique la var global?
+t_pcb recibir_PCB(){
 	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
 	t_pcb nuevo_pcb;
     int offset = 0;
@@ -404,21 +409,27 @@ t_pcb recibir_pcb(int socket_dispatch){
 
     memcpy(&(nuevo_pcb.id_proceso), pcb_buffer->stream+offset, sizeof(uint32_t));
     offset += sizeof(uint32_t);
+
     memcpy(&(nuevo_pcb.tamanio_direcciones), pcb_buffer->stream+offset, sizeof(uint32_t));
     offset += sizeof(uint32_t);
+
     nuevo_pcb.lista_instrucciones = malloc( pcb_buffer->size_instrucciones );
-    memcpy(nuevo_pcb.lista_instrucciones, pcb_buffer->stream+offset, pcb_buffer->size_instrucciones);
+    memcpy(nuevo_pcb.lista_instrucciones, (pcb_buffer->stream)+offset, pcb_buffer->size_instrucciones);
     offset += pcb_buffer->size_instrucciones;
+
     memcpy(&(nuevo_pcb.program_counter), pcb_buffer->stream+offset, sizeof(uint32_t));
     offset += sizeof(uint32_t);
+
     memcpy(&(nuevo_pcb.tabla_paginas), pcb_buffer->stream+offset, sizeof(uint32_t) );
     offset += sizeof(uint32_t);
+
     memcpy(&(nuevo_pcb.estimacion_rafagas), pcb_buffer->stream+offset, sizeof(uint32_t));
 
     printf("PCB ARMADO: \n");
     printf("id proceso: %i \n", nuevo_pcb.id_proceso);
     printf("tamanio direcciones: %i \n", nuevo_pcb.tamanio_direcciones);
     printf("lista instrucciones:  %s \n", nuevo_pcb.lista_instrucciones);
+    printf("strlen: %i \n", (int)strlen(nuevo_pcb.lista_instrucciones));
     printf("program counter: %i \n", nuevo_pcb.program_counter);
     printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
     printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
