@@ -64,6 +64,9 @@ int socket_memoria;
 t_pcb pcb_ejecutando;
 info_traduccion_t info_traduccion;
 uint32_t syscall_bloqueante;
+uint32_t numero_de_marco_glob;
+
+
 
 
 // FUNCIONES (mantener el orden o hay tabla)
@@ -112,6 +115,10 @@ bool encontrar_pagina(void* tlb);
 void cambiar_puntero_tlb(void* tlb);
 void* tlb_mas_viejo(void* tlba,void* tlbb);
 void* tlb_menos_referenciado(void* tlba, void* tlbb);
+bool filtrar_por_marco(void* tlb_puntero_void);
+bool marco_duplicado(uint32_t numero_de_marco);
+bool marco_obsoleto(uint32_t numero_de_marco);
+
 #endif
 
 

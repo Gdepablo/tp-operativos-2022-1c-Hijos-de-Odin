@@ -146,14 +146,23 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
-		// aca podemos hacer un if para ver si esta duplicada la pagina, si lo esta deberiamos hacer la logica del else (linea 156-158)
-		// y si no esta hacemos la logica de la linea 151 a la 153.
-		// testeado por batata, funciona anashe
+		//esta la pagina en la TLB
 		t_tlb* tlb_a_retornar=list_find(lista_tlb, encontrar_pagina);
-		tlb_a_retornar->ultima_referencia=clock();
-		return tlb_a_retornar->marco;
+		if(marco_obsoleto(tlb_a_retornar->marco)){
+			//esta la pagina pero esta duplicada y obsoleta
+			uint32_t numero_frame=pedir_todo_memoria();
+			guardar_en_TLB(numero_pagina, numero_frame);
+			return numero_frame;
+		}
+		else
+		{
+			//esta la pagina y no esta obsoleta XD
+			tlb_a_retornar->ultima_referencia=clock();
+			return tlb_a_retornar->marco;
+		}
 	}
 	else{
+		// la pagina no esta en ninguna entrada
 		uint32_t numero_frame=pedir_todo_memoria();
 		guardar_en_TLB(numero_pagina, numero_frame);
 		return numero_frame;

@@ -391,6 +391,46 @@ void enviar_PCB(){
     free(buffer);
 }
 
+bool marco_obsoleto(uint32_t numero_de_marco){
+    if(marco_duplicado(numero_de_marco)){
+        numero_de_marco_glob = numero_de_marco;
+        t_tlb* puntero_tlb_mas_viejo = list_get_maximum( list_filter(lista_tlb, filtrar_por_marco), tlb_mas_viejo );
+
+        if( (puntero_tlb_mas_viejo -> pagina) == numero_pagina ){
+            return true;
+        }
+
+    }
+    return false;
+}
+
+bool marco_duplicado(uint32_t numero_de_marco){
+    t_tlb* puntero_a_tlb;
+    int cantidad_de_marcos = 0;
+
+    for(int i = 0; i < list_size(lista_tlb); i++){
+        puntero_a_tlb = list_get(lista_tlb, i);
+
+        if(puntero_a_tlb->marco == numero_de_marco){
+            cantidad_de_marcos++;
+        }
+    }
+
+    if(cantidad_de_marcos>=2){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool filtrar_por_marco(void* tlb_puntero_void){
+    t_tlb* tlb_puntero = tlb_puntero_void;
+
+    return (tlb_puntero->marco == numero_de_marco_glob);
+}
+
 // puede ser una funcion void que directamente modifique la var global?
 t_pcb recibir_PCB(){
 	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
