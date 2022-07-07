@@ -2,7 +2,6 @@
 #include "planificadorDeMedianoPlazo.h"
 #include "semaforos.h"
 
-
 // SE EJECUTA AL RECIBIR UNA SYSCALL
 void* executing_a_blocked_o_exit() {
 	sem_post(&se_inicio_el_hilo);
@@ -34,7 +33,7 @@ void executing_a_blocked(t_syscall* syscall) {
 		proceso.pcb.estimacion_rafagas = calcular_rafaga(&syscall->pcb);
 	}
 	proceso.tiempo_de_bloqueo = syscall->tiempo_de_bloqueo;
-	pthread_create(&proceso.hilo_suspensor, NULL, (void)blocked_a_suspended_blocked, &proceso);
+	pthread_create(&proceso.hilo_suspensor, NULL, blocked_a_suspended_blocked, &proceso);
 	proceso.esta_suspendido = 0;
 
 	sem_wait(&mx_cola_blocked);
