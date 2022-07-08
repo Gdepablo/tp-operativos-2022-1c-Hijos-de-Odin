@@ -89,26 +89,20 @@ int main(void){
 	sem_init(&procesos_en_ready, 0, 0);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
-	pthread_create(&lp_new_ready_fifo, NULL, (void*)new_a_ready_fifo, NULL);
-	pthread_create(&lp_new_ready_srt, NULL, (void*)new_a_ready_srt, NULL);
-	pthread_create(&lp_exec_exit, NULL, (void*)executing_a_exit, NULL);
-	pthread_create(&mp_suspendedready_ready, NULL, (void*)suspended_ready_a_ready, NULL);
-	pthread_create(&cp_ready_exec_fifo, NULL, (void*)ready_a_executing_fifo, NULL);
-	pthread_create(&cp_ready_exec_srt, NULL, (void*)ready_a_executing_srt, NULL);
-	pthread_create(&cp_sacar_exec, NULL, (void*)executing_a_ready_o_blocked, NULL);
+	pthread_create(&lp_new_ready_fifo, NULL, new_a_ready, NULL);
+	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
+	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 
-	pthread_detach(lp_new_ready_fifo);
-	pthread_detach(lp_new_ready_srt);
-	pthread_detach(lp_exec_exit);
-	pthread_detach(mp_suspendedready_ready);
-	pthread_detach(cp_ready_exec_fifo);
-	pthread_detach(cp_ready_exec_srt);
-	pthread_detach(cp_sacar_exec);
+	pthread_detach(new_a_ready);
+	pthread_detach(suspended_ready_a_ready);
+	pthread_detach(ready_a_executing);
 
-	for(int i = 0; i < 6; i++){
+	for(int i = 0; i < 3; i++){
 		sem_wait(&se_inicio_el_hilo);
 	}
 	printf("se iniciaron todos los hilos \n");
+
+	while(1); // ver esto xd
 
 	return 0;
 }

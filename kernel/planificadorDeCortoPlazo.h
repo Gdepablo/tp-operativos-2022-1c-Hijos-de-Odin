@@ -9,18 +9,7 @@
 
  CUANDO SE EJECUTA: CUANDO SE VA EL PROCESO QUE ESTABA EN EXECUTE
 */
-void* ready_a_executing_fifo();
-
-/*
- TIPO: HILO
-
- DESCRIPCION: PASA DE READY A EXECUTE, ALGORITMO DE CORTO PLAZO SRT
-
- PARAMETROS: NINGUNO
-
- CUANDO SE EJECUTA: CUANDO SE VA EL PROCESO QUE ESTABA EN EXECUTE
-*/
-void* ready_a_executing_srt();
+void* ready_a_executing();
 
 /*
  TIPO: HILO
@@ -31,7 +20,7 @@ void* ready_a_executing_srt();
 
  CUANDO SE EJECUTA: CUANDO EL CPU AVISA QUE SE EJECUTO LA INSTRUCCION I/O O CUANDO HAY QUE DESALOJAR AL PROCESO (SRT)
 */
-void* executing_a_ready_o_blocked();
+void executing_a_ready();
 
 /*
  TIPO: FUNCION

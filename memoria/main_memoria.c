@@ -110,7 +110,7 @@ int main(){
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
-	sleep(5);
+	sleep(5); // borrar
 
 	close(socket_escucha);
 	close(socket_cpu);

@@ -1,5 +1,6 @@
 #include "cpu.h"
 #include <time.h>
+#include <math.h>
 
 
 sem_t hiloCreado, ejecutar, sem_interrupcion;
@@ -255,7 +256,8 @@ void* interrupt(){
 // va a buscar el contenido de operando a memoria - DONE
 uint32_t fetchOperand(uint32_t dir_logica){
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
-	uint32_t contenido_del_frame = pedir_contenido_frame(frame_a_buscar);
+	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
+	uint32_t contenido_del_frame = pedir_contenido(frame_a_buscar, offset);
 
 	return contenido_del_frame;
 }

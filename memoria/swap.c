@@ -5,22 +5,23 @@
  * TODO: No hardcodear ese 1?*
  * agregar retardo de swap*/
 pagina leer_de_swap(int posicion) {
-    char *extension = ".dat";
+    char *extension = ".dat"; // es .swap creo xD
     char numero[50];
     int j=0;
     int array_pags[500];
     snprintf(numero, sizeof(int), "%d", posicion);
     char* nombre_archivo = strcat(numero,extension);
     pagina paginaAux;
-    if(fopen(nombre_archivo, "rb") != NULL) {
-    lista_de_swap[posicion] = fopen(nombre_archivo, "rb");
-    rewind(lista_de_swap[posicion]);
-    while(!feof(lista_de_swap[posicion])) {
-    fread(&array_pags[j],sizeof(int),1,lista_de_swap[posicion]);
-    j++;
+    if( fopen(nombre_archivo, "rb") != NULL) {
+		lista_de_swap[posicion] = fopen(nombre_archivo, "rb");
+		rewind(lista_de_swap[posicion]);
+		while(!feof(lista_de_swap[posicion])) {
+			fread(&array_pags[j],sizeof(int),1,lista_de_swap[posicion]);
+			j++;
+		}
+		return paginaAux;
+		fclose(lista_de_swap[posicion]); // quien fue?
     }
-    return paginaAux;
-    fclose(lista_de_swap[posicion]);}
     else return perror("El archivo no existe o no se pudo abrir");
 }
 

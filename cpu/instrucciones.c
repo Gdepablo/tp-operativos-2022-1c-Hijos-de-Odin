@@ -61,8 +61,9 @@ void instr_io(int tiempo_en_milisegundos){
 void instr_read(uint32_t dir_logica){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 
-
-	uint32_t contenido_frame = pedir_contenido_frame(frame_a_utilizar);
+										// formula de numero de pagina
+	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
+	uint32_t contenido_frame = pedir_contenido(frame_a_utilizar, offset);
 	printf("%d \n",contenido_frame);
 
 }
@@ -200,12 +201,14 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
     recv(socket_memoria, &num_frame, sizeof(uint32_t), MSG_WAITALL);
     return num_frame;
 }
-uint32_t pedir_contenido_frame(uint32_t numero_de_frame){
+uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset){
 	//EL CODIGO DE OPERACION ES 2
 	uint32_t codigo_de_operacion =2;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
     //ENVIAR NUMERO DE FRAME
     send(socket_memoria, &numero_de_frame, sizeof(uint32_t), 0);
+    //ENVIAR OFFSET
+    send(socket_memoria, &offset, sizeof(uint32_t), 0);
 
     uint32_t contenido;
     recv(socket_memoria, &contenido, sizeof(uint32_t), MSG_WAITALL);
