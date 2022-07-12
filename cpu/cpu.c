@@ -476,7 +476,6 @@ t_pcb recibir_PCB(){
     printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
     printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
 
-
 	free (pcb_buffer);
 	return nuevo_pcb;
 }

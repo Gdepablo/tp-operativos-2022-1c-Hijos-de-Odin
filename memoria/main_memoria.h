@@ -1,28 +1,31 @@
+#ifndef MEMORIA_H_
+#define MEMORIA_H_
 #include <time.h>
 #include <stdio.h>
 #include <netdb.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <sys/time.h>
+#include <semaphore.h>
 #include <sys/socket.h>
 #include <commons/string.h>
 #include <commons/config.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
-#include <stdbool.h>
-#include <netdb.h>
-#include <sys/time.h>
-#include <semaphore.h>
 
 
-typedef struct {
-	uint32_t id_pagina;
-	uint32_t numero_frame;
-	uint32_t data_pagina;
-	uint32_t bit_presencia;
-	uint32_t bit_uso;
-	uint32_t bit_modificacion; // P U M
-} pagina;
+
+
+//typedef struct {
+//	uint32_t id_pagina;
+//	uint32_t numero_frame;
+//	uint32_t data_pagina;
+//	uint32_t bit_presencia;
+//	uint32_t bit_uso;
+//	uint32_t bit_modificacion; // P U M
+//} pagina;
 
 /*
 typedef struct {
@@ -30,10 +33,10 @@ typedef struct {
 	pagina* paginas = list_create(); // máximo según config
 } tabla_paginas_segundo_nivel_t;
 */
-typedef struct {
-	char* direccion_fisica; // 0x000...etc
-	uint32_t data; //Lo que lleva adentro, es decir el dato
-} memoria;
+//typedef struct {
+//	char* direccion_fisica; // 0x000...etc
+//	uint32_t data; //Lo que lleva adentro, es decir el dato
+//} memoria;
 
 t_config* inicializarConfigs(void);
 int crear_conexion(char *ip, char* puerto);
@@ -77,3 +80,4 @@ typedef struct{
  * ya viene indexado. El algoritmo de SWAPEO no sé si vale la pena que esté en la
  * Tabla de Paginas*/
 
+#endif

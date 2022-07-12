@@ -1,8 +1,11 @@
 #include "main_memoria.h"
-#include "algoritmos.h"
-#include "swap.h"
-#include "com_kernel.h"
-#include "com_cpu.h"
+//#include "algoritmos.h"
+//#include "swap.h"
+//#include "com_kernel.h"
+//#include "com_cpu.h"
+#include "hilo_kernel.h"
+#include <pthread.h>
+
 
 // SEMÁFOROS
 
@@ -18,7 +21,7 @@ char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
 uint32_t RETARDO_SWAP;
 char* PATH_SWAP;
-FILE *lista_de_swap[ENTRADAS_POR_TABLA];
+
 
 t_list* tabla_de_paginas_global;
 // Guarda todas las páginas de forma contigua
@@ -34,7 +37,7 @@ t_list* tabla_de_paginas_de_segundo_nivel;
  * Éstas guardan una lista de páginas
  */
 
-uint32_t vector_de_disponibilidad[/*cantidad de frames*/];
+//uint32_t vector_de_disponibilidad[/*cantidad de frames*/];
 
 void* memoria;
 
@@ -72,6 +75,7 @@ int main(){
 	// HANDSHAKE CON KERNEL
 	int socket_kernel = accept(socket_escucha, 0, 0);
 	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);
+	printf("handshake = %i \n", handshake);
 	if(handshake == 555){
 		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
 		send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
@@ -105,12 +109,50 @@ int main(){
 	info_traduccion.entradas_por_tabla = ENTRADAS_POR_TABLA;
 	info_traduccion.tamanio_paginas = TAMANIO_PAGINA;
 
-
-
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
-	sleep(5); // borrar
+	// aca no se toquetea nada
+	sem_init(&hilo_iniciado, 0, 0);
+
+	void* puntero_al_socket = &socket_kernel;
+	pthread_create(&hiloKernel, NULL, hilo_kernel, puntero_al_socket);
+	pthread_detach(hiloKernel);
+
+	sem_wait(&hilo_iniciado);
+
+	uint32_t codigo_recibido = 10;
+
+	// atender peticiones del CPU
+	while(1){
+		recv(socket_cpu, &codigo_recibido, sizeof(uint32_t), MSG_WAITALL);
+
+		switch(codigo_recibido){
+			case 0:
+				// con el numero de entrada + el numero de tabla que envia cpu, hay
+				// que devolver el numero de la segunda tabla
+				printf("responder con numero de tabla 2 \n");
+				break;
+			case 1:
+				// con el numero de segunda tabla + entrada de la segunda tabla,
+				// hay que devolver el numero de frame en el que se encuentra. Si no
+				// esta cargada en memoria, hay que cargarla y responder con el
+				// numero de frame.
+				printf("responder con numero de frame \n");
+				break;
+			case 2:
+				// hay que fijarse que hay en el frame dado.
+				printf("responde contenido en numero de frame con el offset dado \n");
+				break;
+			case 3:
+				// hay que escribir en el frame dado
+				printf("escribir en el frame con offset otorgado \n");
+				break;
+			default:
+				printf("codigo erroneo enviado por CPU \n");
+		}
+	}
+
 
 	close(socket_escucha);
 	close(socket_cpu);

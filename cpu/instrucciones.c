@@ -235,5 +235,5 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t valor){
     if(respuesta == 1){
     	printf("Se escribio en el frame.");
     }
-    else printf("La mula esta de huelga");
+    else printf("La mula esta de huelga.");
 }
