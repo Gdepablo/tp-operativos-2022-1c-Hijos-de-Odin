@@ -39,7 +39,7 @@ t_list* tabla_de_paginas_de_segundo_nivel;
 
 //uint32_t vector_de_disponibilidad[/*cantidad de frames*/];
 
-void* memoria;
+
 
 int main(){
 	printf("MEMORIA \n");
@@ -63,7 +63,6 @@ int main(){
 	PATH_SWAP = config_get_string_value(config, "PATH_SWAP");
 	//FIN CONFIG
 
-	memoria = malloc(TAMANIO_MEMORIA);
 
 	//SOCKETS: MEMORIA ESCUCHA TANTO EL KERNEL COMO EL CPU POR EL MISMO SOCKET
 	uint32_t handshake = 0;
@@ -112,18 +111,14 @@ int main(){
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
-	// aca no se toquetea nada
-	sem_init(&hilo_iniciado, 0, 0);
+	// tod0 lo importante de memoria
+	memoria_real = malloc(TAMANIO_MEMORIA);
 
-	void* puntero_al_socket = &socket_kernel;
-	pthread_create(&hiloKernel, NULL, hilo_kernel, puntero_al_socket);
-	pthread_detach(hiloKernel);
 
-	sem_wait(&hilo_iniciado);
+	// FIN TAREAS ADMINISTRATIVAS, EMPIEZA EL LABURO
+	uint32_t codigo_recibido;
 
-	uint32_t codigo_recibido = 10;
-
-	// atender peticiones del CPU
+	// atender peticiones del CPU y KERNEL (usan el mismo socket)
 	while(1){
 		recv(socket_cpu, &codigo_recibido, sizeof(uint32_t), MSG_WAITALL);
 
@@ -148,8 +143,22 @@ int main(){
 				// hay que escribir en el frame dado
 				printf("escribir en el frame con offset otorgado \n");
 				break;
+			case 4:
+				// basicamente un list add a la lista de tablas, y crear la cantidad
+				// de tablas de segundo nivel necesarias.
+				printf("crear las tablas y responder el nro de 1er tabla \n");
+				break;
+			case 5:
+				// si kernel nos envia tanto el PID como el numero de 1er tabla, es
+				// facilito
+				printf("sacar de memoria todas las paginas del proceso \n");
+				break;
+			case 6:
+				// borrar el .swap y sacar las entradas en memoria si es que hay.
+				printf("borrar el archivo .swap, dejar las tablas \n");
+				break;
 			default:
-				printf("codigo erroneo enviado por CPU \n");
+				printf("codigo erroneo recibido \n");
 		}
 	}
 
