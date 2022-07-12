@@ -159,7 +159,7 @@ void* executer(){
 		getchar();
 
 		//FETCH - DONE
-		siguiente_instruccion = malloc(string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]));
+		siguiente_instruccion = malloc( string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]) );
 		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
 		instruccion_spliteada = string_array_new();
 		instruccion_spliteada = string_split(siguiente_instruccion, " ");
@@ -476,6 +476,7 @@ t_pcb recibir_PCB(){
     printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
     printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
 
-	free (pcb_buffer);
+    free(pcb_buffer->stream);
+	free(pcb_buffer);
 	return nuevo_pcb;
 }
