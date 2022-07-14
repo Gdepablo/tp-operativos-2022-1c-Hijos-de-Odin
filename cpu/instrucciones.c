@@ -2,6 +2,7 @@
 #include <commons/collections/list.h>
 #include <math.h>
 #include <time.h>
+#include <unistd.h>
 
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
@@ -26,16 +27,22 @@ int seleccionarOperacion(char* nombre_instruccion){
 	return -1;
 }
 
-// Descripcion: recibe la cantidad de veces que se debe hacer el sleep(retardo_noop)
+
+// Descripcion: recibe la cantidad de veces que se debe hacer el sleep(retardo_noop).
+// Ejemplo: instr_no_op(5) ejecuta 5 veces un usleep con el tiempo dado en el config pasado a milisegundos
+
 void instr_no_op(int cant_de_no_op){
 	int i = 0;
 	while( i < cant_de_no_op ){
-		sleep(retardo_noop);
+		usleep(retardo_noop * 1000); // pasa de milisegundos (dado por config) a microsegundos (lo que usa usleep)
 		i++;
 	}
 }
 
 
+
+// Descripcion: simula ser una operacion bloqueante de i/o, entonces se envia a kernel con el tiempo que diga la instruccion
+// Ejemplo: instr_io(1000) le envia a kernel el PCB sumado al codigo de instruccion + el numero 1000 (enviado por parametro)
 
 void instr_io(int tiempo_en_milisegundos){
 	extern t_pcb pcb_ejecutando;
@@ -58,6 +65,10 @@ void instr_io(int tiempo_en_milisegundos){
 }
 
 
+// Descripcion: leer una direccion logica. Se envia una solicitud a memoria, esta retorna el contenido en el frame con
+// el offset pedido y el valor es mostrado por pantalla
+// Ejemplo: instr_read(11) lee lo que haya en la direccion logica 11 del proceso y la muestra por pantalla
+
 void instr_read(uint32_t dir_logica){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 
@@ -70,12 +81,19 @@ void instr_read(uint32_t dir_logica){
 
 
 
+// Descripcion: escribir en una direccion logica. Se envia la solicitud a memoria para que esta escriba. Esta contesta con un
+// OK si se pudo escribir.
+// Ejemplo: instr_write(11, 69) escribe en la direccion 11 el valor 69
+
 void instr_write(uint32_t dir_logica, uint32_t valor){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 	escribir_frame(frame_a_utilizar, valor);
 }
 
 
+// Descripcion: copiar un valor en una direccion logica. muy parecida a instr_write, por la salvedad de que el valor viene del
+// contenido de otra direccion logica del proceso.
+// Ejemplo: instr_write(11, 69) escribe en la direccion 11 el valor 69, siendo este el valor que se recibio antes
 
 void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 	uint32_t frame_destino= buscar_frame(dir_logica_destino);
@@ -83,7 +101,8 @@ void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 
 }
 
-
+// Descripcion: manda a la puta al proceso. Devuelve la PCB al kernel y este termina de realizar las tareas administrativas.
+// Ejemlpo: se esta ejecutando el proceso A, al ejecutarse instr_exit, se manda el pcb del proceso A al kernel de vuelta.
 
 void instr_exit(){
 	t_syscall* exit=malloc(sizeof(t_syscall));
@@ -144,6 +163,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	free(syscall_a_enviar);
 }
 
+// Descripcion:
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
@@ -176,6 +196,12 @@ bool encontrar_pagina(void* tlb){
 
 }
 
+
+
+// Descripcion: Pide a memoria el numero de la segunda tabla ubicada en la entrada especificada de la tabla de primer nivel
+// especificada. Retorna el valor que le retorna memoria
+// Ejemplo: pedir_num_tabla_2(3) le pide a memoria que: de la tabla de paginas de primer nivel del proceso, le de el numero
+// de segunda tabla que esta en la entrada numero 3.
 uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 0
 	uint32_t codigo_de_operacion =0;
@@ -188,6 +214,14 @@ uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
     recv(socket_memoria, &num_tabla_2, sizeof(uint32_t), MSG_WAITALL);
     return num_tabla_2;
 }
+
+
+
+// Descripcion: Pide a memoria que retorne el numero de frame del numero de pagina que se encuentra en la entrada de la tabla
+// de segundo nivel dada.
+// Ejemplo: pedir_num_frame(1, 2) pide a memoria que se retorne el numero de frame asignado a la pagina que esta en la
+// tabla 2, entrada 1
+
 uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
 	//EL CODIGO DE OPERACION ES 1
 	uint32_t codigo_de_operacion =1;
@@ -201,6 +235,11 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
     recv(socket_memoria, &num_frame, sizeof(uint32_t), MSG_WAITALL);
     return num_frame;
 }
+
+
+
+// Descripcion: pide a memoria el contenido que se encuentra en el numero de frame con el offset dado
+// Ejemplo: pedir_contenido(5, 13) pide a memoria que del frame 5 + 13 de offset me retorne su contenido.
 uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset){
 	//EL CODIGO DE OPERACION ES 2
 	uint32_t codigo_de_operacion =2;
@@ -214,6 +253,8 @@ uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset){
     recv(socket_memoria, &contenido, sizeof(uint32_t), MSG_WAITALL);
     return contenido;
 }
+
+// Descripcion: pide todos los datos a memoria menos el contenido del frame.
 uint32_t pedir_todo_memoria(){
 	uint32_t entrada_1er_tabla = floor(numero_pagina/info_traduccion.entradas_por_tabla);
 	uint32_t num_tabla_2 =pedir_num_tabla_2(entrada_1er_tabla);
@@ -222,6 +263,14 @@ uint32_t pedir_todo_memoria(){
 	return numero_frame;
 }
 
+
+// Descripcion: escribe en el numero de frame con el offset dado, el valor del tercero parametro.
+// ejemplo: escribir_frame(1,5,8) escribe en el frame 1 con un offset de 5, el valor 8
+
+/* TODO
+ * agregar el offset po aweonao XD
+ * eso afecta instr_copy e instr_write, compilar antes de pushear anashe
+ */
 void escribir_frame(uint32_t numero_de_frame, uint32_t valor){
 	//EL CODIGO DE OPERACION ES 3
 	uint32_t codigo_de_operacion =3;

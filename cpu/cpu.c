@@ -173,11 +173,12 @@ void* executer(){
 		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // retorna 0,1,2,3,4,5
 
 		switch(numOperacion){
-			case NO_OP:				//CANTIDAD DE NO_OP
+			// Cada funcion de cada instruccion tiene su documentacion hecha en instrucciones.c
+			case NO_OP:				//CANTIDAD DE NO_OP, SEGUNDO PARAMETRO DE LA INSTRUCCION
 				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
 				break;
-			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
+			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
 				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
 				break;
@@ -230,6 +231,10 @@ void* executer(){
 }
 
 // recibe el aviso del kernel de que hay que desalojar - DONE
+/*
+ * 	Este hilo solamente atiende lo recibido de KERNEL para detener la ejecucion
+ *
+ */
 void* interrupt(){
 	sem_post(&hiloCreado);
 
@@ -244,7 +249,7 @@ void* interrupt(){
 		}
 		else
 		{
-			printf("EL HANDSHAKE RECIBIDO EN INTERRUPCION NO FUE 55 \n NO CAMBIO EL VALOR DE INTERRUPCION XD \n");
+			printf("EL HANDSHAKE RECIBIDO EN INTERRUPCION NO FUE 55 \n NO CAMBIO EL VALOR DE INTERRUPCION\n");
 		}
 	}
 
