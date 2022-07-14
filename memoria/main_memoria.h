@@ -18,14 +18,13 @@
 
 
 
-//typedef struct {
-//	uint32_t id_pagina;
-//	uint32_t numero_frame;
-//	uint32_t data_pagina;
-//	uint32_t bit_presencia;
-//	uint32_t bit_uso;
-//	uint32_t bit_modificacion; // P U M
-//} pagina;
+typedef struct {
+	uint32_t numero_frame;
+	uint32_t data_pagina;
+	uint32_t bit_presencia;
+	uint32_t bit_uso;
+	uint32_t bit_modificacion; // P U M
+} pagina_t;
 
 /*
 typedef struct {
@@ -37,6 +36,7 @@ typedef struct {
 //	char* direccion_fisica; // 0x000...etc
 //	uint32_t data; //Lo que lleva adentro, es decir el dato
 //} memoria;
+
 
 t_config* inicializarConfigs(void);
 int crear_conexion(char *ip, char* puerto);
