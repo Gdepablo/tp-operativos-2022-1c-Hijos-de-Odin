@@ -109,6 +109,8 @@ int main(void){
 
 	// tod0 lo importante de memoria
 	memoria_real = malloc(TAMANIO_MEMORIA);
+	bitmap_memoria = list_create();
+	llenar_bitmap();
 
 
 	// FIN TAREAS ADMINISTRATIVAS, EMPIEZA EL LABURO
@@ -149,6 +151,14 @@ int main(void){
 	close(socket_cpu);
 	close(socket_kernel);
 	return 0;
+}
+
+void llenar_bitmap(){
+	for(int i = 0 ; i < TAMANIO_MEMORIA / TAMANIO_PAGINA ; i++){
+		uint32_t* bit = malloc(sizeof(uint32_t));
+		*bit = 0;
+		list_add(bitmap_memoria, bit);
+	}
 }
 
 t_config* inicializarConfigs(void) {

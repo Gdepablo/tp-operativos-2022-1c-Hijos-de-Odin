@@ -9,7 +9,7 @@ enum operaciones{
 	solicitud_lectura ,
 	solicitud_escritura ,
 	crear_tablas ,
-	suspension_tablas,
+	suspension_proceso,
 	finalizacion_proceso
 	};
 
@@ -31,6 +31,8 @@ t_list* tabla_de_paginas_de_segundo_nivel;
  * Éstas guardan una lista de páginas
  */
 
+t_list* bitmap_memoria;
+
 // cosas compartidas xd fulbo
 void* memoria_real;
 pthread_t hiloKernel;
@@ -44,3 +46,7 @@ int calcular_cantidad_de_tablas(uint32_t cantidad_paginas_necesaria);
 int calcular_cantidad_de_paginas(uint32_t bytes_proceso);
 void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas);
 void crear_archivo_swap(uint32_t process_id);
+void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla);
+void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id);
+char* obtener_ruta_archivo(uint32_t process_id);
+void poner_bit_en_0(uint32_t numero_de_frame);
