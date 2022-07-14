@@ -39,7 +39,7 @@ uint32_t TAMANIO_PAGINA;
 uint32_t ENTRADAS_POR_TABLA;
 
 void* hilo_kernel(void* ptr_void_socket);
-void crear_tablas_necesarias( uint32_t espacio_de_direcciones);
+uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones);
 int calcular_cantidad_de_tablas(uint32_t cantidad_paginas_necesaria);
 int calcular_cantidad_de_paginas(uint32_t bytes_proceso);
 void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas);

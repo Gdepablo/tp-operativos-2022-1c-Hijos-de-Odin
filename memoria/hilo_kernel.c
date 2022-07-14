@@ -20,16 +20,21 @@ void* hilo_kernel(void* ptr_void_socket){
 		switch(codigo_recibido){
 			// TESTEADO - FUNCIONA BIEN (o eso parece)
 			case crear_tablas:
+				// recibe un PROCESS ID y TAMAÑO DEL ESPACIO DE DIRECCIONES
 				// basicamente un list add a la lista de tablas, y crear la cantidad de
 				// tablas de segundo nivel necesarias. Tambien se crea el archivo .swap
 
+				// recibo las cosas necesarias
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_kernel, &espacio_de_direcciones, sizeof(uint32_t), MSG_WAITALL);
 
-				crear_tablas_necesarias(espacio_de_direcciones);
+				// hago la tarea necesaria
+				int num_tabla_creado = crear_tablas_necesarias(espacio_de_direcciones);
 				crear_archivo_swap(process_id);
 
-				printf("crear las tablas y responder el nro de 1er tabla \n");
+				//respondo con el numero de tabla creado
+				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
+
 				break;
 			case suspension_tablas:
 				// si kernel nos envia tanto el PID como el numero de 1er tabla, es
@@ -52,12 +57,14 @@ void* hilo_kernel(void* ptr_void_socket){
 /*
  * crea tanto la tabla de 1er nivel como las de segundo nivel que sean necesarias.
  */
-void crear_tablas_necesarias( uint32_t espacio_de_direcciones){
+uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones){
 	int (*tabla)[ENTRADAS_POR_TABLA]= malloc(sizeof(int)*ENTRADAS_POR_TABLA);
 	int cantidad_paginas_necesaria = calcular_cantidad_de_paginas(espacio_de_direcciones);
 	int cantidad_tablas_2do_nivel_necesarias = calcular_cantidad_de_tablas(cantidad_paginas_necesaria);
 	crear_tablas_2do_lvl(tabla, cantidad_tablas_2do_nivel_necesarias);
 	list_add(tabla_de_paginas_de_primer_nivel, tabla);
+
+	return list_size(tabla_de_paginas_de_primer_nivel) - 1;
 }
 
 int calcular_cantidad_de_paginas(uint32_t bytes_proceso){
