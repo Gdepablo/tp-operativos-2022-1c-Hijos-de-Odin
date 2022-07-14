@@ -102,8 +102,9 @@ uint32_t pedir_todo_memoria();
 uint32_t buscar_frame(uint32_t dir_logica);
 uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla);
 uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset);
-void escribir_frame(uint32_t numero_de_frame, uint32_t valor);
+void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor);
 uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
+
 
 // COMUNICACION CON KERNEL
 void enviar_PCB();

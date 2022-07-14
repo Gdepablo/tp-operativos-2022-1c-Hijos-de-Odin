@@ -87,7 +87,8 @@ void instr_read(uint32_t dir_logica){
 
 void instr_write(uint32_t dir_logica, uint32_t valor){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
-	escribir_frame(frame_a_utilizar, valor);
+	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
+	escribir_frame(frame_a_utilizar, offset, valor);
 }
 
 
@@ -97,7 +98,8 @@ void instr_write(uint32_t dir_logica, uint32_t valor){
 
 void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 	uint32_t frame_destino= buscar_frame(dir_logica_destino);
-	escribir_frame(frame_destino,valor);
+	uint32_t offset = dir_logica_destino - ( floor(dir_logica_destino/tamanio_de_pagina) * tamanio_de_pagina );
+	escribir_frame(frame_destino, offset, valor);
 
 }
 
@@ -271,12 +273,14 @@ uint32_t pedir_todo_memoria(){
  * agregar el offset po aweonao XD
  * eso afecta instr_copy e instr_write, compilar antes de pushear anashe
  */
-void escribir_frame(uint32_t numero_de_frame, uint32_t valor){
+void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor){
 	//EL CODIGO DE OPERACION ES 3
 	uint32_t codigo_de_operacion =3;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
     //ENVIAR NUMERO DE FRAME
     send(socket_memoria, &numero_de_frame, sizeof(uint32_t), 0);
+    //ENVIAR OFFSET
+    send(socket_memoria, &offset, sizeof(uint32_t), 0);
     //ENVIAR VALOR
     send(socket_memoria, &valor, sizeof(uint32_t), 0);
     uint32_t respuesta;
