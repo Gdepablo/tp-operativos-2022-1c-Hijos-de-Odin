@@ -2,31 +2,36 @@
 #include <time.h>
 #include <math.h>
 
+//	DOCUMENTACION COSMICA REALIZADA POR BATATA
+sem_t 	hiloCreado, // = 0
+		ejecutar,	// = 0
+		sem_interrupcion; // = 1
 
-sem_t hiloCreado, ejecutar, sem_interrupcion;
-
-char** lista_de_instrucciones_actual;
-int socket_dispatch;
-int socket_interrupt;
-uint32_t interrupcion = 0;
-uint32_t entradas_tlb;
-char* reemplazo_tlb;
+char** lista_de_instrucciones_actual; 	// lista de instrucciones del proceso en ejecucion
+int socket_dispatch;					// socket por el que recibo los PCB
+int socket_interrupt;					// socket por el cual el kernel envia interrupciones
+uint32_t interrupcion = 0;				// si == 1 hay interrupcion, si == 0 no hay interrupcion
+uint32_t entradas_tlb;					// recibido por config
+char* reemplazo_tlb;					// modo de reemplazo TLB, puede ser FIFO o LRU
 
 
 int main(void){
-	printf("HOLA SOY EL CPU \n");
-	lista_tlb = list_create();
+	lista_tlb = list_create(); 			// La lista representa la TLB
+	sem_init(&ejecutar, 0, 0);
+
 	//CONFIG
-	t_config* config;
+	t_config* config;					// abro el config, se encuentra en la carpeta padre y se llama cpu.config
 	config = inicializarConfigs();
 
 	char* ip = config_get_string_value(config, "IP_MEMORIA"); // ip de la memoria
 	char* puerto_memoria = config_get_string_value(config, "PUERTO_MEMORIA"); // puerto al cual el cpu se va a conectar con la memoria
 	char* puerto_dispatch = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH"); // aca se comunica el kernel para mensajes de dispatch
 	char* puerto_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT"); // aca se comunica con el kernel para enviar interrupciones
-	reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB");
-	retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") );
-	entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));
+	reemplazo_tlb = config_get_string_value(config, "REEMPLAZO_TLB"); // FIFO o LRU
+	retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") ); // Tiempo que toma el NOOP
+	entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));	// cantidad de entradas de la TLB
+
+	config_destroy(config); 			// lo destruyo porque ya no me sirve
 
 	//FIN CONFIG
 
@@ -49,8 +54,6 @@ int main(void){
 		send(socket_dispatch, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
-
-	// METER UN SLEEP(1) EN KERNEL SINO NO LLEGA A CONECTAR XD;
 
 	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
 	socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
@@ -108,19 +111,16 @@ int main(void){
 		sem_wait(&hiloCreado);
 	}
 
-	printf("Hilo executer creado... \nHilo interruptor creado... \n");
+	crear_TLB(); // crea tantas entradas como el config lo defina
 
-	crear_TLB();
-
-	sem_destroy(&hiloCreado);
+	sem_destroy(&hiloCreado); 						//ya no lo necesito
 	// FIN DE CREACION DE HILO
 
-	printf("hilos creados, esperando PCB del kernel... \n");
+	printf("hilos creados, esperando PCB del kernel... \n"); // avisa que se iniciaron los hilos
+
+
 
 	// COMIENZO A RECIBIR COSAS POR DISPATCH
-	sem_init(&ejecutar, 0, 0);
-
-
 	while(1){
 		pcb_ejecutando = recibir_PCB(); // debe recibir la lista de instrucciones como char*
 		lista_de_instrucciones_actual = string_array_new();
@@ -139,7 +139,6 @@ int main(void){
 	close(socket_escucha_dispatch);
 	close(socket_dispatch);
 	close(socket_memoria);
-	config_destroy(config);
 	list_destroy(lista_tlb);
 	return 0;
 }
@@ -147,11 +146,11 @@ int main(void){
 // HILOS
 // ejecuta las instrucciones del pcb - DONE
 void* executer(){
-	sem_post(&hiloCreado);
+	sem_post(&hiloCreado); // simplemente avisa que se creo el hilo
 
-	char* siguiente_instruccion;
-	char** instruccion_spliteada;
-	uint32_t operando = 0;
+	char* siguiente_instruccion;		// char para la siguiente instruccion
+	char** instruccion_spliteada;		// agarra siguiente instruccion y la separa en 2 o 3 lineas, dependiendo de cual es
+	uint32_t operando = 0;				// para la instruccion copy
 
 	while(1){
 		sem_wait(&ejecutar);
