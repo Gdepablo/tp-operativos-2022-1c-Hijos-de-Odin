@@ -41,7 +41,7 @@ t_list* tabla_de_paginas_de_segundo_nivel;
 
 
 
-int main(){
+int main(void){
 	printf("MEMORIA \n");
 
 
@@ -111,6 +111,9 @@ int main(){
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
+	// TODO INICIAR HILO KERNEL
+
+
 	// tod0 lo importante de memoria
 	memoria_real = malloc(TAMANIO_MEMORIA);
 
@@ -123,42 +126,28 @@ int main(){
 		recv(socket_cpu, &codigo_recibido, sizeof(uint32_t), MSG_WAITALL);
 
 		switch(codigo_recibido){
-			case 0:
+			case solicitud_num_tabla_2:
 				// con el numero de entrada + el numero de tabla que envia cpu, hay
 				// que devolver el numero de la segunda tabla
 				printf("responder con numero de tabla 2 \n");
 				break;
-			case 1:
+			case solicitud_num_frame:
 				// con el numero de segunda tabla + entrada de la segunda tabla,
 				// hay que devolver el numero de frame en el que se encuentra. Si no
 				// esta cargada en memoria, hay que cargarla y responder con el
 				// numero de frame.
 				printf("responder con numero de frame \n");
 				break;
-			case 2:
+			case solicitud_lectura:
 				// hay que fijarse que hay en el frame dado.
 				printf("responde contenido en numero de frame con el offset dado \n");
 				break;
-			case 3:
+			case solicitud_escritura:
 				// hay que escribir en el frame dado
 				printf("escribir en el frame con offset otorgado \n");
 				break;
-			case 4:
-				// basicamente un list add a la lista de tablas, y crear la cantidad
-				// de tablas de segundo nivel necesarias.
-				printf("crear las tablas y responder el nro de 1er tabla \n");
-				break;
-			case 5:
-				// si kernel nos envia tanto el PID como el numero de 1er tabla, es
-				// facilito
-				printf("sacar de memoria todas las paginas del proceso \n");
-				break;
-			case 6:
-				// borrar el .swap y sacar las entradas en memoria si es que hay.
-				printf("borrar el archivo .swap, dejar las tablas \n");
-				break;
 			default:
-				printf("codigo erroneo recibido \n");
+				printf("codigo erroneo enviado por kernel \n");
 		}
 	}
 
@@ -233,9 +222,6 @@ int iniciar_servidor(char* ip, char* puerto) {
 	freeaddrinfo(servinfo);
 	return socket_servidor;
 }
-
-
-
 
 
 
