@@ -16,16 +16,6 @@
 #include <commons/collections/list.h>
 
 
-
-
-typedef struct {
-	uint32_t numero_frame;
-	uint32_t data_pagina;
-	uint32_t bit_presencia;
-	uint32_t bit_uso;
-	uint32_t bit_modificacion; // P U M
-} pagina_t;
-
 /*
 typedef struct {
 	uint32_t num_tabla;

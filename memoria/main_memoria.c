@@ -14,7 +14,6 @@ sem_t mx_tabla_de_paginas_global;
 
 char* PUERTO_ESCUCHA;
 uint32_t TAMANIO_MEMORIA;
-
 uint32_t RETARDO_MEMORIA;
 char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
@@ -26,15 +25,7 @@ t_list* tabla_de_paginas_global;
 // Guarda todas las páginas de forma contigua
 
 
-t_list* tabla_de_paginas_de_primer_nivel;
-/* Hay una lista de uint32_t por cada proceso
- * Éstas guardan una lista de uint32_t que representa el número de tabla de segundo nivel a la cual dirigirse
- */
 
-t_list* tabla_de_paginas_de_segundo_nivel;
-/* Guarda las tablas de segundo nivel de todos los procesos
- * Éstas guardan una lista de páginas
- */
 
 //uint32_t vector_de_disponibilidad[/*cantidad de frames*/];
 
@@ -43,9 +34,7 @@ t_list* tabla_de_paginas_de_segundo_nivel;
 int main(void){
 	printf("MEMORIA \n");
 
-
-
-	//mx_tabla_de_paginas_global = ;
+	sem_init(&hilo_iniciado, 0, 0);
 
 	//CONFIG
 	t_config* config;
@@ -110,7 +99,12 @@ int main(void){
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
-	// TODO INICIAR HILO KERNEL
+	// inicia el hilo de kernel
+	void* puntero_al_socket = &socket_kernel;
+	pthread_create(&hiloKernel, NULL, hilo_kernel, puntero_al_socket);
+	pthread_detach(hiloKernel);
+
+	sem_wait(&hilo_iniciado);
 
 
 	// tod0 lo importante de memoria
