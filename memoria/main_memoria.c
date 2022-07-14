@@ -99,18 +99,17 @@ int main(void){
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
 	//FIN HANDSHAKE
 
+	// tod0 lo importante de memoria
+	memoria_real = malloc(TAMANIO_MEMORIA);
+	bitmap_memoria = list_create();
+	inicializar_bitmap();
+
 	// inicia el hilo de kernel
 	void* puntero_al_socket = &socket_kernel;
 	pthread_create(&hiloKernel, NULL, hilo_kernel, puntero_al_socket);
 	pthread_detach(hiloKernel);
 
 	sem_wait(&hilo_iniciado);
-
-
-	// tod0 lo importante de memoria
-	memoria_real = malloc(TAMANIO_MEMORIA);
-	bitmap_memoria = list_create();
-	llenar_bitmap();
 
 
 	// FIN TAREAS ADMINISTRATIVAS, EMPIEZA EL LABURO
@@ -153,7 +152,7 @@ int main(void){
 	return 0;
 }
 
-void llenar_bitmap(){
+void inicializar_bitmap(){
 	for(int i = 0 ; i < TAMANIO_MEMORIA / TAMANIO_PAGINA ; i++){
 		uint32_t* bit = malloc(sizeof(uint32_t));
 		*bit = 0;

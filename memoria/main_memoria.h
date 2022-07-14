@@ -31,6 +31,7 @@ typedef struct {
 t_config* inicializarConfigs(void);
 int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
+void inicializar_bitmap();
 
 typedef struct{
 	uint32_t tamanio_paginas;

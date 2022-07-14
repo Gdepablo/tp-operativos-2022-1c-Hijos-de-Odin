@@ -53,7 +53,6 @@ void* hilo_kernel(void* ptr_void_socket){
 				suspender_proceso(process_id, numero_primer_tabla);
 
 				// se avisa que esta todo bien
-				// fulbo
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
 
 				break;
@@ -76,7 +75,7 @@ void* hilo_kernel(void* ptr_void_socket){
 /*
  * crea tanto la tabla de 1er nivel como las de segundo nivel que sean necesarias.
  */
-uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones){
+uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones ){
 	int (*tabla)[ENTRADAS_POR_TABLA]= malloc(sizeof(int)*ENTRADAS_POR_TABLA);
 	for(int i=0 ; i < ENTRADAS_POR_TABLA ; i++){
 		(*tabla)[i] = -1; // facilita el momento de recorrer la tabla si tiene menos de ENTRADAS_POR_TABLA entradas
@@ -107,7 +106,7 @@ int calcular_cantidad_de_tablas(uint32_t cantidad_paginas_necesaria){
 
 void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas){
 	for(int i=0; i < cantidad_de_tablas; i++ ){
-		pagina_t (*tabla2)[ENTRADAS_POR_TABLA]= malloc(sizeof(pagina_t)*ENTRADAS_POR_TABLA);
+		pagina_t (*tabla2)[ENTRADAS_POR_TABLA] = malloc(sizeof(pagina_t)*ENTRADAS_POR_TABLA);
 		list_add(tabla_de_paginas_de_segundo_nivel, tabla2);
 		(*tabla)[i] = list_size(tabla_de_paginas_de_segundo_nivel) - 1;
 	}
@@ -137,22 +136,38 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
 
 				if( (*puntero_a_tabla_2do_nivel)[j].bit_modificacion == 1 ){
-					// guardar pagina en swap, batata tiene una funcion
-					// guardar_pagina_en_swap((*puntero_a_tabla_2do_nivel)[j], process_id);
+					guardar_pagina_en_swap((*puntero_a_tabla_2do_nivel)[j], process_id, i * ENTRADAS_POR_TABLA + j);
 				}
 
-				// poner_bit_en_0( (*puntero_a_tabla_2do_nivel)[j].numero_frame );
+				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
+				poner_bit_en_0_bitmap( (*puntero_a_tabla_2do_nivel)[j].numero_frame );
 			}
 		}
 	}
 }
 
-void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id){
-	// fulbo
+void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina){
+	// abrir el archivo, leer el frame, guardar en la pagina correcta, yasta
+	char* ruta_archivo = obtener_ruta_archivo(process_id);
+	FILE* swap = fopen(ruta_archivo, "rb+");
+	void* frame_a_copiar = buscar_frame(pagina.numero_frame);
+
+	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
+	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+
+	free(ruta_archivo);
+	fclose(swap);
 }
 
-void poner_bit_en_0(uint32_t numero_de_frame){
-	// fulbo
+void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
+	int* puntero_bitmap = list_get(bitmap_memoria, numero_de_frame);
+	*puntero_bitmap = 0;
+}
+
+void* buscar_frame(uint32_t numero_de_frame){
+	void* frame = memoria_real + numero_de_frame * TAMANIO_PAGINA;
+
+	return frame;
 }
 
 char* obtener_ruta_archivo(uint32_t process_id){
