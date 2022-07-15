@@ -1,6 +1,7 @@
 #include "hilo_kernel.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
 //#include "main_memoria.h"
@@ -60,7 +61,15 @@ void* hilo_kernel(void* ptr_void_socket){
 
 			case finalizacion_proceso:
 				// borrar el .swap y sacar las entradas en memoria si es que hay.
-				printf("borrar el archivo .swap, dejar las tablas \n");
+
+				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
+
+				// fulbo
+				borrar_swap(process_id);
+				liberar_memoria(numero_primer_tabla);
+
+				send(socket_kernel, &OK, sizeof(uint32_t), 0);
 				break;
 
 			default:
@@ -112,16 +121,8 @@ void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas){
 	}
 }
 
-// ATENCION: ESTO SOLAMENTE LO CREA. SI EXISTE UNO, ENTONCES LO VA A REEMPLAZAR
-// el archivo se crea en la carpeta swap
-void crear_archivo_swap(uint32_t process_id){
-	char* ruta_archivo = obtener_ruta_archivo(process_id);
 
-    FILE* archivo = fopen(ruta_archivo, "wb+");
 
-    free(ruta_archivo);
-    fclose(archivo);
-}
 
 void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
@@ -146,17 +147,22 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 	}
 }
 
-void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina){
-	// abrir el archivo, leer el frame, guardar en la pagina correcta, yasta
-	char* ruta_archivo = obtener_ruta_archivo(process_id);
-	FILE* swap = fopen(ruta_archivo, "rb+");
-	void* frame_a_copiar = buscar_frame(pagina.numero_frame);
+void liberar_memoria(uint32_t numero_primer_tabla){
+	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
 
-	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
-	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+	// empieza a ver cada posicion de la primer tabla hasta que haya un -1 o hasta que i == ENTRADAS_POR_TABLA
+	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
+		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
 
-	free(ruta_archivo);
-	fclose(swap);
+		// empieza a ver cada posicion de la tabla de segundo nivel
+		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
+			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
+				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
+				poner_bit_en_0_bitmap( (*puntero_a_tabla_2do_nivel)[j].numero_frame );
+			}
+		}
+	}
 }
 
 void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
@@ -168,6 +174,49 @@ void* buscar_frame(uint32_t numero_de_frame){
 	void* frame = memoria_real + numero_de_frame * TAMANIO_PAGINA;
 
 	return frame;
+}
+
+// ######################################################################################
+// 								ZONA SWAP Y ASOCIADOS
+// ######################################################################################
+
+// ATENCION: ESTO SOLAMENTE LO CREA. SI EXISTE UNO, ENTONCES LO VA A REEMPLAZAR
+// el archivo se crea en la carpeta swap
+void crear_archivo_swap(uint32_t process_id){
+	char* ruta_archivo = obtener_ruta_archivo(process_id);
+
+	sem_wait(&operacion_swap);
+	usleep(RETARDO_SWAP * 1000);
+
+    FILE* archivo = fopen(ruta_archivo, "wb+");
+	sem_post(&operacion_swap);
+
+    free(ruta_archivo);
+    fclose(archivo);
+}
+
+void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina){
+	// abrir el archivo, leer el frame, guardar en la pagina correcta, yasta
+	char* ruta_archivo = obtener_ruta_archivo(process_id);
+	FILE* swap = fopen(ruta_archivo, "rb+");
+	void* frame_a_copiar = buscar_frame(pagina.numero_frame);
+
+	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
+
+	sem_wait(&operacion_swap);
+	usleep(RETARDO_SWAP * 1000);
+	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+	sem_post(&operacion_swap);
+
+	free(ruta_archivo);
+	fclose(swap);
+}
+
+void borrar_swap(uint32_t process_id){
+	sem_wait(&operacion_swap);
+	usleep(RETARDO_SWAP * 1000);
+	remove(obtener_ruta_archivo(process_id));
+	sem_post(&operacion_swap);
 }
 
 char* obtener_ruta_archivo(uint32_t process_id){

@@ -17,7 +17,6 @@ uint32_t TAMANIO_MEMORIA;
 uint32_t RETARDO_MEMORIA;
 char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
-uint32_t RETARDO_SWAP;
 char* PATH_SWAP;
 
 
@@ -35,6 +34,7 @@ int main(void){
 	printf("MEMORIA \n");
 
 	sem_init(&hilo_iniciado, 0, 0);
+	sem_init(&operacion_swap, 0, 1);
 
 	//CONFIG
 	t_config* config;

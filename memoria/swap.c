@@ -1,5 +1,61 @@
 //#include "swap.h"
 //
+//
+//// ATENCION: ESTO SOLAMENTE LO CREA. SI EXISTE UNO, ENTONCES LO VA A REEMPLAZAR
+//// el archivo se crea en la carpeta swap
+//void crear_archivo_swap(uint32_t process_id){
+//	char* ruta_archivo = obtener_ruta_archivo(process_id);
+//
+//	sem_wait(&operacion_swap);
+//	usleep(RETARDO_SWAP * 1000);
+//
+//    FILE* archivo = fopen(ruta_archivo, "wb+");
+//	sem_post(&operacion_swap);
+//
+//    free(ruta_archivo);
+//    fclose(archivo);
+//}
+//
+//void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina){
+//	// abrir el archivo, leer el frame, guardar en la pagina correcta, yasta
+//	char* ruta_archivo = obtener_ruta_archivo(process_id);
+//	FILE* swap = fopen(ruta_archivo, "rb+");
+//	void* frame_a_copiar = buscar_frame(pagina.numero_frame);
+//
+//	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
+//
+//	sem_wait(&operacion_swap);
+//	usleep(RETARDO_SWAP * 1000);
+//	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+//	sem_post(&operacion_swap);
+//
+//	free(ruta_archivo);
+//	fclose(swap);
+//}
+//
+//void borrar_swap(uint32_t process_id){
+//	sem_wait(&operacion_swap);
+//	usleep(RETARDO_SWAP * 1000);
+//	remove(obtener_ruta_archivo(process_id));
+//	sem_post(&operacion_swap);
+//}
+//
+//char* obtener_ruta_archivo(uint32_t process_id){
+//	char* nombre_archivo = string_itoa(process_id);
+//	string_append(&nombre_archivo,".swap");
+//
+//	char* ruta_archivo = string_new();
+//	string_append(&ruta_archivo, "./swap/");
+//	string_append(&ruta_archivo, nombre_archivo);
+//
+//	free(nombre_archivo);
+//
+//	return ruta_archivo;
+//}
+
+// FIN ZONA BATATA
+
+
 ///** Lee una pagina desde su archivo de SWAP
 // Lee hasta encontrar el final del archivo
 // * TODO: No hardcodear ese 1?*
