@@ -52,7 +52,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				else
 				{
 					numero_pagina = calcular_num_pagina(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer, numero_de_entrada);
-					cargar_a_memoria(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer,pagina_buscada,numero_pagina);
+					cargar_a_memoria(numero_tabla_1er_nivel_leer,pagina_buscada,numero_pagina);
 				}
 
 
@@ -117,19 +117,13 @@ pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de
 }
 
 
-void cargar_a_memoria(uint32_t numero_tabla_1er_nivel_leer, uint32_t numero_tabla_2do_nivel_leer, pagina_t* pagina_buscada, uint32_t num_pagina){
-	uint32_t numero_de_frame;
-	// asignacion fija = 5;
-	// marcos por proceso < cant maxima => busca un lugar libre y ya esta
-	// marcos por proceso == cant maxima => usa clock o clock-m
-
-
+void cargar_a_memoria(uint32_t numero_tabla_1er_nivel_leer, pagina_t* pagina_buscada, uint32_t num_pagina){
 	if( es_clock() ){
-		algoritmo_clock(numero_tabla_1er_nivel_leer, pagina_buscada);
+		// ejecuta clock XD
 	}
 	else
 	{
-
+		// ejecuta clock-m XD
 	}
 }
 

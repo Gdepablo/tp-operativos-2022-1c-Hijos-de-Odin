@@ -7,10 +7,11 @@
 
 
 
-void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t process_id);
+void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t numero_de_pagina, uint32_t process_id);
 void algoritmo_clock_modificado(t_list *lista_paginas, pagina_t pagina_buscada);
 bool esta_libre(void* void_bitmap);
 bool memoria_no_llena();
 int buscar_frame_libre();
+void* copiar_de_swap(uint32_t pagina, uint32_t process_id);
 //int es_clock();
 //void* enviar_a_swap();

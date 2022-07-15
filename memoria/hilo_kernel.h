@@ -29,4 +29,3 @@ void crear_archivo_swap(uint32_t process_id);
 void borrar_swap(uint32_t process_id);
 void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina);
 char* obtener_ruta_archivo(uint32_t process_id);
-void* copiar_de_swap(uint32_t pagina, uint32_t process_id);

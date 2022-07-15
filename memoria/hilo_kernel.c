@@ -219,17 +219,6 @@ void borrar_swap(uint32_t process_id){
 	sem_post(&operacion_swap);
 }
 
-
-void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
-	char* ruta = obtener_ruta_archivo(process_id);
-	FILE* archivo = fopen(ruta, "rb");
-	fseek( archivo, pagina * TAMANIO_PAGINA, SEEK_SET);
-	void* a_copiar = malloc(TAMANIO_PAGINA);
-	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
-
-	return a_copiar;
-}
-
 char* obtener_ruta_archivo(uint32_t process_id){
 	char* nombre_archivo = string_itoa(process_id);
 	string_append(&nombre_archivo,".swap");
