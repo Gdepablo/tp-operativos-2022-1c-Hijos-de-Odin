@@ -40,14 +40,32 @@ typedef struct{
 	uint32_t entradas_por_tabla;
 } info_traduccion_t;
 
-pthread_t hiloCPU;
-uint32_t RETARDO_MEMORIA;
-uint32_t ENTRADAS_POR_TABLA;
-t_list* tabla_de_paginas_de_primer_nivel;
-t_list* tabla_de_paginas_de_segundo_nivel;
-t_list* bitmap_memoria;
-char* ALGORITMO_REEMPLAZO;
-uint32_t MARCOS_POR_PROCESO;
+//pthread_t hiloCPU;
+//uint32_t RETARDO_MEMORIA;
+//uint32_t ENTRADAS_POR_TABLA;
+//t_list* tabla_de_paginas_de_primer_nivel;
+//t_list* tabla_de_paginas_de_segundo_nivel;
+//t_list* bitmap_memoria;
+//char* ALGORITMO_REEMPLAZO;
+//uint32_t MARCOS_POR_PROCESO;
+//
+//enum operaciones{
+//	solicitud_num_tabla_2 ,
+//	solicitud_num_frame ,
+//	solicitud_lectura ,
+//	solicitud_escritura ,
+//	crear_tablas ,
+//	suspension_proceso,
+//	finalizacion_proceso
+//};
+
+//typedef struct {
+//	uint32_t numero_frame;
+//	uint32_t bit_presencia;
+//	uint32_t bit_uso;
+//	uint32_t bit_modificacion; // P U M
+//} pagina_t;
+
 /* Hay una lista de uint32_t por cada proceso
  * Éstas guardan una lista de uint32_t que representa el número de tabla de segundo nivel a la cual dirigirse
  */

@@ -1,6 +1,6 @@
 #include <netdb.h>
-#include "hilo_kernel.h"
 #include "main_memoria.h"
+#include "variables_globales.h"
 
 
 uint32_t buscar_tabla_2do_nivel(uint32_t numero_tabla_1er_nivel, uint32_t numero_de_entrada);

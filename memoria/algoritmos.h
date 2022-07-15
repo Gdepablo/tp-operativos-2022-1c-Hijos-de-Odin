@@ -1,6 +1,6 @@
 // CON CONTROL + SHIFT + C SACAN LOS COMENTARIOS ATTE BATATA <3
 #include <commons/collections/list.h>
-
+#include "variables_globales.h"
 //#include <stdbool.h>
 //#include "swap.h"
 //#include "main_memoria.h"

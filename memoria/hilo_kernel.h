@@ -2,27 +2,7 @@
 #include <pthread.h>
 #include <netdb.h>
 #include <commons/collections/list.h>
-
-// todo
-enum operaciones{
-	solicitud_num_tabla_2 ,
-	solicitud_num_frame ,
-	solicitud_lectura ,
-	solicitud_escritura ,
-	crear_tablas ,
-	suspension_proceso,
-	finalizacion_proceso
-};
-
-typedef struct {
-	uint32_t numero_frame;
-	uint32_t bit_presencia;
-	uint32_t bit_uso;
-	uint32_t bit_modificacion; // P U M
-} pagina_t;
-
-
-
+#include "variables_globales.h"
 
 
 // cosas compartidas xd fulbo
