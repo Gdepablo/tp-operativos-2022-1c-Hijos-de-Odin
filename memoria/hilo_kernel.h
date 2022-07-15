@@ -3,6 +3,7 @@
 #include <netdb.h>
 #include <commons/collections/list.h>
 
+// todo
 enum operaciones{
 	solicitud_num_tabla_2 ,
 	solicitud_num_frame ,
@@ -11,11 +12,10 @@ enum operaciones{
 	crear_tablas ,
 	suspension_proceso,
 	finalizacion_proceso
-	};
+};
 
 typedef struct {
 	uint32_t numero_frame;
-	uint32_t data_pagina;
 	uint32_t bit_presencia;
 	uint32_t bit_uso;
 	uint32_t bit_modificacion; // P U M
@@ -23,7 +23,7 @@ typedef struct {
 
 
 
-t_list* bitmap_memoria;
+
 
 // cosas compartidas xd fulbo
 void* memoria_real;
@@ -49,4 +49,4 @@ void crear_archivo_swap(uint32_t process_id);
 void borrar_swap(uint32_t process_id);
 void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina);
 char* obtener_ruta_archivo(uint32_t process_id);
-
+void* copiar_de_swap(uint32_t pagina, uint32_t process_id);

@@ -44,11 +44,15 @@ pthread_t hiloCPU;
 uint32_t RETARDO_MEMORIA;
 uint32_t ENTRADAS_POR_TABLA;
 t_list* tabla_de_paginas_de_primer_nivel;
+t_list* tabla_de_paginas_de_segundo_nivel;
+t_list* bitmap_memoria;
+char* ALGORITMO_REEMPLAZO;
+uint32_t MARCOS_POR_PROCESO;
 /* Hay una lista de uint32_t por cada proceso
  * Éstas guardan una lista de uint32_t que representa el número de tabla de segundo nivel a la cual dirigirse
  */
 
-t_list* tabla_de_paginas_de_segundo_nivel;
+
 /* Guarda las tablas de segundo nivel de todos los procesos
  * Éstas guardan una lista de páginas
  */

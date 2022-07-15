@@ -1,26 +1,73 @@
-//#include "algoritmos.h"
-//extern char* ALGORITMO_REEMPLAZO;
-//extern uint32_t ENTRADAS_POR_TABLA;
-//int es_clock() {
-//	return strcmp(ALGORITMO_REEMPLAZO, "CLOCK") != 0;
-//}
+#include "hilo_cpu.h"
+#include "main_memoria.h"
+#include "swap.h"
+#include "algoritmos.h"
+#include <commons/collections/list.h>
+
+
+int es_clock() {
+	return strcmp(ALGORITMO_REEMPLAZO, "CLOCK") != 0;
+}
+
+t_list* buscar_paginas_presentes(int (*tabla_primer_nivel)[]){
+	t_list* lista = list_create();
+
+	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
+		if( (*tabla_primer_nivel)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*tabla_primer_nivel)[i]);
+		// empieza a ver cada posicion de la tabla de segundo nivel
+		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
+			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
+				list_add(lista, &(*puntero_a_tabla_2do_nivel)[j]);
+			}
+		}
+	}
+
+	return lista;
+}
+
+int buscar_frame_libre(){
+	int posicion = 0;
+	int *ptr = list_get(bitmap_memoria, posicion);
+
+	while( (*ptr) != 0 ){
+		posicion++;
+	}
+
+	return posicion;
+}
+
+bool memoria_no_llena(){
+	return list_any_satisfy(bitmap_memoria, esta_libre);
+}
+
+bool esta_libre(void* void_bitmap){
+	int bit = *(int*)void_bitmap;
+
+	return bit == 0;
+}
+
+//void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, , uint32_t process_id){
+//	t_list* paginas_presentes = buscar_paginas_presentes(tabla_primer_nivel);
 //
-//void* enviar_a_swap(t_list* lista_paginas, pagina pagina_buscada) {
-//
-//	while(1) { // hago un boceto de la función
-//		if(es_clock()) {
-//			algoritmo_clock(lista_paginas,pagina_buscada);
-//		} else {
-//			algoritmo_clock_modificado(lista_paginas,pagina_buscada);
-//		}
+//	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
+//		int frame = buscar_frame_libre();
+////		void* a_copiar = leer_de_swap( nro_pagina , process_id);
+//		memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
+//		pagina_a_ubicar->bit_presencia = 1;
+//		pagina_a_ubicar->bit_uso = 1;
 //	}
-//	return "";
+//	else
+//	{
+//
+//	}
+//
+//	list_destroy(paginas_presentes);
 //}
-//
-//
-//void algoritmo_clock(t_list* lista_paginas, pagina pagina_buscada) {
-//	pagina *unaPagina;
-//	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
+
+//void algoritmo_clock(t_list* lista_paginas, pagina_t* pagina_buscada) {
+//	pagina_t *unaPagina;
+//	if( list_size(lista_paginas) == ENTRADAS_POR_TABLA ) {
 //			for(int i=0; i <= list_size(lista_paginas); i++) {
 //				unaPagina = list_get(lista_paginas, i);
 //				if(unaPagina -> bit_uso == 0 ) {
@@ -42,66 +89,68 @@
 //		if(unaPagina -> bit_presencia ==1)
 //			if(unaPagina -> bit_uso == 0) {
 //			list_replace(lista_paginas, j, unaPagina);
-//			break;}
-//		else  {
+//			break;
+//			}
+//		else {
 //			escribir_en_swap(unaPagina); //ni idea porque se queja
 //			//Escribo que me llevo una pag o algo asi (o el cambio realizado)
 //			unaPagina -> bit_presencia = 1;};
 //		}
-//
-//		}
-//
-///** TODO REVISAR ALGORITMOS*/
-//void algoritmo_clock_modificado(t_list* lista_paginas, pagina pagina_buscada) {
-//pagina *unaPagina;
-//
-//	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
-//	//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
-//		for(int i=0; i <= list_size(lista_paginas); i++) {
-//			unaPagina = list_get(lista_paginas, i);
-//			if(unaPagina -> bit_uso == 0 ) {
-//				if(unaPagina -> bit_presencia != 1 || unaPagina -> bit_modificacion == 1) {
-//					escribir_en_swap(unaPagina);
-//					//Escribo que me llevo una pag o algo asi (o el cambio realizado)
-//					unaPagina -> bit_presencia = 1;
-//					unaPagina ->bit_modificacion =0;
-//				}
-//			} else {
-//				unaPagina -> bit_uso = 0;
-//			}
-//		}
-//		}
-//	 else if (list_size(lista_paginas) < ENTRADAS_POR_TABLA){
-//			unaPagina = buscar_pagina_en_swap(pagina_buscada);
-//			list_add(lista_paginas,unaPagina);
-//		}
-//		for(int j=0; j <= list_size(lista_paginas); j++) {
-//		unaPagina = list_get(lista_paginas, j);
-//		if(unaPagina -> bit_presencia == 1)
-//			if(unaPagina -> bit_uso == 0 && unaPagina -> bit_modificacion == 0){
-//			list_replace(lista_paginas, j, unaPagina);
-//			break;}
-//		else  {
-//			escribir_en_swap(unaPagina);
-//			//Escribo que me llevo una pag o algo asi (o el cambio realizado)
-//			unaPagina -> bit_presencia = 1;
-//			unaPagina -> bit_modificacion = 0;};
-//		}
-//		}
-//
-///*
-// * 2 OPCIONES: 1 : Una funcion buscarPagina que si no la encuentra se fija en el algoritmo
-// * y hace todoo el reemplazo y la marencoche y sino ponerlo adentro de los algoritmos
-// * y que ellos pregunten si la pagina ya esta cargada de por si */
-//
-//bool esta_presente(pagina pagina) {
-//	return pagina.bit_presencia == 1;
 //}
-//
-//bool primer_paso_clock(pagina una_pagina) {
-//	return una_pagina.bit_modificacion == 0 && una_pagina.bit_uso==0;
-//}
-//
-//bool segundo_paso_clock(pagina una_pagina) {
-//	return una_pagina.bit_modificacion ==1 && una_pagina.bit_uso==0;
-//}
+
+/** TODO REVISAR ALGORITMOS*/
+void algoritmo_clock_modificado(t_list* lista_paginas, pagina_t pagina_buscada) {
+	pagina_t *unaPagina;
+
+	if(list_size(lista_paginas) == ENTRADAS_POR_TABLA) {
+	//Preguntar si la pag no esta. Marcos por proceso no se para que sirve
+		for(int i=0; i <= list_size(lista_paginas); i++) {
+			unaPagina = list_get(lista_paginas, i);
+			if(unaPagina -> bit_uso == 0 ) {
+				if(unaPagina -> bit_presencia != 1 || unaPagina -> bit_modificacion == 1) {
+					escribir_en_swap(unaPagina);
+					//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+					unaPagina -> bit_presencia = 1;
+					unaPagina ->bit_modificacion =0;
+				}
+			} else {
+				unaPagina -> bit_uso = 0;
+			}
+		}
+		}
+	 else if (list_size(lista_paginas) < ENTRADAS_POR_TABLA){
+			unaPagina = buscar_pagina_en_swap(pagina_buscada);
+			list_add(lista_paginas,unaPagina);
+		}
+		for(int j=0; j <= list_size(lista_paginas); j++) {
+		unaPagina = list_get(lista_paginas, j);
+		if(unaPagina -> bit_presencia == 1)
+			if(unaPagina -> bit_uso == 0 && unaPagina -> bit_modificacion == 0){
+			list_replace(lista_paginas, j, unaPagina);
+			break;}
+		else  {
+			escribir_en_swap(unaPagina);
+			//Escribo que me llevo una pag o algo asi (o el cambio realizado)
+			unaPagina -> bit_presencia = 1;
+			unaPagina -> bit_modificacion = 0;};
+		}
+		}
+
+/*
+ * 2 OPCIONES: 1 : Una funcion buscarPagina que si no la encuentra se fija en el algoritmo
+ * y hace todoo el reemplazo y la marencoche y sino ponerlo adentro de los algoritmos
+ * y que ellos pregunten si la pagina ya esta cargada de por si */
+
+bool esta_presente(pagina_t pagina) {
+	return pagina.bit_presencia == 1;
+}
+
+bool primer_paso_clock(pagina_t una_pagina) {
+	return una_pagina.bit_modificacion == 0 && una_pagina.bit_uso==0;
+}
+
+bool segundo_paso_clock(pagina_t una_pagina) {
+	return una_pagina.bit_modificacion ==1 && una_pagina.bit_uso==0;
+}
+
+

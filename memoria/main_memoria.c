@@ -15,8 +15,8 @@ sem_t mx_tabla_de_paginas_global;
 char* PUERTO_ESCUCHA;
 uint32_t TAMANIO_MEMORIA;
 
-char* ALGORITMO_REEMPLAZO;
-uint32_t MARCOS_POR_PROCESO;
+
+
 char* PATH_SWAP;
 
 

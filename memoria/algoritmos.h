@@ -1,10 +1,16 @@
 // CON CONTROL + SHIFT + C SACAN LOS COMENTARIOS ATTE BATATA <3
-
+#include <commons/collections/list.h>
 
 //#include <stdbool.h>
 //#include "swap.h"
 //#include "main_memoria.h"
-//void algoritmo_clock(t_list* lista_paginas, pagina pagina_buscada);
-//void algoritmo_clock_modificado(t_list *lista_paginas,pagina pagina_buscada);
+
+
+
+void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t process_id);
+void algoritmo_clock_modificado(t_list *lista_paginas, pagina_t pagina_buscada);
+bool esta_libre(void* void_bitmap);
+bool memoria_no_llena();
+int buscar_frame_libre();
 //int es_clock();
 //void* enviar_a_swap();
