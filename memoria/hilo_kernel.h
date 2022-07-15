@@ -20,7 +20,6 @@ int calcular_cantidad_de_tablas(uint32_t cantidad_paginas_necesaria);
 int calcular_cantidad_de_paginas(uint32_t bytes_proceso);
 void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas);
 void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla);
-char* obtener_ruta_archivo(uint32_t process_id);
 void poner_bit_en_0_bitmap(uint32_t numero_de_frame);
 void* buscar_frame(uint32_t numero_de_frame);
 void liberar_memoria(uint32_t numero_tabla);

@@ -9,43 +9,7 @@ int es_clock() {
 	return strcmp(ALGORITMO_REEMPLAZO, "CLOCK") != 0;
 }
 
-t_list* buscar_paginas_presentes(int (*tabla_primer_nivel)[]){
-	t_list* lista = list_create();
 
-	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
-		if( (*tabla_primer_nivel)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
-		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*tabla_primer_nivel)[i]);
-		// empieza a ver cada posicion de la tabla de segundo nivel
-		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
-			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
-				list_add(lista, &(*puntero_a_tabla_2do_nivel)[j]);
-			}
-		}
-	}
-
-	return lista;
-}
-
-int buscar_frame_libre(){
-	int posicion = 0;
-	int *ptr = list_get(bitmap_memoria, posicion);
-
-	while( (*ptr) != 0 ){
-		posicion++;
-	}
-
-	return posicion;
-}
-
-bool memoria_no_llena(){
-	return list_any_satisfy(bitmap_memoria, esta_libre);
-}
-
-bool esta_libre(void* void_bitmap){
-	int bit = *(int*)void_bitmap;
-
-	return bit == 0;
-}
 
 void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t numero_de_pagina, uint32_t process_id){
 	t_list* paginas_presentes = buscar_paginas_presentes(tabla_primer_nivel);
@@ -65,16 +29,6 @@ void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uin
 	}
 
 	list_destroy(paginas_presentes);
-}
-
-void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
-	char* ruta = obtener_ruta_archivo(process_id);
-	FILE* archivo = fopen(ruta, "rb");
-	fseek( archivo, pagina * TAMANIO_PAGINA, SEEK_SET);
-	void* a_copiar = malloc(TAMANIO_PAGINA);
-	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
-
-	return a_copiar;
 }
 
 //void algoritmo_clock(t_list* lista_paginas, pagina_t* pagina_buscada) {

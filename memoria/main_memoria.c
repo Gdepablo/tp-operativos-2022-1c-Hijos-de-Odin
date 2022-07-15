@@ -94,6 +94,7 @@ int main(void){
 
 	// tod0 lo importante de memoria
 	memoria_real = malloc(TAMANIO_MEMORIA);
+	punteros_clock = list_create();
 	bitmap_memoria = list_create();
 	inicializar_bitmap();
 

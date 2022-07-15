@@ -5,6 +5,7 @@ uint32_t RETARDO_MEMORIA;
 uint32_t ENTRADAS_POR_TABLA;
 t_list* tabla_de_paginas_de_primer_nivel;
 t_list* tabla_de_paginas_de_segundo_nivel;
+t_list* punteros_clock;
 t_list* bitmap_memoria;
 char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
