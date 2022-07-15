@@ -1,4 +1,5 @@
 #include "hilo_kernel.h"
+#include "main_memoria.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

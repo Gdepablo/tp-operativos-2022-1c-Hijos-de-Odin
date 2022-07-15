@@ -21,15 +21,7 @@ typedef struct {
 	uint32_t bit_modificacion; // P U M
 } pagina_t;
 
-t_list* tabla_de_paginas_de_primer_nivel;
-/* Hay una lista de uint32_t por cada proceso
- * Éstas guardan una lista de uint32_t que representa el número de tabla de segundo nivel a la cual dirigirse
- */
 
-t_list* tabla_de_paginas_de_segundo_nivel;
-/* Guarda las tablas de segundo nivel de todos los procesos
- * Éstas guardan una lista de páginas
- */
 
 t_list* bitmap_memoria;
 
@@ -39,7 +31,7 @@ pthread_t hiloKernel;
 sem_t hilo_iniciado; // = 0
 sem_t operacion_swap; // = 0
 uint32_t TAMANIO_PAGINA;
-uint32_t ENTRADAS_POR_TABLA;
+
 uint32_t RETARDO_SWAP;
 
 void* hilo_kernel(void* ptr_void_socket);

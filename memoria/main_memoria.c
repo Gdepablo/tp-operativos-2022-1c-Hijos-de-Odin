@@ -14,7 +14,7 @@ sem_t mx_tabla_de_paginas_global;
 
 char* PUERTO_ESCUCHA;
 uint32_t TAMANIO_MEMORIA;
-uint32_t RETARDO_MEMORIA;
+
 char* ALGORITMO_REEMPLAZO;
 uint32_t MARCOS_POR_PROCESO;
 char* PATH_SWAP;
@@ -106,7 +106,7 @@ int main(void){
 
 	puntero_al_socket = &socket_cpu;
 	pthread_create(&hiloCPU, NULL, hilo_cpu, puntero_al_socket);
-	pthread_join(hiloCPU);
+	pthread_join(hiloCPU, NULL);
 	// FIN TAREAS ADMINISTRATIVAS, EMPIEZA EL LABURO
 	// atender peticiones del CPU y KERNEL con hilo_cpu.c e hilo_kernel.c
 
