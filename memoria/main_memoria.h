@@ -33,11 +33,14 @@ int crear_conexion(char *ip, char* puerto);
 int iniciar_servidor(char* ip, char* puerto);
 void inicializar_bitmap();
 
+void* hilo_cpu(void* socket_cpu_void);
+
 typedef struct{
 	uint32_t tamanio_paginas;
 	uint32_t entradas_por_tabla;
 } info_traduccion_t;
 
+pthread_t hiloCPU;
 
 /** LEER ACLARACIONES mientras se mira el dibujo pasado al grupo*/
 

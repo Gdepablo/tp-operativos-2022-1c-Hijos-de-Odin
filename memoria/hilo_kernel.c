@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
-//#include "main_memoria.h"
 
 void* hilo_kernel(void* ptr_void_socket){
 	sem_post(&hilo_iniciado);
