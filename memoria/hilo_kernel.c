@@ -174,6 +174,11 @@ void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
 	*puntero_bitmap = 0;
 }
 
+void poner_bit_en_1_bitmap(uint32_t numero_de_frame){
+	int* puntero_bitmap = list_get(bitmap_memoria, numero_de_frame);
+	*puntero_bitmap = 1;
+}
+
 void* buscar_frame(uint32_t numero_de_frame){
 	void* frame = memoria_real + numero_de_frame * TAMANIO_PAGINA;
 
