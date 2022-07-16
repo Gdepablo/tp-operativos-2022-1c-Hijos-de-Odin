@@ -94,6 +94,10 @@ uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones ){
 	crear_tablas_2do_lvl(tabla, cantidad_tablas_2do_nivel_necesarias);
 	list_add(tabla_de_paginas_de_primer_nivel, tabla);
 
+	int (*puntero_del_clock) = malloc(sizeof(int));
+	*puntero_del_clock = 0;
+	list_add(punteros_clock, puntero_del_clock);
+
 	return list_size(tabla_de_paginas_de_primer_nivel) - 1;
 }
 

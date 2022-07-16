@@ -54,17 +54,22 @@ void* hilo_cpu(void* socket_cpu_void){
 					cargar_a_memoria(numero_tabla_1er_nivel_leer,pagina_buscada,numero_pagina, process_id);
 				}
 
-
+				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 
 				printf("responder con numero de frame \n");
 				break;
 			case solicitud_lectura:
 
+				// PONER BIT DE USO EN 1 TODO
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 
 				a_enviar = leer_de_memoria(numero_de_frame, offset);
+
+				bit_de_uso_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
@@ -72,11 +77,17 @@ void* hilo_cpu(void* socket_cpu_void){
 				break;
 			case solicitud_escritura:
 
+				// PONER LA PAGINA CON BIT DE MODIFICADO EN 1 TODO
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &valor_a_escribir, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 
 				escribir_en_memoria(numero_de_frame, offset, valor_a_escribir);
+
+				bit_de_uso_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
+				bit_de_modificado_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &OK, sizeof(uint32_t), 0);
@@ -157,7 +168,7 @@ void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar
 			poner_bit_en_0_bitmap(pagina_a_reemplazar->numero_frame);
 			// TERMINE DE SACAR LA PAGINA
 			// CARGO MI PAGINA
-			cargar_en_memoria( num_pagina, pagina_a_reemplazar->numero_frame, process_id );
+			cargar_pagina_a_memoria( num_pagina, pagina_a_reemplazar->numero_frame, process_id );
 			pagina_a_cargar_a_memoria->bit_presencia=1;
 			pagina_a_cargar_a_memoria->bit_uso=1;
 			pagina_a_cargar_a_memoria->numero_frame = pagina_a_reemplazar->numero_frame;
@@ -170,12 +181,24 @@ void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar
 	list_destroy(paginas_presentes);
 }
 
-void cargar_en_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame, uint32_t process_id){
-	FILE* archivo_swap = fopen( obtener_ruta_archivo(process_id), "rb" );
+void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame, uint32_t process_id){
+	char* ruta_archivo = obtener_ruta_archivo(process_id);
+	FILE* archivo_swap = fopen( ruta_archivo, "rb" );
 	fseek(archivo_swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
 	void* a_copiar = malloc(TAMANIO_PAGINA);
+	// MOMENTO SWAP
+	sem_wait(&operacion_swap);
+
+	usleep(RETARDO_SWAP * 1000);
 	fread(a_copiar, TAMANIO_PAGINA, 1 , archivo_swap);
+
+	sem_post(&operacion_swap);
+	// MOMENTO SWAP
 	memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
+
+	free(a_copiar);
+	free(ruta_archivo);
+	fclose(archivo_swap);
 }
 
 void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
@@ -183,7 +206,12 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 	FILE* archivo = fopen(ruta, "rb");
 	fseek( archivo, pagina * TAMANIO_PAGINA, SEEK_SET);
 	void* a_copiar = malloc(TAMANIO_PAGINA);
+
+	sem_wait(&operacion_swap);
+
+	usleep(RETARDO_SWAP * 1000);
 	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
+	sem_post(&operacion_swap);
 
 	return a_copiar;
 }
@@ -319,15 +347,15 @@ int calcular_numero_de_pagina_a_reemplazar(pagina_t* pagina_a_reemplazar, uint32
 }
 
 
+void bit_de_uso_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada){
+	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel_leer);
+	(*puntero_pagina)[numero_de_entrada].bit_uso = 1;
+}
 
 
-
-
-
-
-
-
-
-
+void bit_de_modificado_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada){
+	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel_leer);
+	(*puntero_pagina)[numero_de_entrada].bit_modificacion = 1;
+}
 
 

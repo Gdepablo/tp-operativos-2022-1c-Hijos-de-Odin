@@ -18,4 +18,8 @@ pagina_t* elegir_pagina_a_sacar_clock(uint32_t numero_primer_tabla);
 bool comparador(void* puntero_void_1, void* puntero_void_2);
 pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria);
 int calcular_numero_de_pagina_a_reemplazar(pagina_t* pagina_a_reemplazar, uint32_t numero_primer_tabla);
-void cargar_en_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame, uint32_t process_id);
+void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame, uint32_t process_id);
+void bit_de_uso_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada);
+
+
+void bit_de_modificado_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada);
