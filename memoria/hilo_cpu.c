@@ -213,6 +213,8 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
 	sem_post(&operacion_swap);
 
+	fclose(archivo);
+
 	return a_copiar;
 }
 
