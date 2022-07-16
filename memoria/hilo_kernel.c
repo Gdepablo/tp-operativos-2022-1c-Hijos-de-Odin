@@ -24,6 +24,7 @@ void* hilo_kernel(void* ptr_void_socket){
 		switch(codigo_recibido){
 			// TESTEADO - FUNCIONA BIEN (o eso parece)
 			case crear_tablas:{
+				printf("solicitud crear tablas (kernel) \n");
 				// recibe un PROCESS ID y TAMAÑO DEL ESPACIO DE DIRECCIONES
 				// basicamente un list add a la lista de tablas, y crear la cantidad de
 				// tablas de segundo nivel necesarias. Tambien se crea el archivo .swap
@@ -34,14 +35,17 @@ void* hilo_kernel(void* ptr_void_socket){
 
 				// hago la tarea necesaria
 				int num_tabla_creado = crear_tablas_necesarias(espacio_de_direcciones);
+				printf("num tabla creado = %i \n", num_tabla_creado);
 				crear_archivo_swap(process_id);
+				printf("swap crea2 \n");
 
 				//respondo con el numero de tabla creado
-				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
 
+				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
 				break;
 			}
 			case suspension_proceso:{
+				printf("solicitud suspender proceso (kernel) \n");
 				// sacar todos los frames del proceso que esten en memoria y actualizarlos en el
 				// swap si es necesario
 
@@ -60,12 +64,13 @@ void* hilo_kernel(void* ptr_void_socket){
 			}
 
 			case finalizacion_proceso:
+				printf("solicitud finalizar proceso (kernel) \n");
 				// borrar el .swap y sacar las entradas en memoria si es que hay.
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
 
-				// fulbo
+				// laburo
 				borrar_swap(process_id);
 				liberar_memoria(numero_primer_tabla);
 
@@ -120,8 +125,12 @@ int calcular_cantidad_de_tablas(uint32_t cantidad_paginas_necesaria){
 void crear_tablas_2do_lvl(int (*tabla)[], int cantidad_de_tablas){
 	for(int i=0; i < cantidad_de_tablas; i++ ){
 		pagina_t (*tabla2)[ENTRADAS_POR_TABLA] = malloc(sizeof(pagina_t)*ENTRADAS_POR_TABLA);
+
+		sem_wait(&operacion_en_lista_de_tablas);
 		list_add(tabla_de_paginas_de_segundo_nivel, tabla2);
+
 		(*tabla)[i] = list_size(tabla_de_paginas_de_segundo_nivel) - 1;
+		sem_post(&operacion_en_lista_de_tablas);
 	}
 }
 
@@ -171,12 +180,16 @@ void liberar_memoria(uint32_t numero_primer_tabla){
 
 void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
 	int* puntero_bitmap = list_get(bitmap_memoria, numero_de_frame);
+	sem_wait(&operacion_en_bitmap);
 	*puntero_bitmap = 0;
+	sem_post(&operacion_en_bitmap);
 }
 
 void poner_bit_en_1_bitmap(uint32_t numero_de_frame){
 	int* puntero_bitmap = list_get(bitmap_memoria, numero_de_frame);
+	sem_wait(&operacion_en_bitmap);
 	*puntero_bitmap = 1;
+	sem_post(&operacion_en_bitmap);
 }
 
 void* buscar_frame(uint32_t numero_de_frame){
@@ -193,11 +206,12 @@ void* buscar_frame(uint32_t numero_de_frame){
 // el archivo se crea en la carpeta swap
 void crear_archivo_swap(uint32_t process_id){
 	char* ruta_archivo = obtener_ruta_archivo(process_id);
+	printf("ruta archivo %s \n", ruta_archivo);
 
 	sem_wait(&operacion_swap);
 	usleep(RETARDO_SWAP * 1000);
 
-    FILE* archivo = fopen(ruta_archivo, "wb+");
+    FILE* archivo = fopen(ruta_archivo, "wb");
 	sem_post(&operacion_swap);
 
     free(ruta_archivo);
@@ -213,8 +227,13 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
 
 	sem_wait(&operacion_swap);
+
 	usleep(RETARDO_SWAP * 1000);
+
+	sem_wait(&operacion_en_memoria);
 	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+	sem_post(&operacion_en_memoria);
+
 	sem_post(&operacion_swap);
 
 	free(ruta_archivo);
@@ -233,10 +252,11 @@ char* obtener_ruta_archivo(uint32_t process_id){
 	string_append(&nombre_archivo,".swap");
 
 	char* ruta_archivo = string_new();
-	string_append(&ruta_archivo, "./swap/");
+	string_append(&ruta_archivo, "./../swap/");
 	string_append(&ruta_archivo, nombre_archivo);
 
 	free(nombre_archivo);
+
 
 	return ruta_archivo;
 }

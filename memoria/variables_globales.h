@@ -12,7 +12,10 @@ uint32_t MARCOS_POR_PROCESO;
 void* memoria_real;
 pthread_t hiloKernel;
 sem_t hilo_iniciado; // = 0
-sem_t operacion_swap; // = 0
+sem_t operacion_swap; // = 1
+sem_t operacion_en_memoria; // = 1
+sem_t operacion_en_bitmap; // = 1
+sem_t operacion_en_lista_de_tablas; // = 1
 uint32_t TAMANIO_PAGINA;
 uint32_t RETARDO_SWAP;
 

@@ -10,6 +10,7 @@ void* hilo_cpu(void* socket_cpu_void){
 	uint32_t numero_pagina;
 	uint32_t codigo_recibido;
 	uint32_t numero_de_entrada;
+	uint32_t numero_de_entrada_2;
 	uint32_t numero_tabla_1er_nivel_leer;
 	uint32_t numero_tabla_2do_nivel_leer;
 	uint32_t numero_de_frame;
@@ -24,6 +25,7 @@ void* hilo_cpu(void* socket_cpu_void){
 
 		switch(codigo_recibido){
 			case solicitud_num_tabla_2:
+				printf("solicitud numero de tabla 2 (cpu) \n");
 				// con el numero de entrada + el numero de tabla que envia cpu, hay
 				// que devolver el numero de la segunda tabla
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
@@ -34,60 +36,61 @@ void* hilo_cpu(void* socket_cpu_void){
 				usleep(RETARDO_MEMORIA * 1000);
 
 				send(socket_cpu, &numero_2da_tabla, sizeof(uint32_t), 0);
-
 				break;
 			case solicitud_num_frame:
-
+				printf("solicitud numero de frame (cpu) \n");
 				recv(socket_cpu, &process_id, sizeof(uint32_t), MSG_WAITALL);
-				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
-				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_de_entrada_2, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 
-				pagina_t* pagina_buscada = buscar_pagina(numero_tabla_2do_nivel_leer, numero_de_entrada);
+				// BUSCO LA PAGINA QUE QUIERO LEER EL NUMERO DE FRAME
+				pagina_t* pagina_buscada = buscar_pagina(numero_tabla_2do_nivel_leer, numero_de_entrada_2);
 
 				if( pagina_buscada->bit_presencia == 1 ){
+					// CASO FELIZ: ESTA EN MEMORIA
 					a_enviar = pagina_buscada->numero_frame;
 				}
 				else
 				{
-					numero_pagina = calcular_num_pagina(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer, numero_de_entrada);
+					// CASO TRISTE: NO ESTA EN MEMORIA
+					numero_pagina = calcular_num_pagina(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer, numero_de_entrada_2);
 					cargar_a_memoria(numero_tabla_1er_nivel_leer,pagina_buscada,numero_pagina, process_id);
 				}
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
-
-				printf("responder con numero de frame \n");
 				break;
 			case solicitud_lectura:
-
+				printf("solicitud de lectura (cpu) \n");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
-				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				// ENTRADA DE TABLA 1
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 
 				a_enviar = leer_de_memoria(numero_de_frame, offset);
 
-				bit_de_uso_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
+				bit_de_uso_en_1(numero_tabla_1er_nivel_leer, numero_de_entrada, numero_de_frame);
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
-
 				break;
 			case solicitud_escritura:
-
+				printf("solicitud escritura (cpu) \n");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_cpu, &valor_a_escribir, sizeof(uint32_t), MSG_WAITALL);
-				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				// ENTRADA DE TABLA 1
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 
 				escribir_en_memoria(numero_de_frame, offset, valor_a_escribir);
 
-				bit_de_uso_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
-				bit_de_modificado_en_1(numero_tabla_2do_nivel_leer, numero_de_entrada);
+				bit_de_uso_en_1(numero_tabla_1er_nivel_leer, numero_de_entrada, numero_de_frame);
+				bit_de_modificado_en_1(numero_tabla_1er_nivel_leer, numero_de_entrada, numero_de_frame);
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &OK, sizeof(uint32_t), 0);
@@ -125,18 +128,23 @@ uint32_t buscar_tabla_2do_nivel(uint32_t numero_tabla_1er_nivel, uint32_t numero
 uint32_t leer_de_memoria(uint32_t numero_de_frame, uint32_t offset){
 	uint32_t numero_leido;
 
-	memcpy(&numero_leido, memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, sizeof(uint32_t));
+	// semaforo loco
+	sem_wait(&operacion_en_memoria);
+		memcpy(&numero_leido, memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, sizeof(uint32_t));
+	sem_post(&operacion_en_memoria);
 
 	return numero_leido;
 }
 
 
 void escribir_en_memoria(uint32_t numero_de_frame,uint32_t offset,uint32_t valor_a_escribir){
+	sem_wait(&operacion_en_memoria);
 	memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, &valor_a_escribir, sizeof(uint32_t));
+	sem_post(&operacion_en_memoria);
 }
 
-pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada){
-	pagina_t (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel_leer);
+pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entrada){
+	pagina_t (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel);
 
 	return &(*puntero_a_tabla)[numero_de_entrada];
 }
@@ -148,7 +156,9 @@ void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar
 	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
 		int frame = buscar_frame_libre();
 		void* a_copiar = copiar_de_swap(num_pagina, process_id);
+		sem_wait(&operacion_en_memoria);
 		memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
+		sem_post(&operacion_en_memoria);
 		poner_bit_en_1_bitmap(frame);
 		pagina_a_cargar_a_memoria->bit_presencia = 1;
 		pagina_a_cargar_a_memoria->bit_uso = 1;
@@ -157,7 +167,7 @@ void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar
 	else
 	{
 		// SACO UNA PAGINA
-		pagina_t* pagina_a_reemplazar = elegir_pagina_a_sacar_clock(numero_tabla_1er_nivel);
+		pagina_t* pagina_a_reemplazar = elegir_pagina_a_sacar(numero_tabla_1er_nivel);
 
 		if( pagina_a_reemplazar->bit_modificacion == 1 ){
 			int num_pagina = calcular_numero_de_pagina_a_reemplazar(pagina_a_reemplazar, numero_tabla_1er_nivel);
@@ -277,7 +287,10 @@ void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame
 
 	sem_post(&operacion_swap);
 	// MOMENTO SWAP
+
+	sem_wait(&operacion_en_memoria);
 	memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
+	sem_post(&operacion_en_memoria);
 
 	free(a_copiar);
 	free(ruta_archivo);
@@ -339,60 +352,60 @@ uint32_t calcular_num_pagina(uint32_t numero_tabla_1er_nivel_leer,uint32_t numer
 	return fulbo;
 }
 
-pagina_t* elegir_pagina_a_sacar_clock(uint32_t numero_primer_tabla){
-    //int* posicion_puntero = list_get(punteros_clock, numero_primer_tabla);
-   	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
-
-    // empiezo a armar la lista con las paginas en memoria, de forma ordenada:
-
-    t_list (*paginas_en_memoria) = list_create();
-
-    // empiezo a mirar XD
-    for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
-		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
-		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
-
-		// empieza a ver cada posicion de la tabla de segundo nivel
-		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
-			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
-                list_add_sorted(paginas_en_memoria, &(*puntero_a_tabla_2do_nivel)[j], comparador);
-			}
-		}
-	}
-
-    pagina_t* puntero_pagina = clock_comun(numero_primer_tabla, paginas_en_memoria);
-
-    list_destroy(paginas_en_memoria);
-
-    return puntero_pagina;
-}
-
-pagina_t* elegir_pagina_a_sacar_clock_m(uint32_t numero_primer_tabla){
-	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
-
-	// empiezo a armar la lista con las paginas en memoria, de forma ordenada:
-
-	t_list (*paginas_en_memoria) = list_create();
-
-	// empiezo a mirar XD
-	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
-		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
-		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
-
-		// empieza a ver cada posicion de la tabla de segundo nivel
-		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
-			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
-				list_add_sorted(paginas_en_memoria, &(*puntero_a_tabla_2do_nivel)[j], comparador);
-			}
-		}
-	}
-
-	pagina_t* puntero_pagina = clock_mejorado(numero_primer_tabla, paginas_en_memoria);
-
-	list_destroy(paginas_en_memoria);
-
-	return puntero_pagina;
-}
+//pagina_t* elegir_pagina_a_sacar_clock(uint32_t numero_primer_tabla){
+//    //int* posicion_puntero = list_get(punteros_clock, numero_primer_tabla);
+//   	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
+//
+//    // empiezo a armar la lista con las paginas en memoria, de forma ordenada:
+//
+//    t_list (*paginas_en_memoria) = list_create();
+//
+//    // empiezo a mirar XD
+//    for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
+//		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+//		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
+//
+//		// empieza a ver cada posicion de la tabla de segundo nivel
+//		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
+//			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
+//                list_add_sorted(paginas_en_memoria, &(*puntero_a_tabla_2do_nivel)[j], comparador);
+//			}
+//		}
+//	}
+//
+//    pagina_t* puntero_pagina = clock_comun(numero_primer_tabla, paginas_en_memoria);
+//
+//    list_destroy(paginas_en_memoria);
+//
+//    return puntero_pagina;
+//}
+//
+//pagina_t* elegir_pagina_a_sacar_clock_m(uint32_t numero_primer_tabla){
+//	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
+//
+//	// empiezo a armar la lista con las paginas en memoria, de forma ordenada:
+//
+//	t_list (*paginas_en_memoria) = list_create();
+//
+//	// empiezo a mirar XD
+//	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
+//		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+//		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
+//
+//		// empieza a ver cada posicion de la tabla de segundo nivel
+//		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
+//			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
+//				list_add_sorted(paginas_en_memoria, &(*puntero_a_tabla_2do_nivel)[j], comparador);
+//			}
+//		}
+//	}
+//
+//	pagina_t* puntero_pagina = clock_mejorado(numero_primer_tabla, paginas_en_memoria);
+//
+//	list_destroy(paginas_en_memoria);
+//
+//	return puntero_pagina;
+//}
 
 bool comparador(void* puntero_void_1, void* puntero_void_2){
     pagina_t pagina = *(pagina_t*)puntero_void_1;
@@ -402,17 +415,22 @@ bool comparador(void* puntero_void_1, void* puntero_void_2){
 }
 
 pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
-	int* indice = list_get(punteros_clock, numero_de_tabla);
+	int* puntero_clock = list_get(punteros_clock, numero_de_tabla);
 	pagina_t* puntero_pagina;
 	bool pagina_encontrada = false;
 	while(pagina_encontrada == false){
+
+
 		/*
 		 * bit uso = 0, bit modificado = 0;
 		 * bit uso = 0, bit modificado = 1; -> bit uso = 1 => bit uso = 0
 		 */
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
-			puntero_pagina = list_get(paginas_en_memoria, *indice);
-			(*indice)++;
+			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			(*puntero_clock)++;
+            if( (*puntero_clock) == list_size(paginas_en_memoria) ){
+                (*puntero_clock) = 0;
+            }
 			if( (puntero_pagina->bit_uso == 0) && (puntero_pagina->bit_modificacion == 0) ){
 				pagina_encontrada = true;
 				break;
@@ -421,9 +439,14 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		if( pagina_encontrada ) break;
 
+
+
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
-			puntero_pagina = list_get(paginas_en_memoria, *indice);
-			(*indice)++;
+			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			(*puntero_clock)++;
+            if( (*puntero_clock) == list_size(paginas_en_memoria) ){
+                (*puntero_clock) = 0;
+            }
 			if( (puntero_pagina->bit_uso) == 0 ){
 				pagina_encontrada = true;
 				break;
@@ -435,27 +458,31 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 		}
 	}
 
+    // if( (*puntero_clock) == list_size(paginas_en_memoria) ){
+    //     (*puntero_clock) = 0;
+    // }
+
 	return puntero_pagina;
 }
 
 
 pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
-    int* indice = list_get(punteros_clock, numero_de_tabla);
+    int* puntero_clock = list_get(punteros_clock, numero_de_tabla);
     pagina_t* puntero_pagina;
     while(1){
-        puntero_pagina = list_get(paginas_en_memoria, *indice);
+        puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
         if(puntero_pagina->bit_uso == 0){
-            (*indice)++;
+            (*puntero_clock)++;
             break;
         }
         else
         {
-           (*indice)++;
+           (*puntero_clock)++;
            puntero_pagina->bit_uso = 0;
         }
 
-        if( *indice == list_size(paginas_en_memoria) ){
-            *indice = 0;
+        if( *puntero_clock == list_size(paginas_en_memoria) ){
+            *puntero_clock = 0;
         }
     }
 
@@ -484,15 +511,27 @@ int calcular_numero_de_pagina_a_reemplazar(pagina_t* pagina_a_reemplazar, uint32
 }
 
 
-void bit_de_uso_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada){
-	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel_leer);
-	(*puntero_pagina)[numero_de_entrada].bit_uso = 1;
+void bit_de_uso_en_1(uint32_t numero_tabla_1er_nivel_leer, uint32_t numero_de_entrada, uint32_t num_frame){
+	int (*numero_tabla)[ENTRADAS_POR_TABLA] = list_get( tabla_de_paginas_de_primer_nivel, numero_tabla_1er_nivel_leer);
+	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*numero_tabla)[numero_de_entrada]);
+
+	for( int i = 0; i < ENTRADAS_POR_TABLA ; i++ ){
+		if( ((*puntero_pagina)[i].bit_presencia == 1) && ((*puntero_pagina)[i].numero_frame == num_frame)){
+			(*puntero_pagina)[i].bit_uso = 1;
+		}
+	}
 }
 
 
-void bit_de_modificado_en_1(uint32_t numero_tabla_2do_nivel_leer, uint32_t numero_de_entrada){
-	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel_leer);
-	(*puntero_pagina)[numero_de_entrada].bit_modificacion = 1;
+void bit_de_modificado_en_1(uint32_t numero_tabla_1er_nivel_leer, uint32_t numero_de_entrada, uint32_t num_frame){
+	int (*numero_tabla)[ENTRADAS_POR_TABLA] = list_get( tabla_de_paginas_de_primer_nivel, numero_tabla_1er_nivel_leer);
+	pagina_t (*puntero_pagina)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*numero_tabla)[numero_de_entrada]);
+
+	for( int i = 0; i < ENTRADAS_POR_TABLA ; i++ ){
+		if( ((*puntero_pagina)[i].bit_presencia == 1) && ((*puntero_pagina)[i].numero_frame == num_frame)){
+			(*puntero_pagina)[i].bit_uso = 1;
+		}
+	}
 }
 
 

@@ -11,13 +11,11 @@ int main(int argc, char** argv){
 	// PARSEAR INSTRUCCIONES
 	t_config* config;
 	int socket_cliente;
-	uint32_t handshake = 8080;
 	char* ip = string_new();
 	char* puerto = string_new();
 	char c = '\0';
 	char caracter[1];
 	char* buffer = string_new();
-	uint32_t exit_code = 1;
 	FILE* archivo = fopen(argv[1], "r");
 
 
@@ -84,6 +82,9 @@ int main(int argc, char** argv){
 
 
 	send(socket_cliente, a_enviar, sizeof(uint32_t) * 2 + paquete -> buffer -> size, 0);
+
+	uint32_t respuesta;
+	recv(socket_cliente, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 
 	free(infoProceso.listaInstrucciones);
 	close(socket_cliente);

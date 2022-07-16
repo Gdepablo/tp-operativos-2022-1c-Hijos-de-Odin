@@ -28,6 +28,9 @@ int main(void){
 
 	sem_init(&hilo_iniciado, 0, 0);
 	sem_init(&operacion_swap, 0, 1);
+	sem_init(&operacion_en_memoria, 0, 1);
+	sem_init(&operacion_en_bitmap, 0, 1);
+	sem_init(&operacion_en_lista_de_tablas, 0, 1);
 
 	//CONFIG
 	t_config* config;
@@ -94,6 +97,8 @@ int main(void){
 
 	// tod0 lo importante de memoria
 	memoria_real = malloc(TAMANIO_MEMORIA);
+	tabla_de_paginas_de_primer_nivel = list_create();
+	tabla_de_paginas_de_segundo_nivel = list_create();
 	punteros_clock = list_create();
 	bitmap_memoria = list_create();
 	inicializar_bitmap();

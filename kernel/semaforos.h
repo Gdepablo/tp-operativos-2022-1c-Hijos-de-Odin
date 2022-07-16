@@ -16,6 +16,6 @@ sem_t procesos_en_suspended_ready;
 sem_t proceso_nuevo_en_ready;
 // SINCRONIZADORES
 sem_t proceso_finalizado; // = 0
-sem_t fin_de_ejecucion; // = 0
+sem_t fin_de_ejecucion; // = 1
 sem_t se_inicio_el_hilo; // = 0
 sem_t proceso_en_io; // = 0

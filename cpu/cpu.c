@@ -40,7 +40,6 @@ int main(void){
 	//SOCKETS
 	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
 	socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
-	printf("se conecto el kernel al dispatch \n");
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 333){
 		printf("Conexion con kernel realizada con exito... (DISPATCH) \n");
@@ -55,7 +54,6 @@ int main(void){
 
 	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
 	socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
-	printf("se conecto el kernel al interrupt \n");
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
 		printf("Conexion con kernel realizada con exito... (INTERRUPT) \n");
@@ -83,9 +81,6 @@ int main(void){
 		printf("ERROR: HANDSHAKE INICIAL CON MEMORIA ERRONEO, TERMINANDO PROCESO \n");
 		return 1;
 	}
-
-	printf("Conexiones con memoria y Kernel realizadas correctamente. \n");
-
 	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si toodo esta correcto)
 
 
@@ -123,6 +118,7 @@ int main(void){
 		pcb_ejecutando = recibir_PCB(); // debe recibir la lista de instrucciones como char*
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
+		printf("\nCOMIENZA LA EJECUCION DEL PROCESO %i \n", pcb_ejecutando.id_proceso);
 		sem_post(&ejecutar);
 	}
 	// FIN DE RECIBIR COSAS POR DISPATCH
@@ -154,8 +150,6 @@ void* executer(){
 	while(1){
 		sem_wait(&ejecutar);
 
-		getchar();
-
 		//FETCH - DONE
 		siguiente_instruccion = malloc( string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]) );
 		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
@@ -176,25 +170,31 @@ void* executer(){
 			case NO_OP:				//CANTIDAD DE NO_OP, SEGUNDO PARAMETRO DE LA INSTRUCCION
 				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
+				printf("NO OP \n");
 				break;
 			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
 				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
+				printf("IO \n");
 				break;
 			case READ:				//DIR LOGICA
 				instr_read(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
+				printf("READ \n");
 				break;
 			case WRITE:				//DIR LOGICA					VALOR
 				instr_write( atoi(instruccion_spliteada[1]), atoi(instruccion_spliteada[2]) );
 				pcb_ejecutando.program_counter++;
+				printf("WRITE \n");
 				break;
 			case COPY:				//DIR LOGICA DESTINO			VALOR
 				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
+				printf("COPY \n");
 				break;
 			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
 				instr_exit();
+				printf("EXIT \n");
 				break;
 			default:
 				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);
@@ -208,7 +208,7 @@ void* executer(){
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 			enviar_PCB();
-			free(pcb_ejecutando.lista_instrucciones);
+//			free(pcb_ejecutando.lista_instrucciones);
 			sem_wait(&sem_interrupcion);
 			interrupcion = 0;
 			sem_post(&sem_interrupcion);
@@ -216,7 +216,7 @@ void* executer(){
 		else if (se_hizo_una_syscall_bloqueante()){
 			// el pcb se envia en la instruccion IO o EXIT
 			limpiar_TLB();
-			free(pcb_ejecutando.lista_instrucciones);
+//			free(pcb_ejecutando.lista_instrucciones);
 			syscall_bloqueante=0;
 		} else {
 			sem_post(&ejecutar);
@@ -259,8 +259,9 @@ void* interrupt(){
 // va a buscar el contenido de operando a memoria - DONE
 uint32_t fetchOperand(uint32_t dir_logica){
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
-	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
-	uint32_t contenido_del_frame = pedir_contenido(frame_a_buscar, offset);
+	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
+	uint32_t numero_entrada = floor(numero_pagina / info_traduccion.entradas_por_tabla);
+	uint32_t contenido_del_frame = pedir_contenido(frame_a_buscar, offset, numero_entrada);
 
 	return contenido_del_frame;
 }
@@ -269,8 +270,8 @@ void crear_TLB(){ // DONE
 	lista_tlb = list_create();
 	for(int i=0;entradas_tlb > i;i++){
 		t_tlb* tlb = malloc (sizeof(t_tlb));
-		tlb->marco=0;
-		tlb->pagina=0;
+		tlb->marco=-1;
+		tlb->pagina=-1;
 		tlb->primera_referencia = clock();
 		tlb->ultima_referencia=clock();
 		list_add(lista_tlb, tlb);
@@ -437,49 +438,87 @@ bool filtrar_por_marco(void* tlb_puntero_void){
 }
 
 // puede ser una funcion void que directamente modifique la var global?
+//t_pcb recibir_PCB(){
+//	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
+//	t_pcb nuevo_pcb;
+//    int offset = 0;
+//
+//	recv(socket_dispatch, &(pcb_buffer->size), sizeof(uint32_t), MSG_WAITALL);
+//    recv(socket_dispatch, &(pcb_buffer->size_instrucciones), sizeof(uint32_t), 0);
+//
+//    printf("tamanio: %i \n", pcb_buffer->size);
+//    printf("tamanio instrucciones: %i \n", pcb_buffer->size_instrucciones);
+//
+//    pcb_buffer->stream = malloc(pcb_buffer->size);
+//    recv(socket_dispatch, pcb_buffer->stream, sizeof(uint32_t) * 5 + pcb_buffer->size_instrucciones, 0);
+//
+//
+//    memcpy(&(nuevo_pcb.id_proceso), pcb_buffer->stream+offset, sizeof(uint32_t));
+//    offset += sizeof(uint32_t);
+//
+//    memcpy(&(nuevo_pcb.tamanio_direcciones), pcb_buffer->stream+offset, sizeof(uint32_t));
+//    offset += sizeof(uint32_t);
+//
+//    nuevo_pcb.lista_instrucciones = malloc( pcb_buffer->size_instrucciones );
+//    memcpy(nuevo_pcb.lista_instrucciones, (pcb_buffer->stream)+offset, pcb_buffer->size_instrucciones);
+//    offset += pcb_buffer->size_instrucciones;
+//
+//    memcpy(&(nuevo_pcb.program_counter), pcb_buffer->stream+offset, sizeof(uint32_t));
+//    offset += sizeof(uint32_t);
+//
+//    memcpy(&(nuevo_pcb.tabla_paginas), pcb_buffer->stream+offset, sizeof(uint32_t) );
+//    offset += sizeof(uint32_t);
+//
+//    memcpy(&(nuevo_pcb.estimacion_rafagas), pcb_buffer->stream+offset, sizeof(uint32_t));
+//
+//    printf("PCB ARMADO: \n");
+//    printf("id proceso: %i \n", nuevo_pcb.id_proceso);
+//    printf("tamanio direcciones: %i \n", nuevo_pcb.tamanio_direcciones);
+//    printf("lista instrucciones:  %s \n", nuevo_pcb.lista_instrucciones);
+//    printf("strlen: %i \n", (int)strlen(nuevo_pcb.lista_instrucciones));
+//    printf("program counter: %i \n", nuevo_pcb.program_counter);
+//    printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
+//    printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
+//
+//    free(pcb_buffer->stream);
+//	free(pcb_buffer);
+//	return nuevo_pcb;
+//}
+
 t_pcb recibir_PCB(){
-	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
-	t_pcb nuevo_pcb;
-    int offset = 0;
+    t_pcb_buffer buffer;
 
-	recv(socket_dispatch, &(pcb_buffer->size), sizeof(uint32_t), MSG_WAITALL);
-    recv(socket_dispatch, &(pcb_buffer->size_instrucciones), sizeof(uint32_t), 0);
+    recv(socket_dispatch, &(buffer.size), sizeof(uint32_t), MSG_WAITALL);
+//    printf("buffer->size: %i \n", buffer.size);
+    recv(socket_dispatch, &(buffer.size_instrucciones), sizeof(uint32_t), MSG_WAITALL);
+//    printf("buffer->size_instrucciones: %i \n", buffer.size_instrucciones);
+    buffer.stream = malloc(buffer.size);
+    recv(socket_dispatch, buffer.stream, buffer.size, MSG_WAITALL);
 
-    printf("tamanio: %i \n", pcb_buffer->size);
-    printf("tamanio instrucciones: %i \n", pcb_buffer->size_instrucciones);
+    t_pcb pcb;
+    int offset=0;
+    memcpy(&(pcb.id_proceso), buffer.stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+//    printf("pcb.id_proceso = %i \n", pcb.id_proceso);
+    memcpy(&(pcb.tamanio_direcciones), buffer.stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+//    printf("pcb.tamanio_direcciones = %i \n", pcb.tamanio_direcciones);
 
-    pcb_buffer->stream = malloc(pcb_buffer->size);
-    recv(socket_dispatch, pcb_buffer->stream, sizeof(uint32_t) * 5 + pcb_buffer->size_instrucciones, 0);
+    pcb.lista_instrucciones = malloc(buffer.size_instrucciones);
+    memcpy(pcb.lista_instrucciones, buffer.stream+offset, buffer.size_instrucciones);
+    offset+=buffer.size_instrucciones;
+//    printf("pcb.lista_instrucciones = %s \n", pcb.lista_instrucciones);
+//    printf("strlen: %i \n", (int)strlen(pcb.lista_instrucciones));
 
+    memcpy(&(pcb.program_counter), buffer.stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+//    printf("pcb.program_counter = %i \n", pcb.program_counter);
+    memcpy(&(pcb.tabla_paginas), buffer.stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+//    printf("pcb.tabla_paginas = %i \n", pcb.tabla_paginas);
+    memcpy(&(pcb.estimacion_rafagas), buffer.stream+offset, sizeof(uint32_t));
+//    printf("pcb.estimacion_rafagas = %i \n", pcb.estimacion_rafagas);
 
-    memcpy(&(nuevo_pcb.id_proceso), pcb_buffer->stream+offset, sizeof(uint32_t));
-    offset += sizeof(uint32_t);
-
-    memcpy(&(nuevo_pcb.tamanio_direcciones), pcb_buffer->stream+offset, sizeof(uint32_t));
-    offset += sizeof(uint32_t);
-
-    nuevo_pcb.lista_instrucciones = malloc( pcb_buffer->size_instrucciones );
-    memcpy(nuevo_pcb.lista_instrucciones, (pcb_buffer->stream)+offset, pcb_buffer->size_instrucciones);
-    offset += pcb_buffer->size_instrucciones;
-
-    memcpy(&(nuevo_pcb.program_counter), pcb_buffer->stream+offset, sizeof(uint32_t));
-    offset += sizeof(uint32_t);
-
-    memcpy(&(nuevo_pcb.tabla_paginas), pcb_buffer->stream+offset, sizeof(uint32_t) );
-    offset += sizeof(uint32_t);
-
-    memcpy(&(nuevo_pcb.estimacion_rafagas), pcb_buffer->stream+offset, sizeof(uint32_t));
-
-    printf("PCB ARMADO: \n");
-    printf("id proceso: %i \n", nuevo_pcb.id_proceso);
-    printf("tamanio direcciones: %i \n", nuevo_pcb.tamanio_direcciones);
-    printf("lista instrucciones:  %s \n", nuevo_pcb.lista_instrucciones);
-    printf("strlen: %i \n", (int)strlen(nuevo_pcb.lista_instrucciones));
-    printf("program counter: %i \n", nuevo_pcb.program_counter);
-    printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
-    printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
-
-    free(pcb_buffer->stream);
-	free(pcb_buffer);
-	return nuevo_pcb;
+    return pcb;
 }
+

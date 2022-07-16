@@ -51,7 +51,7 @@ int main(void){
 
 	socket_consola_proceso  = iniciar_servidor(IP_ESCUCHA, PUERTO_ESCUCHA); // por aca se comunican las consolas XD
 
-	int socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
+	socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
 	handshake = 555;
 	send(socket_memoria, &handshake, sizeof(uint32_t), 0);
 
@@ -63,11 +63,11 @@ int main(void){
 		return 1;
 	}
 
-	int socket_cpu_pcb = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH); // se conecta a cpu
+	socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH); // se conecta a cpu
 	handshake = 333;
-	send(socket_cpu_pcb, &handshake, sizeof(uint32_t), 0);
+	send(socket_cpu_dispatch, &handshake, sizeof(uint32_t), 0);
 	respuesta = 0;
-	recv(socket_cpu_pcb, &respuesta, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket_cpu_dispatch, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta == 1) {
 		printf("Se conectó al dispatch \n");
 	} else {
@@ -88,23 +88,27 @@ int main(void){
 		}
 
 	printf("FULBO \n");
-	getchar();
 
 	// INICIALIZACION DE SEMÁFOROS
 	sem_init(&mx_cola_new, 0, 1);
+	sem_init(&mx_lista_ready , 0, 1);
+	sem_init(&fin_de_ejecucion, 0, 1);
 	sem_init(&se_inicio_el_hilo, 0, 0);
 	sem_init(&procesos_en_ready, 0, 0);
+	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, new_a_ready, NULL);
 	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
+	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
 
 	pthread_detach(lp_new_ready_fifo);
 	pthread_detach(mp_suspendedready_ready);
 	pthread_detach(cp_ready_exec_fifo);
+	pthread_detach(atender_consolas);
 
-	for(int i = 0; i < 3; i++){
+	for(int i = 0; i < 4; i++){
 		sem_wait(&se_inicio_el_hilo);
 	}
 	printf("se iniciaron todos los hilos \n");
@@ -117,30 +121,44 @@ int main(void){
 // RECEPCIÓN DE PROCESOS DESDE CONSOLA Y CARGA EN NEW
 
 void* recibir_procesos() {
+	sem_post(&se_inicio_el_hilo);
 	int id = 0;
+	uint32_t codop;
 	while(1) {
+		int* socket_nuevo = malloc(sizeof(int));
+		*socket_nuevo = accept(socket_consola_proceso, NULL, NULL);
+
 		t_buffer* buffer = malloc(sizeof(buffer));
 
-		recv(socket_consola_proceso, &(buffer->size), sizeof(uint32_t), 0);
+		recv(*socket_nuevo, &codop, sizeof(uint32_t), MSG_WAITALL);
+		printf("codop %i \n", codop);
+		recv(*socket_nuevo, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
 		buffer -> stream = malloc(buffer->size);
-		recv(socket_consola_proceso, buffer->stream, buffer->size, 0);
+		recv(*socket_nuevo, buffer->stream, buffer->size, MSG_WAITALL);
 
 		t_info_proceso* proceso = deserializar_proceso(buffer);
+
 		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
 		printf("\n");
 
 		t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largo_instrucciones + sizeof(char*) );
 
-		pcb->id_proceso = socket_consola_proceso;
+		pcb->id_proceso = *socket_nuevo;
 		pcb->tamanio_direcciones = proceso->tamanio_direcciones;
 		pcb->instrucciones = proceso->instrucciones;
 		pcb->program_counter = 0;
 		pcb->tabla_paginas = 0;
 		pcb->estimacion_rafagas = ESTIMACION_INICIAL;
 
+		printf("%i \n", pcb->id_proceso);
+		printf("%i \n", pcb->tamanio_direcciones);
+		printf("%s \n", pcb->instrucciones);
+		printf("%i \n", pcb->program_counter);
+		printf("%i \n", pcb->tabla_paginas);
+		printf("%i \n", pcb->estimacion_rafagas);
+
 		free(buffer->stream);
 		free(buffer);
-		free(proceso->instrucciones);
 		free(proceso);
 
 		ingreso_a_new(pcb); // planificador largo plazo
@@ -181,11 +199,14 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 
 	memcpy(&(procesoNuevo->tamanio_direcciones), stream, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	memcpy(&(procesoNuevo->instrucciones), stream+offset, sizeof(uint32_t));
+	printf("procesonuevo->tamanio_direcciones = %i \n", procesoNuevo->tamanio_direcciones);
+
+	memcpy(&(procesoNuevo->largo_instrucciones), stream+offset, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
+	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
+
 	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones);
 	memcpy(procesoNuevo->instrucciones, stream+offset, procesoNuevo->largo_instrucciones);
-
 
 	return procesoNuevo;
 }
@@ -254,7 +275,7 @@ t_config* inicializarConfigs(void) {
 }
 
 int es_FIFO(){
-	return strcmp(ALGORITMO_PLANIFICACION, "FIFO") != 0;
+	return !strcmp(ALGORITMO_PLANIFICACION, "FIFO");
 }
 
 

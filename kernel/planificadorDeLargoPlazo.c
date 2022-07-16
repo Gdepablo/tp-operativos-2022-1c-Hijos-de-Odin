@@ -8,9 +8,10 @@ void ingreso_a_new(t_pcb* pcb) {
 	// guardar en memoria XD
 	sem_wait(&mx_cola_new);
 		queue_push(cola_new, pcb);
+		printf("se metio en queue al pcb \n");
 	sem_post(&mx_cola_new);
 
-	sem_post(&procesos_en_ready);
+	sem_post(&procesos_en_new);
 }
 
 // 	THREADS
@@ -25,12 +26,17 @@ void* new_a_ready(){
 		sem_wait(&mx_cola_new);
 		if(es_FIFO()) {
 			// FIFO
+				//
+				t_pcb* pcb = queue_pop(cola_new);
+				crear_tabla_proceso(pcb);
+				printf("PCB TABLA PAGINA = %i \n", pcb->tabla_paginas);
+				//
+				queue_push(cola_ready, pcb);
 
-				queue_push(cola_ready, queue_pop(cola_new));
 		} else {
 			// SJF
-
 				list_add(lista_ready, queue_pop(cola_new));
+
 		}
 		sem_post(&mx_cola_new);
 		sem_post(&mx_lista_ready);
@@ -38,6 +44,19 @@ void* new_a_ready(){
 		sem_post(&procesos_en_ready);
 	}
 	return "";
+}
+
+void crear_tabla_proceso(t_pcb* pcb){
+	// CODIGO DE OPERACION = 4
+	int codop = 4;
+	send(socket_memoria, &codop, sizeof(uint32_t), 0);
+
+	// FULBO
+	send(socket_memoria, &(pcb->id_proceso), sizeof(uint32_t), 0);
+	send(socket_memoria, &(pcb->tamanio_direcciones), sizeof(uint32_t), 0);
+
+	// RECIBO NUMERO DE TABLA
+	recv(socket_memoria, &(pcb->tabla_paginas), sizeof(uint32_t), MSG_WAITALL);
 }
 
 void executing_a_exit(/*t_pcb* pcb*/){

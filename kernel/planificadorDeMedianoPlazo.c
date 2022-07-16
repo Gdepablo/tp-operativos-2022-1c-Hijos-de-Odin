@@ -10,7 +10,7 @@ void* executing_a_blocked_o_exit() {
 	//syscall->pcb.instrucciones = malloc(sizeof(t_pcb)); Esto aca no iba
 
 	while(1) {
-		recv(socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
+		recv(socket_cpu_dispatch, syscall, sizeof(syscall), MSG_WAITALL); // ver sizeof
 		sem_post(&fin_de_ejecucion);
 		if(syscall->instruccion) {
 			// EXIT

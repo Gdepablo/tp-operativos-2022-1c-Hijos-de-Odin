@@ -30,6 +30,12 @@ typedef struct {
 } t_info_proceso;
 
 typedef struct {
+	uint32_t size; // t_pcb + strlen(lista_instrucciones) + uint32_t * 2
+	uint32_t size_instrucciones;
+	void* stream;
+} t_pcb_buffer;
+
+typedef struct {
 	uint32_t size;
 	void* stream;
 } t_buffer;
@@ -73,8 +79,9 @@ t_pcb PCB_EJECUCION;
 
 int socket_consola_proceso;
 int socket_cpu_syscall;
-int socket_cpu_pcb;
+int socket_cpu_dispatch;
 int socket_cpu_interrupcion;
+int socket_memoria;
 // COLAS Y LISTAS
 t_queue* cola_new;
 t_queue* cola_ready; // FIFO
@@ -88,6 +95,7 @@ t_queue*  cola_suspended_ready;
 pthread_t lp_new_ready_fifo, lp_new_ready_srt, lp_exec_exit; // HILOS LARGO PLAZO
 pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
 pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
+pthread_t atender_consolas;
 
 // VARIABLES PARA LOS SOCKETS
 char* IP_CONSOLA;
@@ -114,6 +122,7 @@ void* atender_cliente(int* socket_cliente);
 void* planificador_largo_plazo();
 int crear_conexion(char *ip, char* puerto);
 t_syscall* recibirSyscall();
+void* recibir_procesos();
 
 int es_FIFO();
 

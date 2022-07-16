@@ -71,11 +71,11 @@ void instr_io(int tiempo_en_milisegundos){
 
 void instr_read(uint32_t dir_logica){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
-
 										// formula de numero de pagina
-	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
-	uint32_t contenido_frame = pedir_contenido(frame_a_utilizar, offset);
-	printf("%d \n",contenido_frame);
+	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
+	uint32_t entrada_1er_tabla = floor(numero_pagina / info_traduccion.entradas_por_tabla );
+	uint32_t contenido_frame = pedir_contenido(frame_a_utilizar, offset, entrada_1er_tabla);
+	printf("Dato leido en la direccion logica %i: %i \n", dir_logica, contenido_frame);
 
 }
 
@@ -87,8 +87,9 @@ void instr_read(uint32_t dir_logica){
 
 void instr_write(uint32_t dir_logica, uint32_t valor){
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
-	uint32_t offset = dir_logica - ( floor(dir_logica/tamanio_de_pagina) * tamanio_de_pagina );
-	escribir_frame(frame_a_utilizar, offset, valor);
+	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
+	uint32_t entrada_1er_nivel = floor(numero_pagina / info_traduccion.entradas_por_tabla);
+	escribir_frame(frame_a_utilizar, offset, valor, entrada_1er_nivel);
 }
 
 
@@ -98,9 +99,9 @@ void instr_write(uint32_t dir_logica, uint32_t valor){
 
 void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 	uint32_t frame_destino= buscar_frame(dir_logica_destino);
-	uint32_t offset = dir_logica_destino - ( floor(dir_logica_destino/tamanio_de_pagina) * tamanio_de_pagina );
-	escribir_frame(frame_destino, offset, valor);
-
+	uint32_t offset = dir_logica_destino - ( floor(dir_logica_destino/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
+	uint32_t entrada_1er_nivel = floor(numero_pagina / info_traduccion.entradas_por_tabla);
+	escribir_frame(frame_destino, offset, valor, entrada_1er_nivel);
 }
 
 // Descripcion: manda a la puta al proceso. Devuelve la PCB al kernel y este termina de realizar las tareas administrativas.
@@ -147,6 +148,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.estimacion_rafagas), sizeof(uint32_t));
 
 
+
 	offset = 0;
 	int tamanio_stream = sizeof(uint32_t) * 2 + buffer->size;
 	void* a_enviar = malloc(tamanio_stream);
@@ -159,19 +161,20 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 
 	send(socket_dispatch, a_enviar, buffer->size + sizeof(uint32_t) * 2, 0);
 
+	free((syscall_a_enviar->pcb).lista_instrucciones);
+	free(syscall_a_enviar);
 	free(buffer->stream);
 	free(buffer);
-	free(syscall_a_enviar->pcb.lista_instrucciones);
-	free(syscall_a_enviar);
 }
 
 // Descripcion:
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
-		//esta la pagina en la TLB
+		printf("ESTA EN TLB, ");
 		t_tlb* tlb_a_retornar=list_find(lista_tlb, encontrar_pagina);
 		if(marco_obsoleto(tlb_a_retornar->marco)){
+			printf("ESTA OBSOLETO \n");
 			//esta la pagina pero esta duplicada y obsoleta
 			uint32_t numero_frame=pedir_todo_memoria();
 			guardar_en_TLB(numero_pagina, numero_frame);
@@ -179,12 +182,14 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 		}
 		else
 		{
+			printf("NO ESTA OBSOLETO \n");
 			//esta la pagina y no esta obsoleta XD
 			tlb_a_retornar->ultima_referencia=clock();
 			return tlb_a_retornar->marco;
 		}
 	}
 	else{
+		printf("no esta en tlb \n");
 		// la pagina no esta en ninguna entrada
 		uint32_t numero_frame=pedir_todo_memoria();
 		guardar_en_TLB(numero_pagina, numero_frame);
@@ -212,6 +217,8 @@ uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
     send(socket_memoria, &(pcb_ejecutando.tabla_paginas), sizeof(uint32_t), 0);
     //ENVIAR ENTRADA DE TABLA 1
     send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
+
+
     uint32_t num_tabla_2;
     recv(socket_memoria, &num_tabla_2, sizeof(uint32_t), MSG_WAITALL);
     return num_tabla_2;
@@ -224,14 +231,18 @@ uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
 // Ejemplo: pedir_num_frame(1, 2) pide a memoria que se retorne el numero de frame asignado a la pagina que esta en la
 // tabla 2, entrada 1
 
-uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
+uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2, uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 1
 	uint32_t codigo_de_operacion =1;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
+	// PROCESS ID
+	send(socket_memoria, &(pcb_ejecutando.id_proceso), sizeof(uint32_t), 0);
     //ENVIAR NUMERO TABLA DE PAGINAS 2
     send(socket_memoria, &(num_tabla_2), sizeof(uint32_t), 0);
     //ENVIAR ENTRADA DE TABLA 2
     send(socket_memoria, &entrada_2da_tabla, sizeof(uint32_t), 0);
+    // NUMERO DE TABLA 1
+    send(socket_memoria, &(pcb_ejecutando.tabla_paginas), sizeof(uint32_t), 0);
 
     uint32_t num_frame;
     recv(socket_memoria, &num_frame, sizeof(uint32_t), MSG_WAITALL);
@@ -242,17 +253,23 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2){
 
 // Descripcion: pide a memoria el contenido que se encuentra en el numero de frame con el offset dado
 // Ejemplo: pedir_contenido(5, 13) pide a memoria que del frame 5 + 13 de offset me retorne su contenido.
-uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset){
+uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 2
+	printf("SE ENVIO CODIGO 2 \n");
 	uint32_t codigo_de_operacion =2;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
     //ENVIAR NUMERO DE FRAME
     send(socket_memoria, &numero_de_frame, sizeof(uint32_t), 0);
     //ENVIAR OFFSET
     send(socket_memoria, &offset, sizeof(uint32_t), 0);
+    //ENVIAR NUMERO 1ER TABLA
+    send(socket_memoria, &(pcb_ejecutando.tabla_paginas), sizeof(uint32_t), 0);
+    //ENVIAR ENTRADA 1ER TABLA
+    send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
 
     uint32_t contenido;
     recv(socket_memoria, &contenido, sizeof(uint32_t), MSG_WAITALL);
+
     return contenido;
 }
 
@@ -261,7 +278,7 @@ uint32_t pedir_todo_memoria(){
 	uint32_t entrada_1er_tabla = floor(numero_pagina/info_traduccion.entradas_por_tabla);
 	uint32_t num_tabla_2 =pedir_num_tabla_2(entrada_1er_tabla);
 	uint32_t entrada_2da_tabla = numero_pagina % info_traduccion.entradas_por_tabla;
-	uint32_t numero_frame = pedir_num_frame(entrada_2da_tabla, num_tabla_2);
+	uint32_t numero_frame = pedir_num_frame(entrada_2da_tabla, num_tabla_2, entrada_1er_tabla);
 	return numero_frame;
 }
 
@@ -273,7 +290,7 @@ uint32_t pedir_todo_memoria(){
  * agregar el offset po aweonao XD
  * eso afecta instr_copy e instr_write, compilar antes de pushear anashe
  */
-void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor){
+void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 3
 	uint32_t codigo_de_operacion =3;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
@@ -283,6 +300,12 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor){
     send(socket_memoria, &offset, sizeof(uint32_t), 0);
     //ENVIAR VALOR
     send(socket_memoria, &valor, sizeof(uint32_t), 0);
+    //ENVIAR 1RA TABLA
+    send(socket_memoria, &(pcb_ejecutando.tabla_paginas), sizeof(uint32_t), 0);
+    //ENVIAR ENTRADA 1RA TABLA
+    send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
+
+
     uint32_t respuesta;
     recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
     if(respuesta == 1){

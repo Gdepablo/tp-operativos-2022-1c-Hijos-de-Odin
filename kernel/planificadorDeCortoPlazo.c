@@ -8,15 +8,18 @@ void* ready_a_executing(){
 	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_ready);
+		printf("hola soy ready a executing \n");
 		if( es_FIFO()) {
+			printf("ES FIFOVICH \n");
 			// FIFO
 			sem_wait(&fin_de_ejecucion);
 
 			sem_wait(&mx_lista_ready);
-			//enviar_a_CPU( queue_pop(&cola_ready) ); // ENVIAR A CPU POR SOCKET
+			enviar_a_CPU( queue_pop(cola_ready) );
 			sem_post(&mx_lista_ready);
 		} else {
 			// SJF
+			printf("ES SJF NASHE \n");
 			t_pcb* pcb_elegido = algoritmo_sjf();
 			if(pcb_elegido->id_proceso != PCB_EJECUCION.id_proceso) {
 				uint32_t interrupcion = 1000;
@@ -34,18 +37,58 @@ void* ready_a_executing(){
 	return "";
 }
 
-/*void enviar_a_CPU(t_pcb pcb) { // TODO POR BATATA
-	send(socket_cpu_pcb,0,sizeof(pcb),0); //No estoy seguro si es el socket correcto
-	recv(*socket_cpu_pcb,syscall,sizeof(syscall),MSG_WAITALL);
-	//Envia fulbo;
-}*/
+void enviar_a_CPU(t_pcb* pcb_a_enviar) { // TODO POR BATATA
+	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
+
+	printf("INSTRUCCIONES A ENVIAR: \n%s \n", pcb_a_enviar->instrucciones);
+
+	buffer->size = sizeof(uint32_t) * 5 + strlen(pcb_a_enviar->instrucciones) + 1;
+	buffer->size_instrucciones = strlen(pcb_a_enviar->instrucciones) + 1;
+	buffer->stream = malloc(buffer->size);
+
+	int offset = 0;
+	// COPY DEL ID DE PROCESO
+	memcpy(buffer->stream+offset, &(pcb_a_enviar->id_proceso), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	printf("%i \n", *(int*)buffer->stream);
+	// COPY DE TAMANIO DE DIRECCIONES
+	memcpy(buffer->stream+offset, &(pcb_a_enviar->tamanio_direcciones), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	printf("%i \n", pcb_a_enviar->tamanio_direcciones);
+	printf("%i \n", *(uint32_t*)(buffer->stream+sizeof(uint32_t)));
+	// COPY LISTA DE INSTRUCCIONES
+	memcpy(buffer->stream+offset, pcb_a_enviar->instrucciones, buffer->size_instrucciones + 1);
+	offset+=buffer->size_instrucciones;
+	// COPY PROGRAM COUNTER
+	memcpy(buffer->stream+offset, &(pcb_a_enviar->program_counter), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	// COPY TABLA DE PAGINAS
+	memcpy(buffer->stream+offset, &(pcb_a_enviar->tabla_paginas), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+	// COPY ESTIMACION DE RAFAGA
+	memcpy(buffer->stream+offset, &(pcb_a_enviar->estimacion_rafagas), sizeof(uint32_t));
+
+	offset=0;
+	int tamanio_a_enviar = sizeof(uint32_t) * 2 + buffer->size;
+	void* a_enviar = malloc( tamanio_a_enviar );
+
+	memcpy(a_enviar+offset, &(buffer->size), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+
+	memcpy(a_enviar+offset, &(buffer->size_instrucciones), sizeof(uint32_t));
+	offset+=sizeof(uint32_t);
+
+	memcpy(a_enviar+offset, buffer->stream, buffer->size);
+
+	send(socket_cpu_dispatch, a_enviar, tamanio_a_enviar, 0);
+}
 
 // Se ejecuta en SJF al desalojar un proceso
 void executing_a_ready(t_pcb* pcb){ // le falta
 	sem_wait(&proceso_nuevo_en_ready);
 
 	send(socket_cpu_interrupcion, 0, sizeof(pcb), 0); //aca toqueteamos tambien
-	recv(socket_cpu_pcb, syscall, sizeof(syscall), MSG_WAITALL);
+	recv(socket_cpu_dispatch, syscall, sizeof(syscall), MSG_WAITALL);
 	pcb->estimacion_rafagas = calcular_rafaga(pcb);
 
 	sem_wait(&mx_lista_ready);

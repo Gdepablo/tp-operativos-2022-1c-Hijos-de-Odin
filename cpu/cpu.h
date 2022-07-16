@@ -42,8 +42,8 @@ typedef struct{
 } info_traduccion_t; 	// Necesario para hacer la traduccion de logica a real
 
 typedef struct{
-	uint32_t pagina;
-	uint32_t marco;
+	int pagina;
+	int marco;
 	clock_t primera_referencia;
 	clock_t ultima_referencia;
 }t_tlb;
@@ -57,7 +57,6 @@ typedef struct {
 
 // VAR GLOBALES
 uint32_t retardo_noop;
-uint32_t tamanio_de_pagina;
 t_list* lista_tlb;
 uint32_t numero_pagina;
 int socket_memoria;
@@ -100,9 +99,9 @@ void instr_copy(uint32_t dir_logica_destino, uint32_t valor);
 uint32_t pedir_todo_memoria();
 uint32_t buscar_frame(uint32_t dir_logica);
 uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla);
-uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset);
-void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor);
-uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2);
+uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t entrada_1er_tabla);
+void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, uint32_t entrada_1er_tabla);
+uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2, uint32_t entrada_1er_tabla);
 
 
 // COMUNICACION CON KERNEL

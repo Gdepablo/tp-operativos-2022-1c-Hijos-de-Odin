@@ -31,3 +31,5 @@ void* new_a_ready();
  CUANDO ACTUA: CUANDO SE RECIBE LA INSTRUCCION DEL CPU PARA TERMINAR EL PROCESO
 */
 void executing_a_exit();
+
+void crear_tabla_proceso(t_pcb* pcb);
