@@ -14,14 +14,13 @@ uint32_t interrupcion = 0;				// si == 1 hay interrupcion, si == 0 no hay interr
 uint32_t entradas_tlb;					// recibido por config
 char* reemplazo_tlb;					// modo de reemplazo TLB, puede ser FIFO o LRU
 
-
 int main(void){
 	lista_tlb = list_create(); 			// La lista representa la TLB
 	sem_init(&ejecutar, 0, 0);
 
 	//CONFIG
-	t_config* config;					// abro el config, se encuentra en la carpeta padre y se llama cpu.config
-	config = inicializarConfigs();
+	t_config* config = inicializarConfigs();;					// abro el config, se encuentra en la carpeta padre y se llama cpu.config
+	//config = inicializarConfigs();
 
 	char* ip = config_get_string_value(config, "IP_MEMORIA"); // ip de la memoria
 	char* puerto_memoria = config_get_string_value(config, "PUERTO_MEMORIA"); // puerto al cual el cpu se va a conectar con la memoria
@@ -31,7 +30,6 @@ int main(void){
 	retardo_noop = atoi( config_get_string_value(config, "RETARDO_NOOP") ); // Tiempo que toma el NOOP
 	entradas_tlb = atoi( config_get_string_value(config, "ENTRADAS_TLB"));	// cantidad de entradas de la TLB
 
-	config_destroy(config); 			// lo destruyo porque ya no me sirve
 
 	//FIN CONFIG
 
@@ -140,6 +138,7 @@ int main(void){
 	close(socket_dispatch);
 	close(socket_memoria);
 	list_destroy(lista_tlb);
+	config_destroy(config);
 	return 0;
 }
 

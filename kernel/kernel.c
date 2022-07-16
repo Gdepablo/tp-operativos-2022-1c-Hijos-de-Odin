@@ -5,7 +5,7 @@
 #include "planificadorDeLargoPlazo.h"
 
 // VARIABLES GLOBALES
-
+char* PUERTO_ESCUCHA;
 
 
 
@@ -16,15 +16,13 @@ int main(void){
 
 	// VARIABLES DEL CONFIG
 	t_config* config = inicializarConfigs();
-	IP_CONSOLA = config_get_string_value(config, "IP_CONSOLA");
-	IP_KERNEL  = config_get_string_value(config, "IP_KERNEL");
 	IP_CPU     = config_get_string_value(config, "IP_CPU");
 	IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
 
 	PUERTO_MEMORIA          = config_get_string_value(config, "PUERTO_MEMORIA");
-	PUERTO_CPU_SYSCALL          = config_get_string_value(config, "PUERTO_ESCUCHA");
 	PUERTO_CPU_DISPATCH     = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
 	PUERTO_CPU_INTERRUPT    = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+	PUERTO_ESCUCHA 			= config_get_string_value(config, "PUERTO_ESCUCHA");
 
 	ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
 	ESTIMACION_INICIAL      = atoi( config_get_string_value(config, "ESTIMACION_INICIAL") );
@@ -40,24 +38,30 @@ int main(void){
 	cola_suspended_blocked  = queue_create();
 	cola_suspended_ready    = queue_create();
 
+	printf("%s \n", PUERTO_MEMORIA);
+	printf("%s \n", PUERTO_CPU_DISPATCH);
+	printf("%s \n", PUERTO_CPU_INTERRUPT);
+
+	// CAMBIAR ESTA IP
+	char* IP_ESCUCHA = "127.0.0.1";
 
 	// SOCKETS
 	uint32_t handshake;
 	uint32_t respuesta;
 
-	socket_consola_proceso  = iniciar_servidor(IP_KERNEL, PUERTO_CONSOLA_PROCESO); // por aca se comunican las consolas XD
+	socket_consola_proceso  = iniciar_servidor(IP_ESCUCHA, PUERTO_ESCUCHA); // por aca se comunican las consolas XD
 
 	int socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
 	handshake = 555;
 	send(socket_memoria, &handshake, sizeof(uint32_t), 0);
 
 	recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
-		if(respuesta == 1) {
-			printf("Se conectó a memoria \n");
-		} else {
-			printf("Error en la conexión con la memoria \n");
-			return 1;
-		}
+	if(respuesta == 1) {
+		printf("Se conectó a memoria \n");
+	} else {
+		printf("Error en la conexión con la memoria \n");
+		return 1;
+	}
 
 	int socket_cpu_pcb = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH); // se conecta a cpu
 	handshake = 333;
@@ -83,6 +87,9 @@ int main(void){
 			return 1;
 		}
 
+	printf("FULBO \n");
+	getchar();
+
 	// INICIALIZACION DE SEMÁFOROS
 	sem_init(&mx_cola_new, 0, 1);
 	sem_init(&se_inicio_el_hilo, 0, 0);
@@ -93,9 +100,9 @@ int main(void){
 	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 
-	pthread_detach(new_a_ready);
-	pthread_detach(suspended_ready_a_ready);
-	pthread_detach(ready_a_executing);
+	pthread_detach(lp_new_ready_fifo);
+	pthread_detach(mp_suspendedready_ready);
+	pthread_detach(cp_ready_exec_fifo);
 
 	for(int i = 0; i < 3; i++){
 		sem_wait(&se_inicio_el_hilo);
@@ -161,7 +168,7 @@ void* esperar_syscall() {
 	}
 }
 
-t_syscall* recibirSyscall(){ //ToDO
+t_syscall* recibirSyscall(){ //ToDO POR BATATA
 	t_syscall* CAMBIAR_NOMBRE;
 
 	return CAMBIAR_NOMBRE;
@@ -241,7 +248,7 @@ int iniciar_servidor(char* ip, char* puerto) {
 t_config* inicializarConfigs(void) {
 	t_config* nuevo_config;
 
-	nuevo_config = config_create("/home/utnso/workspace/tp-2022-1c-Hijos-de-Odin/kernel/kernel.config");
+	nuevo_config = config_create("./../kernel.config");
 
 	return nuevo_config;
 }

@@ -109,6 +109,7 @@ void* inputOuput() {
 
 // hay que sincronizar que suspended ready tenga mayor prioridad que de new a ready
 void* suspended_ready_a_ready() {
+	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_suspended_ready);
 		sem_wait(&grado_multiprogramacion);

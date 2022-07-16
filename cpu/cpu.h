@@ -78,7 +78,6 @@ void limpiar_TLB();
 void reemplazar_TLB();
 void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame);
 bool hay_interrupcion();
-t_config* inicializarConfigs(void);
 bool se_hizo_una_syscall_bloqueante();
 uint32_t fetchOperand(uint32_t dir_logica);
 int crear_conexion(char *ip, char* puerto);
