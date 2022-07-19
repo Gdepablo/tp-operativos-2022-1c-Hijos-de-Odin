@@ -58,7 +58,6 @@ int main(void){
 	// HANDSHAKE CON KERNEL
 	int socket_kernel = accept(socket_escucha, 0, 0);
 	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);
-	printf("handshake = %i \n", handshake);
 	if(handshake == 555){
 		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
 		send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
@@ -179,7 +178,7 @@ int iniciar_servidor(char* ip, char* puerto) {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	getaddrinfo(ip, puerto, &hints, &servinfo);
+	getaddrinfo(NULL, puerto, &hints, &servinfo);
 
 	// Creamos el socket de escucha del servidor
 	socket_servidor = 	socket( servinfo -> ai_family,

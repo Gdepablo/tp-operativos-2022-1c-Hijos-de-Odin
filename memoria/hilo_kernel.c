@@ -24,57 +24,70 @@ void* hilo_kernel(void* ptr_void_socket){
 		switch(codigo_recibido){
 			// TESTEADO - FUNCIONA BIEN (o eso parece)
 			case crear_tablas:{
-				printf("solicitud crear tablas (kernel) \n");
+				printf("# Solicitud crear tablas (kernel) #\n");
+				printf("Datos recibidos: \n");
 				// recibe un PROCESS ID y TAMAÑO DEL ESPACIO DE DIRECCIONES
 				// basicamente un list add a la lista de tablas, y crear la cantidad de
 				// tablas de segundo nivel necesarias. Tambien se crea el archivo .swap
 
 				// recibo las cosas necesarias
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
+				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &espacio_de_direcciones, sizeof(uint32_t), MSG_WAITALL);
+				printf("Espacio de direcciones: %i \n", espacio_de_direcciones);
 
 				// hago la tarea necesaria
 				int num_tabla_creado = crear_tablas_necesarias(espacio_de_direcciones);
-				printf("num tabla creado = %i \n", num_tabla_creado);
+				printf("Numero de tabla de primer creada = %i \n", num_tabla_creado);
 				crear_archivo_swap(process_id);
-				printf("swap crea2 \n");
-
+				printf("Archivo SWAP creado \n");
 				//respondo con el numero de tabla creado
 
 				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
+				printf("# Fin # \n\n");
 				break;
 			}
 			case suspension_proceso:{
-				printf("solicitud suspender proceso (kernel) \n");
+				printf("# Solicitud suspender proceso (kernel) #\n");
+				printf("Datos recibidos: \n");
 				// sacar todos los frames del proceso que esten en memoria y actualizarlos en el
 				// swap si es necesario
 
 				// recibo las cosas necesarias para el laburo
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
+				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
 
 				// hago el laburo
 				suspender_proceso(process_id, numero_primer_tabla);
-
+				printf("Tabla suspendida \n");
 				// se avisa que esta todo bien
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
-
+				printf("# Fin # \n\n");
 				break;
 			}
 
 			case finalizacion_proceso:
-				printf("solicitud finalizar proceso (kernel) \n");
+				printf("# Solicitud finalizar proceso (kernel) # \n");
+				printf("Datos recibidos: \n");
 				// borrar el .swap y sacar las entradas en memoria si es que hay.
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
+				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
 
 				// laburo
 				borrar_swap(process_id);
 				liberar_memoria(numero_primer_tabla);
 
+
+				printf("Archivo %i.swap eliminado \n", process_id);
+				printf("Memoria ocupada por el proceso %i eliminada \n", process_id);
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
+				printf("# Fin # \n\n");
 				break;
 
 			default:
@@ -231,10 +244,8 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 	usleep(RETARDO_SWAP * 1000);
 
 	sem_wait(&operacion_en_memoria);
-		printf("guardar en pagina wait \n");
 		fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
 	sem_post(&operacion_en_memoria);
-	printf("guardar en pagina post \n");
 
 	sem_post(&operacion_swap);
 

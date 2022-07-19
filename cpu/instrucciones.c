@@ -36,6 +36,7 @@ void instr_no_op(int cant_de_no_op){
 	while( i < cant_de_no_op ){
 		usleep(retardo_noop * 1000); // pasa de milisegundos (dado por config) a microsegundos (lo que usa usleep)
 		i++;
+		log_info(log_ejecucion_cpu, "UN NO_OP EJECUTADO");
 	}
 }
 
@@ -70,13 +71,15 @@ void instr_io(int tiempo_en_milisegundos){
 // Ejemplo: instr_read(11) lee lo que haya en la direccion logica 11 del proceso y la muestra por pantalla
 
 void instr_read(uint32_t dir_logica){
+	log_info(log_ejecucion_cpu, "se leera la direccion logica %i", dir_logica);
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 										// formula de numero de pagina
 	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
+	log_info(log_ejecucion_cpu, "se leera del frame %i, offset %i", frame_a_utilizar, offset);
 	uint32_t entrada_1er_tabla = floor(numero_pagina / info_traduccion.entradas_por_tabla );
 	uint32_t contenido_frame = pedir_contenido(frame_a_utilizar, offset, entrada_1er_tabla);
 	printf("Dato leido en la direccion logica %i: %i \n", dir_logica, contenido_frame);
-
+	log_info(log_ejecucion_cpu, "el dato leido fue %i", contenido_frame);
 }
 
 
@@ -86,9 +89,11 @@ void instr_read(uint32_t dir_logica){
 // Ejemplo: instr_write(11, 69) escribe en la direccion 11 el valor 69
 
 void instr_write(uint32_t dir_logica, uint32_t valor){
+	log_info(log_ejecucion_cpu, "se escribira en la direccion logica %i el valor %i", dir_logica, valor);
 	uint32_t frame_a_utilizar = buscar_frame(dir_logica);
 	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
 	uint32_t entrada_1er_nivel = floor(numero_pagina / info_traduccion.entradas_por_tabla);
+	log_info(log_ejecucion_cpu, "se escribira en el frame %i, offset %i", frame_a_utilizar, offset);
 	escribir_frame(frame_a_utilizar, offset, valor, entrada_1er_nivel);
 }
 
@@ -98,9 +103,11 @@ void instr_write(uint32_t dir_logica, uint32_t valor){
 // Ejemplo: instr_write(11, 69) escribe en la direccion 11 el valor 69, siendo este el valor que se recibio antes
 
 void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
+	log_info(log_ejecucion_cpu, "se escribira en la direccion logica %i el valor %i", dir_logica_destino, valor);
 	uint32_t frame_destino= buscar_frame(dir_logica_destino);
 	uint32_t offset = dir_logica_destino - ( floor(dir_logica_destino/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
 	uint32_t entrada_1er_nivel = floor(numero_pagina / info_traduccion.entradas_por_tabla);
+	log_info(log_ejecucion_cpu, "se escribira en el frame %i, offset %i", frame_destino, offset);
 	escribir_frame(frame_destino, offset, valor, entrada_1er_nivel);
 }
 
@@ -115,6 +122,7 @@ void instr_exit(){
 	exit->tiempo_de_bloqueo = 0;
 	enviar_syscall(exit);
 	syscall_bloqueante=1;
+	log_info(log_ejecucion_cpu, "la syscall fue enviada");
 }
 
 void enviar_syscall(t_syscall* syscall_a_enviar){
@@ -218,28 +226,37 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 // Descripcion:
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	numero_pagina = floor(dir_logica/info_traduccion.tamanio_paginas);
+	log_info(log_ejecucion_cpu, "comienza a buscarse la pagina %i en la TLB", numero_pagina);
+
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
+		log_info(log_ejecucion_cpu, "hay una entrada con la misma pagina");
 		printf("LA DIRECCION LOGICA %i ESTA EN TLB, ", dir_logica);
 		t_tlb* tlb_a_retornar=list_find(lista_tlb, encontrar_pagina);
 		if(marco_obsoleto(tlb_a_retornar->marco)){
+			log_info(log_ejecucion_cpu, "la pagina esta obsoleta");
 			printf("PERO EL DATO ESTA OBSOLETO \n");
 			//esta la pagina pero esta duplicada y obsoleta
 			uint32_t numero_frame=pedir_todo_memoria();
+			log_info(log_ejecucion_cpu, "se pidio el frame a memoria, frame devuelto por memoria: %i", numero_frame);
 			guardar_en_TLB(numero_pagina, numero_frame);
 			return numero_frame;
 		}
 		else
 		{
+			log_info(log_ejecucion_cpu, "la pagina no esta obsoleta");
 			printf("Y EL DATO NO ESTA OBSOLETO \n");
 			//esta la pagina y no esta obsoleta XD
 			tlb_a_retornar->ultima_referencia=clock();
 			return tlb_a_retornar->marco;
 		}
 	}
-	else{
+	else
+	{
+		log_info(log_ejecucion_cpu, "no hay ninguna entrada con esa pagina en la TLB");
 		printf("no esta en tlb \n");
 		// la pagina no esta en ninguna entrada
 		uint32_t numero_frame=pedir_todo_memoria();
+		log_info(log_ejecucion_cpu, "se pidio el frame a memoria, frame devuelto por memoria: %i", numero_frame);
 		guardar_en_TLB(numero_pagina, numero_frame);
 		return numero_frame;
 	}
@@ -357,6 +374,10 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, u
     recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
     if(respuesta == 1){
     	printf("Se escribio en el frame %i, offset %i, el valor %i \n", numero_de_frame, offset, valor);
+    	log_info(log_ejecucion_cpu, "se escribio con exito en el frame");
     }
-    else printf("La mula esta de huelga.");
+    else {
+    	printf("La mula esta de huelga.");
+    	log_error(log_ejecucion_cpu, "no se pudo escribir en el frame");
+    }
 }

@@ -25,21 +25,26 @@ void* hilo_cpu(void* socket_cpu_void){
 
 		switch(codigo_recibido){
 			case solicitud_num_tabla_2:
-				printf("solicitud numero de tabla 2 (cpu) \n");
+				printf("# Solicitud numero de tabla 2 (cpu) #\n");
+				printf("Datos recibidos: \n");
 				// con el numero de entrada + el numero de tabla que envia cpu, hay
 				// que devolver el numero de la segunda tabla
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de primer tabla: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de entrada: %i \n", numero_de_entrada);
 
 				numero_2da_tabla = buscar_tabla_2do_nivel(numero_tabla_1er_nivel_leer, numero_de_entrada);
 
 				usleep(RETARDO_MEMORIA * 1000);
 
+				printf("# Valor devuelto: %i \n", numero_2da_tabla);
 				send(socket_cpu, &numero_2da_tabla, sizeof(uint32_t), 0);
-				printf("Numero de tabla 2 enviada \n\n");
+				printf("# Fin #\n\n");
 				break;
 			case solicitud_num_frame:
-				printf("solicitud numero de frame (cpu) \n");
+				printf("# Solicitud numero de frame (cpu) #\n");
+				printf("Datos recibidos: \n");
 				recv(socket_cpu, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
 				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
@@ -47,7 +52,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				recv(socket_cpu, &numero_de_entrada_2, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada 2: %i \n", numero_de_entrada_2);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
-				printf("NUmero de 1er tabla: %i \n", numero_tabla_1er_nivel_leer);
+				printf("Numero de 1er tabla: %i \n", numero_tabla_1er_nivel_leer);
 
 				// BUSCO LA PAGINA QUE QUIERO LEER EL NUMERO DE FRAME
 				pagina_t* pagina_buscada = buscar_pagina(numero_tabla_2do_nivel_leer, numero_de_entrada_2);
@@ -65,37 +70,47 @@ void* hilo_cpu(void* socket_cpu_void){
 				}
 
 				usleep(RETARDO_MEMORIA * 1000);
-				printf("numero de frame enviado: %i \n", a_enviar);
+				printf("# Valor devuelto: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
-				printf("Numero de frame enviado \n\n");
+				printf("# Fin # \n\n");
 				break;
 			case solicitud_lectura:
-				printf("solicitud de lectura (cpu) \n");
+				printf("# Solicitud de lectura (cpu) #\n");
+				printf("Datos recibidos: \n");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de frame: %i \n", numero_de_frame);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
+				printf("Offset: %i \n", offset);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
-				// ENTRADA DE TABLA 1
+				printf("Numero de tabla primer nivel: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
 
 				a_enviar = leer_de_memoria(numero_de_frame, offset);
 
 				bit_de_uso_en_1(numero_tabla_1er_nivel_leer, numero_de_entrada, numero_de_frame);
 
 				usleep(RETARDO_MEMORIA * 1000);
+				printf("# Valor devuelto: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 
-				printf("Dato leido enviado \n\n");
+				printf("# Fin # \n\n");
 				break;
 			case solicitud_escritura:
-				printf("solicitud escritura (cpu) \n");
+				printf("# Solicitud escritura (cpu) #\n");
+				printf("Datos recibidos: \n");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de frame: %i \n", numero_de_frame);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
+				printf("Offset: %i \n", offset);
 				recv(socket_cpu, &valor_a_escribir, sizeof(uint32_t), MSG_WAITALL);
+				printf("Valor a escribir: %i \n", valor_a_escribir);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
-				// ENTRADA DE TABLA 1
+				printf("Numero de tabla de primer nivel: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
 
 				escribir_en_memoria(numero_de_frame, offset, valor_a_escribir);
 
@@ -105,7 +120,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &OK, sizeof(uint32_t), 0);
 
-				printf("Confirmacion de escritura enviada \n\n");
+				printf("# Fin # \n\n");
 				break;
 			default:
 				printf("codigo erroneo enviado por kernel \n");
@@ -142,10 +157,8 @@ uint32_t leer_de_memoria(uint32_t numero_de_frame, uint32_t offset){
 
 	// semaforo loco
 	sem_wait(&operacion_en_memoria);
-		printf("leer en memoria wait \n");
 		memcpy(&numero_leido, memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, sizeof(uint32_t));
 	sem_post(&operacion_en_memoria);
-	printf("leer en memoria post \n");
 
 	return numero_leido;
 }
@@ -153,10 +166,8 @@ uint32_t leer_de_memoria(uint32_t numero_de_frame, uint32_t offset){
 
 void escribir_en_memoria(uint32_t numero_de_frame,uint32_t offset,uint32_t valor_a_escribir){
 	sem_wait(&operacion_en_memoria);
-		printf("escribir en memoria wait \n");
 		memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, &valor_a_escribir, sizeof(uint32_t));
 	sem_post(&operacion_en_memoria);
-	printf("escribir en memoria post \n");
 }
 
 pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entrada){
@@ -306,10 +317,8 @@ void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame
 	// MOMENTO SWAP
 
 	sem_wait(&operacion_en_memoria);
-		printf("cargar pagina en memoria wait \n");
 		memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
 	sem_post(&operacion_en_memoria);
-	printf("cargar pagina en memoria post \n");
 
 	free(a_copiar);
 	free(ruta_archivo);
@@ -338,12 +347,9 @@ int buscar_frame_libre(){
 	int *ptr = list_get(bitmap_memoria, posicion);
 
 	while( (*ptr) != 0 ){
-		printf("frame %i esta ocupado \n", posicion);
 		posicion++;
 		ptr = list_get(bitmap_memoria, posicion);
 	}
-
-	printf("posicion = %i ", posicion);
 
 	return posicion;
 }

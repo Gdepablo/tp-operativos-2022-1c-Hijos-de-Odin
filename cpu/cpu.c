@@ -14,8 +14,12 @@ uint32_t interrupcion = 0;				// si == 1 hay interrupcion, si == 0 no hay interr
 uint32_t entradas_tlb;					// recibido por config
 char* reemplazo_tlb;					// modo de reemplazo TLB, puede ser FIFO o LRU
 
+
 int main(void){
 	printf("# CPU # \n");
+
+	log_ejecucion_cpu = log_create("./../logs/log_cpu.log", "CPU", 0, LOG_LEVEL_INFO);
+
 
 	lista_tlb = list_create(); 			// La lista representa la TLB
 	sem_init(&ejecutar, 0, 0);
@@ -45,11 +49,13 @@ int main(void){
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 333){
 		printf("Conexion con kernel realizada con exito... (DISPATCH) \n");
+		log_info(log_ejecucion_cpu, "se realizo la conexion al kernel (dispatch)");
 		send(socket_dispatch, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (DISPATCH) \n");
+		log_error(log_ejecucion_cpu, "no se realizo la conexion al kernel (dispatch)");
 		send(socket_dispatch, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
@@ -59,11 +65,13 @@ int main(void){
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
 		printf("Conexion con kernel realizada con exito... (INTERRUPT) \n");
+		log_info(log_ejecucion_cpu, "se realizo la conexion al kernel (interrupt)");
 		send(socket_interrupt, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE DEL KERNEL ERRONEO, TERMINANDO PROCESO (INTERRUPT) \n");
+		log_error(log_ejecucion_cpu, "no se realizo la conexion al kernel (interrupt)");
 		send(socket_interrupt, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
@@ -77,10 +85,12 @@ int main(void){
 	if(respuesta_memoria == 1)
 	{
 		printf("Conexion con memoria realizada con exito... \n");
+		log_info(log_ejecucion_cpu, "se realizo la conexion a memoria");
 	}
 	else
 	{
 		printf("ERROR: HANDSHAKE INICIAL CON MEMORIA ERRONEO, TERMINANDO PROCESO \n");
+		log_error(log_ejecucion_cpu, "no se realizo la conexion a memoria (interrupt)");
 		return 1;
 	}
 	//FIN SOCKETS, A ESTA ALTURA DEBERIAN ESTAR MEMORIA, CPU Y KERNEL CONECTADOS (si toodo esta correcto)
@@ -88,7 +98,8 @@ int main(void){
 
 	//RECIBO INFORMACION DE LA MEMORIA PARA LA TRADUCCION DE MEMORIA
 	recv(socket_memoria, &(info_traduccion), sizeof(info_traduccion_t), MSG_WAITALL);
-	printf("Informacion para la traduccion de memoria recibida... \n");
+	log_info(log_ejecucion_cpu, "se recibio la informacion para traduccion de direccion logica");
+	printf("Informacion para la traduccion de direcciones logicas recibida... \n");
 
 
 	// CREAR POOL DE HILOS
@@ -144,6 +155,7 @@ int main(void){
 // ejecuta las instrucciones del pcb - DONE
 void* executer(){
 	sem_post(&hiloCreado); // simplemente avisa que se creo el hilo
+	log_info(log_ejecucion_cpu, "hilo executer iniciado \n");
 
 	char* siguiente_instruccion;		// char para la siguiente instruccion
 	char** instruccion_spliteada;		// agarra siguiente instruccion y la separa en 2 o 3 lineas, dependiendo de cual es
@@ -151,52 +163,75 @@ void* executer(){
 
 	while(1){
 		sem_wait(&ejecutar);
+		log_info(log_ejecucion_cpu, "### COMIENZO CICLO DE INSTRUCCION ###");
 
 		//FETCH - DONE
+		log_info(log_ejecucion_cpu, "FETCH NEXT INSTRUCTION");
 		siguiente_instruccion = malloc( string_length(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]) );
 		siguiente_instruccion = string_duplicate(lista_de_instrucciones_actual[pcb_ejecutando.program_counter]);
+		log_info(log_ejecucion_cpu, "siguiente instruccion: %s \n", siguiente_instruccion);
 		instruccion_spliteada = string_array_new();
 		instruccion_spliteada = string_split(siguiente_instruccion, " ");
 
 		//DECODE - ETAPA OPCIONAL - DONE
 		if(!strcmp(instruccion_spliteada[0], "COPY")){
+			log_info(log_ejecucion_cpu, "FETCH OPERAND");
 			operando = fetchOperand(atoi(instruccion_spliteada[2])); //instruccion_spliteada[2] = dir_logica_origen
 		}
 
 
 		//EXECUTE - DONE
+		log_info(log_ejecucion_cpu, "EXECUTE");
 		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // retorna 0,1,2,3,4,5
 
 		switch(numOperacion){
 			// Cada funcion de cada instruccion tiene su documentacion hecha en instrucciones.c
 			case NO_OP:				//CANTIDAD DE NO_OP, SEGUNDO PARAMETRO DE LA INSTRUCCION
-				printf("NO OP \n");
+				printf("# NO OP \n");
+				log_info(log_ejecucion_cpu, "Se comienza a ejecutar la instruccion NO_OP");
 				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
+				printf("# FIN NO OP \n\n");
+				log_info(log_ejecucion_cpu, "Se termino de ejecutar la instruccion NO_OP \n");
 				break;
 			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
-				printf("IO \n");
+				printf("# IO \n");
+				log_info(log_ejecucion_cpu, "Se comienza a ejecutar la instruccion IO");
 				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
+				printf("# FIN IO \n\n");
+				log_info(log_ejecucion_cpu, "Se termino de ejecutar la instruccion IO \n");
 				break;
 			case READ:				//DIR LOGICA
-				printf("READ \n");
+				printf("# READ \n");
+				log_info(log_ejecucion_cpu, "Se comienza a ejecutar la instruccion READ");
 				instr_read(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
+				printf("# FIN READ \n\n");
+				log_info(log_ejecucion_cpu, "Se termino de ejecutar la instruccion READ \n");
 				break;
 			case WRITE:				//DIR LOGICA					VALOR
-				printf("WRITE \n");
+				printf("# WRITE \n");
+				log_info(log_ejecucion_cpu, "se comienza a ejecutar la instruccion WRITE");
 				instr_write( atoi(instruccion_spliteada[1]), atoi(instruccion_spliteada[2]) );
 				pcb_ejecutando.program_counter++;
+				printf("# FIN WRITE \n\n");
+				log_info(log_ejecucion_cpu, "se termino de ejecutar la instruccion WRITE \n");
 				break;
 			case COPY:				//DIR LOGICA DESTINO			VALOR
-				printf("COPY \n");
+				printf("# COPY \n");
+				log_info(log_ejecucion_cpu, "se comienza a ejecutar la instruccion COPY");
 				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
+				printf("# FIN COPY \n\n");
+				log_info(log_ejecucion_cpu, "se termino de ejecutar la instruccion COPY \n");
 				break;
 			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
-				printf("EXIT \n");
+				printf("# EXIT \n");
+				log_info(log_ejecucion_cpu, "se comienza a ejecutar la instruccion EXIT");
 				instr_exit();
+				printf("# FIN EXIT \n\n");
+				log_info(log_ejecucion_cpu, "se termino de ejecutar la instruccion EXIT \n");
 				break;
 			default:
 				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);
@@ -205,8 +240,10 @@ void* executer(){
 
 
 		// CHECK INTERRUPT - DONE
-
+		log_info(log_ejecucion_cpu, "CHECK INTERRUPT");
+		log_info(log_ejecucion_cpu, "chequeando interrupciones y/o syscall bloqueante");
 		if( hay_interrupcion() ){
+			log_info(log_ejecucion_cpu, "se detecto una interrupcion \n\n");
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 			enviar_PCB();
@@ -216,11 +253,13 @@ void* executer(){
 			sem_post(&sem_interrupcion);
 		}
 		else if (se_hizo_una_syscall_bloqueante()){
+			log_info(log_ejecucion_cpu, "se detecto una syscall bloqueante \n\n");
 			// el pcb se envia en la instruccion IO o EXIT
 			limpiar_TLB();
 //			free(pcb_ejecutando.lista_instrucciones);
 			syscall_bloqueante=0;
 		} else {
+			log_info(log_ejecucion_cpu, "no hay interrupcion ni syscall bloqueante \n\n");
 			sem_post(&ejecutar);
 		}
 
@@ -238,7 +277,7 @@ void* executer(){
  */
 void* interrupt(){
 	sem_post(&hiloCreado);
-
+	log_info(log_ejecucion_cpu, "hilo interrupt iniciado");
 	uint32_t valor_recibido = -1;
 	while(1){
 		recv(socket_interrupt, &valor_recibido, sizeof(uint32_t), MSG_WAITALL);
@@ -247,10 +286,13 @@ void* interrupt(){
 			sem_wait(&sem_interrupcion);
 			interrupcion = 1;
 			sem_post(&sem_interrupcion);
+			printf("#### SE RECIBIO UNA INTERRUPCION ####");
+			log_info(log_ejecucion_cpu, "Se recibio una interrupcion de kernel");
 		}
 		else
 		{
 			printf("EL HANDSHAKE RECIBIDO EN INTERRUPCION NO FUE 55 \n NO CAMBIO EL VALOR DE INTERRUPCION\n");
+			log_error(log_ejecucion_cpu, "se recibio una interrupcion pero con valor erroneo");
 		}
 	}
 
@@ -260,10 +302,13 @@ void* interrupt(){
 // FUNCIONES
 // va a buscar el contenido de operando a memoria - DONE
 uint32_t fetchOperand(uint32_t dir_logica){
+	printf("# FETCH OPERAND (PASO PREVIO INSTRUCCION COPY) \n");
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
 	uint32_t offset = dir_logica - ( floor(dir_logica/info_traduccion.tamanio_paginas) * info_traduccion.tamanio_paginas );
 	uint32_t numero_entrada = floor(numero_pagina / info_traduccion.entradas_por_tabla);
 	uint32_t contenido_del_frame = pedir_contenido(frame_a_buscar, offset, numero_entrada);
+	log_info(log_ejecucion_cpu, "datos fetcheados: frame_a_buscar: %i, offset: %i, numero_entrada: %i, contenido_del_frame: %i", frame_a_buscar, offset, numero_entrada, contenido_del_frame);
+	log_info(log_ejecucion_cpu, "se termina de ejecutar fetchOperand");
 
 	return contenido_del_frame;
 }
@@ -277,11 +322,13 @@ void crear_TLB(){ // DONE
 		tlb->primera_referencia = clock();
 		tlb->ultima_referencia=clock();
 		list_add(lista_tlb, tlb);
+		log_info(log_ejecucion_cpu, "se creo la tlb");
 	}
 }
 
 void limpiar_TLB(){ // DONE
 	list_iterate(lista_tlb,cambiar_puntero_tlb);
+	log_info(log_ejecucion_cpu, "se limpio la tlb");
 }
 
 t_tlb* elegir_pagina_a_reemplazar_TLB(){ // DONE
@@ -289,13 +336,17 @@ t_tlb* elegir_pagina_a_reemplazar_TLB(){ // DONE
 
 	//Algoritmo LRU
 	if(!strcmp(reemplazo_tlb,"LRU")){
+		log_info(log_ejecucion_cpu, "se elegira una pagina a reemplazar con algoritmo LRU");
 		pagina_a_retornar=list_get_maximum(lista_tlb,tlb_menos_referenciado);
+		log_info(log_ejecucion_cpu, "la entrada reemplazada contenia la pagina numero %i ", pagina_a_retornar->pagina);
 	}
 
 	//Como el unico algoritmo alternativo es fifo no se aclaran nuevas condiciones para esta entrada.
 	//Algoritmo FIFO
 	else{
+		log_info(log_ejecucion_cpu, "se elegira una pagina a reemplazar con algoritmo FIFO");
 		pagina_a_retornar= list_get_maximum(lista_tlb,tlb_mas_viejo);
+		log_info(log_ejecucion_cpu, "la entrada reemplazada contenia la pagina numero %i ", pagina_a_retornar->pagina);
 	}
 	return pagina_a_retornar;
 }
@@ -304,6 +355,7 @@ void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // DON
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
+	log_info(log_ejecucion_cpu, "la pagina fue reemplazada por la numero %i, frame %i", numero_de_pagina, numero_de_frame);
 	pagina_a_reemplazar->primera_referencia=clock();
 	pagina_a_reemplazar->ultima_referencia=clock();
 }

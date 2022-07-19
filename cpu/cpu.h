@@ -16,6 +16,7 @@
 #include <commons/config.h>
 #include "funcionesSocketsyConfig.h"
 #include <commons/collections/list.h>
+#include <commons/log.h>
 
 // ENUM
 enum operaciones{ NO_OP, IO, READ, WRITE, COPY, EXIT };
@@ -64,7 +65,7 @@ t_pcb pcb_ejecutando;
 info_traduccion_t info_traduccion;
 uint32_t syscall_bloqueante;
 uint32_t numero_de_marco_glob;
-
+t_log* log_ejecucion_cpu;
 
 
 
