@@ -8,7 +8,7 @@
 t_config* inicializarConfigs(void) {
 	t_config* nuevo_config;
 
-	nuevo_config = config_create("/home/utnso/Documentos/borrar/configs/fulbo.config");
+	nuevo_config = config_create("./../cpu.config");
 
 
 	return nuevo_config; //Creo que esto funciona así igual pero no estoy seguro
