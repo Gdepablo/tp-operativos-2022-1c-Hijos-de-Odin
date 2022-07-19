@@ -1,21 +1,21 @@
 # GUIA COSMICA DE DEPLOY Y EJECUCION COSMICA
 
 
-SI NO ESTA COMPILADO:
-1- Entrar a las siguientes carpetas por consola::
-.../tp-2022-1c-Hijos-de-Odin/cpu/Default,
-.../tp-2022-1c-Hijos-de-Odin/memoria/Debug,
-.../tp-2022-1c-Hijos-de-Odin/kernel/Debug,
-.../tp-2022-1c-Hijos-de-Odin/consola/Debug.
+SI NO ESTA COMPILADO: <br />
+1- Entrar a las siguientes carpetas por consola: <br />
+.../tp-2022-1c-Hijos-de-Odin/cpu/Default, <br />
+.../tp-2022-1c-Hijos-de-Odin/memoria/Debug, <br />
+.../tp-2022-1c-Hijos-de-Odin/kernel/Debug, <br />
+.../tp-2022-1c-Hijos-de-Odin/consola/Debug. <br />
 
-2- En cada una de ellas, ejecutar por consola:
-	make clean
-	make
+2- En cada una de ellas, ejecutar por consola: <br />
+	make clean <br />
+	make <br />
 
-Con esto deberian estar los ejecutables listos.
+Con esto deberian estar los ejecutables listos. <br />
 
 
-SI ESTA COMPILADO:
-opcional - Modificar los configs si es necesario
-1- Primero se ejecuta memoria, luego se ejecuta el CPU y despues el Kernel.
-2- Luego se inician las consolas.
+SI ESTA COMPILADO: <br /><br />
+(Opcional) - Modificar los configs si es necesario <br />
+1- Primero se ejecuta memoria, luego se ejecuta el CPU y despues el Kernel. <br />
+2- Luego se inician las consolas. <br />
