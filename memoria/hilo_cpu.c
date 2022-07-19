@@ -36,13 +36,18 @@ void* hilo_cpu(void* socket_cpu_void){
 				usleep(RETARDO_MEMORIA * 1000);
 
 				send(socket_cpu, &numero_2da_tabla, sizeof(uint32_t), 0);
+				printf("Numero de tabla 2 enviada \n\n");
 				break;
 			case solicitud_num_frame:
 				printf("solicitud numero de frame (cpu) \n");
 				recv(socket_cpu, &process_id, sizeof(uint32_t), MSG_WAITALL);
+				printf("Process id: %i \n", process_id);
 				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de tabla 2: %i \n", numero_tabla_2do_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada_2, sizeof(uint32_t), MSG_WAITALL);
+				printf("Numero de entrada 2: %i \n", numero_de_entrada_2);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
+				printf("NUmero de 1er tabla: %i \n", numero_tabla_1er_nivel_leer);
 
 				// BUSCO LA PAGINA QUE QUIERO LEER EL NUMERO DE FRAME
 				pagina_t* pagina_buscada = buscar_pagina(numero_tabla_2do_nivel_leer, numero_de_entrada_2);
@@ -60,6 +65,7 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
+				printf("Numero de frame enviado \n\n");
 				break;
 			case solicitud_lectura:
 				printf("solicitud de lectura (cpu) \n");
@@ -76,6 +82,8 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
+
+				printf("Dato leido enviado \n\n");
 				break;
 			case solicitud_escritura:
 				printf("solicitud escritura (cpu) \n");
@@ -94,6 +102,8 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				send(socket_cpu, &OK, sizeof(uint32_t), 0);
+
+				printf("Confirmacion de escritura enviada \n\n");
 				break;
 			default:
 				printf("codigo erroneo enviado por kernel \n");
@@ -130,8 +140,10 @@ uint32_t leer_de_memoria(uint32_t numero_de_frame, uint32_t offset){
 
 	// semaforo loco
 	sem_wait(&operacion_en_memoria);
+		printf("leer en memoria wait \n");
 		memcpy(&numero_leido, memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, sizeof(uint32_t));
 	sem_post(&operacion_en_memoria);
+	printf("leer en memoria post \n");
 
 	return numero_leido;
 }
@@ -139,8 +151,10 @@ uint32_t leer_de_memoria(uint32_t numero_de_frame, uint32_t offset){
 
 void escribir_en_memoria(uint32_t numero_de_frame,uint32_t offset,uint32_t valor_a_escribir){
 	sem_wait(&operacion_en_memoria);
-	memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, &valor_a_escribir, sizeof(uint32_t));
+		printf("escribir en memoria wait \n");
+		memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA + offset, &valor_a_escribir, sizeof(uint32_t));
 	sem_post(&operacion_en_memoria);
+	printf("escribir en memoria post \n");
 }
 
 pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entrada){
@@ -152,12 +166,17 @@ pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entr
 
 void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar_a_memoria, uint32_t num_pagina, uint32_t process_id){
 	t_list* paginas_presentes = buscar_paginas_presentes(list_get(tabla_de_paginas_de_primer_nivel, numero_tabla_1er_nivel));
+	printf("CARGAR A MEMORIA \n");
 
 	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
+		printf("ENTRO AL IF \n");
 		int frame = buscar_frame_libre();
+		printf("n de frame = %i \n", frame);
 		void* a_copiar = copiar_de_swap(num_pagina, process_id);
+		printf("termino a_copiar \n");
 		sem_wait(&operacion_en_memoria);
-		memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
+			printf("PASO EL SEMAFORO \n");
+			memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
 		sem_post(&operacion_en_memoria);
 		poner_bit_en_1_bitmap(frame);
 		pagina_a_cargar_a_memoria->bit_presencia = 1;
@@ -289,8 +308,10 @@ void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame
 	// MOMENTO SWAP
 
 	sem_wait(&operacion_en_memoria);
-	memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
+		printf("cargar pagina en memoria wait \n");
+		memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
 	sem_post(&operacion_en_memoria);
+	printf("cargar pagina en memoria post \n");
 
 	free(a_copiar);
 	free(ruta_archivo);
@@ -304,9 +325,10 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 	void* a_copiar = malloc(TAMANIO_PAGINA);
 
 	sem_wait(&operacion_swap);
-
+	printf("paso el semaforo copiar_swap \n");
 	usleep(RETARDO_SWAP * 1000);
 	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
+
 	sem_post(&operacion_swap);
 
 	fclose(archivo);
@@ -320,6 +342,7 @@ int buscar_frame_libre(){
 
 	while( (*ptr) != 0 ){
 		posicion++;
+		ptr = list_get(bitmap_memoria, posicion);
 	}
 
 	return posicion;

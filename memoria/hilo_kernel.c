@@ -231,8 +231,10 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 	usleep(RETARDO_SWAP * 1000);
 
 	sem_wait(&operacion_en_memoria);
-	fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
+		printf("guardar en pagina wait \n");
+		fwrite(frame_a_copiar, TAMANIO_PAGINA, 1, swap);
 	sem_post(&operacion_en_memoria);
+	printf("guardar en pagina post \n");
 
 	sem_post(&operacion_swap);
 

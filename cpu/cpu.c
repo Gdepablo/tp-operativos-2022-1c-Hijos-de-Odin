@@ -15,6 +15,8 @@ uint32_t entradas_tlb;					// recibido por config
 char* reemplazo_tlb;					// modo de reemplazo TLB, puede ser FIFO o LRU
 
 int main(void){
+	printf("# CPU # \n");
+
 	lista_tlb = list_create(); 			// La lista representa la TLB
 	sem_init(&ejecutar, 0, 0);
 
@@ -119,7 +121,6 @@ int main(void){
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
 		printf("\nCOMIENZA LA EJECUCION DEL PROCESO %i \n", pcb_ejecutando.id_proceso);
-		printf("LA ESTIMACION INICIAL ES %i \n", pcb_ejecutando.estimacion_rafagas);
 		sem_post(&ejecutar);
 	}
 	// FIN DE RECIBIR COSAS POR DISPATCH
@@ -169,33 +170,33 @@ void* executer(){
 		switch(numOperacion){
 			// Cada funcion de cada instruccion tiene su documentacion hecha en instrucciones.c
 			case NO_OP:				//CANTIDAD DE NO_OP, SEGUNDO PARAMETRO DE LA INSTRUCCION
+				printf("NO OP \n");
 				instr_no_op(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
-				printf("NO OP \n");
 				break;
 			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
+				printf("IO \n");
 				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
-				printf("IO \n");
 				break;
 			case READ:				//DIR LOGICA
+				printf("READ \n");
 				instr_read(atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
-				printf("READ \n");
 				break;
 			case WRITE:				//DIR LOGICA					VALOR
+				printf("WRITE \n");
 				instr_write( atoi(instruccion_spliteada[1]), atoi(instruccion_spliteada[2]) );
 				pcb_ejecutando.program_counter++;
-				printf("WRITE \n");
 				break;
 			case COPY:				//DIR LOGICA DESTINO			VALOR
+				printf("COPY \n");
 				instr_copy( atoi(instruccion_spliteada[1]), operando );
 				pcb_ejecutando.program_counter++;
-				printf("COPY \n");
 				break;
 			case EXIT: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION DONE
-				instr_exit();
 				printf("EXIT \n");
+				instr_exit();
 				break;
 			default:
 				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);

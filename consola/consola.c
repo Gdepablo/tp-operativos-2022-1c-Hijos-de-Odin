@@ -8,6 +8,9 @@ int main(int argc, char** argv){
 		return EXIT_FAILURE;
 	}
 
+	printf("# CONSOLA # \n");
+	printf("Datos leidos: \n");
+
 	// PARSEAR INSTRUCCIONES
 	t_config* config;
 	int socket_cliente;
@@ -82,6 +85,8 @@ int main(int argc, char** argv){
 
 
 	send(socket_cliente, a_enviar, sizeof(uint32_t) * 2 + paquete -> buffer -> size, 0);
+
+	printf("Datos enviados, esperando respuesta de Kernel... \n");
 
 	uint32_t respuesta;
 	recv(socket_cliente, &respuesta, sizeof(uint32_t), MSG_WAITALL);

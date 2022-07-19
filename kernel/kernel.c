@@ -12,6 +12,8 @@ char* PUERTO_ESCUCHA;
 
 
 int main(void){
+	printf("# KERNEL # \n");
+
 	PCB_EJECUCION.id_proceso = -1;
 
 	// VARIABLES DEL CONFIG

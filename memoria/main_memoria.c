@@ -24,7 +24,7 @@ t_list* tabla_de_paginas_global;
 // Guarda todas las páginas de forma contigua
 
 int main(void){
-	printf("MEMORIA \n");
+	printf("# MEMORIA #\n");
 
 	sem_init(&hilo_iniciado, 0, 0);
 	sem_init(&operacion_swap, 0, 1);

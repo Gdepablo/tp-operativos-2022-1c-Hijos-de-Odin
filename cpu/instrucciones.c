@@ -168,12 +168,12 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 
 // Descripcion:
 uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
-	numero_pagina= floor(dir_logica/info_traduccion.tamanio_paginas);
+	numero_pagina = floor(dir_logica/info_traduccion.tamanio_paginas);
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
-		printf("ESTA EN TLB, ");
+		printf("LA DIRECCION LOGICA %i ESTA EN TLB, ", dir_logica);
 		t_tlb* tlb_a_retornar=list_find(lista_tlb, encontrar_pagina);
 		if(marco_obsoleto(tlb_a_retornar->marco)){
-			printf("ESTA OBSOLETO \n");
+			printf("PERO EL DATO ESTA OBSOLETO \n");
 			//esta la pagina pero esta duplicada y obsoleta
 			uint32_t numero_frame=pedir_todo_memoria();
 			guardar_en_TLB(numero_pagina, numero_frame);
@@ -181,7 +181,7 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 		}
 		else
 		{
-			printf("NO ESTA OBSOLETO \n");
+			printf("Y EL DATO NO ESTA OBSOLETO \n");
 			//esta la pagina y no esta obsoleta XD
 			tlb_a_retornar->ultima_referencia=clock();
 			return tlb_a_retornar->marco;
@@ -254,7 +254,6 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2, uint3
 // Ejemplo: pedir_contenido(5, 13) pide a memoria que del frame 5 + 13 de offset me retorne su contenido.
 uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 2
-	printf("SE ENVIO CODIGO 2 \n");
 	uint32_t codigo_de_operacion =2;
 	send(socket_memoria, &codigo_de_operacion,sizeof(uint32_t),0);
     //ENVIAR NUMERO DE FRAME
@@ -308,7 +307,7 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, u
     uint32_t respuesta;
     recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
     if(respuesta == 1){
-    	printf("Se escribio en el frame.");
+    	printf("Se escribio en el frame %i, offset %i, el valor %i \n", numero_de_frame, offset, valor);
     }
     else printf("La mula esta de huelga.");
 }
