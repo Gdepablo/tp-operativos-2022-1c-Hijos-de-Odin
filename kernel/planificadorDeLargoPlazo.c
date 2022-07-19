@@ -29,7 +29,6 @@ void* new_a_ready(){
 				//
 				t_pcb* pcb = queue_pop(cola_new);
 				crear_tabla_proceso(pcb);
-				printf("PCB TABLA PAGINA = %i \n", pcb->tabla_paginas);
 				//
 				queue_push(cola_ready, pcb);
 
@@ -59,12 +58,19 @@ void crear_tabla_proceso(t_pcb* pcb){
 	recv(socket_memoria, &(pcb->tabla_paginas), sizeof(uint32_t), MSG_WAITALL);
 }
 
-void executing_a_exit(/*t_pcb* pcb*/){
+void executing_a_exit(t_syscall* una_syscall){
 	sem_post(&grado_multiprogramacion);
-	// liberar memoria XD
+	// avisar a consola
+	uint32_t OK = 10;
+	send(una_syscall->pcb.id_proceso, &OK, sizeof(uint32_t), 0);
+
 	if(!es_FIFO()) {
 		// SJF
 		PCB_EJECUCION.id_proceso = -1;
 		sem_post(&procesos_en_ready);
+	}
+	else
+	{
+		sem_post(&fin_de_ejecucion);
 	}
 }

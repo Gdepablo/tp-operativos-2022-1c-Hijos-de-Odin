@@ -37,7 +37,7 @@ void executing_a_blocked(t_syscall* syscall) {
 	proceso.esta_suspendido = 0;
 
 	sem_wait(&mx_cola_blocked);
-	queue_push(cola_blocked, &proceso);
+		queue_push(cola_blocked, &proceso);
 	sem_post(&mx_cola_blocked);
 
 	pthread_detach(proceso.hilo_suspensor);

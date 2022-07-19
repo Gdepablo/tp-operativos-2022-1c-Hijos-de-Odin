@@ -109,10 +109,10 @@ void instr_copy(uint32_t dir_logica_destino, uint32_t valor){
 
 void instr_exit(){
 	t_syscall* exit=malloc(sizeof(t_syscall));
-	exit->pcb.lista_instrucciones= malloc(string_length(pcb_ejecutando.lista_instrucciones));
-	exit->pcb= pcb_ejecutando;
-	exit->instruccion=1;
-	exit->tiempo_de_bloqueo=0;
+	exit->pcb.lista_instrucciones = malloc(string_length(pcb_ejecutando.lista_instrucciones));
+	exit->pcb = pcb_ejecutando;
+	exit->instruccion = 1;
+	exit->tiempo_de_bloqueo = 0;
 	enviar_syscall(exit);
 	syscall_bloqueante=1;
 }
@@ -148,7 +148,6 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.estimacion_rafagas), sizeof(uint32_t));
 
 
-
 	offset = 0;
 	int tamanio_stream = sizeof(uint32_t) * 2 + buffer->size;
 	void* a_enviar = malloc(tamanio_stream);
@@ -159,7 +158,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	memcpy(a_enviar+offset, buffer->stream, buffer->size);
 
 
-	send(socket_dispatch, a_enviar, buffer->size + sizeof(uint32_t) * 2, 0);
+	send(socket_dispatch, a_enviar, buffer->size + sizeof(uint32_t) * 2 + 1, 0);
 
 	free((syscall_a_enviar->pcb).lista_instrucciones);
 	free(syscall_a_enviar);

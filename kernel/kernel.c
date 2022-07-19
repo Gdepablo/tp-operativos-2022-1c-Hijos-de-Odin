@@ -43,6 +43,7 @@ int main(void){
 	printf("%s \n", PUERTO_CPU_INTERRUPT);
 
 	// CAMBIAR ESTA IP
+	// TOdo, se recibe por config
 	char* IP_ESCUCHA = "127.0.0.1";
 
 	// SOCKETS
@@ -96,19 +97,21 @@ int main(void){
 	sem_init(&se_inicio_el_hilo, 0, 0);
 	sem_init(&procesos_en_ready, 0, 0);
 	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
+	sem_init(&pcb_recibido, 0, 0);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, new_a_ready, NULL);
 	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
+	pthread_create(&recibir_syscall_cpu, NULL, esperar_syscall, NULL);
 
 	pthread_detach(lp_new_ready_fifo);
 	pthread_detach(mp_suspendedready_ready);
 	pthread_detach(cp_ready_exec_fifo);
 	pthread_detach(atender_consolas);
 
-	for(int i = 0; i < 4; i++){
+	for(int i = 0; i < 5; i++){
 		sem_wait(&se_inicio_el_hilo);
 	}
 	printf("se iniciaron todos los hilos \n");
@@ -170,26 +173,109 @@ void* recibir_procesos() {
 // ESPERA DE SYSCALLS PROVENIENTES DEL CPU (IO Y EXIT)
 
 void* esperar_syscall() {
+	sem_post(&se_inicio_el_hilo);
 	while(1) {
-		t_syscall* una_syscall = recibirSyscall(); 	// espera por una sycall, la deserializa y la devuelve
-													// TODO por batata
+		t_syscall* una_syscall = recibirSyscall();
 		switch(una_syscall->instruccion) {
-		case 0: // IO
+		case IO:
 			executing_a_blocked(una_syscall);
 			break;
-		case 1: // EXIT
-			executing_a_exit();
+		case EXIT:
+			printf("ENTRO EN EXIT \n");
+			executing_a_exit(una_syscall);
+			free(una_syscall->pcb.instrucciones);
+			free(una_syscall);
 			break;
+		case DESALOJO:{
+			// VER
+			// recibir pcb
+			// meter pcb en ready
+			t_pcb* pcb_nuevo = malloc(sizeof(t_pcb));
+			// ID PROCESO
+			pcb_nuevo->id_proceso = una_syscall->pcb.id_proceso;
+			// TAMANIO INSTRUCCIONES
+			pcb_nuevo->tamanio_direcciones = una_syscall->pcb.tamanio_direcciones;
+			// SIZE INSTRUCCIONES
+			pcb_nuevo->size_instrucciones = una_syscall->pcb.size_instrucciones;
+			// INSTRUCCIONES
+			pcb_nuevo->instrucciones = malloc(strlen(una_syscall->pcb.instrucciones));
+			strcpy(pcb_nuevo->instrucciones, una_syscall->pcb.instrucciones);
+			// PROGRAM COUNTER
+			pcb_nuevo->program_counter = una_syscall->pcb.program_counter;
+			// TABLA PAGINAS
+			pcb_nuevo->tabla_paginas = una_syscall->pcb.tabla_paginas;
+			// ESTIMACION RAFAGA
+			pcb_nuevo->estimacion_rafagas = una_syscall->pcb.estimacion_rafagas;
+			// LISTO
+
+			free(una_syscall->pcb.instrucciones);
+			free(una_syscall);
+
+			list_add(lista_ready, pcb_nuevo);
+			// TODO CREAR PCB NUEVO, VER EN CPU EL CODIGO 2, VER STRUCTS t_pcb
+			sem_post(&pcb_recibido);
+			break;}
 		default:
 			printf("Error de código de instrucción \n");
 		}
 	}
 }
 
-t_syscall* recibirSyscall(){ //ToDO POR BATATA
-	t_syscall* CAMBIAR_NOMBRE;
+t_syscall* recibirSyscall(){
+    t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 
-	return CAMBIAR_NOMBRE;
+
+    recv(socket_cpu_dispatch, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
+    printf("#### RECIBIENDO SYSCALL #### \n");
+    printf("tamanio recibido: %i \n", buffer->size);
+    recv(socket_cpu_dispatch, &(buffer->size_instrucciones), sizeof(uint32_t), 0);
+    printf("size de instrucciones es: %i \n", buffer->size_instrucciones);
+
+    buffer->stream = malloc(buffer->size);
+
+    recv(socket_cpu_dispatch, buffer->stream, buffer->size, 0);
+
+    t_syscall* syscall_recibida = malloc(sizeof(t_syscall));
+
+    int offset = 0;
+    // INSTRUCCION
+    memcpy(&(syscall_recibida->instruccion), buffer->stream+offset, sizeof(uint32_t));
+    printf("syscall instruccion es: %i \n", syscall_recibida->instruccion);
+    offset+=sizeof(uint32_t);
+    // TIEMPO DE BLOQUEO
+    memcpy(&(syscall_recibida->tiempo_de_bloqueo), buffer->stream+offset, sizeof(uint32_t));
+    printf("syscall tiempo de bloqueo es: %i \n", syscall_recibida->tiempo_de_bloqueo);
+    offset+=sizeof(uint32_t);
+    // PCB
+    // ID PROCESO
+    memcpy(&(syscall_recibida->pcb.id_proceso), buffer->stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    printf("syscall pcb id proceso es: %i \n", syscall_recibida->pcb.id_proceso);
+    // TAMANIO DIRECCIONES
+    memcpy(&(syscall_recibida->pcb.tamanio_direcciones), buffer->stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    printf("syscall pcb tamanio direcciones es: %i \n", syscall_recibida->pcb.tamanio_direcciones);
+    // LISTA DE INSTRUCCIONES (PELIGRO)
+    syscall_recibida->pcb.instrucciones = malloc(buffer->size_instrucciones + 1);
+    memcpy(syscall_recibida->pcb.instrucciones, buffer->stream+offset, buffer->size_instrucciones);
+    offset+=buffer->size_instrucciones;
+    printf("la lista de instrucciones es: %s \n", syscall_recibida->pcb.instrucciones);
+    // PROGRAM COUNTER
+    memcpy(&(syscall_recibida->pcb.program_counter), buffer->stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    printf("el program counter es: %i \n", syscall_recibida->pcb.program_counter);
+    // TABLA DE PAGINAS
+    memcpy(&(syscall_recibida->pcb.tabla_paginas), buffer->stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    printf("la tabla de paginas es: %i \n", syscall_recibida->pcb.tabla_paginas);
+    // ESTIMACION DE RAFAGAS
+    memcpy(&(syscall_recibida->pcb.estimacion_rafagas), buffer->stream+offset, sizeof(uint32_t));
+    offset+=sizeof(uint32_t);
+    printf("la estimacion de rafagas es: %i \n", syscall_recibida->pcb.estimacion_rafagas);
+
+    // TODO liberar memoria, ver struct
+
+	return syscall_recibida;
 }
 
 t_info_proceso* deserializar_proceso(t_buffer* buffer) {
@@ -213,6 +299,8 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 
 int crear_conexion(char *ip, char* puerto)
 {
+	t_log* log_fallas = log_create("./../logs/log de fallas.log", "log fulbo", true, LOG_LEVEL_INFO);
+
 	struct addrinfo hints;
 	struct addrinfo *server_info;
 
@@ -227,9 +315,16 @@ int crear_conexion(char *ip, char* puerto)
 								 server_info -> ai_socktype,
 								 server_info -> ai_protocol);
 
-	connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
+	int resultado_conexion = connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
+
+	while(resultado_conexion == -1){
+		log_info(log_fallas, "Hubo un fallo al conectarse a la direccion %s:%s, reintentando...", ip, puerto);
+		sleep(1);
+		resultado_conexion = connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
+	}
 
 	freeaddrinfo(server_info);
+	log_destroy(log_fallas);
 
 	return socket_cliente;
 }

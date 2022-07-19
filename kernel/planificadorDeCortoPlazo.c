@@ -15,29 +15,30 @@ void* ready_a_executing(){
 			sem_wait(&fin_de_ejecucion);
 
 			sem_wait(&mx_lista_ready);
-			enviar_a_CPU( queue_pop(cola_ready) );
+				t_pcb* pcb_a_enviar = queue_pop(cola_ready);
+				enviar_a_CPU( pcb_a_enviar );
+				free(pcb_a_enviar->instrucciones);
+				free(pcb_a_enviar);
 			sem_post(&mx_lista_ready);
 		} else {
 			// SJF
 			printf("ES SJF NASHE \n");
 			t_pcb* pcb_elegido = algoritmo_sjf();
 			if(pcb_elegido->id_proceso != PCB_EJECUCION.id_proceso) {
-				uint32_t interrupcion = 1000;
+				uint32_t interrupcion = 55;
 				send(socket_cpu_interrupcion, &interrupcion, sizeof(uint32_t), 0);
-				// recibir pcb
-				// meter pcb en ready
-				// mandar nuevo pcb
+				sem_wait(&pcb_recibido);
+				enviar_a_CPU(pcb_elegido);
 				asignar_pcb_ejecucion(pcb_elegido);
 
 				gettimeofday(&HORA_INICIO_EJECUCION, NULL);
 			}
 		}
-
 	}
 	return "";
 }
 
-void enviar_a_CPU(t_pcb* pcb_a_enviar) { // TODO POR BATATA
+void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 
 	printf("INSTRUCCIONES A ENVIAR: \n%s \n", pcb_a_enviar->instrucciones);
@@ -111,7 +112,6 @@ t_pcb* algoritmo_sjf() {
 			return pcb_minimo;
 		} else {
 			return &PCB_EJECUCION;
-
 		}
 }
 

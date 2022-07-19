@@ -86,6 +86,14 @@ int main(int argc, char** argv){
 	uint32_t respuesta;
 	recv(socket_cliente, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 
+	if(respuesta == 10){
+		printf("FINALIZACION OK \n");
+	}
+	else
+	{
+		printf("FINALIZACION OKn't \n");
+	}
+
 	free(infoProceso.listaInstrucciones);
 	close(socket_cliente);
 	config_destroy(config);

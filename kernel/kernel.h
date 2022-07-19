@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <commons/string.h>
 #include <commons/config.h>
+#include <commons/log.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
 #include <semaphore.h>
@@ -21,7 +22,7 @@
 int iniciar_servidor(char* ip, char* puerto);
 t_config* inicializarConfigs(void);
 
-
+enum operaciones { IO, EXIT, DESALOJO };
 
 typedef struct {
 	uint32_t tamanio_direcciones;
@@ -58,7 +59,7 @@ typedef struct {
 
 typedef struct {
 	t_pcb pcb;
-	uint32_t instruccion; // 0==IO, 1==EXIT
+	uint32_t instruccion; // 0==IO, 1==EXIT, 2==DESALOJO
 	uint32_t tiempo_de_bloqueo; // para IO
 } t_syscall;
 
@@ -96,6 +97,7 @@ pthread_t lp_new_ready_fifo, lp_new_ready_srt, lp_exec_exit; // HILOS LARGO PLAZ
 pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
 pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
 pthread_t atender_consolas;
+pthread_t recibir_syscall_cpu;
 
 // VARIABLES PARA LOS SOCKETS
 char* IP_CONSOLA;
@@ -123,6 +125,7 @@ void* planificador_largo_plazo();
 int crear_conexion(char *ip, char* puerto);
 t_syscall* recibirSyscall();
 void* recibir_procesos();
+void* esperar_syscall();
 
 int es_FIFO();
 

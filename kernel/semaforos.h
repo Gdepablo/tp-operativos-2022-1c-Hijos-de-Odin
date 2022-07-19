@@ -14,6 +14,7 @@ sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
 sem_t io_terminada;
 sem_t procesos_en_suspended_ready;
 sem_t proceso_nuevo_en_ready;
+sem_t pcb_recibido;
 // SINCRONIZADORES
 sem_t proceso_finalizado; // = 0
 sem_t fin_de_ejecucion; // = 1

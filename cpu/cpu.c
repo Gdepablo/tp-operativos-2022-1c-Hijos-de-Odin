@@ -119,6 +119,7 @@ int main(void){
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
 		printf("\nCOMIENZA LA EJECUCION DEL PROCESO %i \n", pcb_ejecutando.id_proceso);
+		printf("LA ESTIMACION INICIAL ES %i \n", pcb_ejecutando.estimacion_rafagas);
 		sem_post(&ejecutar);
 	}
 	// FIN DE RECIBIR COSAS POR DISPATCH
@@ -308,8 +309,8 @@ void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // DON
 
 void cambiar_puntero_tlb(void* tlb){
 	t_tlb* tlb_puntero= tlb;
-	tlb_puntero->pagina=0;
-	tlb_puntero->marco=0;
+	tlb_puntero->pagina=-1;
+	tlb_puntero->marco=-1;
 	tlb_puntero->primera_referencia=clock();
 	tlb_puntero->ultima_referencia=clock();
 }
