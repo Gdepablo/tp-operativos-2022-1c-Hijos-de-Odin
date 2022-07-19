@@ -61,9 +61,11 @@ void* hilo_cpu(void* socket_cpu_void){
 					// CASO TRISTE: NO ESTA EN MEMORIA
 					numero_pagina = calcular_num_pagina(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer, numero_de_entrada_2);
 					cargar_a_memoria(numero_tabla_1er_nivel_leer,pagina_buscada,numero_pagina, process_id);
+					a_enviar = pagina_buscada->numero_frame;
 				}
 
 				usleep(RETARDO_MEMORIA * 1000);
+				printf("numero de frame enviado: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 				printf("Numero de frame enviado \n\n");
 				break;
@@ -166,21 +168,17 @@ pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entr
 
 void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar_a_memoria, uint32_t num_pagina, uint32_t process_id){
 	t_list* paginas_presentes = buscar_paginas_presentes(list_get(tabla_de_paginas_de_primer_nivel, numero_tabla_1er_nivel));
-	printf("CARGAR A MEMORIA \n");
 
 	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
-		printf("ENTRO AL IF \n");
 		int frame = buscar_frame_libre();
-		printf("n de frame = %i \n", frame);
 		void* a_copiar = copiar_de_swap(num_pagina, process_id);
-		printf("termino a_copiar \n");
 		sem_wait(&operacion_en_memoria);
-			printf("PASO EL SEMAFORO \n");
 			memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
 		sem_post(&operacion_en_memoria);
 		poner_bit_en_1_bitmap(frame);
 		pagina_a_cargar_a_memoria->bit_presencia = 1;
 		pagina_a_cargar_a_memoria->bit_uso = 1;
+		pagina_a_cargar_a_memoria->numero_frame = frame;
 		free(a_copiar);
 	}
 	else
@@ -325,7 +323,6 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 	void* a_copiar = malloc(TAMANIO_PAGINA);
 
 	sem_wait(&operacion_swap);
-	printf("paso el semaforo copiar_swap \n");
 	usleep(RETARDO_SWAP * 1000);
 	fread( a_copiar, TAMANIO_PAGINA, 1, archivo );
 
@@ -341,9 +338,12 @@ int buscar_frame_libre(){
 	int *ptr = list_get(bitmap_memoria, posicion);
 
 	while( (*ptr) != 0 ){
+		printf("frame %i esta ocupado \n", posicion);
 		posicion++;
 		ptr = list_get(bitmap_memoria, posicion);
 	}
+
+	printf("posicion = %i ", posicion);
 
 	return posicion;
 }
