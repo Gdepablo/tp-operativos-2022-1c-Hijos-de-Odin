@@ -155,7 +155,7 @@ void* recibir_procesos() {
 
 //		printf("%i \n", pcb->id_proceso);
 //		printf("%i \n", pcb->tamanio_direcciones);
-//		printf("%s \n", pcb->instrucciones);
+		printf("INSTRUCCINES MALDITAS:\n%s \n", pcb->instrucciones);
 //		printf("%i \n", pcb->program_counter);
 //		printf("%i \n", pcb->tabla_paginas);
 //		printf("%i \n", pcb->estimacion_rafagas);

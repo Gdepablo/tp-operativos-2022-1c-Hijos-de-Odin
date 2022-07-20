@@ -34,7 +34,7 @@ void executing_a_blocked(t_syscall* syscall) {
 	// SIZE INSTRUCCIONES
 	pcb_nuevo->size_instrucciones = syscall->pcb.size_instrucciones;
 	// INSTRUCCIONES
-	pcb_nuevo->instrucciones = malloc(strlen(syscall->pcb.instrucciones));
+	pcb_nuevo->instrucciones = malloc(strlen(syscall->pcb.instrucciones) + 1);
 	strcpy(pcb_nuevo->instrucciones, syscall->pcb.instrucciones);
 	// PROGRAM COUNTER
 	pcb_nuevo->program_counter = syscall->pcb.program_counter;
@@ -125,11 +125,11 @@ void* hilo_io(){
 		else
 		{
 			printf("EL TIEMPO DE ESPERA MAXIMO ES MAYOR \n");
-			usleep( proceso->tiempo_de_bloqueo );
+			usleep( ( proceso->tiempo_de_bloqueo ) * 1000 );
 
 			if( es_FIFO() ){
 				sem_wait(&mx_lista_ready);
-				queue_push(cola_ready, proceso->pcb);
+					queue_push(cola_ready, proceso->pcb);
 				sem_post(&mx_lista_ready);
 				printf("PROCESO DEVUELTO A LA COLA READY ANASHE ID %i (FIFO) \n", proceso->pcb->id_proceso);
 			}

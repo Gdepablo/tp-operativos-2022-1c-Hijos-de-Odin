@@ -183,6 +183,7 @@ void* executer(){
 		//EXECUTE - DONE
 		log_info(log_ejecucion_cpu, "EXECUTE");
 		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // retorna 0,1,2,3,4,5
+		log_info(log_ejecucion_cpu, "PROXIMA OPERACION A EJECUTAR: %s", instruccion_spliteada[0]);
 
 		switch(numOperacion){
 			// Cada funcion de cada instruccion tiene su documentacion hecha en instrucciones.c
@@ -547,7 +548,7 @@ t_pcb recibir_PCB(){
     t_pcb_buffer buffer;
 
     recv(socket_dispatch, &(buffer.size), sizeof(uint32_t), MSG_WAITALL);
-//    printf("buffer->size: %i \n", buffer.size);
+    printf("SE RECIBIO UN PCB \n");
     recv(socket_dispatch, &(buffer.size_instrucciones), sizeof(uint32_t), MSG_WAITALL);
 //    printf("buffer->size_instrucciones: %i \n", buffer.size_instrucciones);
     buffer.stream = malloc(buffer.size);
@@ -562,9 +563,10 @@ t_pcb recibir_PCB(){
     offset+=sizeof(uint32_t);
 //    printf("pcb.tamanio_direcciones = %i \n", pcb.tamanio_direcciones);
 
-    pcb.lista_instrucciones = malloc(buffer.size_instrucciones);
+    pcb.lista_instrucciones = malloc(buffer.size_instrucciones + 1);
     memcpy(pcb.lista_instrucciones, buffer.stream+offset, buffer.size_instrucciones);
     offset+=buffer.size_instrucciones;
+    printf("SE RECIBIERON LAS INSTRUCCIONES %s \n", pcb.lista_instrucciones);
 //    printf("pcb.lista_instrucciones = %s \n", pcb.lista_instrucciones);
 //    printf("strlen: %i \n", (int)strlen(pcb.lista_instrucciones));
 

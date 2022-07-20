@@ -53,13 +53,14 @@ void instr_io(int tiempo_en_milisegundos){
 	//tiempo de bloqueo
 	syscall_a_enviar->tiempo_de_bloqueo = tiempo_en_milisegundos;
 	//pcb
-	syscall_a_enviar->pcb.estimacion_rafagas = pcb_ejecutando.estimacion_rafagas;
-	syscall_a_enviar->pcb.id_proceso = pcb_ejecutando.id_proceso;
-	syscall_a_enviar->pcb.program_counter = pcb_ejecutando.program_counter;
-	syscall_a_enviar->pcb.tabla_paginas = pcb_ejecutando.tabla_paginas;
-	syscall_a_enviar->pcb.tamanio_direcciones = pcb_ejecutando.tamanio_direcciones;
-	syscall_a_enviar->pcb.lista_instrucciones = malloc(string_length(pcb_ejecutando.lista_instrucciones));
-	strcpy(syscall_a_enviar->pcb.lista_instrucciones, pcb_ejecutando.lista_instrucciones);
+//	syscall_a_enviar->pcb.estimacion_rafagas = pcb_ejecutando.estimacion_rafagas;
+//	syscall_a_enviar->pcb.id_proceso = pcb_ejecutando.id_proceso;
+//	syscall_a_enviar->pcb.program_counter = pcb_ejecutando.program_counter;
+//	syscall_a_enviar->pcb.tabla_paginas = pcb_ejecutando.tabla_paginas;
+//	syscall_a_enviar->pcb.tamanio_direcciones = pcb_ejecutando.tamanio_direcciones;
+//	syscall_a_enviar->pcb.lista_instrucciones = malloc(string_length(pcb_ejecutando.lista_instrucciones) + 1);
+//	strcpy(syscall_a_enviar->pcb.lista_instrucciones, pcb_ejecutando.lista_instrucciones);
+	syscall_a_enviar->pcb = pcb_ejecutando;
 
 	enviar_syscall(syscall_a_enviar);
 	syscall_bloqueante=1;
@@ -131,6 +132,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 	buffer->size = sizeof(uint32_t) * 7 + strlen(syscall_a_enviar->pcb.lista_instrucciones);
 	buffer->size_instrucciones = strlen(syscall_a_enviar->pcb.lista_instrucciones);
+	printf("instrucciones = %s \n", syscall_a_enviar->pcb.lista_instrucciones);
 	buffer->stream = malloc(buffer->size);
 
 	int offset = 0;
@@ -147,6 +149,10 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	offset+=sizeof(uint32_t);
 	// ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO
 	memcpy(buffer->stream + offset, syscall_a_enviar->pcb.lista_instrucciones, buffer->size_instrucciones);
+
+	char* instrucciones_enviadas = malloc(buffer->size_instrucciones);
+	memcpy(instrucciones_enviadas , buffer->stream + offset, buffer->size_instrucciones);
+
 	offset+=buffer->size_instrucciones;
 	// FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO
 	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.program_counter), sizeof(uint32_t));

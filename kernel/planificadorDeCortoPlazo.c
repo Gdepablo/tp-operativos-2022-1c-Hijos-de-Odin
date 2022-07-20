@@ -59,7 +59,7 @@ void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 	printf("%i \n", pcb_a_enviar->tamanio_direcciones);
 	printf("%i \n", *(uint32_t*)(buffer->stream+sizeof(uint32_t)));
 	// COPY LISTA DE INSTRUCCIONES
-	memcpy(buffer->stream+offset, pcb_a_enviar->instrucciones, buffer->size_instrucciones + 1);
+	memcpy(buffer->stream+offset, pcb_a_enviar->instrucciones, buffer->size_instrucciones);
 	offset+=buffer->size_instrucciones;
 	// COPY PROGRAM COUNTER
 	memcpy(buffer->stream+offset, &(pcb_a_enviar->program_counter), sizeof(uint32_t));
