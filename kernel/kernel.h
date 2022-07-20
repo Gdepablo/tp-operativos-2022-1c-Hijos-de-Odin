@@ -64,10 +64,8 @@ typedef struct {
 } t_syscall;
 
 typedef struct {
-	t_pcb pcb;
+	t_pcb* pcb;
 	uint32_t tiempo_de_bloqueo;
-	pthread_t hilo_suspensor;
-	int esta_suspendido; // 0==NO, 1==SI
 } t_bloqueado;
 
 

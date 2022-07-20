@@ -41,7 +41,8 @@ void blocked_a_ready(t_pcb* pcb);
 
  CUANDO SE EJECUTA:
 */
-void* blocked_a_suspended_blocked(t_bloqueado* proceso);
+void* blocked_a_suspended_blocked(void* proceso);
+void* hilo_io();
 
 /*
  TIPO:

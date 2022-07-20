@@ -19,7 +19,7 @@ void ingreso_a_new(t_pcb* pcb);
 
  CUANDO ACTUA: CUANDO HAY LUGAR EL GRADO DE MULTIPROGRAMACION LO PERMITE Y NO HAY PROCESOS EN SUSPENDIDO READY
 */
-void* new_a_ready();
+void* pasar_a_ready();
 
 /*
  TIPO: HILO

@@ -8,9 +8,7 @@ void* ready_a_executing(){
 	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_en_ready);
-		printf("hola soy ready a executing \n");
 		if( es_FIFO()) {
-			printf("ES FIFOVICH \n");
 			// FIFO
 			sem_wait(&fin_de_ejecucion);
 
@@ -22,11 +20,12 @@ void* ready_a_executing(){
 			sem_post(&mx_lista_ready);
 		} else {
 			// SJF
-			printf("ES SJF NASHE \n");
 			t_pcb* pcb_elegido = algoritmo_sjf();
 			if(pcb_elegido->id_proceso != PCB_EJECUCION.id_proceso) {
+				// enviar interrupcion a cpu
 				uint32_t interrupcion = 55;
 				send(socket_cpu_interrupcion, &interrupcion, sizeof(uint32_t), 0);
+
 				sem_wait(&pcb_recibido);
 				enviar_a_CPU(pcb_elegido);
 				asignar_pcb_ejecucion(pcb_elegido);
@@ -98,7 +97,22 @@ void executing_a_ready(t_pcb* pcb){ // le falta
 
 }
 
+bool sacar_proceso(void* pcb_void){
+	t_pcb* pcb = pcb_void;
+
+	t_pcb* pcb_minimo = list_get_minimum(lista_ready, comparar_rafagas );
+
+	if( (pcb->id_proceso) == (pcb_minimo->id_proceso) ){
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 t_pcb* algoritmo_sjf() {
+	// TODO TESTEAR
 		t_pcb* pcb_minimo = list_get_minimum(lista_ready, comparar_rafagas );
 
 		struct timeval hora_actual;
@@ -108,7 +122,8 @@ t_pcb* algoritmo_sjf() {
 		long milisegundos = (((seconds * 1000000) + hora_actual.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
 		uint32_t rafaga_restante_pcb_en_ejecucion = PCB_EJECUCION.estimacion_rafagas - milisegundos;
 
-		if(pcb_minimo->estimacion_rafagas < rafaga_restante_pcb_en_ejecucion || PCB_EJECUCION.id_proceso == -1) {
+		if( ( pcb_minimo->estimacion_rafagas < rafaga_restante_pcb_en_ejecucion ) || (  PCB_EJECUCION.id_proceso == -1 )) {
+			pcb_minimo = list_remove_by_condition(lista_ready, sacar_proceso);
 			return pcb_minimo;
 		} else {
 			return &PCB_EJECUCION;

@@ -9,3 +9,320 @@
 [INFO] 20:41:48:359 CPU/(26747:26747): se creo la tlb
 [INFO] 20:41:48:361 CPU/(26747:26754): hilo executer iniciado 
 
+[INFO] 23:52:07:930 CPU/(16619:16619): se realizo la conexion al kernel (dispatch)
+[INFO] 23:52:07:930 CPU/(16619:16619): se realizo la conexion al kernel (interrupt)
+[INFO] 23:52:07:931 CPU/(16619:16619): se realizo la conexion a memoria
+[INFO] 23:52:07:931 CPU/(16619:16619): se recibio la informacion para traduccion de direccion logica
+[INFO] 23:52:07:931 CPU/(16619:16619): se creo la tlb
+[INFO] 23:52:07:931 CPU/(16619:16619): se creo la tlb
+[INFO] 23:52:07:931 CPU/(16619:16619): se creo la tlb
+[INFO] 23:52:07:931 CPU/(16619:16619): se creo la tlb
+[INFO] 23:52:07:932 CPU/(16619:16623): hilo executer iniciado 
+
+[INFO] 23:52:21:951 CPU/(16619:16623): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:52:21:951 CPU/(16619:16623): FETCH NEXT INSTRUCTION
+[INFO] 23:52:21:951 CPU/(16619:16623): siguiente instruccion: NO_OP 5 
+
+[INFO] 23:52:21:951 CPU/(16619:16623): EXECUTE
+[INFO] 23:52:21:951 CPU/(16619:16623): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 23:52:22:956 CPU/(16619:16623): UN NO_OP EJECUTADO
+[INFO] 23:52:23:961 CPU/(16619:16623): UN NO_OP EJECUTADO
+[INFO] 23:52:24:966 CPU/(16619:16623): UN NO_OP EJECUTADO
+[INFO] 23:52:25:971 CPU/(16619:16623): UN NO_OP EJECUTADO
+[INFO] 23:52:26:976 CPU/(16619:16623): UN NO_OP EJECUTADO
+[INFO] 23:52:26:976 CPU/(16619:16623): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 23:52:26:976 CPU/(16619:16623): CHECK INTERRUPT
+[INFO] 23:52:26:976 CPU/(16619:16623): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:52:26:976 CPU/(16619:16623): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:52:26:976 CPU/(16619:16623): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:52:26:976 CPU/(16619:16623): FETCH NEXT INSTRUCTION
+[INFO] 23:52:26:976 CPU/(16619:16623): siguiente instruccion: WRITE 4 2 
+
+[INFO] 23:52:26:976 CPU/(16619:16623): EXECUTE
+[INFO] 23:52:26:976 CPU/(16619:16623): se comienza a ejecutar la instruccion WRITE
+[INFO] 23:52:26:976 CPU/(16619:16623): se escribira en la direccion logica 4 el valor 2
+[INFO] 23:52:26:976 CPU/(16619:16623): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:52:26:976 CPU/(16619:16623): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 23:52:31:031 CPU/(16619:16623): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 23:52:31:031 CPU/(16619:16623): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 23:52:31:031 CPU/(16619:16623): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 23:52:31:031 CPU/(16619:16623): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 23:52:31:031 CPU/(16619:16623): se escribira en el frame 0, offset 4
+[INFO] 23:52:32:036 CPU/(16619:16623): se escribio con exito en el frame
+[INFO] 23:52:32:036 CPU/(16619:16623): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 23:52:32:036 CPU/(16619:16623): CHECK INTERRUPT
+[INFO] 23:52:32:036 CPU/(16619:16623): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:52:32:036 CPU/(16619:16623): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:52:32:036 CPU/(16619:16623): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:52:32:036 CPU/(16619:16623): FETCH NEXT INSTRUCTION
+[INFO] 23:52:32:036 CPU/(16619:16623): siguiente instruccion: READ 4 
+
+[INFO] 23:52:32:036 CPU/(16619:16623): EXECUTE
+[INFO] 23:52:32:036 CPU/(16619:16623): Se comienza a ejecutar la instruccion READ
+[INFO] 23:52:32:036 CPU/(16619:16623): se leera la direccion logica 4
+[INFO] 23:52:32:036 CPU/(16619:16623): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:52:32:036 CPU/(16619:16623): hay una entrada con la misma pagina
+[INFO] 23:52:32:036 CPU/(16619:16623): la pagina no esta obsoleta
+[INFO] 23:52:32:036 CPU/(16619:16623): se leera del frame 0, offset 4
+[INFO] 23:52:33:041 CPU/(16619:16623): el dato leido fue 2
+[INFO] 23:52:33:041 CPU/(16619:16623): Se termino de ejecutar la instruccion READ 
+
+[INFO] 23:52:33:041 CPU/(16619:16623): CHECK INTERRUPT
+[INFO] 23:52:33:041 CPU/(16619:16623): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:52:33:041 CPU/(16619:16623): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:52:33:041 CPU/(16619:16623): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:52:33:041 CPU/(16619:16623): FETCH NEXT INSTRUCTION
+[INFO] 23:52:33:041 CPU/(16619:16623): siguiente instruccion: COPY 1 4 
+
+[INFO] 23:52:33:041 CPU/(16619:16623): FETCH OPERAND
+[INFO] 23:52:33:041 CPU/(16619:16623): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:52:33:041 CPU/(16619:16623): hay una entrada con la misma pagina
+[INFO] 23:52:33:041 CPU/(16619:16623): la pagina no esta obsoleta
+[INFO] 23:52:34:046 CPU/(16619:16623): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 23:52:34:046 CPU/(16619:16623): se termina de ejecutar fetchOperand
+[INFO] 23:52:34:046 CPU/(16619:16623): EXECUTE
+[INFO] 23:52:34:046 CPU/(16619:16623): se comienza a ejecutar la instruccion COPY
+[INFO] 23:52:34:046 CPU/(16619:16623): se escribira en la direccion logica 1 el valor 2
+[INFO] 23:52:34:046 CPU/(16619:16623): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:52:34:046 CPU/(16619:16623): hay una entrada con la misma pagina
+[INFO] 23:52:34:046 CPU/(16619:16623): la pagina no esta obsoleta
+[INFO] 23:52:34:046 CPU/(16619:16623): se escribira en el frame 0, offset 1
+[INFO] 23:52:35:051 CPU/(16619:16623): se escribio con exito en el frame
+[INFO] 23:52:35:051 CPU/(16619:16623): se termino de ejecutar la instruccion COPY 
+
+[INFO] 23:52:35:051 CPU/(16619:16623): CHECK INTERRUPT
+[INFO] 23:52:35:051 CPU/(16619:16623): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:52:35:051 CPU/(16619:16623): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:52:35:051 CPU/(16619:16623): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:52:35:051 CPU/(16619:16623): FETCH NEXT INSTRUCTION
+[INFO] 23:52:35:051 CPU/(16619:16623): siguiente instruccion: EXIT 
+
+[INFO] 23:52:35:051 CPU/(16619:16623): EXECUTE
+[INFO] 23:52:35:051 CPU/(16619:16623): se comienza a ejecutar la instruccion EXIT
+[INFO] 23:52:35:051 CPU/(16619:16623): la syscall fue enviada
+[INFO] 23:52:35:051 CPU/(16619:16623): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 23:52:35:051 CPU/(16619:16623): CHECK INTERRUPT
+[INFO] 23:52:35:051 CPU/(16619:16623): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:52:35:051 CPU/(16619:16623): se detecto una syscall bloqueante 
+
+
+[INFO] 23:52:35:051 CPU/(16619:16623): se limpio la tlb
+[INFO] 23:55:39:283 CPU/(17126:17126): se realizo la conexion al kernel (dispatch)
+[INFO] 23:55:39:284 CPU/(17126:17126): se realizo la conexion al kernel (interrupt)
+[INFO] 23:55:39:285 CPU/(17126:17126): se realizo la conexion a memoria
+[INFO] 23:55:39:285 CPU/(17126:17126): se recibio la informacion para traduccion de direccion logica
+[INFO] 23:55:39:285 CPU/(17126:17126): se creo la tlb
+[INFO] 23:55:39:285 CPU/(17126:17126): se creo la tlb
+[INFO] 23:55:39:285 CPU/(17126:17126): se creo la tlb
+[INFO] 23:55:39:285 CPU/(17126:17126): se creo la tlb
+[INFO] 23:55:39:286 CPU/(17126:17144): hilo executer iniciado 
+
+[INFO] 23:55:46:768 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:55:46:768 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:55:46:768 CPU/(17126:17144): siguiente instruccion: NO_OP 5 
+
+[INFO] 23:55:46:768 CPU/(17126:17144): EXECUTE
+[INFO] 23:55:46:768 CPU/(17126:17144): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 23:55:47:776 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:55:48:782 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:55:49:791 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:55:50:805 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:55:51:818 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:55:51:818 CPU/(17126:17144): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 23:55:51:818 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:55:51:818 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:55:51:818 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:55:51:818 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:55:51:818 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:55:51:818 CPU/(17126:17144): siguiente instruccion: WRITE 4 2 
+
+[INFO] 23:55:51:818 CPU/(17126:17144): EXECUTE
+[INFO] 23:55:51:818 CPU/(17126:17144): se comienza a ejecutar la instruccion WRITE
+[INFO] 23:55:51:818 CPU/(17126:17144): se escribira en la direccion logica 4 el valor 2
+[INFO] 23:55:51:818 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:55:51:818 CPU/(17126:17144): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 23:55:55:884 CPU/(17126:17144): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 23:55:55:884 CPU/(17126:17144): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 23:55:55:884 CPU/(17126:17144): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 23:55:55:884 CPU/(17126:17144): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 23:55:55:884 CPU/(17126:17144): se escribira en el frame 0, offset 4
+[INFO] 23:55:56:885 CPU/(17126:17144): se escribio con exito en el frame
+[INFO] 23:55:56:885 CPU/(17126:17144): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 23:55:56:885 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:55:56:885 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:55:56:885 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:55:56:885 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:55:56:885 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:55:56:885 CPU/(17126:17144): siguiente instruccion: READ 4 
+
+[INFO] 23:55:56:885 CPU/(17126:17144): EXECUTE
+[INFO] 23:55:56:885 CPU/(17126:17144): Se comienza a ejecutar la instruccion READ
+[INFO] 23:55:56:885 CPU/(17126:17144): se leera la direccion logica 4
+[INFO] 23:55:56:885 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:55:56:885 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:55:56:885 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:55:56:885 CPU/(17126:17144): se leera del frame 0, offset 4
+[INFO] 23:55:57:891 CPU/(17126:17144): el dato leido fue 2
+[INFO] 23:55:57:891 CPU/(17126:17144): Se termino de ejecutar la instruccion READ 
+
+[INFO] 23:55:57:891 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:55:57:891 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:55:57:891 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:55:57:891 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:55:57:891 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:55:57:891 CPU/(17126:17144): siguiente instruccion: COPY 1 4 
+
+[INFO] 23:55:57:891 CPU/(17126:17144): FETCH OPERAND
+[INFO] 23:55:57:891 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:55:57:891 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:55:57:891 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:55:58:900 CPU/(17126:17144): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 23:55:58:900 CPU/(17126:17144): se termina de ejecutar fetchOperand
+[INFO] 23:55:58:900 CPU/(17126:17144): EXECUTE
+[INFO] 23:55:58:900 CPU/(17126:17144): se comienza a ejecutar la instruccion COPY
+[INFO] 23:55:58:900 CPU/(17126:17144): se escribira en la direccion logica 1 el valor 2
+[INFO] 23:55:58:900 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:55:58:900 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:55:58:900 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:55:58:900 CPU/(17126:17144): se escribira en el frame 0, offset 1
+[INFO] 23:55:59:903 CPU/(17126:17144): se escribio con exito en el frame
+[INFO] 23:55:59:903 CPU/(17126:17144): se termino de ejecutar la instruccion COPY 
+
+[INFO] 23:55:59:903 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:55:59:903 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:55:59:903 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:55:59:903 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:55:59:903 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:55:59:903 CPU/(17126:17144): siguiente instruccion: EXIT 
+
+[INFO] 23:55:59:903 CPU/(17126:17144): EXECUTE
+[INFO] 23:55:59:903 CPU/(17126:17144): se comienza a ejecutar la instruccion EXIT
+[INFO] 23:55:59:903 CPU/(17126:17144): la syscall fue enviada
+[INFO] 23:55:59:903 CPU/(17126:17144): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 23:55:59:903 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:55:59:903 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:55:59:903 CPU/(17126:17144): se detecto una syscall bloqueante 
+
+
+[INFO] 23:55:59:903 CPU/(17126:17144): se limpio la tlb
+[INFO] 23:56:10:234 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:56:10:234 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:56:10:234 CPU/(17126:17144): siguiente instruccion: NO_OP 5 
+
+[INFO] 23:56:10:234 CPU/(17126:17144): EXECUTE
+[INFO] 23:56:10:234 CPU/(17126:17144): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 23:56:11:245 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:56:12:249 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:56:13:250 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:56:14:265 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:56:15:266 CPU/(17126:17144): UN NO_OP EJECUTADO
+[INFO] 23:56:15:266 CPU/(17126:17144): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 23:56:15:266 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:56:15:266 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:56:15:266 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:56:15:266 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:56:15:266 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:56:15:266 CPU/(17126:17144): siguiente instruccion: WRITE 4 2 
+
+[INFO] 23:56:15:266 CPU/(17126:17144): EXECUTE
+[INFO] 23:56:15:266 CPU/(17126:17144): se comienza a ejecutar la instruccion WRITE
+[INFO] 23:56:15:266 CPU/(17126:17144): se escribira en la direccion logica 4 el valor 2
+[INFO] 23:56:15:266 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:56:15:266 CPU/(17126:17144): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 23:56:19:284 CPU/(17126:17144): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 23:56:19:284 CPU/(17126:17144): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 23:56:19:284 CPU/(17126:17144): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 23:56:19:284 CPU/(17126:17144): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 23:56:19:284 CPU/(17126:17144): se escribira en el frame 0, offset 4
+[INFO] 23:56:20:296 CPU/(17126:17144): se escribio con exito en el frame
+[INFO] 23:56:20:296 CPU/(17126:17144): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 23:56:20:296 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:56:20:296 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:56:20:296 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:56:20:296 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:56:20:296 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:56:20:296 CPU/(17126:17144): siguiente instruccion: READ 4 
+
+[INFO] 23:56:20:296 CPU/(17126:17144): EXECUTE
+[INFO] 23:56:20:296 CPU/(17126:17144): Se comienza a ejecutar la instruccion READ
+[INFO] 23:56:20:296 CPU/(17126:17144): se leera la direccion logica 4
+[INFO] 23:56:20:296 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:56:20:296 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:56:20:296 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:56:20:297 CPU/(17126:17144): se leera del frame 0, offset 4
+[INFO] 23:56:21:299 CPU/(17126:17144): el dato leido fue 2
+[INFO] 23:56:21:299 CPU/(17126:17144): Se termino de ejecutar la instruccion READ 
+
+[INFO] 23:56:21:299 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:56:21:299 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:56:21:299 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:56:21:299 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:56:21:299 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:56:21:299 CPU/(17126:17144): siguiente instruccion: COPY 1 4 
+
+[INFO] 23:56:21:299 CPU/(17126:17144): FETCH OPERAND
+[INFO] 23:56:21:299 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:56:21:299 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:56:21:299 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:56:22:314 CPU/(17126:17144): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 23:56:22:314 CPU/(17126:17144): se termina de ejecutar fetchOperand
+[INFO] 23:56:22:314 CPU/(17126:17144): EXECUTE
+[INFO] 23:56:22:314 CPU/(17126:17144): se comienza a ejecutar la instruccion COPY
+[INFO] 23:56:22:314 CPU/(17126:17144): se escribira en la direccion logica 1 el valor 2
+[INFO] 23:56:22:314 CPU/(17126:17144): comienza a buscarse la pagina 0 en la TLB
+[INFO] 23:56:22:314 CPU/(17126:17144): hay una entrada con la misma pagina
+[INFO] 23:56:22:314 CPU/(17126:17144): la pagina no esta obsoleta
+[INFO] 23:56:22:315 CPU/(17126:17144): se escribira en el frame 0, offset 1
+[INFO] 23:56:23:330 CPU/(17126:17144): se escribio con exito en el frame
+[INFO] 23:56:23:330 CPU/(17126:17144): se termino de ejecutar la instruccion COPY 
+
+[INFO] 23:56:23:330 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:56:23:330 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:56:23:330 CPU/(17126:17144): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 23:56:23:330 CPU/(17126:17144): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 23:56:23:330 CPU/(17126:17144): FETCH NEXT INSTRUCTION
+[INFO] 23:56:23:330 CPU/(17126:17144): siguiente instruccion: EXIT 
+
+[INFO] 23:56:23:330 CPU/(17126:17144): EXECUTE
+[INFO] 23:56:23:330 CPU/(17126:17144): se comienza a ejecutar la instruccion EXIT
+[INFO] 23:56:23:330 CPU/(17126:17144): la syscall fue enviada
+[INFO] 23:56:23:330 CPU/(17126:17144): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 23:56:23:330 CPU/(17126:17144): CHECK INTERRUPT
+[INFO] 23:56:23:330 CPU/(17126:17144): chequeando interrupciones y/o syscall bloqueante
+[INFO] 23:56:23:330 CPU/(17126:17144): se detecto una syscall bloqueante 
+
+
+[INFO] 23:56:23:330 CPU/(17126:17144): se limpio la tlb

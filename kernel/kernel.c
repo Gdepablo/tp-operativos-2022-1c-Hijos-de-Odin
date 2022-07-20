@@ -40,19 +40,12 @@ int main(void){
 	cola_suspended_blocked  = queue_create();
 	cola_suspended_ready    = queue_create();
 
-	printf("%s \n", PUERTO_MEMORIA);
-	printf("%s \n", PUERTO_CPU_DISPATCH);
-	printf("%s \n", PUERTO_CPU_INTERRUPT);
-
-	// CAMBIAR ESTA IP
-	// TOdo, se recibe por config
-	char* IP_ESCUCHA = "127.0.0.1";
 
 	// SOCKETS
 	uint32_t handshake;
 	uint32_t respuesta;
 
-	socket_consola_proceso  = iniciar_servidor(IP_ESCUCHA, PUERTO_ESCUCHA); // por aca se comunican las consolas XD
+	socket_consola_proceso  = iniciar_servidor("anashe", PUERTO_ESCUCHA); // por aca se comunican las consolas XD
 
 	socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
 	handshake = 555;
@@ -90,8 +83,6 @@ int main(void){
 			return 1;
 		}
 
-	printf("FULBO \n");
-
 	// INICIALIZACION DE SEMÁFOROS
 	sem_init(&mx_cola_new, 0, 1);
 	sem_init(&mx_lista_ready , 0, 1);
@@ -100,9 +91,11 @@ int main(void){
 	sem_init(&procesos_en_ready, 0, 0);
 	sem_init(&grado_multiprogramacion, 0, GRADO_MULTIPROGRAMACION);
 	sem_init(&pcb_recibido, 0, 0);
+	sem_init(&mx_suspension, 0, 1);
+	sem_init(&procesos_para_ready, 0, 0);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
-	pthread_create(&lp_new_ready_fifo, NULL, new_a_ready, NULL);
+	pthread_create(&lp_new_ready_fifo, NULL, pasar_a_ready, NULL);
 	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
@@ -214,7 +207,7 @@ void* esperar_syscall() {
 			free(una_syscall);
 
 			list_add(lista_ready, pcb_nuevo);
-			// TODO CREAR PCB NUEVO, VER EN CPU EL CODIGO 2, VER STRUCTS t_pcb
+			// TODO CREAR PCB NUEVO, VER EN CPU EL CODIGO 2
 			sem_post(&pcb_recibido);
 			break;}
 		default:

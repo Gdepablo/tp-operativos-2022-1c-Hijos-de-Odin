@@ -4,7 +4,10 @@
 #include <pthread.h>
 
 void* hilo_cpu(void* socket_cpu_void){
+	sem_wait(&escritura_log);
 	log_info(log_ejecucion_main, "hilo cpu iniciado");
+	sem_post(&escritura_log);
+
 	int socket_cpu = *(int*)socket_cpu_void;
 
 	uint32_t process_id;
@@ -23,9 +26,16 @@ void* hilo_cpu(void* socket_cpu_void){
 
 	while(1){
 		recv(socket_cpu, &codigo_recibido, sizeof(uint32_t), MSG_WAITALL);
+		sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "\n# SOLICITUD RECIBIDA DE CPU #");
+		sem_post(&escritura_log);
+
 
 		switch(codigo_recibido){
 			case solicitud_num_tabla_2:
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# SOLICITUD NUMERO DE TABLA 2");
+				sem_post(&escritura_log);
 				printf("# Solicitud numero de tabla 2 (cpu) #\n");
 				printf("Datos recibidos: \n");
 				// con el numero de entrada + el numero de tabla que envia cpu, hay
@@ -35,13 +45,25 @@ void* hilo_cpu(void* socket_cpu_void){
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada: %i \n", numero_de_entrada);
 
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main,
+						"datos recibidos: numero_tabla_1er_nivel_leer %i numero_de_entrada %i",
+						numero_tabla_1er_nivel_leer,
+						numero_de_entrada);
+				sem_post(&escritura_log);
+
 				numero_2da_tabla = buscar_tabla_2do_nivel(numero_tabla_1er_nivel_leer, numero_de_entrada);
 
 				usleep(RETARDO_MEMORIA * 1000);
 
 				printf("# Valor devuelto: %i \n", numero_2da_tabla);
+
 				send(socket_cpu, &numero_2da_tabla, sizeof(uint32_t), 0);
 				printf("# Fin #\n\n");
+
+				sem_wait(&escritura_log);
+					log_info(log_ejecucion_main, "# FIN SOLICITUD NUMERO DE TABLA 2 \n\n");
+				sem_post(&escritura_log);
 				break;
 			case solicitud_num_frame:
 				printf("# Solicitud numero de frame (cpu) #\n");
@@ -150,6 +172,10 @@ t_list* buscar_paginas_presentes(int (*tabla_primer_nivel)[]){
 uint32_t buscar_tabla_2do_nivel(uint32_t numero_tabla_1er_nivel, uint32_t numero_de_entrada){
 	int (*ptr_tabla_1er_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_tabla_1er_nivel);
 
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "Numero de tabla 2 encontrado: %i", (*ptr_tabla_1er_nivel)[numero_de_entrada]);
+	sem_post(&escritura_log);
+
 	return (*ptr_tabla_1er_nivel)[numero_de_entrada];
 }
 
@@ -173,6 +199,8 @@ void escribir_en_memoria(uint32_t numero_de_frame,uint32_t offset,uint32_t valor
 
 pagina_t* buscar_pagina(uint32_t numero_tabla_2do_nivel, uint32_t numero_de_entrada){
 	pagina_t (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, numero_tabla_2do_nivel);
+
+
 
 	return &(*puntero_a_tabla)[numero_de_entrada];
 }

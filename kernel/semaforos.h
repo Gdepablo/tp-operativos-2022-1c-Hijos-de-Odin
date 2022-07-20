@@ -6,9 +6,10 @@ sem_t mx_lista_ready; // = 1
 sem_t mx_cola_blocked; // = 1
 sem_t mx_cola_suspended_blocked; // = 1
 sem_t mx_cola_suspended_ready; // = 1
+sem_t mx_suspension; // = 1
 
 // CONTADORES
-sem_t procesos_en_new; // = 0
+sem_t procesos_para_ready; // = 0
 sem_t procesos_en_ready; // = 0
 sem_t grado_multiprogramacion; // = GRADO_MULTIPROGRAMACION DEL .CONFIG
 sem_t io_terminada;
