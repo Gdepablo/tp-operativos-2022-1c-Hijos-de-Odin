@@ -9,6 +9,10 @@
 void* hilo_kernel(void* ptr_void_socket){
 	sem_post(&hilo_iniciado);
 
+	sem_wait(&escritura_log);
+	log_info(log_ejecucion_main, "hilo kernel iniciado");
+	sem_post(&escritura_log);
+
 	//atender peticiones del KERNEL
 	uint32_t OK = 100;
 	uint32_t codigo_recibido;
@@ -20,10 +24,18 @@ void* hilo_kernel(void* ptr_void_socket){
 	while(1){
 		recv(socket_kernel, &codigo_recibido, sizeof(uint32_t), MSG_WAITALL);
 
+		sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "\n# SOLICITUD RECIBIDA DE KERNEL #");
+		sem_post(&escritura_log);
+
 		// no sacar las llaves de los casem atte batata
 		switch(codigo_recibido){
 			// TESTEADO - FUNCIONA BIEN (o eso parece)
 			case crear_tablas:{
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# CREAR_TABLAS");
+				sem_post(&escritura_log);
+
 				printf("# Solicitud crear tablas (kernel) #\n");
 				printf("Datos recibidos: \n");
 				// recibe un PROCESS ID y TAMAÑO DEL ESPACIO DE DIRECCIONES
@@ -36,18 +48,28 @@ void* hilo_kernel(void* ptr_void_socket){
 				recv(socket_kernel, &espacio_de_direcciones, sizeof(uint32_t), MSG_WAITALL);
 				printf("Espacio de direcciones: %i \n", espacio_de_direcciones);
 
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "datos recibidos: \nprocess id: %i, espacio de direcciones: %i", process_id, espacio_de_direcciones);
+				sem_post(&escritura_log);
+
 				// hago la tarea necesaria
 				int num_tabla_creado = crear_tablas_necesarias(espacio_de_direcciones);
-				printf("Numero de tabla de primer creada = %i \n", num_tabla_creado);
 				crear_archivo_swap(process_id);
-				printf("Archivo SWAP creado \n");
 				//respondo con el numero de tabla creado
 
 				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
-				printf("# Fin # \n\n");
+				printf("# FIN CREAR TABLAS \n\n");
+
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# FIN CREAR_TABLAS \n\n");
+				sem_post(&escritura_log);
 				break;
 			}
 			case suspension_proceso:{
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# SUSPENSION_PROCESO");
+				sem_post(&escritura_log);
+
 				printf("# Solicitud suspender proceso (kernel) #\n");
 				printf("Datos recibidos: \n");
 				// sacar todos los frames del proceso que esten en memoria y actualizarlos en el
@@ -59,17 +81,29 @@ void* hilo_kernel(void* ptr_void_socket){
 				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
-
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "Datos recibidos: process id %i, numero_primer_tabla %i", process_id, numero_primer_tabla);
+				sem_post(&escritura_log);
 				// hago el laburo
 				suspender_proceso(process_id, numero_primer_tabla);
-				printf("Tabla suspendida \n");
+				printf("Tablas suspendidas \n");
+				sem_wait(&escritura_log);
+					log_info(log_ejecucion_main, "Tablas suspendidas");
+				sem_post(&escritura_log);
 				// se avisa que esta todo bien
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# FIN SUSPENSION_PROCESO");
+				sem_post(&escritura_log);
 				printf("# Fin # \n\n");
 				break;
 			}
 
 			case finalizacion_proceso:
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "# FINALIZACION_PROCESO");
+				sem_post(&escritura_log);
+
 				printf("# Solicitud finalizar proceso (kernel) # \n");
 				printf("Datos recibidos: \n");
 				// borrar el .swap y sacar las entradas en memoria si es que hay.
@@ -78,6 +112,9 @@ void* hilo_kernel(void* ptr_void_socket){
 				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
+				sem_wait(&escritura_log);
+				log_info(log_ejecucion_main, "Datos recibidos: process id %i, numero primer tabla %i", process_id, numero_primer_tabla);
+				sem_post(&escritura_log);
 
 				// laburo
 				borrar_swap(process_id);
@@ -86,12 +123,14 @@ void* hilo_kernel(void* ptr_void_socket){
 
 				printf("Archivo %i.swap eliminado \n", process_id);
 				printf("Memoria ocupada por el proceso %i eliminada \n", process_id);
+
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
 				printf("# Fin # \n\n");
 				break;
 
 			default:
 				printf("codigo erroneo enviado por kernel \n");
+				log_error(log_ejecucion_main, "codigo de operacion erroneo");
 		}
 	}
 
@@ -108,13 +147,37 @@ uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones ){
 		(*tabla)[i] = -1; // facilita el momento de recorrer la tabla si tiene menos de ENTRADAS_POR_TABLA entradas
 	}
 	int cantidad_paginas_necesaria = calcular_cantidad_de_paginas(espacio_de_direcciones);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "El proceso necesitara %i paginas", cantidad_paginas_necesaria);
+	sem_post(&escritura_log);
+
 	int cantidad_tablas_2do_nivel_necesarias = calcular_cantidad_de_tablas(cantidad_paginas_necesaria);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "La cantidad de tablas de 2do nivel necesaria es %i", cantidad_tablas_2do_nivel_necesarias);
+	sem_post(&escritura_log);
+
 	crear_tablas_2do_lvl(tabla, cantidad_tablas_2do_nivel_necesarias);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "Tablas de segundo nivel creadas");
+	sem_post(&escritura_log);
+
 	list_add(tabla_de_paginas_de_primer_nivel, tabla);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "tabla 1er nivel numero %i creada", list_size(tabla_de_paginas_de_primer_nivel) - 1);
+	sem_post(&escritura_log);
 
 	int (*puntero_del_clock) = malloc(sizeof(int));
 	*puntero_del_clock = 0;
 	list_add(punteros_clock, puntero_del_clock);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "puntero numero %i creado, inicializado en 0", list_size(punteros_clock) - 1);
+	sem_post(&escritura_log);
+
 
 	return list_size(tabla_de_paginas_de_primer_nivel) - 1;
 }
@@ -168,6 +231,8 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 
 				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
 				poner_bit_en_0_bitmap( (*puntero_a_tabla_2do_nivel)[j].numero_frame );
+
+
 			}
 		}
 	}
@@ -186,9 +251,19 @@ void liberar_memoria(uint32_t numero_primer_tabla){
 			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
 				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
 				poner_bit_en_0_bitmap( (*puntero_a_tabla_2do_nivel)[j].numero_frame );
+
+
 			}
 		}
+
+		free(puntero_a_tabla_2do_nivel);
 	}
+
+	free(puntero_a_tabla);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "memoria ocupada por la tabla %i liberada", numero_primer_tabla);
+	sem_post(&escritura_log);
 }
 
 void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
@@ -196,6 +271,10 @@ void poner_bit_en_0_bitmap(uint32_t numero_de_frame){
 	sem_wait(&operacion_en_bitmap);
 	*puntero_bitmap = 0;
 	sem_post(&operacion_en_bitmap);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "frame %i liberado", numero_de_frame);
+	sem_post(&escritura_log);
 }
 
 void poner_bit_en_1_bitmap(uint32_t numero_de_frame){
@@ -227,6 +306,10 @@ void crear_archivo_swap(uint32_t process_id){
     FILE* archivo = fopen(ruta_archivo, "wb");
 	sem_post(&operacion_swap);
 
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "archivo %s creado", ruta_archivo);
+	sem_post(&escritura_log);
+
     free(ruta_archivo);
     fclose(archivo);
 }
@@ -249,6 +332,10 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 
 	sem_post(&operacion_swap);
 
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "pagina %i guardada en %s", numero_de_pagina, ruta_archivo);
+	sem_post(&escritura_log);
+
 	free(ruta_archivo);
 	fclose(swap);
 }
@@ -258,6 +345,10 @@ void borrar_swap(uint32_t process_id){
 	usleep(RETARDO_SWAP * 1000);
 	remove(obtener_ruta_archivo(process_id));
 	sem_post(&operacion_swap);
+
+	sem_wait(&escritura_log);
+		log_info(log_ejecucion_main, "archivo %i.swap borradp", process_id);
+	sem_post(&escritura_log);
 }
 
 char* obtener_ruta_archivo(uint32_t process_id){

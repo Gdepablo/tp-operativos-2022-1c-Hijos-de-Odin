@@ -277,7 +277,11 @@ void* executer(){
  */
 void* interrupt(){
 	sem_post(&hiloCreado);
-	log_info(log_ejecucion_cpu, "hilo interrupt iniciado");
+
+	t_log* log_ejecucion_cpu_interrupt = log_create("./../logs/log_interrupt.log", "CPU - INTERRUPT", 0, LOG_LEVEL_INFO);
+
+
+	log_info(log_ejecucion_cpu_interrupt, "hilo interrupt iniciado");
 	uint32_t valor_recibido = -1;
 	while(1){
 		recv(socket_interrupt, &valor_recibido, sizeof(uint32_t), MSG_WAITALL);
@@ -287,12 +291,12 @@ void* interrupt(){
 			interrupcion = 1;
 			sem_post(&sem_interrupcion);
 			printf("#### SE RECIBIO UNA INTERRUPCION ####");
-			log_info(log_ejecucion_cpu, "Se recibio una interrupcion de kernel");
+			log_info(log_ejecucion_cpu_interrupt, "Se recibio una interrupcion de kernel");
 		}
 		else
 		{
 			printf("EL HANDSHAKE RECIBIDO EN INTERRUPCION NO FUE 55 \n NO CAMBIO EL VALOR DE INTERRUPCION\n");
-			log_error(log_ejecucion_cpu, "se recibio una interrupcion pero con valor erroneo");
+			log_error(log_ejecucion_cpu_interrupt, "se recibio una interrupcion pero con valor erroneo");
 		}
 	}
 

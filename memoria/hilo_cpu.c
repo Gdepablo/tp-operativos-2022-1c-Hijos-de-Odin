@@ -4,6 +4,7 @@
 #include <pthread.h>
 
 void* hilo_cpu(void* socket_cpu_void){
+	log_info(log_ejecucion_main, "hilo cpu iniciado");
 	int socket_cpu = *(int*)socket_cpu_void;
 
 	uint32_t process_id;

@@ -12,6 +12,7 @@
 #include <sys/socket.h>
 #include <commons/string.h>
 #include <commons/config.h>
+#include <commons/log.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
 
@@ -39,6 +40,9 @@ typedef struct{
 	uint32_t tamanio_paginas;
 	uint32_t entradas_por_tabla;
 } info_traduccion_t;
+
+sem_t escritura_log;
+t_log* log_ejecucion_main;
 
 //pthread_t hiloCPU;
 //uint32_t RETARDO_MEMORIA;

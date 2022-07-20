@@ -1,0 +1,11 @@
+[INFO] 20:41:48:333 CPU/(26747:26747): se realizo la conexion al kernel (dispatch)
+[INFO] 20:41:48:335 CPU/(26747:26747): se realizo la conexion al kernel (interrupt)
+[INFO] 20:41:48:336 CPU/(26747:26747): se realizo la conexion a memoria
+[INFO] 20:41:48:336 CPU/(26747:26747): se recibio la informacion para traduccion de direccion logica
+[INFO] 20:41:48:337 CPU/(26747:26755): hilo interrupt iniciado
+[INFO] 20:41:48:359 CPU/(26747:26747): se creo la tlb
+[INFO] 20:41:48:359 CPU/(26747:26747): se creo la tlb
+[INFO] 20:41:48:359 CPU/(26747:26747): se creo la tlb
+[INFO] 20:41:48:359 CPU/(26747:26747): se creo la tlb
+[INFO] 20:41:48:361 CPU/(26747:26754): hilo executer iniciado 
+

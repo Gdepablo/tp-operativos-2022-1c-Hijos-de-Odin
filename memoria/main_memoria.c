@@ -26,6 +26,9 @@ t_list* tabla_de_paginas_global;
 int main(void){
 	printf("# MEMORIA #\n");
 
+	log_ejecucion_main = log_create("./../logs/log_memoria_main.log", "MEMORIA - MAIN", 0, LOG_LEVEL_INFO);
+
+	sem_init(&escritura_log, 0, 1);
 	sem_init(&hilo_iniciado, 0, 0);
 	sem_init(&operacion_swap, 0, 1);
 	sem_init(&operacion_en_memoria, 0, 1);
@@ -53,19 +56,21 @@ int main(void){
 	uint32_t todo_ok = 1;
 	uint32_t todo_mal = 0;
 
-	int socket_escucha = iniciar_servidor("127.0.0.1", PUERTO_ESCUCHA);
+	int socket_escucha = iniciar_servidor("fulbo", PUERTO_ESCUCHA);
 
 	// HANDSHAKE CON KERNEL
 	int socket_kernel = accept(socket_escucha, 0, 0);
 	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 555){
 		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (KERNEL)\n");
+		log_info(log_ejecucion_main, "se conecto con el kernel");
 		send(socket_kernel, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE RECIBIDO DE KERNEL ERRONEO, TERMINANDO PROCESO (MEMORIA) \n");
 		send(socket_kernel, &todo_mal, sizeof(uint32_t), 0);
+		log_error(log_ejecucion_main, "error al conectarse con el kernel");
 		return 1;
 	}
 
@@ -74,11 +79,13 @@ int main(void){
 	recv(socket_cpu, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 222){
 		printf("HANDSHAKE RECIBIDO CORRECTAMENTE (CPU)\n");
+		log_info(log_ejecucion_main, "se conecto con el CPU");
 		send(socket_cpu, &todo_ok, sizeof(uint32_t), 0);
 	}
 	else
 	{
 		printf("HANDSHAKE RECIBIDO ERRONEO DE CPU, TERMINANDO PROCESO (MEMORIA) \n");
+		log_error(log_ejecucion_main, "error al conectarse con el kernel");
 		send(socket_cpu, &todo_mal, sizeof(uint32_t), 0);
 		return 1;
 	}
@@ -92,15 +99,19 @@ int main(void){
 	info_traduccion.tamanio_paginas = TAMANIO_PAGINA;
 
 	send(socket_cpu, &info_traduccion, sizeof(info_traduccion_t), 0);
+	log_info(log_ejecucion_main, "datos de traduccion enviados al CPU");
 	//FIN HANDSHAKE
 
 	// tod0 lo importante de memoria
 	memoria_real = malloc(TAMANIO_MEMORIA);
+	log_info(log_ejecucion_main, "memoria inicializada con un tamaño de %i", TAMANIO_MEMORIA);
+	log_info(log_ejecucion_main, "la cantidad de frames en esta ejecucion es de %i", TAMANIO_MEMORIA / TAMANIO_PAGINA);
 	tabla_de_paginas_de_primer_nivel = list_create();
 	tabla_de_paginas_de_segundo_nivel = list_create();
 	punteros_clock = list_create();
 	bitmap_memoria = list_create();
 	inicializar_bitmap();
+
 
 	// inicia el hilo de kernel
 	void* puntero_al_socket = &socket_kernel;
@@ -130,6 +141,7 @@ void inicializar_bitmap(){
 		*bit = 0;
 		list_add(bitmap_memoria, bit);
 	}
+	log_info(log_ejecucion_main, "bitmap creado con un tamaño de %i", TAMANIO_MEMORIA / TAMANIO_PAGINA);
 }
 
 t_config* inicializarConfigs(void) {
