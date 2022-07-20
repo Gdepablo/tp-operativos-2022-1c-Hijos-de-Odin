@@ -197,8 +197,8 @@ void* executer(){
 			case IO: // DESPUES DE ESTA INSTRUCCION HAY QUE CORTAR LA EJECUCION
 				printf("# IO \n");
 				log_info(log_ejecucion_cpu, "Se comienza a ejecutar la instruccion IO");
-				instr_io(  atoi(instruccion_spliteada[1]) );
 				pcb_ejecutando.program_counter++;
+				instr_io(  atoi(instruccion_spliteada[1]) );
 				printf("# FIN IO \n\n");
 				log_info(log_ejecucion_cpu, "Se termino de ejecutar la instruccion IO \n");
 				break;

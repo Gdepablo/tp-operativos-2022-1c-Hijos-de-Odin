@@ -20,23 +20,28 @@ void* pasar_a_ready(){
 	sem_post(&se_inicio_el_hilo);
 	while(1){
 		sem_wait(&procesos_para_ready);
+		printf("########### PROCESOS PARA READY ############ \n");
 		sem_wait(&grado_multiprogramacion);
 
 		if( queue_size(cola_suspended_ready) == 0 ){ // => agarro la queue NEW
+			printf("################ ENTRO AL IF ################ \n");
 			sem_wait(&mx_lista_ready);
+			printf("########## mx_lista_ready ########## \n");
 			sem_wait(&mx_cola_new);
+			printf("########## mx_cola_new ########## \n");
 			if(es_FIFO()) {
 				// FIFO
+
 				t_pcb* pcb = queue_pop(cola_new);
+
 				crear_tabla_proceso(pcb);
 				queue_push(cola_ready, pcb);
-
+				printf("############## ID PUSHEADO: %i ############## \n", pcb->id_proceso);
 			} else {
 				// SJF
 				t_pcb* pcb = queue_pop(cola_new);
 				crear_tabla_proceso(pcb);
 				list_add(lista_ready, queue_pop(cola_new));
-
 			}
 			sem_post(&mx_cola_new);
 			sem_post(&mx_lista_ready);
@@ -44,13 +49,26 @@ void* pasar_a_ready(){
 		else // ==> aAgarro la queue SUSPENDED READY
 		{
 			if( es_FIFO() ){
-				t_pcb* pcb = queue_pop(cola_suspended_ready);
+				sem_wait(&mx_cola_suspended_ready);
+					t_pcb* pcb = queue_pop(cola_suspended_ready);
+				sem_post(&mx_cola_suspended_ready);
 				// NO HACE FALTA CREAR ME PARECE
-				queue_push(cola_ready, pcb);
+
+				sem_wait(&mx_lista_ready);
+					queue_push(cola_ready, pcb);
+				sem_post(&mx_lista_ready);
+
+				printf("PROCESO PASADO A READY DESDE SUSPENDED: %i \n", pcb->id_proceso);
 			} else {
-				t_pcb* pcb = queue_pop(cola_suspended_ready);
+				sem_wait(&mx_cola_suspended_ready);
+					t_pcb* pcb = queue_pop(cola_suspended_ready);
+				sem_post(&mx_cola_suspended_ready);
 				// NO HACE FALTA CREAR XD
-				list_add(lista_ready, pcb);
+				sem_wait(&mx_lista_ready);
+					list_add(lista_ready, pcb);
+				sem_post(&mx_lista_ready);
+
+				printf("PROCESO PASADO A READY DESDE SUSPENDED: %i \n", pcb->id_proceso);
 			}
 		}
 

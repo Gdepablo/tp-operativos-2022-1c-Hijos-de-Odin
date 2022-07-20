@@ -8,7 +8,7 @@ int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
 		return NO_OP;
 	}
-	if(!strcmp(nombre_instruccion, "IO")) {
+	if(!strcmp(nombre_instruccion, "I/O")) {
 		return IO;
 	}
 	if(!strcmp(nombre_instruccion, "READ")){
@@ -48,13 +48,13 @@ void instr_no_op(int cant_de_no_op){
 void instr_io(int tiempo_en_milisegundos){
 	extern t_pcb pcb_ejecutando;
 	t_syscall* syscall_a_enviar = malloc(sizeof(t_syscall));
-	//instruccion = IO
+	//instruccion IO = 0
 	syscall_a_enviar->instruccion = 0;
 	//tiempo de bloqueo
 	syscall_a_enviar->tiempo_de_bloqueo = tiempo_en_milisegundos;
 	//pcb
 	syscall_a_enviar->pcb.estimacion_rafagas = pcb_ejecutando.estimacion_rafagas;
-	syscall_a_enviar->pcb.id_proceso = pcb_ejecutando.estimacion_rafagas;
+	syscall_a_enviar->pcb.id_proceso = pcb_ejecutando.id_proceso;
 	syscall_a_enviar->pcb.program_counter = pcb_ejecutando.program_counter;
 	syscall_a_enviar->pcb.tabla_paginas = pcb_ejecutando.tabla_paginas;
 	syscall_a_enviar->pcb.tamanio_direcciones = pcb_ejecutando.tamanio_direcciones;

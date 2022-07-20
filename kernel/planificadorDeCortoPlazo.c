@@ -13,7 +13,9 @@ void* ready_a_executing(){
 			sem_wait(&fin_de_ejecucion);
 
 			sem_wait(&mx_lista_ready);
+				printf("########SIZE DE COLA READY %i ####### \n", queue_size(cola_ready));
 				t_pcb* pcb_a_enviar = queue_pop(cola_ready);
+				printf("################## id del pcb popeado: %i ################ \n", pcb_a_enviar->id_proceso);
 				enviar_a_CPU( pcb_a_enviar );
 				free(pcb_a_enviar->instrucciones);
 				free(pcb_a_enviar);

@@ -132,3 +132,1263 @@ process id: 9, espacio de direcciones: 500
 [INFO] 23:56:25:332 MEMORIA - MAIN/(17136:17138): memoria ocupada por la tabla 1 liberada
 [INFO] 23:56:33:610 MEMORIA - MAIN/(17136:17146): 
 # SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:48:17:262 MEMORIA - MAIN/(6937:6937): se conecto con el kernel
+[INFO] 17:48:17:263 MEMORIA - MAIN/(6937:6937): se conecto con el CPU
+[INFO] 17:48:17:263 MEMORIA - MAIN/(6937:6937): datos de traduccion enviados al CPU
+[INFO] 17:48:17:263 MEMORIA - MAIN/(6937:6937): memoria inicializada con un tamaño de 4096
+[INFO] 17:48:17:263 MEMORIA - MAIN/(6937:6937): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:48:17:263 MEMORIA - MAIN/(6937:6937): bitmap creado con un tamaño de 64
+[INFO] 17:48:17:264 MEMORIA - MAIN/(6937:6940): hilo kernel iniciado
+[INFO] 17:48:17:269 MEMORIA - MAIN/(6937:6948): hilo cpu iniciado
+[INFO] 17:48:44:148 MEMORIA - MAIN/(6937:6940): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 17:48:44:148 MEMORIA - MAIN/(6937:6940): # CREAR_TABLAS
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): El proceso necesitara 3 paginas
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): Tablas de segundo nivel creadas
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): tabla 1er nivel numero 0 creada
+[INFO] 17:48:44:186 MEMORIA - MAIN/(6937:6940): puntero numero 0 creado, inicializado en 0
+[INFO] 17:48:46:186 MEMORIA - MAIN/(6937:6940): archivo ./../swap/4.swap creado
+[INFO] 17:48:46:187 MEMORIA - MAIN/(6937:6940): # FIN CREAR_TABLAS 
+
+
+[INFO] 17:48:49:544 MEMORIA - MAIN/(6937:6948): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:48:49:544 MEMORIA - MAIN/(6937:6948): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:48:49:544 MEMORIA - MAIN/(6937:6948): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:48:49:544 MEMORIA - MAIN/(6937:6948): Numero de tabla 2 encontrado: 0
+[INFO] 17:48:50:545 MEMORIA - MAIN/(6937:6948): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 17:48:50:545 MEMORIA - MAIN/(6937:6948): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:48:50:545 MEMORIA - MAIN/(6937:6948): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:48:50:545 MEMORIA - MAIN/(6937:6948): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:48:50:545 MEMORIA - MAIN/(6937:6948): Numero de tabla 2 encontrado: 0
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): # CREAR_TABLAS
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): El proceso necesitara 3 paginas
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): Tablas de segundo nivel creadas
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): tabla 1er nivel numero 1 creada
+[INFO] 17:48:50:993 MEMORIA - MAIN/(6937:6940): puntero numero 1 creado, inicializado en 0
+[INFO] 17:50:20:187 MEMORIA - MAIN/(7090:7090): se conecto con el kernel
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7090): se conecto con el CPU
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7090): datos de traduccion enviados al CPU
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7090): memoria inicializada con un tamaño de 4096
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7090): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7090): bitmap creado con un tamaño de 64
+[INFO] 17:50:20:188 MEMORIA - MAIN/(7090:7093): hilo kernel iniciado
+[INFO] 17:50:20:194 MEMORIA - MAIN/(7090:7101): hilo cpu iniciado
+[INFO] 17:50:43:169 MEMORIA - MAIN/(7090:7093): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 17:50:43:169 MEMORIA - MAIN/(7090:7093): # CREAR_TABLAS
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): El proceso necesitara 3 paginas
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): Tablas de segundo nivel creadas
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): tabla 1er nivel numero 0 creada
+[INFO] 17:50:43:206 MEMORIA - MAIN/(7090:7093): puntero numero 0 creado, inicializado en 0
+[INFO] 17:50:45:207 MEMORIA - MAIN/(7090:7093): archivo ./../swap/4.swap creado
+[INFO] 17:50:45:208 MEMORIA - MAIN/(7090:7093): # FIN CREAR_TABLAS 
+
+
+[INFO] 17:57:05:798 MEMORIA - MAIN/(7090:7101): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:57:05:798 MEMORIA - MAIN/(7090:7101): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:57:05:801 MEMORIA - MAIN/(7090:7101): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:57:05:801 MEMORIA - MAIN/(7090:7101): Numero de tabla 2 encontrado: 0
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): # CREAR_TABLAS
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): El proceso necesitara 3 paginas
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): Tablas de segundo nivel creadas
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): tabla 1er nivel numero 1 creada
+[INFO] 17:57:06:257 MEMORIA - MAIN/(7090:7093): puntero numero 1 creado, inicializado en 0
+[INFO] 17:57:06:802 MEMORIA - MAIN/(7090:7101): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 17:57:06:802 MEMORIA - MAIN/(7090:7101): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:57:06:802 MEMORIA - MAIN/(7090:7101): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:57:06:802 MEMORIA - MAIN/(7090:7101): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:57:06:802 MEMORIA - MAIN/(7090:7101): Numero de tabla 2 encontrado: 0
+[INFO] 17:57:23:924 MEMORIA - MAIN/(7350:7350): se conecto con el kernel
+[INFO] 17:57:23:925 MEMORIA - MAIN/(7350:7350): se conecto con el CPU
+[INFO] 17:57:23:925 MEMORIA - MAIN/(7350:7350): datos de traduccion enviados al CPU
+[INFO] 17:57:23:925 MEMORIA - MAIN/(7350:7350): memoria inicializada con un tamaño de 4096
+[INFO] 17:57:23:925 MEMORIA - MAIN/(7350:7350): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:57:23:925 MEMORIA - MAIN/(7350:7350): bitmap creado con un tamaño de 64
+[INFO] 17:57:23:926 MEMORIA - MAIN/(7350:7353): hilo kernel iniciado
+[INFO] 17:57:23:930 MEMORIA - MAIN/(7350:7361): hilo cpu iniciado
+[INFO] 17:57:28:648 MEMORIA - MAIN/(7350:7353): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 17:57:28:648 MEMORIA - MAIN/(7350:7353): # CREAR_TABLAS
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): El proceso necesitara 3 paginas
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): Tablas de segundo nivel creadas
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): tabla 1er nivel numero 0 creada
+[INFO] 17:57:28:686 MEMORIA - MAIN/(7350:7353): puntero numero 0 creado, inicializado en 0
+[INFO] 17:57:30:686 MEMORIA - MAIN/(7350:7353): archivo ./../swap/4.swap creado
+[INFO] 17:57:30:687 MEMORIA - MAIN/(7350:7353): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:00:06:175 MEMORIA - MAIN/(7350:7361): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:00:06:175 MEMORIA - MAIN/(7350:7361): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:00:06:178 MEMORIA - MAIN/(7350:7361): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:00:06:178 MEMORIA - MAIN/(7350:7361): Numero de tabla 2 encontrado: 0
+[INFO] 18:00:06:865 MEMORIA - MAIN/(7350:7353): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:00:06:865 MEMORIA - MAIN/(7350:7353): # CREAR_TABLAS
+[INFO] 18:00:06:870 MEMORIA - MAIN/(7350:7353): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:00:06:870 MEMORIA - MAIN/(7350:7353): El proceso necesitara 3 paginas
+[INFO] 18:00:06:870 MEMORIA - MAIN/(7350:7353): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:00:06:871 MEMORIA - MAIN/(7350:7353): Tablas de segundo nivel creadas
+[INFO] 18:00:06:871 MEMORIA - MAIN/(7350:7353): tabla 1er nivel numero 1 creada
+[INFO] 18:00:06:871 MEMORIA - MAIN/(7350:7353): puntero numero 1 creado, inicializado en 0
+[INFO] 18:00:07:178 MEMORIA - MAIN/(7350:7361): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:00:07:178 MEMORIA - MAIN/(7350:7361): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:00:07:178 MEMORIA - MAIN/(7350:7361): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:00:07:178 MEMORIA - MAIN/(7350:7361): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:00:07:178 MEMORIA - MAIN/(7350:7361): Numero de tabla 2 encontrado: 0
+[INFO] 18:00:18:954 MEMORIA - MAIN/(7498:7498): se conecto con el kernel
+[INFO] 18:00:18:955 MEMORIA - MAIN/(7498:7498): se conecto con el CPU
+[INFO] 18:00:18:955 MEMORIA - MAIN/(7498:7498): datos de traduccion enviados al CPU
+[INFO] 18:00:18:955 MEMORIA - MAIN/(7498:7498): memoria inicializada con un tamaño de 4096
+[INFO] 18:00:18:955 MEMORIA - MAIN/(7498:7498): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:00:18:955 MEMORIA - MAIN/(7498:7498): bitmap creado con un tamaño de 64
+[INFO] 18:00:18:956 MEMORIA - MAIN/(7498:7501): hilo kernel iniciado
+[INFO] 18:00:18:962 MEMORIA - MAIN/(7498:7509): hilo cpu iniciado
+[INFO] 18:00:21:448 MEMORIA - MAIN/(7498:7501): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:00:21:448 MEMORIA - MAIN/(7498:7501): # CREAR_TABLAS
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): El proceso necesitara 3 paginas
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): Tablas de segundo nivel creadas
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): tabla 1er nivel numero 0 creada
+[INFO] 18:00:21:486 MEMORIA - MAIN/(7498:7501): puntero numero 0 creado, inicializado en 0
+[INFO] 18:00:23:487 MEMORIA - MAIN/(7498:7501): archivo ./../swap/4.swap creado
+[INFO] 18:00:23:488 MEMORIA - MAIN/(7498:7501): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:00:23:913 MEMORIA - MAIN/(7498:7501): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): # CREAR_TABLAS
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): El proceso necesitara 3 paginas
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): Tablas de segundo nivel creadas
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): tabla 1er nivel numero 1 creada
+[INFO] 18:00:23:914 MEMORIA - MAIN/(7498:7501): puntero numero 1 creado, inicializado en 0
+[INFO] 18:00:24:357 MEMORIA - MAIN/(7498:7509): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:00:24:357 MEMORIA - MAIN/(7498:7509): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:00:24:357 MEMORIA - MAIN/(7498:7509): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:00:24:357 MEMORIA - MAIN/(7498:7509): Numero de tabla 2 encontrado: 0
+[INFO] 18:00:25:358 MEMORIA - MAIN/(7498:7509): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:00:25:358 MEMORIA - MAIN/(7498:7509): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:00:25:358 MEMORIA - MAIN/(7498:7509): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:00:25:359 MEMORIA - MAIN/(7498:7509): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:00:25:359 MEMORIA - MAIN/(7498:7509): Numero de tabla 2 encontrado: 0
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): archivo ./../swap/4.swap creado
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): # CREAR_TABLAS
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): El proceso necesitara 3 paginas
+[INFO] 18:00:25:914 MEMORIA - MAIN/(7498:7501): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:00:25:915 MEMORIA - MAIN/(7498:7501): Tablas de segundo nivel creadas
+[INFO] 18:00:25:915 MEMORIA - MAIN/(7498:7501): tabla 1er nivel numero 2 creada
+[INFO] 18:00:25:915 MEMORIA - MAIN/(7498:7501): puntero numero 2 creado, inicializado en 0
+[INFO] 18:02:58:809 MEMORIA - MAIN/(7612:7612): se conecto con el kernel
+[INFO] 18:02:58:811 MEMORIA - MAIN/(7612:7612): se conecto con el CPU
+[INFO] 18:02:58:811 MEMORIA - MAIN/(7612:7612): datos de traduccion enviados al CPU
+[INFO] 18:02:58:811 MEMORIA - MAIN/(7612:7612): memoria inicializada con un tamaño de 4096
+[INFO] 18:02:58:811 MEMORIA - MAIN/(7612:7612): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:02:58:811 MEMORIA - MAIN/(7612:7612): bitmap creado con un tamaño de 64
+[INFO] 18:02:58:812 MEMORIA - MAIN/(7612:7615): hilo kernel iniciado
+[INFO] 18:02:58:817 MEMORIA - MAIN/(7612:7623): hilo cpu iniciado
+[INFO] 18:03:01:512 MEMORIA - MAIN/(7612:7615): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:03:01:513 MEMORIA - MAIN/(7612:7615): # CREAR_TABLAS
+[INFO] 18:03:01:555 MEMORIA - MAIN/(7612:7615): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:03:01:555 MEMORIA - MAIN/(7612:7615): El proceso necesitara 3 paginas
+[INFO] 18:03:01:555 MEMORIA - MAIN/(7612:7615): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:03:01:555 MEMORIA - MAIN/(7612:7615): Tablas de segundo nivel creadas
+[INFO] 18:03:01:555 MEMORIA - MAIN/(7612:7615): tabla 1er nivel numero 0 creada
+[INFO] 18:03:01:556 MEMORIA - MAIN/(7612:7615): puntero numero 0 creado, inicializado en 0
+[INFO] 18:03:03:556 MEMORIA - MAIN/(7612:7615): archivo ./../swap/4.swap creado
+[INFO] 18:03:03:557 MEMORIA - MAIN/(7612:7615): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:03:04:022 MEMORIA - MAIN/(7612:7615): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:03:04:022 MEMORIA - MAIN/(7612:7615): # CREAR_TABLAS
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): El proceso necesitara 3 paginas
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): Tablas de segundo nivel creadas
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): tabla 1er nivel numero 1 creada
+[INFO] 18:03:04:030 MEMORIA - MAIN/(7612:7615): puntero numero 1 creado, inicializado en 0
+[INFO] 18:03:04:483 MEMORIA - MAIN/(7612:7623): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:03:04:483 MEMORIA - MAIN/(7612:7623): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:03:04:483 MEMORIA - MAIN/(7612:7623): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:03:04:483 MEMORIA - MAIN/(7612:7623): Numero de tabla 2 encontrado: 0
+[INFO] 18:03:05:485 MEMORIA - MAIN/(7612:7623): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:03:05:485 MEMORIA - MAIN/(7612:7623): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:03:05:485 MEMORIA - MAIN/(7612:7623): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:03:05:485 MEMORIA - MAIN/(7612:7623): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:03:05:485 MEMORIA - MAIN/(7612:7623): Numero de tabla 2 encontrado: 0
+[INFO] 18:03:06:030 MEMORIA - MAIN/(7612:7615): archivo ./../swap/4.swap creado
+[INFO] 18:03:06:030 MEMORIA - MAIN/(7612:7615): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:03:06:030 MEMORIA - MAIN/(7612:7615): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:03:06:030 MEMORIA - MAIN/(7612:7615): # CREAR_TABLAS
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): El proceso necesitara 3 paginas
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): Tablas de segundo nivel creadas
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): tabla 1er nivel numero 2 creada
+[INFO] 18:03:06:031 MEMORIA - MAIN/(7612:7615): puntero numero 2 creado, inicializado en 0
+[INFO] 18:04:20:665 MEMORIA - MAIN/(7691:7691): se conecto con el kernel
+[INFO] 18:04:20:666 MEMORIA - MAIN/(7691:7691): se conecto con el CPU
+[INFO] 18:04:20:666 MEMORIA - MAIN/(7691:7691): datos de traduccion enviados al CPU
+[INFO] 18:04:20:666 MEMORIA - MAIN/(7691:7691): memoria inicializada con un tamaño de 4096
+[INFO] 18:04:20:666 MEMORIA - MAIN/(7691:7691): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:04:20:666 MEMORIA - MAIN/(7691:7691): bitmap creado con un tamaño de 64
+[INFO] 18:04:20:667 MEMORIA - MAIN/(7691:7694): hilo kernel iniciado
+[INFO] 18:04:20:672 MEMORIA - MAIN/(7691:7702): hilo cpu iniciado
+[INFO] 18:04:22:585 MEMORIA - MAIN/(7691:7694): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:04:22:585 MEMORIA - MAIN/(7691:7694): # CREAR_TABLAS
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): El proceso necesitara 3 paginas
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): Tablas de segundo nivel creadas
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): tabla 1er nivel numero 0 creada
+[INFO] 18:04:22:626 MEMORIA - MAIN/(7691:7694): puntero numero 0 creado, inicializado en 0
+[INFO] 18:04:24:627 MEMORIA - MAIN/(7691:7694): archivo ./../swap/4.swap creado
+[INFO] 18:04:24:628 MEMORIA - MAIN/(7691:7694): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:04:25:066 MEMORIA - MAIN/(7691:7694): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:04:25:066 MEMORIA - MAIN/(7691:7694): # CREAR_TABLAS
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): El proceso necesitara 3 paginas
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): Tablas de segundo nivel creadas
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): tabla 1er nivel numero 1 creada
+[INFO] 18:04:25:070 MEMORIA - MAIN/(7691:7694): puntero numero 1 creado, inicializado en 0
+[INFO] 18:04:25:522 MEMORIA - MAIN/(7691:7702): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:04:25:522 MEMORIA - MAIN/(7691:7702): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:04:25:522 MEMORIA - MAIN/(7691:7702): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:04:25:522 MEMORIA - MAIN/(7691:7702): Numero de tabla 2 encontrado: 0
+[INFO] 18:04:26:523 MEMORIA - MAIN/(7691:7702): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:04:26:523 MEMORIA - MAIN/(7691:7702): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:04:26:523 MEMORIA - MAIN/(7691:7702): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:04:26:523 MEMORIA - MAIN/(7691:7702): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:04:26:523 MEMORIA - MAIN/(7691:7702): Numero de tabla 2 encontrado: 0
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): archivo ./../swap/4.swap creado
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): # CREAR_TABLAS
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): El proceso necesitara 3 paginas
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:04:27:070 MEMORIA - MAIN/(7691:7694): Tablas de segundo nivel creadas
+[INFO] 18:04:27:071 MEMORIA - MAIN/(7691:7694): tabla 1er nivel numero 2 creada
+[INFO] 18:04:27:071 MEMORIA - MAIN/(7691:7694): puntero numero 2 creado, inicializado en 0
+[INFO] 18:08:21:308 MEMORIA - MAIN/(7906:7906): se conecto con el kernel
+[INFO] 18:08:21:309 MEMORIA - MAIN/(7906:7906): se conecto con el CPU
+[INFO] 18:08:21:309 MEMORIA - MAIN/(7906:7906): datos de traduccion enviados al CPU
+[INFO] 18:08:21:309 MEMORIA - MAIN/(7906:7906): memoria inicializada con un tamaño de 4096
+[INFO] 18:08:21:309 MEMORIA - MAIN/(7906:7906): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:08:21:309 MEMORIA - MAIN/(7906:7906): bitmap creado con un tamaño de 64
+[INFO] 18:08:21:310 MEMORIA - MAIN/(7906:7909): hilo kernel iniciado
+[INFO] 18:08:21:313 MEMORIA - MAIN/(7906:7917): hilo cpu iniciado
+[INFO] 18:08:23:375 MEMORIA - MAIN/(7906:7909): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:08:23:375 MEMORIA - MAIN/(7906:7909): # CREAR_TABLAS
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): El proceso necesitara 3 paginas
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): Tablas de segundo nivel creadas
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): tabla 1er nivel numero 0 creada
+[INFO] 18:08:23:414 MEMORIA - MAIN/(7906:7909): puntero numero 0 creado, inicializado en 0
+[INFO] 18:08:25:414 MEMORIA - MAIN/(7906:7909): archivo ./../swap/4.swap creado
+[INFO] 18:08:25:416 MEMORIA - MAIN/(7906:7909): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:08:27:761 MEMORIA - MAIN/(7906:7909): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:08:27:761 MEMORIA - MAIN/(7906:7909): # FINALIZACION_PROCESO
+[INFO] 18:08:27:761 MEMORIA - MAIN/(7906:7909): Datos recibidos: process id 10000, numero primer tabla 0
+[INFO] 18:08:29:762 MEMORIA - MAIN/(7906:7909): archivo 10000.swap borradp
+[INFO] 18:08:29:762 MEMORIA - MAIN/(7906:7909): memoria ocupada por la tabla 0 liberada
+[INFO] 18:09:16:575 MEMORIA - MAIN/(7906:7909): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:09:16:575 MEMORIA - MAIN/(7906:7909): # FINALIZACION_PROCESO
+[INFO] 18:09:16:575 MEMORIA - MAIN/(7906:7909): Datos recibidos: process id 10000, numero primer tabla 0
+[INFO] 18:09:17:184 MEMORIA - MAIN/(7906:7917): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:09:17:184 MEMORIA - MAIN/(7906:7917): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:09:17:186 MEMORIA - MAIN/(7906:7917): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:09:17:186 MEMORIA - MAIN/(7906:7917): Numero de tabla 2 encontrado: -1237318392
+[INFO] 18:09:18:190 MEMORIA - MAIN/(7906:7917): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:09:18:190 MEMORIA - MAIN/(7906:7917): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:09:18:190 MEMORIA - MAIN/(7906:7917): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:09:18:190 MEMORIA - MAIN/(7906:7917): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:09:18:190 MEMORIA - MAIN/(7906:7917): Numero de tabla 2 encontrado: -1237318392
+[INFO] 18:10:30:253 MEMORIA - MAIN/(7985:7985): se conecto con el kernel
+[INFO] 18:10:30:254 MEMORIA - MAIN/(7985:7985): se conecto con el CPU
+[INFO] 18:10:30:254 MEMORIA - MAIN/(7985:7985): datos de traduccion enviados al CPU
+[INFO] 18:10:30:254 MEMORIA - MAIN/(7985:7985): memoria inicializada con un tamaño de 4096
+[INFO] 18:10:30:254 MEMORIA - MAIN/(7985:7985): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:10:30:254 MEMORIA - MAIN/(7985:7985): bitmap creado con un tamaño de 64
+[INFO] 18:10:30:255 MEMORIA - MAIN/(7985:7988): hilo kernel iniciado
+[INFO] 18:10:30:261 MEMORIA - MAIN/(7985:7996): hilo cpu iniciado
+[INFO] 18:10:33:612 MEMORIA - MAIN/(7985:7988): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:10:33:612 MEMORIA - MAIN/(7985:7988): # CREAR_TABLAS
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): El proceso necesitara 3 paginas
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): Tablas de segundo nivel creadas
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): tabla 1er nivel numero 0 creada
+[INFO] 18:10:33:650 MEMORIA - MAIN/(7985:7988): puntero numero 0 creado, inicializado en 0
+[INFO] 18:10:35:651 MEMORIA - MAIN/(7985:7988): archivo ./../swap/4.swap creado
+[INFO] 18:10:35:652 MEMORIA - MAIN/(7985:7988): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:10:35:655 MEMORIA - MAIN/(7985:7988): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:10:35:655 MEMORIA - MAIN/(7985:7988): # FINALIZACION_PROCESO
+[INFO] 18:10:35:655 MEMORIA - MAIN/(7985:7988): Datos recibidos: process id 10000, numero primer tabla 0
+[INFO] 18:10:37:655 MEMORIA - MAIN/(7985:7988): archivo 10000.swap borradp
+[INFO] 18:10:37:655 MEMORIA - MAIN/(7985:7988): memoria ocupada por la tabla 0 liberada
+[INFO] 18:11:48:341 MEMORIA - MAIN/(7985:7996): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:11:48:341 MEMORIA - MAIN/(7985:7996): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:11:48:342 MEMORIA - MAIN/(7985:7996): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:11:48:342 MEMORIA - MAIN/(7985:7996): Numero de tabla 2 encontrado: -1237318392
+[INFO] 18:11:48:841 MEMORIA - MAIN/(7985:7988): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:11:48:841 MEMORIA - MAIN/(7985:7988): # FINALIZACION_PROCESO
+[INFO] 18:11:48:841 MEMORIA - MAIN/(7985:7988): Datos recibidos: process id 10000, numero primer tabla 0
+[INFO] 18:11:49:342 MEMORIA - MAIN/(7985:7996): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:11:49:342 MEMORIA - MAIN/(7985:7996): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:11:49:342 MEMORIA - MAIN/(7985:7996): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:11:49:343 MEMORIA - MAIN/(7985:7996): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 18:11:49:343 MEMORIA - MAIN/(7985:7996): Numero de tabla 2 encontrado: -1237318392
+[INFO] 18:11:54:751 MEMORIA - MAIN/(8052:8052): se conecto con el kernel
+[INFO] 18:11:54:752 MEMORIA - MAIN/(8052:8052): se conecto con el CPU
+[INFO] 18:11:54:752 MEMORIA - MAIN/(8052:8052): datos de traduccion enviados al CPU
+[INFO] 18:11:54:752 MEMORIA - MAIN/(8052:8052): memoria inicializada con un tamaño de 4096
+[INFO] 18:11:54:752 MEMORIA - MAIN/(8052:8052): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:11:54:752 MEMORIA - MAIN/(8052:8052): bitmap creado con un tamaño de 64
+[INFO] 18:11:54:753 MEMORIA - MAIN/(8052:8055): hilo kernel iniciado
+[INFO] 18:11:54:757 MEMORIA - MAIN/(8052:8063): hilo cpu iniciado
+[INFO] 18:11:57:408 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:11:57:408 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 0 creada
+[INFO] 18:11:57:446 MEMORIA - MAIN/(8052:8055): puntero numero 0 creado, inicializado en 0
+[INFO] 18:11:59:447 MEMORIA - MAIN/(8052:8055): archivo ./../swap/4.swap creado
+[INFO] 18:11:59:449 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:11:59:451 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:11:59:451 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:11:59:451 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:12:01:451 MEMORIA - MAIN/(8052:8055): archivo 4.swap borradp
+[INFO] 18:12:01:451 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 0 liberada
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 1 creada
+[INFO] 18:12:08:582 MEMORIA - MAIN/(8052:8055): puntero numero 1 creado, inicializado en 0
+[INFO] 18:12:10:582 MEMORIA - MAIN/(8052:8055): archivo ./../swap/9.swap creado
+[INFO] 18:12:10:583 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:12:10:585 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:10:585 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:12:10:585 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:12:12:585 MEMORIA - MAIN/(8052:8055): archivo 9.swap borradp
+[INFO] 18:12:12:585 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 1 liberada
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 10, espacio de direcciones: 160
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 2 creada
+[INFO] 18:12:50:001 MEMORIA - MAIN/(8052:8055): puntero numero 2 creado, inicializado en 0
+[INFO] 18:12:52:001 MEMORIA - MAIN/(8052:8055): archivo ./../swap/10.swap creado
+[INFO] 18:12:52:002 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:12:52:002 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:52:002 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 11, espacio de direcciones: 160
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 3 creada
+[INFO] 18:12:52:003 MEMORIA - MAIN/(8052:8055): puntero numero 3 creado, inicializado en 0
+[INFO] 18:12:54:004 MEMORIA - MAIN/(8052:8055): archivo ./../swap/11.swap creado
+[INFO] 18:12:54:005 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:12:54:005 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:54:005 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:12:54:005 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 10, numero primer tabla 2
+[INFO] 18:12:56:005 MEMORIA - MAIN/(8052:8055): archivo 10.swap borradp
+[INFO] 18:12:56:005 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 2 liberada
+[INFO] 18:12:56:008 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:12:56:008 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:12:56:008 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 11, numero primer tabla 3
+[INFO] 18:12:58:009 MEMORIA - MAIN/(8052:8055): archivo 11.swap borradp
+[INFO] 18:12:58:009 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 3 liberada
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 12, espacio de direcciones: 160
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 4 creada
+[INFO] 18:13:23:579 MEMORIA - MAIN/(8052:8055): puntero numero 4 creado, inicializado en 0
+[INFO] 18:13:25:580 MEMORIA - MAIN/(8052:8055): archivo ./../swap/12.swap creado
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 13, espacio de direcciones: 160
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 5 creada
+[INFO] 18:13:25:581 MEMORIA - MAIN/(8052:8055): puntero numero 5 creado, inicializado en 0
+[INFO] 18:13:27:582 MEMORIA - MAIN/(8052:8055): archivo ./../swap/13.swap creado
+[INFO] 18:13:27:582 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:13:30:585 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:30:585 MEMORIA - MAIN/(8052:8063): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:13:30:622 MEMORIA - MAIN/(8052:8063): datos recibidos: numero_tabla_1er_nivel_leer 4 numero_de_entrada 0
+[INFO] 18:13:30:622 MEMORIA - MAIN/(8052:8063): Numero de tabla 2 encontrado: 4
+[INFO] 18:13:31:622 MEMORIA - MAIN/(8052:8063): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:13:31:622 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:34:624 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:35:627 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:36:628 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:37:629 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:13:38:630 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:38:630 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:13:38:630 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 12, numero primer tabla 4
+[INFO] 18:13:40:631 MEMORIA - MAIN/(8052:8055): archivo 12.swap borradp
+[INFO] 18:13:40:631 MEMORIA - MAIN/(8052:8055): frame 0 liberado
+[INFO] 18:13:40:631 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 4 liberada
+[INFO] 18:13:40:636 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:40:636 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:13:40:636 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 13, numero primer tabla 5
+[INFO] 18:13:42:637 MEMORIA - MAIN/(8052:8055): archivo 13.swap borradp
+[INFO] 18:13:42:637 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 5 liberada
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 14, espacio de direcciones: 160
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 6 creada
+[INFO] 18:13:57:226 MEMORIA - MAIN/(8052:8055): puntero numero 6 creado, inicializado en 0
+[INFO] 18:13:59:227 MEMORIA - MAIN/(8052:8055): archivo ./../swap/14.swap creado
+[INFO] 18:13:59:228 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:13:59:228 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:13:59:228 MEMORIA - MAIN/(8052:8055): # CREAR_TABLAS
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): datos recibidos: 
+process id: 15, espacio de direcciones: 160
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): El proceso necesitara 3 paginas
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): Tablas de segundo nivel creadas
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): tabla 1er nivel numero 7 creada
+[INFO] 18:13:59:229 MEMORIA - MAIN/(8052:8055): puntero numero 7 creado, inicializado en 0
+[INFO] 18:14:01:230 MEMORIA - MAIN/(8052:8055): archivo ./../swap/15.swap creado
+[INFO] 18:14:01:231 MEMORIA - MAIN/(8052:8055): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:14:01:231 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:14:01:231 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:14:01:231 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 14, numero primer tabla 6
+[INFO] 18:14:03:231 MEMORIA - MAIN/(8052:8055): archivo 14.swap borradp
+[INFO] 18:14:03:231 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 6 liberada
+[INFO] 18:14:08:236 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:08:237 MEMORIA - MAIN/(8052:8063): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:14:08:237 MEMORIA - MAIN/(8052:8063): datos recibidos: numero_tabla_1er_nivel_leer 7 numero_de_entrada 0
+[INFO] 18:14:08:237 MEMORIA - MAIN/(8052:8063): Numero de tabla 2 encontrado: 7
+[INFO] 18:14:09:237 MEMORIA - MAIN/(8052:8063): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:14:09:237 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:12:239 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:13:242 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:14:244 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:15:246 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:14:16:247 MEMORIA - MAIN/(8052:8055): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:14:16:247 MEMORIA - MAIN/(8052:8055): # FINALIZACION_PROCESO
+[INFO] 18:14:16:248 MEMORIA - MAIN/(8052:8055): Datos recibidos: process id 15, numero primer tabla 7
+[INFO] 18:14:18:248 MEMORIA - MAIN/(8052:8055): archivo 15.swap borradp
+[INFO] 18:14:18:248 MEMORIA - MAIN/(8052:8055): frame 0 liberado
+[INFO] 18:14:18:249 MEMORIA - MAIN/(8052:8055): memoria ocupada por la tabla 7 liberada
+[INFO] 18:25:19:364 MEMORIA - MAIN/(8052:8063): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:27:405 MEMORIA - MAIN/(8492:8492): se conecto con el kernel
+[INFO] 18:25:27:407 MEMORIA - MAIN/(8492:8492): se conecto con el CPU
+[INFO] 18:25:27:407 MEMORIA - MAIN/(8492:8492): datos de traduccion enviados al CPU
+[INFO] 18:25:27:407 MEMORIA - MAIN/(8492:8492): memoria inicializada con un tamaño de 4096
+[INFO] 18:25:27:407 MEMORIA - MAIN/(8492:8492): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:25:27:408 MEMORIA - MAIN/(8492:8492): bitmap creado con un tamaño de 64
+[INFO] 18:25:27:410 MEMORIA - MAIN/(8492:8495): hilo kernel iniciado
+[INFO] 18:25:27:414 MEMORIA - MAIN/(8492:8503): hilo cpu iniciado
+[INFO] 18:25:33:740 MEMORIA - MAIN/(8492:8495): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:25:33:740 MEMORIA - MAIN/(8492:8495): # CREAR_TABLAS
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): El proceso necesitara 3 paginas
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): Tablas de segundo nivel creadas
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): tabla 1er nivel numero 0 creada
+[INFO] 18:25:33:778 MEMORIA - MAIN/(8492:8495): puntero numero 0 creado, inicializado en 0
+[INFO] 18:25:35:778 MEMORIA - MAIN/(8492:8495): archivo ./../swap/4.swap creado
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): # CREAR_TABLAS
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): El proceso necesitara 3 paginas
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): Tablas de segundo nivel creadas
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): tabla 1er nivel numero 1 creada
+[INFO] 18:25:35:779 MEMORIA - MAIN/(8492:8495): puntero numero 1 creado, inicializado en 0
+[INFO] 18:25:37:779 MEMORIA - MAIN/(8492:8495): archivo ./../swap/9.swap creado
+[INFO] 18:25:37:780 MEMORIA - MAIN/(8492:8495): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:25:37:780 MEMORIA - MAIN/(8492:8495): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:25:37:780 MEMORIA - MAIN/(8492:8495): # FINALIZACION_PROCESO
+[INFO] 18:25:37:781 MEMORIA - MAIN/(8492:8495): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:25:39:781 MEMORIA - MAIN/(8492:8495): archivo 4.swap borradp
+[INFO] 18:25:39:781 MEMORIA - MAIN/(8492:8495): memoria ocupada por la tabla 0 liberada
+[INFO] 18:25:44:785 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:44:786 MEMORIA - MAIN/(8492:8503): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:25:44:826 MEMORIA - MAIN/(8492:8503): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:25:44:826 MEMORIA - MAIN/(8492:8503): Numero de tabla 2 encontrado: 1
+[INFO] 18:25:45:827 MEMORIA - MAIN/(8492:8503): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:25:45:827 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:48:828 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:49:830 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:50:833 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:51:834 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:25:52:835 MEMORIA - MAIN/(8492:8495): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:25:52:835 MEMORIA - MAIN/(8492:8495): # FINALIZACION_PROCESO
+[INFO] 18:25:52:835 MEMORIA - MAIN/(8492:8495): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:25:54:837 MEMORIA - MAIN/(8492:8495): archivo 9.swap borradp
+[INFO] 18:25:54:837 MEMORIA - MAIN/(8492:8495): frame 0 liberado
+[INFO] 18:25:54:837 MEMORIA - MAIN/(8492:8495): memoria ocupada por la tabla 1 liberada
+[INFO] 18:27:50:346 MEMORIA - MAIN/(8492:8503): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:27:58:070 MEMORIA - MAIN/(8582:8582): se conecto con el kernel
+[INFO] 18:27:58:071 MEMORIA - MAIN/(8582:8582): se conecto con el CPU
+[INFO] 18:27:58:071 MEMORIA - MAIN/(8582:8582): datos de traduccion enviados al CPU
+[INFO] 18:27:58:071 MEMORIA - MAIN/(8582:8582): memoria inicializada con un tamaño de 4096
+[INFO] 18:27:58:071 MEMORIA - MAIN/(8582:8582): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:27:58:071 MEMORIA - MAIN/(8582:8582): bitmap creado con un tamaño de 64
+[INFO] 18:27:58:072 MEMORIA - MAIN/(8582:8590): hilo kernel iniciado
+[INFO] 18:27:58:086 MEMORIA - MAIN/(8582:8598): hilo cpu iniciado
+[INFO] 18:28:06:036 MEMORIA - MAIN/(8582:8590): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:28:06:036 MEMORIA - MAIN/(8582:8590): # CREAR_TABLAS
+[INFO] 18:28:06:075 MEMORIA - MAIN/(8582:8590): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:28:06:075 MEMORIA - MAIN/(8582:8590): El proceso necesitara 3 paginas
+[INFO] 18:28:06:076 MEMORIA - MAIN/(8582:8590): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:28:06:076 MEMORIA - MAIN/(8582:8590): Tablas de segundo nivel creadas
+[INFO] 18:28:06:076 MEMORIA - MAIN/(8582:8590): tabla 1er nivel numero 0 creada
+[INFO] 18:28:06:076 MEMORIA - MAIN/(8582:8590): puntero numero 0 creado, inicializado en 0
+[INFO] 18:28:08:077 MEMORIA - MAIN/(8582:8590): archivo ./../swap/4.swap creado
+[INFO] 18:28:08:077 MEMORIA - MAIN/(8582:8590): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:28:08:077 MEMORIA - MAIN/(8582:8590): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:28:08:077 MEMORIA - MAIN/(8582:8590): # CREAR_TABLAS
+[INFO] 18:28:08:077 MEMORIA - MAIN/(8582:8590): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:28:08:078 MEMORIA - MAIN/(8582:8590): El proceso necesitara 3 paginas
+[INFO] 18:28:08:078 MEMORIA - MAIN/(8582:8590): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:28:08:078 MEMORIA - MAIN/(8582:8590): Tablas de segundo nivel creadas
+[INFO] 18:28:08:078 MEMORIA - MAIN/(8582:8590): tabla 1er nivel numero 1 creada
+[INFO] 18:28:08:078 MEMORIA - MAIN/(8582:8590): puntero numero 1 creado, inicializado en 0
+[INFO] 18:28:10:078 MEMORIA - MAIN/(8582:8590): archivo ./../swap/9.swap creado
+[INFO] 18:28:10:079 MEMORIA - MAIN/(8582:8590): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:28:10:079 MEMORIA - MAIN/(8582:8590): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:28:10:079 MEMORIA - MAIN/(8582:8590): # FINALIZACION_PROCESO
+[INFO] 18:28:10:079 MEMORIA - MAIN/(8582:8590): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:28:12:080 MEMORIA - MAIN/(8582:8590): archivo 4.swap borradp
+[INFO] 18:28:12:080 MEMORIA - MAIN/(8582:8590): memoria ocupada por la tabla 0 liberada
+[INFO] 18:28:17:085 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:17:085 MEMORIA - MAIN/(8582:8598): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:28:17:124 MEMORIA - MAIN/(8582:8598): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:28:17:124 MEMORIA - MAIN/(8582:8598): Numero de tabla 2 encontrado: 1
+[INFO] 18:28:18:124 MEMORIA - MAIN/(8582:8598): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:28:18:124 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:21:126 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:22:128 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:23:130 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:24:130 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:28:25:132 MEMORIA - MAIN/(8582:8590): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:28:25:132 MEMORIA - MAIN/(8582:8590): # FINALIZACION_PROCESO
+[INFO] 18:28:25:132 MEMORIA - MAIN/(8582:8590): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:28:27:134 MEMORIA - MAIN/(8582:8590): archivo 9.swap borradp
+[INFO] 18:28:27:134 MEMORIA - MAIN/(8582:8590): frame 0 liberado
+[INFO] 18:28:27:134 MEMORIA - MAIN/(8582:8590): memoria ocupada por la tabla 1 liberada
+[INFO] 18:32:50:954 MEMORIA - MAIN/(8582:8590): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:32:50:954 MEMORIA - MAIN/(8582:8590): # FINALIZACION_PROCESO
+[INFO] 18:32:50:954 MEMORIA - MAIN/(8582:8590): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:32:51:804 MEMORIA - MAIN/(8582:8598): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:32:59:168 MEMORIA - MAIN/(9004:9004): se conecto con el kernel
+[INFO] 18:32:59:169 MEMORIA - MAIN/(9004:9004): se conecto con el CPU
+[INFO] 18:32:59:169 MEMORIA - MAIN/(9004:9004): datos de traduccion enviados al CPU
+[INFO] 18:32:59:169 MEMORIA - MAIN/(9004:9004): memoria inicializada con un tamaño de 4096
+[INFO] 18:32:59:169 MEMORIA - MAIN/(9004:9004): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:32:59:169 MEMORIA - MAIN/(9004:9004): bitmap creado con un tamaño de 64
+[INFO] 18:32:59:170 MEMORIA - MAIN/(9004:9007): hilo kernel iniciado
+[INFO] 18:32:59:174 MEMORIA - MAIN/(9004:9015): hilo cpu iniciado
+[INFO] 18:33:03:523 MEMORIA - MAIN/(9004:9007): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:33:03:523 MEMORIA - MAIN/(9004:9007): # CREAR_TABLAS
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): El proceso necesitara 3 paginas
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): Tablas de segundo nivel creadas
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): tabla 1er nivel numero 0 creada
+[INFO] 18:33:03:564 MEMORIA - MAIN/(9004:9007): puntero numero 0 creado, inicializado en 0
+[INFO] 18:33:05:567 MEMORIA - MAIN/(9004:9007): archivo ./../swap/4.swap creado
+[INFO] 18:33:05:568 MEMORIA - MAIN/(9004:9007): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): # CREAR_TABLAS
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): El proceso necesitara 3 paginas
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): Tablas de segundo nivel creadas
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): tabla 1er nivel numero 1 creada
+[INFO] 18:33:05:569 MEMORIA - MAIN/(9004:9007): puntero numero 1 creado, inicializado en 0
+[INFO] 18:33:07:570 MEMORIA - MAIN/(9004:9007): archivo ./../swap/9.swap creado
+[INFO] 18:33:07:571 MEMORIA - MAIN/(9004:9007): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:33:07:571 MEMORIA - MAIN/(9004:9007): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:33:07:571 MEMORIA - MAIN/(9004:9007): # FINALIZACION_PROCESO
+[INFO] 18:33:07:571 MEMORIA - MAIN/(9004:9007): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:33:09:572 MEMORIA - MAIN/(9004:9007): archivo 4.swap borradp
+[INFO] 18:33:09:572 MEMORIA - MAIN/(9004:9007): memoria ocupada por la tabla 0 liberada
+[INFO] 18:33:14:577 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:14:577 MEMORIA - MAIN/(9004:9015): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:33:14:614 MEMORIA - MAIN/(9004:9015): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:33:14:614 MEMORIA - MAIN/(9004:9015): Numero de tabla 2 encontrado: 1
+[INFO] 18:33:15:614 MEMORIA - MAIN/(9004:9015): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:33:15:614 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:18:617 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:19:618 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:20:620 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:21:621 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:33:22:623 MEMORIA - MAIN/(9004:9007): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:33:22:623 MEMORIA - MAIN/(9004:9007): # FINALIZACION_PROCESO
+[INFO] 18:33:22:623 MEMORIA - MAIN/(9004:9007): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:33:24:624 MEMORIA - MAIN/(9004:9007): archivo 9.swap borradp
+[INFO] 18:33:24:624 MEMORIA - MAIN/(9004:9007): frame 0 liberado
+[INFO] 18:33:24:624 MEMORIA - MAIN/(9004:9007): memoria ocupada por la tabla 1 liberada
+[INFO] 18:36:34:595 MEMORIA - MAIN/(9004:9007): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:36:34:595 MEMORIA - MAIN/(9004:9007): # FINALIZACION_PROCESO
+[INFO] 18:36:34:595 MEMORIA - MAIN/(9004:9007): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:36:35:219 MEMORIA - MAIN/(9004:9015): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:36:40:760 MEMORIA - MAIN/(9130:9130): se conecto con el kernel
+[INFO] 18:36:40:761 MEMORIA - MAIN/(9130:9130): se conecto con el CPU
+[INFO] 18:36:40:761 MEMORIA - MAIN/(9130:9130): datos de traduccion enviados al CPU
+[INFO] 18:36:40:761 MEMORIA - MAIN/(9130:9130): memoria inicializada con un tamaño de 4096
+[INFO] 18:36:40:761 MEMORIA - MAIN/(9130:9130): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:36:40:761 MEMORIA - MAIN/(9130:9130): bitmap creado con un tamaño de 64
+[INFO] 18:36:40:762 MEMORIA - MAIN/(9130:9133): hilo kernel iniciado
+[INFO] 18:36:40:766 MEMORIA - MAIN/(9130:9141): hilo cpu iniciado
+[INFO] 18:36:46:734 MEMORIA - MAIN/(9130:9133): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:36:46:734 MEMORIA - MAIN/(9130:9133): # CREAR_TABLAS
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): El proceso necesitara 3 paginas
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): Tablas de segundo nivel creadas
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): tabla 1er nivel numero 0 creada
+[INFO] 18:36:46:774 MEMORIA - MAIN/(9130:9133): puntero numero 0 creado, inicializado en 0
+[INFO] 18:36:48:775 MEMORIA - MAIN/(9130:9133): archivo ./../swap/4.swap creado
+[INFO] 18:36:48:776 MEMORIA - MAIN/(9130:9133): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): # CREAR_TABLAS
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): El proceso necesitara 3 paginas
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): Tablas de segundo nivel creadas
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): tabla 1er nivel numero 1 creada
+[INFO] 18:36:48:778 MEMORIA - MAIN/(9130:9133): puntero numero 1 creado, inicializado en 0
+[INFO] 18:36:50:778 MEMORIA - MAIN/(9130:9133): archivo ./../swap/9.swap creado
+[INFO] 18:36:50:779 MEMORIA - MAIN/(9130:9133): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:36:50:780 MEMORIA - MAIN/(9130:9133): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:36:50:780 MEMORIA - MAIN/(9130:9133): # FINALIZACION_PROCESO
+[INFO] 18:36:50:780 MEMORIA - MAIN/(9130:9133): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:36:52:780 MEMORIA - MAIN/(9130:9133): archivo 4.swap borradp
+[INFO] 18:36:52:780 MEMORIA - MAIN/(9130:9133): memoria ocupada por la tabla 0 liberada
+[INFO] 18:36:57:785 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:36:57:785 MEMORIA - MAIN/(9130:9141): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:36:57:824 MEMORIA - MAIN/(9130:9141): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:36:57:824 MEMORIA - MAIN/(9130:9141): Numero de tabla 2 encontrado: 1
+[INFO] 18:36:58:825 MEMORIA - MAIN/(9130:9141): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:36:58:825 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:37:01:827 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:37:02:828 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:37:03:829 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:37:04:830 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:37:05:831 MEMORIA - MAIN/(9130:9133): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:37:05:831 MEMORIA - MAIN/(9130:9133): # FINALIZACION_PROCESO
+[INFO] 18:37:05:832 MEMORIA - MAIN/(9130:9133): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:37:07:832 MEMORIA - MAIN/(9130:9133): archivo 9.swap borradp
+[INFO] 18:37:07:832 MEMORIA - MAIN/(9130:9133): frame 0 liberado
+[INFO] 18:37:07:832 MEMORIA - MAIN/(9130:9133): memoria ocupada por la tabla 1 liberada
+[INFO] 18:40:23:539 MEMORIA - MAIN/(9130:9133): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:40:23:539 MEMORIA - MAIN/(9130:9133): # FINALIZACION_PROCESO
+[INFO] 18:40:23:539 MEMORIA - MAIN/(9130:9133): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:40:24:180 MEMORIA - MAIN/(9130:9141): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:30:769 MEMORIA - MAIN/(9257:9257): se conecto con el kernel
+[INFO] 18:40:30:770 MEMORIA - MAIN/(9257:9257): se conecto con el CPU
+[INFO] 18:40:30:770 MEMORIA - MAIN/(9257:9257): datos de traduccion enviados al CPU
+[INFO] 18:40:30:770 MEMORIA - MAIN/(9257:9257): memoria inicializada con un tamaño de 4096
+[INFO] 18:40:30:770 MEMORIA - MAIN/(9257:9257): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:40:30:770 MEMORIA - MAIN/(9257:9257): bitmap creado con un tamaño de 64
+[INFO] 18:40:30:771 MEMORIA - MAIN/(9257:9260): hilo kernel iniciado
+[INFO] 18:40:30:774 MEMORIA - MAIN/(9257:9268): hilo cpu iniciado
+[INFO] 18:40:37:224 MEMORIA - MAIN/(9257:9260): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:40:37:224 MEMORIA - MAIN/(9257:9260): # CREAR_TABLAS
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): El proceso necesitara 3 paginas
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): Tablas de segundo nivel creadas
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): tabla 1er nivel numero 0 creada
+[INFO] 18:40:37:263 MEMORIA - MAIN/(9257:9260): puntero numero 0 creado, inicializado en 0
+[INFO] 18:40:39:263 MEMORIA - MAIN/(9257:9260): archivo ./../swap/4.swap creado
+[INFO] 18:40:39:264 MEMORIA - MAIN/(9257:9260): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:40:39:264 MEMORIA - MAIN/(9257:9260): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:40:39:264 MEMORIA - MAIN/(9257:9260): # CREAR_TABLAS
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): El proceso necesitara 3 paginas
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): Tablas de segundo nivel creadas
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): tabla 1er nivel numero 1 creada
+[INFO] 18:40:39:265 MEMORIA - MAIN/(9257:9260): puntero numero 1 creado, inicializado en 0
+[INFO] 18:40:41:265 MEMORIA - MAIN/(9257:9260): archivo ./../swap/9.swap creado
+[INFO] 18:40:41:266 MEMORIA - MAIN/(9257:9260): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:40:41:267 MEMORIA - MAIN/(9257:9260): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:40:41:267 MEMORIA - MAIN/(9257:9260): # FINALIZACION_PROCESO
+[INFO] 18:40:41:268 MEMORIA - MAIN/(9257:9260): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:40:43:268 MEMORIA - MAIN/(9257:9260): archivo 4.swap borradp
+[INFO] 18:40:43:268 MEMORIA - MAIN/(9257:9260): memoria ocupada por la tabla 0 liberada
+[INFO] 18:40:48:273 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:48:273 MEMORIA - MAIN/(9257:9268): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:40:48:313 MEMORIA - MAIN/(9257:9268): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:40:48:313 MEMORIA - MAIN/(9257:9268): Numero de tabla 2 encontrado: 1
+[INFO] 18:40:49:315 MEMORIA - MAIN/(9257:9268): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:40:49:315 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:52:317 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:53:318 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:54:319 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:55:321 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:40:56:322 MEMORIA - MAIN/(9257:9260): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:40:56:322 MEMORIA - MAIN/(9257:9260): # FINALIZACION_PROCESO
+[INFO] 18:40:56:322 MEMORIA - MAIN/(9257:9260): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:40:58:323 MEMORIA - MAIN/(9257:9260): archivo 9.swap borradp
+[INFO] 18:40:58:323 MEMORIA - MAIN/(9257:9260): frame 0 liberado
+[INFO] 18:40:58:323 MEMORIA - MAIN/(9257:9260): memoria ocupada por la tabla 1 liberada
+[INFO] 18:43:27:935 MEMORIA - MAIN/(9257:9268): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:33:425 MEMORIA - MAIN/(9380:9380): se conecto con el kernel
+[INFO] 18:43:33:426 MEMORIA - MAIN/(9380:9380): se conecto con el CPU
+[INFO] 18:43:33:426 MEMORIA - MAIN/(9380:9380): datos de traduccion enviados al CPU
+[INFO] 18:43:33:426 MEMORIA - MAIN/(9380:9380): memoria inicializada con un tamaño de 4096
+[INFO] 18:43:33:426 MEMORIA - MAIN/(9380:9380): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:43:33:426 MEMORIA - MAIN/(9380:9380): bitmap creado con un tamaño de 64
+[INFO] 18:43:33:442 MEMORIA - MAIN/(9380:9383): hilo kernel iniciado
+[INFO] 18:43:33:442 MEMORIA - MAIN/(9380:9391): hilo cpu iniciado
+[INFO] 18:43:38:448 MEMORIA - MAIN/(9380:9383): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:43:38:449 MEMORIA - MAIN/(9380:9383): # CREAR_TABLAS
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): El proceso necesitara 3 paginas
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): Tablas de segundo nivel creadas
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): tabla 1er nivel numero 0 creada
+[INFO] 18:43:38:490 MEMORIA - MAIN/(9380:9383): puntero numero 0 creado, inicializado en 0
+[INFO] 18:43:40:490 MEMORIA - MAIN/(9380:9383): archivo ./../swap/4.swap creado
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): # CREAR_TABLAS
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): El proceso necesitara 3 paginas
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:43:40:492 MEMORIA - MAIN/(9380:9383): Tablas de segundo nivel creadas
+[INFO] 18:43:40:493 MEMORIA - MAIN/(9380:9383): tabla 1er nivel numero 1 creada
+[INFO] 18:43:40:493 MEMORIA - MAIN/(9380:9383): puntero numero 1 creado, inicializado en 0
+[INFO] 18:43:42:493 MEMORIA - MAIN/(9380:9383): archivo ./../swap/9.swap creado
+[INFO] 18:43:42:495 MEMORIA - MAIN/(9380:9383): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:43:42:495 MEMORIA - MAIN/(9380:9383): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:43:42:495 MEMORIA - MAIN/(9380:9383): # FINALIZACION_PROCESO
+[INFO] 18:43:42:495 MEMORIA - MAIN/(9380:9383): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:43:44:496 MEMORIA - MAIN/(9380:9383): archivo 4.swap borradp
+[INFO] 18:43:44:496 MEMORIA - MAIN/(9380:9383): memoria ocupada por la tabla 0 liberada
+[INFO] 18:43:49:502 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:49:502 MEMORIA - MAIN/(9380:9391): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:43:49:542 MEMORIA - MAIN/(9380:9391): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:43:49:542 MEMORIA - MAIN/(9380:9391): Numero de tabla 2 encontrado: 1
+[INFO] 18:43:50:542 MEMORIA - MAIN/(9380:9391): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:43:50:542 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:53:544 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:54:545 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:55:547 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:56:549 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:43:57:553 MEMORIA - MAIN/(9380:9383): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:43:57:553 MEMORIA - MAIN/(9380:9383): # FINALIZACION_PROCESO
+[INFO] 18:43:57:553 MEMORIA - MAIN/(9380:9383): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:43:59:554 MEMORIA - MAIN/(9380:9383): archivo 9.swap borradp
+[INFO] 18:43:59:554 MEMORIA - MAIN/(9380:9383): frame 0 liberado
+[INFO] 18:43:59:554 MEMORIA - MAIN/(9380:9383): memoria ocupada por la tabla 1 liberada
+[INFO] 18:48:39:606 MEMORIA - MAIN/(9380:9391): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:48:51:631 MEMORIA - MAIN/(9538:9538): se conecto con el kernel
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9538): se conecto con el CPU
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9538): datos de traduccion enviados al CPU
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9538): memoria inicializada con un tamaño de 4096
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9538): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9538): bitmap creado con un tamaño de 64
+[INFO] 18:48:51:632 MEMORIA - MAIN/(9538:9546): hilo kernel iniciado
+[INFO] 18:48:51:637 MEMORIA - MAIN/(9538:9554): hilo cpu iniciado
+[INFO] 18:48:58:244 MEMORIA - MAIN/(9538:9546): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:48:58:244 MEMORIA - MAIN/(9538:9546): # CREAR_TABLAS
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): El proceso necesitara 3 paginas
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): Tablas de segundo nivel creadas
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): tabla 1er nivel numero 0 creada
+[INFO] 18:48:58:282 MEMORIA - MAIN/(9538:9546): puntero numero 0 creado, inicializado en 0
+[INFO] 18:49:00:283 MEMORIA - MAIN/(9538:9546): archivo ./../swap/4.swap creado
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): # CREAR_TABLAS
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): datos recibidos: 
+process id: 9, espacio de direcciones: 160
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): El proceso necesitara 3 paginas
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): Tablas de segundo nivel creadas
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): tabla 1er nivel numero 1 creada
+[INFO] 18:49:00:284 MEMORIA - MAIN/(9538:9546): puntero numero 1 creado, inicializado en 0
+[INFO] 18:49:02:285 MEMORIA - MAIN/(9538:9546): archivo ./../swap/9.swap creado
+[INFO] 18:49:02:288 MEMORIA - MAIN/(9538:9546): # FIN CREAR_TABLAS 
+
+
+[INFO] 18:49:07:291 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:07:291 MEMORIA - MAIN/(9538:9554): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 18:49:07:330 MEMORIA - MAIN/(9538:9554): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 18:49:07:330 MEMORIA - MAIN/(9538:9554): Numero de tabla 2 encontrado: 1
+[INFO] 18:49:08:331 MEMORIA - MAIN/(9538:9554): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 18:49:08:331 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:11:332 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:12:334 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:13:337 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:14:338 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:49:15:339 MEMORIA - MAIN/(9538:9546): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:49:15:339 MEMORIA - MAIN/(9538:9546): # FINALIZACION_PROCESO
+[INFO] 18:49:15:340 MEMORIA - MAIN/(9538:9546): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 18:49:17:340 MEMORIA - MAIN/(9538:9546): archivo 9.swap borradp
+[INFO] 18:49:17:340 MEMORIA - MAIN/(9538:9546): frame 0 liberado
+[INFO] 18:49:17:340 MEMORIA - MAIN/(9538:9546): memoria ocupada por la tabla 1 liberada
+[INFO] 18:49:17:343 MEMORIA - MAIN/(9538:9546): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:49:17:343 MEMORIA - MAIN/(9538:9546): # FINALIZACION_PROCESO
+[INFO] 18:49:17:344 MEMORIA - MAIN/(9538:9546): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 18:49:19:344 MEMORIA - MAIN/(9538:9546): archivo 4.swap borradp
+[INFO] 18:49:19:344 MEMORIA - MAIN/(9538:9546): memoria ocupada por la tabla 0 liberada
+[INFO] 18:49:52:785 MEMORIA - MAIN/(9538:9554): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 18:56:47:658 MEMORIA - MAIN/(9815:9815): se conecto con el kernel
+[INFO] 18:56:47:662 MEMORIA - MAIN/(9815:9815): se conecto con el CPU
+[INFO] 18:56:47:662 MEMORIA - MAIN/(9815:9815): datos de traduccion enviados al CPU
+[INFO] 18:56:47:662 MEMORIA - MAIN/(9815:9815): memoria inicializada con un tamaño de 4096
+[INFO] 18:56:47:662 MEMORIA - MAIN/(9815:9815): la cantidad de frames en esta ejecucion es de 64
+[INFO] 18:56:47:662 MEMORIA - MAIN/(9815:9815): bitmap creado con un tamaño de 64
+[INFO] 18:56:47:663 MEMORIA - MAIN/(9815:9818): hilo kernel iniciado
+[INFO] 18:56:47:672 MEMORIA - MAIN/(9815:9826): hilo cpu iniciado
+[INFO] 18:56:50:750 MEMORIA - MAIN/(9815:9818): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 18:56:50:750 MEMORIA - MAIN/(9815:9818): # CREAR_TABLAS
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): El proceso necesitara 3 paginas
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): Tablas de segundo nivel creadas
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): tabla 1er nivel numero 0 creada
+[INFO] 18:56:50:790 MEMORIA - MAIN/(9815:9818): puntero numero 0 creado, inicializado en 0
+[INFO] 18:56:52:791 MEMORIA - MAIN/(9815:9818): archivo ./../swap/4.swap creado
+[INFO] 18:56:52:792 MEMORIA - MAIN/(9815:9818): # FIN CREAR_TABLAS 
+
+
+[INFO] 19:01:24:576 MEMORIA - MAIN/(9815:9826): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 19:01:24:581 MEMORIA - MAIN/(9815:9826): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 19:01:24:581 MEMORIA - MAIN/(9815:9826): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 19:01:24:581 MEMORIA - MAIN/(9815:9826): Numero de tabla 2 encontrado: 0
+[INFO] 19:01:25:101 MEMORIA - MAIN/(9815:9818): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:01:25:101 MEMORIA - MAIN/(9815:9818): # CREAR_TABLAS
+[INFO] 19:01:25:101 MEMORIA - MAIN/(9815:9818): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:01:25:101 MEMORIA - MAIN/(9815:9818): El proceso necesitara 3 paginas
+[INFO] 19:01:25:102 MEMORIA - MAIN/(9815:9818): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:01:25:102 MEMORIA - MAIN/(9815:9818): Tablas de segundo nivel creadas
+[INFO] 19:01:25:102 MEMORIA - MAIN/(9815:9818): tabla 1er nivel numero 1 creada
+[INFO] 19:01:25:102 MEMORIA - MAIN/(9815:9818): puntero numero 1 creado, inicializado en 0
+[INFO] 19:01:25:581 MEMORIA - MAIN/(9815:9826): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 19:01:25:581 MEMORIA - MAIN/(9815:9826): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 19:01:25:581 MEMORIA - MAIN/(9815:9826): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 19:01:25:582 MEMORIA - MAIN/(9815:9826): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 19:01:25:582 MEMORIA - MAIN/(9815:9826): Numero de tabla 2 encontrado: 0
+[INFO] 19:01:57:816 MEMORIA - MAIN/(10420:10420): se conecto con el kernel
+[INFO] 19:01:57:817 MEMORIA - MAIN/(10420:10420): se conecto con el CPU
+[INFO] 19:01:57:817 MEMORIA - MAIN/(10420:10420): datos de traduccion enviados al CPU
+[INFO] 19:01:57:817 MEMORIA - MAIN/(10420:10420): memoria inicializada con un tamaño de 4096
+[INFO] 19:01:57:817 MEMORIA - MAIN/(10420:10420): la cantidad de frames en esta ejecucion es de 64
+[INFO] 19:01:57:818 MEMORIA - MAIN/(10420:10420): bitmap creado con un tamaño de 64
+[INFO] 19:01:57:818 MEMORIA - MAIN/(10420:10433): hilo kernel iniciado
+[INFO] 19:01:57:822 MEMORIA - MAIN/(10420:10441): hilo cpu iniciado
+[INFO] 19:02:00:009 MEMORIA - MAIN/(10420:10433): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:02:00:009 MEMORIA - MAIN/(10420:10433): # CREAR_TABLAS
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): El proceso necesitara 3 paginas
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): Tablas de segundo nivel creadas
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): tabla 1er nivel numero 0 creada
+[INFO] 19:02:00:046 MEMORIA - MAIN/(10420:10433): puntero numero 0 creado, inicializado en 0
+[INFO] 19:02:02:048 MEMORIA - MAIN/(10420:10433): archivo ./../swap/4.swap creado
+[INFO] 19:02:02:049 MEMORIA - MAIN/(10420:10433): # FIN CREAR_TABLAS 
+
+
+[INFO] 19:05:01:740 MEMORIA - MAIN/(10420:10441): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 19:05:01:741 MEMORIA - MAIN/(10420:10441): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 19:05:01:742 MEMORIA - MAIN/(10420:10441): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 19:05:01:742 MEMORIA - MAIN/(10420:10441): Numero de tabla 2 encontrado: 0
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): # CREAR_TABLAS
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): El proceso necesitara 3 paginas
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): Tablas de segundo nivel creadas
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): tabla 1er nivel numero 1 creada
+[INFO] 19:05:02:119 MEMORIA - MAIN/(10420:10433): puntero numero 1 creado, inicializado en 0
+[INFO] 19:05:02:742 MEMORIA - MAIN/(10420:10441): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 19:05:02:742 MEMORIA - MAIN/(10420:10441): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 19:05:02:742 MEMORIA - MAIN/(10420:10441): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 19:05:02:742 MEMORIA - MAIN/(10420:10441): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 19:05:02:742 MEMORIA - MAIN/(10420:10441): Numero de tabla 2 encontrado: 0
+[INFO] 19:05:06:660 MEMORIA - MAIN/(10555:10555): se conecto con el kernel
+[INFO] 19:05:06:661 MEMORIA - MAIN/(10555:10555): se conecto con el CPU
+[INFO] 19:05:06:661 MEMORIA - MAIN/(10555:10555): datos de traduccion enviados al CPU
+[INFO] 19:05:06:663 MEMORIA - MAIN/(10555:10555): memoria inicializada con un tamaño de 4096
+[INFO] 19:05:06:663 MEMORIA - MAIN/(10555:10555): la cantidad de frames en esta ejecucion es de 64
+[INFO] 19:05:06:663 MEMORIA - MAIN/(10555:10555): bitmap creado con un tamaño de 64
+[INFO] 19:05:06:664 MEMORIA - MAIN/(10555:10558): hilo kernel iniciado
+[INFO] 19:05:06:673 MEMORIA - MAIN/(10555:10566): hilo cpu iniciado
+[INFO] 19:05:09:196 MEMORIA - MAIN/(10555:10558): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:05:09:196 MEMORIA - MAIN/(10555:10558): # CREAR_TABLAS
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): El proceso necesitara 3 paginas
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): Tablas de segundo nivel creadas
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): tabla 1er nivel numero 0 creada
+[INFO] 19:05:09:238 MEMORIA - MAIN/(10555:10558): puntero numero 0 creado, inicializado en 0
+[INFO] 19:05:11:238 MEMORIA - MAIN/(10555:10558): archivo ./../swap/4.swap creado
+[INFO] 19:05:11:239 MEMORIA - MAIN/(10555:10558): # FIN CREAR_TABLAS 
+
+
+[INFO] 19:06:50:056 MEMORIA - MAIN/(10555:10558): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:06:50:056 MEMORIA - MAIN/(10555:10558): # CREAR_TABLAS
+[INFO] 19:06:50:056 MEMORIA - MAIN/(10555:10558): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:06:50:057 MEMORIA - MAIN/(10555:10558): El proceso necesitara 3 paginas
+[INFO] 19:06:50:057 MEMORIA - MAIN/(10555:10558): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:06:50:057 MEMORIA - MAIN/(10555:10558): Tablas de segundo nivel creadas
+[INFO] 19:06:50:057 MEMORIA - MAIN/(10555:10558): tabla 1er nivel numero 1 creada
+[INFO] 19:06:50:057 MEMORIA - MAIN/(10555:10558): puntero numero 1 creado, inicializado en 0
+[INFO] 19:06:51:108 MEMORIA - MAIN/(10555:10566): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 19:06:51:108 MEMORIA - MAIN/(10555:10566): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 19:06:51:108 MEMORIA - MAIN/(10555:10566): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 19:06:51:108 MEMORIA - MAIN/(10555:10566): Numero de tabla 2 encontrado: 0
+[INFO] 19:06:57:288 MEMORIA - MAIN/(10637:10637): se conecto con el kernel
+[INFO] 19:06:57:289 MEMORIA - MAIN/(10637:10637): se conecto con el CPU
+[INFO] 19:06:57:289 MEMORIA - MAIN/(10637:10637): datos de traduccion enviados al CPU
+[INFO] 19:06:57:289 MEMORIA - MAIN/(10637:10637): memoria inicializada con un tamaño de 4096
+[INFO] 19:06:57:289 MEMORIA - MAIN/(10637:10637): la cantidad de frames en esta ejecucion es de 64
+[INFO] 19:06:57:289 MEMORIA - MAIN/(10637:10637): bitmap creado con un tamaño de 64
+[INFO] 19:06:57:290 MEMORIA - MAIN/(10637:10640): hilo kernel iniciado
+[INFO] 19:06:57:293 MEMORIA - MAIN/(10637:10648): hilo cpu iniciado
+[INFO] 19:07:00:675 MEMORIA - MAIN/(10637:10640): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:07:00:675 MEMORIA - MAIN/(10637:10640): # CREAR_TABLAS
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): El proceso necesitara 3 paginas
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): Tablas de segundo nivel creadas
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): tabla 1er nivel numero 0 creada
+[INFO] 19:07:00:718 MEMORIA - MAIN/(10637:10640): puntero numero 0 creado, inicializado en 0
+[INFO] 19:07:02:719 MEMORIA - MAIN/(10637:10640): archivo ./../swap/4.swap creado
+[INFO] 19:07:02:720 MEMORIA - MAIN/(10637:10640): # FIN CREAR_TABLAS 
+
+
+[INFO] 19:07:04:221 MEMORIA - MAIN/(10637:10640): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 19:07:04:221 MEMORIA - MAIN/(10637:10640): # FINALIZACION_PROCESO
+[INFO] 19:07:04:221 MEMORIA - MAIN/(10637:10640): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 19:07:06:222 MEMORIA - MAIN/(10637:10640): archivo 4.swap borradp
+[INFO] 19:07:06:222 MEMORIA - MAIN/(10637:10640): memoria ocupada por la tabla 0 liberada

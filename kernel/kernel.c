@@ -93,18 +93,23 @@ int main(void){
 	sem_init(&pcb_recibido, 0, 0);
 	sem_init(&mx_suspension, 0, 1);
 	sem_init(&procesos_para_ready, 0, 0);
+	sem_init(&proceso_en_io, 0, 0);
+	sem_init(&mx_cola_suspended_ready, 0, 1);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, pasar_a_ready, NULL);
-	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
+//	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
 	pthread_create(&recibir_syscall_cpu, NULL, esperar_syscall, NULL);
+	pthread_create(&hiloIO , NULL, hilo_io, NULL);
 
 	pthread_detach(lp_new_ready_fifo);
-	pthread_detach(mp_suspendedready_ready);
+//	pthread_detach(mp_suspendedready_ready);
 	pthread_detach(cp_ready_exec_fifo);
 	pthread_detach(atender_consolas);
+	pthread_detach(hiloIO);
+	pthread_detach(recibir_syscall_cpu);
 
 	for(int i = 0; i < 5; i++){
 		sem_wait(&se_inicio_el_hilo);
@@ -136,8 +141,8 @@ void* recibir_procesos() {
 
 		t_info_proceso* proceso = deserializar_proceso(buffer);
 
-		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
-		printf("\n");
+//		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
+//		printf("\n");
 
 		t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largo_instrucciones + sizeof(char*) );
 
@@ -148,18 +153,19 @@ void* recibir_procesos() {
 		pcb->tabla_paginas = 0;
 		pcb->estimacion_rafagas = ESTIMACION_INICIAL;
 
-		printf("%i \n", pcb->id_proceso);
-		printf("%i \n", pcb->tamanio_direcciones);
-		printf("%s \n", pcb->instrucciones);
-		printf("%i \n", pcb->program_counter);
-		printf("%i \n", pcb->tabla_paginas);
-		printf("%i \n", pcb->estimacion_rafagas);
+//		printf("%i \n", pcb->id_proceso);
+//		printf("%i \n", pcb->tamanio_direcciones);
+//		printf("%s \n", pcb->instrucciones);
+//		printf("%i \n", pcb->program_counter);
+//		printf("%i \n", pcb->tabla_paginas);
+//		printf("%i \n", pcb->estimacion_rafagas);
 
 		free(buffer->stream);
 		free(buffer);
 		free(proceso);
 
 		ingreso_a_new(pcb); // planificador largo plazo
+		printf("############# SE INGRESO A NEW ############# \n");
 		id++;
 	}
 	return "";
@@ -173,7 +179,10 @@ void* esperar_syscall() {
 		t_syscall* una_syscall = recibirSyscall();
 		switch(una_syscall->instruccion) {
 		case IO:
+			printf("IO RECIBIDA \n");
 			executing_a_blocked(una_syscall);
+			free(una_syscall->pcb.instrucciones);
+			free(una_syscall);
 			break;
 		case EXIT:
 			printf("ENTRO EN EXIT \n");

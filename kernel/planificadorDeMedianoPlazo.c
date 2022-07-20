@@ -25,6 +25,7 @@
 //}
 
 void executing_a_blocked(t_syscall* syscall) {
+	printf("EXECUTING A BLOCKED \n");
 	t_pcb* pcb_nuevo = malloc(sizeof(t_pcb));
 	// ID PROCESO
 	pcb_nuevo->id_proceso = syscall->pcb.id_proceso;
@@ -42,10 +43,14 @@ void executing_a_blocked(t_syscall* syscall) {
 	// ESTIMACION RAFAGA
 	pcb_nuevo->estimacion_rafagas = syscall->pcb.estimacion_rafagas;
 
+	printf("PCB NUEVO CREADO, INSTRUCCIONES: \n%s \n", pcb_nuevo->instrucciones);
+
 	t_bloqueado* proceso_bloqueado = malloc(sizeof(t_bloqueado));
 
 	proceso_bloqueado->pcb = pcb_nuevo;
 	proceso_bloqueado->tiempo_de_bloqueo = syscall->tiempo_de_bloqueo;
+
+	printf("TIEMPO DE BLOQUEO = %i \n", proceso_bloqueado->tiempo_de_bloqueo);
 
 	if( !es_FIFO() ){
 		// ACTUALIZA LA ESTIMACION? XD
@@ -53,9 +58,9 @@ void executing_a_blocked(t_syscall* syscall) {
 	}
 
 	queue_push(cola_blocked, proceso_bloqueado);
+	printf("PROCESO PASADO DE EXECUTING A BLOCKED: %i \n", pcb_nuevo->id_proceso);
 
-	// TODO HAY QUE AVISAR QUE SE EJECUTE
-
+	// SE AVISA QUE SE LIBERO EL CPU
 	if( es_FIFO() ){
 		sem_post(&fin_de_ejecucion); // para que fifo meta el proximo
 	}
@@ -90,14 +95,16 @@ void executing_a_blocked(t_syscall* syscall) {
 //	sem_post(&proceso_en_io);
 //}
 
-// HILO QUE SUSPENDE CUANDO ESPERA MÁS DEL TIEMPO MÁXIMO
+// HACE LAS IO A MEDIDA QUE INGRESAN
 void* hilo_io(){
+	sem_post(&se_inicio_el_hilo);
 	t_bloqueado* proceso;
 	while(1){
 		sem_wait(&proceso_en_io);
 		proceso = queue_pop(cola_blocked);
 
 		if( TIEMPO_MAXIMO_BLOQUEADO < proceso->tiempo_de_bloqueo ){
+			printf("EL TIEMPO MAXIMO BLOQUEADO ES MENOR \n");
 			usleep( TIEMPO_MAXIMO_BLOQUEADO * 1000);
 
 			// avisar a memoria que pase a SWAP TODO POR BATATA ANASHEX
@@ -107,25 +114,39 @@ void* hilo_io(){
 			sem_post(&mx_cola_suspended_ready);
 			sem_post(&grado_multiprogramacion);
 
+			printf("PROCESO PASADO A SUSPENDED READY DESDE BLOCKED: %i  \n", proceso->pcb->id_proceso);
+
+
 
 			usleep( ( proceso->tiempo_de_bloqueo - TIEMPO_MAXIMO_BLOQUEADO ) * 1000 );
+
+			sem_post(&procesos_para_ready);
 		}
 		else
 		{
+			printf("EL TIEMPO DE ESPERA MAXIMO ES MAYOR \n");
 			usleep( proceso->tiempo_de_bloqueo );
 
 			if( es_FIFO() ){
+				sem_wait(&mx_lista_ready);
 				queue_push(cola_ready, proceso->pcb);
+				sem_post(&mx_lista_ready);
+				printf("PROCESO DEVUELTO A LA COLA READY ANASHE ID %i (FIFO) \n", proceso->pcb->id_proceso);
 			}
 			else
 			{
+				sem_wait(&mx_lista_ready);
 				list_add(lista_ready, proceso->pcb);
+				sem_post(&mx_lista_ready);
+				printf("PROCESO DEVUELTO A LA LISTA READY ANASHE (SFJ) \n");
 			}
+
+			sem_post(&procesos_en_ready);
 		}
 
-		free(proceso);
 
-		sem_post(&io_terminada);
+
+		free(proceso);
 	}
 	return "";
 }
@@ -167,27 +188,27 @@ void suspended_blocked_a_suspended_ready(t_pcb* pcb) {
 //}
 
 // hay que sincronizar que suspended ready tenga mayor prioridad que de new a ready
-void* suspended_ready_a_ready() {
-	sem_post(&se_inicio_el_hilo);
-	while(1) {
-		sem_wait(&procesos_en_suspended_ready);
-		sem_wait(&grado_multiprogramacion);
-
-		if(es_FIFO()) {
-
-			queue_push(cola_ready, queue_pop(cola_suspended_ready));
-		} else {
-			list_add(lista_ready, queue_pop(cola_suspended_ready));
-		}
-
-		if(!es_FIFO()) {
-			sem_post(&proceso_nuevo_en_ready);
-		}
-
-	}
-
-	return "";
-}
+//void* suspended_ready_a_ready() {
+//	sem_post(&se_inicio_el_hilo);
+//	while(1) {
+//		sem_wait(&procesos_en_suspended_ready);
+//		sem_wait(&grado_multiprogramacion);
+//
+//		if(es_FIFO()) {
+//
+//			queue_push(cola_ready, queue_pop(cola_suspended_ready));
+//		} else {
+//			list_add(lista_ready, queue_pop(cola_suspended_ready));
+//		}
+//
+//		if(!es_FIFO()) {
+//			sem_post(&proceso_nuevo_en_ready);
+//		}
+//
+//	}
+//
+//	return "";
+//}
 
 
 uint32_t calcular_rafaga(t_pcb* pcb){

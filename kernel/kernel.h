@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <pthread.h>
 
-
 #define CREAR_PROCESO 1
 
 int iniciar_servidor(char* ip, char* puerto);
@@ -96,6 +95,7 @@ pthread_t mp_suspendedready_ready; //HILOS MEDIANO PLAZO
 pthread_t cp_ready_exec_fifo, cp_ready_exec_srt, cp_sacar_exec; //HILOS CORTO PLAZO
 pthread_t atender_consolas;
 pthread_t recibir_syscall_cpu;
+pthread_t hiloIO;
 
 // VARIABLES PARA LOS SOCKETS
 char* IP_CONSOLA;
