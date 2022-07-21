@@ -107,7 +107,7 @@ int main(){
 	pthread_detach(cp_ready_exec_fifo);
 	pthread_detach(atender_consolas);
 	pthread_detach(hiloIO);
-	pthread_join(recibir_syscall_cpu);
+	pthread_join(recibir_syscall_cpu, NULL);
 //	pthread_detach(mp_suspendedready_ready);
 	
 
@@ -161,9 +161,20 @@ void* recibir_procesos() {
 		free(proceso);
 
 		ingreso_a_new(pcb); // planificador largo plazo
-		printf("Proceso %i # Ingreso a new \n", pcb.id_proceso);
+		printf("Proceso %i # Ingreso a new \n", pcb->id_proceso);
 	}
 	return "";
+}
+
+void copiar_pcb(t_pcb* pcb_nuevo, t_pcb pcb) {
+	pcb_nuevo->id_proceso = pcb.id_proceso;
+	pcb_nuevo->tamanio_direcciones = pcb.tamanio_direcciones;
+	pcb_nuevo->size_instrucciones = pcb.size_instrucciones;
+	pcb_nuevo->instrucciones = malloc(strlen(pcb.instrucciones) + 1);
+	strcpy(pcb_nuevo->instrucciones, pcb.instrucciones);
+	pcb_nuevo->program_counter = pcb.program_counter;
+	pcb_nuevo->tabla_paginas = pcb.tabla_paginas;
+	pcb_nuevo->estimacion_rafagas = pcb.estimacion_rafagas;
 }
 
 void* esperar_syscall() {
@@ -203,17 +214,6 @@ void* esperar_syscall() {
 			printf("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN \n", syscall->pcb.id_proceso);
 		}
 	}
-}
-
-void copiar_pcb(t_pcb* pcb_nuevo, pcb) {
-	pcb_nuevo->id_proceso = pcb.id_proceso;
-	pcb_nuevo->tamanio_direcciones = pcb.tamanio_direcciones;
-	pcb_nuevo->size_instrucciones = pcb.size_instrucciones;
-	pcb_nuevo->instrucciones = malloc(strlen(pcb.instrucciones));
-	strcpy(pcb_nuevo->instrucciones, pcb.instrucciones);
-	pcb_nuevo->program_counter = pcb.program_counter;
-	pcb_nuevo->tabla_paginas = pcb.tabla_paginas;
-	pcb_nuevo->estimacion_rafagas = pcb.estimacion_rafagas;
 }
 
 t_syscall* recibirSyscall(){

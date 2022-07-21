@@ -1597,3 +1597,840 @@
 
 
 [INFO] 23:52:26:152 CPU/(25921:25926): se limpio la tlb
+[INFO] 14:49:57:252 CPU/(4477:4477): se realizo la conexion al kernel (dispatch)
+[INFO] 14:49:57:255 CPU/(4477:4477): se realizo la conexion al kernel (interrupt)
+[INFO] 14:49:57:256 CPU/(4477:4477): se realizo la conexion a memoria
+[INFO] 14:49:57:256 CPU/(4477:4477): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:49:57:258 CPU/(4477:4477): se creo la tlb
+[INFO] 14:49:57:258 CPU/(4477:4477): se creo la tlb
+[INFO] 14:49:57:258 CPU/(4477:4477): se creo la tlb
+[INFO] 14:49:57:258 CPU/(4477:4477): se creo la tlb
+[INFO] 14:49:57:262 CPU/(4477:4480): hilo executer iniciado 
+
+[INFO] 14:50:15:894 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:50:15:894 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:50:15:894 CPU/(4477:4480): siguiente instruccion: NO_OP 5 
+
+[INFO] 14:50:15:894 CPU/(4477:4480): EXECUTE
+[INFO] 14:50:15:894 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 14:50:15:894 CPU/(4477:4480): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 14:50:16:894 CPU/(4477:4480): UN NO_OP EJECUTADO
+[INFO] 14:50:17:895 CPU/(4477:4480): UN NO_OP EJECUTADO
+[INFO] 14:50:18:895 CPU/(4477:4480): UN NO_OP EJECUTADO
+[INFO] 14:50:19:895 CPU/(4477:4480): UN NO_OP EJECUTADO
+[INFO] 14:50:20:896 CPU/(4477:4480): UN NO_OP EJECUTADO
+[INFO] 14:50:20:896 CPU/(4477:4480): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 14:50:20:896 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:50:20:896 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:50:20:896 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:50:20:896 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:50:20:896 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:50:20:896 CPU/(4477:4480): siguiente instruccion: WRITE 4 2 
+
+[INFO] 14:50:20:896 CPU/(4477:4480): EXECUTE
+[INFO] 14:50:20:896 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:50:20:897 CPU/(4477:4480): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:50:20:897 CPU/(4477:4480): se escribira en la direccion logica 4 el valor 2
+[INFO] 14:50:20:897 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:50:20:897 CPU/(4477:4480): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:50:24:936 CPU/(4477:4480): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:50:24:936 CPU/(4477:4480): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:50:24:936 CPU/(4477:4480): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:50:24:936 CPU/(4477:4480): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:50:24:936 CPU/(4477:4480): se escribira en el frame 0, offset 4
+[INFO] 14:50:25:938 CPU/(4477:4480): se escribio con exito en el frame
+[INFO] 14:50:25:938 CPU/(4477:4480): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:50:25:938 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:50:25:938 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:50:25:938 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:50:25:938 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:50:25:938 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:50:25:938 CPU/(4477:4480): siguiente instruccion: READ 4 
+
+[INFO] 14:50:25:938 CPU/(4477:4480): EXECUTE
+[INFO] 14:50:25:938 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: READ
+[INFO] 14:50:25:938 CPU/(4477:4480): Se comienza a ejecutar la instruccion READ
+[INFO] 14:50:25:938 CPU/(4477:4480): se leera la direccion logica 4
+[INFO] 14:50:25:939 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:50:25:939 CPU/(4477:4480): hay una entrada con la misma pagina
+[INFO] 14:50:25:939 CPU/(4477:4480): la pagina no esta obsoleta
+[INFO] 14:50:25:939 CPU/(4477:4480): se leera del frame 0, offset 4
+[INFO] 14:50:26:940 CPU/(4477:4480): el dato leido fue 2
+[INFO] 14:50:26:940 CPU/(4477:4480): Se termino de ejecutar la instruccion READ 
+
+[INFO] 14:50:26:940 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:50:26:940 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:50:26:940 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:50:26:940 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:50:26:940 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:50:26:940 CPU/(4477:4480): siguiente instruccion: COPY 1 4 
+
+[INFO] 14:50:26:940 CPU/(4477:4480): FETCH OPERAND
+[INFO] 14:50:26:940 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:50:26:940 CPU/(4477:4480): hay una entrada con la misma pagina
+[INFO] 14:50:26:940 CPU/(4477:4480): la pagina no esta obsoleta
+[INFO] 14:50:27:941 CPU/(4477:4480): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 14:50:27:941 CPU/(4477:4480): se termina de ejecutar fetchOperand
+[INFO] 14:50:27:941 CPU/(4477:4480): EXECUTE
+[INFO] 14:50:27:941 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: COPY
+[INFO] 14:50:27:942 CPU/(4477:4480): se comienza a ejecutar la instruccion COPY
+[INFO] 14:50:27:942 CPU/(4477:4480): se escribira en la direccion logica 1 el valor 2
+[INFO] 14:50:27:942 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:50:27:942 CPU/(4477:4480): hay una entrada con la misma pagina
+[INFO] 14:50:27:942 CPU/(4477:4480): la pagina no esta obsoleta
+[INFO] 14:50:27:942 CPU/(4477:4480): se escribira en el frame 0, offset 1
+[INFO] 14:50:28:943 CPU/(4477:4480): se escribio con exito en el frame
+[INFO] 14:50:28:943 CPU/(4477:4480): se termino de ejecutar la instruccion COPY 
+
+[INFO] 14:50:28:943 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:50:28:943 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:50:28:943 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:50:28:943 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:50:28:943 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:50:28:943 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:50:28:943 CPU/(4477:4480): EXECUTE
+[INFO] 14:50:28:943 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:50:28:944 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:50:28:944 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:50:28:944 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:50:28:944 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:50:28:944 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:50:28:944 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:50:28:945 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:12:325 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:12:325 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:12:325 CPU/(4477:4480): siguiente instruccion: I/O 1000 
+
+[INFO] 14:51:12:325 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:12:325 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:51:12:325 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:51:12:326 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:51:12:326 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:12:326 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:12:327 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:12:327 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:13:330 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:13:330 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:13:330 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:51:13:330 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:13:330 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:51:13:330 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:51:13:331 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:51:13:331 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:51:13:331 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:13:331 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:13:331 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:13:331 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:16:334 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:16:334 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:16:334 CPU/(4477:4480): siguiente instruccion: WRITE 1 5 
+
+[INFO] 14:51:16:334 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:16:334 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:51:16:334 CPU/(4477:4480): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:51:16:334 CPU/(4477:4480): se escribira en la direccion logica 1 el valor 5
+[INFO] 14:51:16:334 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:51:16:334 CPU/(4477:4480): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:51:20:337 CPU/(4477:4480): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:51:20:337 CPU/(4477:4480): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:51:20:337 CPU/(4477:4480): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:51:20:337 CPU/(4477:4480): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:51:20:337 CPU/(4477:4480): se escribira en el frame 0, offset 1
+[INFO] 14:51:21:338 CPU/(4477:4480): se escribio con exito en el frame
+[INFO] 14:51:21:339 CPU/(4477:4480): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:51:21:339 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:21:339 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:21:339 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:51:21:339 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:21:339 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:21:339 CPU/(4477:4480): siguiente instruccion: I/O 5000 
+
+[INFO] 14:51:21:339 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:21:339 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:51:21:339 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:51:21:340 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:51:21:340 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:21:340 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:21:340 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:21:340 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:26:341 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:26:341 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:26:341 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:51:26:341 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:26:341 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:51:26:341 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:51:26:341 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:51:26:342 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:51:26:342 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:26:342 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:26:342 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:26:342 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:32:875 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:32:875 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:32:875 CPU/(4477:4480): siguiente instruccion: I/O 1000 
+
+[INFO] 14:51:32:875 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:32:875 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:51:32:875 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:51:32:876 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:51:32:876 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:32:876 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:32:876 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:32:876 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:33:878 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:33:878 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:33:878 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:51:33:878 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:33:878 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:51:33:878 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:51:33:878 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:51:33:879 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:51:33:879 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:33:879 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:33:879 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:33:879 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:36:883 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:36:883 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:36:883 CPU/(4477:4480): siguiente instruccion: WRITE 1 5 
+
+[INFO] 14:51:36:883 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:36:883 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:51:36:883 CPU/(4477:4480): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:51:36:883 CPU/(4477:4480): se escribira en la direccion logica 1 el valor 5
+[INFO] 14:51:36:883 CPU/(4477:4480): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:51:36:883 CPU/(4477:4480): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:51:40:886 CPU/(4477:4480): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:51:40:886 CPU/(4477:4480): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:51:40:887 CPU/(4477:4480): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:51:40:887 CPU/(4477:4480): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:51:40:887 CPU/(4477:4480): se escribira en el frame 0, offset 1
+[INFO] 14:51:41:888 CPU/(4477:4480): se escribio con exito en el frame
+[INFO] 14:51:41:888 CPU/(4477:4480): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:51:41:888 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:41:888 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:41:888 CPU/(4477:4480): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:51:41:888 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:41:888 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:41:888 CPU/(4477:4480): siguiente instruccion: I/O 5000 
+
+[INFO] 14:51:41:888 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:41:888 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:51:41:888 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:51:41:889 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:51:41:889 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:41:889 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:41:889 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:41:889 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:51:46:890 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:51:46:890 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:51:46:890 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:51:46:890 CPU/(4477:4480): EXECUTE
+[INFO] 14:51:46:890 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:51:46:890 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:51:46:890 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:51:46:891 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:51:46:891 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:51:46:891 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:51:46:891 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:51:46:891 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:52:13:275 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:52:13:275 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:52:13:275 CPU/(4477:4480): siguiente instruccion: I/O 1000 
+
+[INFO] 14:52:13:275 CPU/(4477:4480): EXECUTE
+[INFO] 14:52:13:275 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:52:13:275 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:52:13:275 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:52:13:275 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:52:13:275 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:52:13:275 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:52:13:275 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:52:14:276 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:52:14:276 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:52:14:277 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:52:14:277 CPU/(4477:4480): EXECUTE
+[INFO] 14:52:14:277 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:52:14:277 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:52:14:277 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:52:14:278 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:52:14:278 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:52:14:278 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:52:14:278 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:52:14:278 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:53:27:441 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:53:27:441 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:53:27:441 CPU/(4477:4480): siguiente instruccion: I/O 1000 
+
+[INFO] 14:53:27:441 CPU/(4477:4480): EXECUTE
+[INFO] 14:53:27:442 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:53:27:442 CPU/(4477:4480): Se comienza a ejecutar la instruccion IO
+[INFO] 14:53:27:442 CPU/(4477:4480): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:53:27:442 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:53:27:442 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:53:27:442 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:53:27:442 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:53:28:449 CPU/(4477:4480): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:53:28:449 CPU/(4477:4480): FETCH NEXT INSTRUCTION
+[INFO] 14:53:28:449 CPU/(4477:4480): siguiente instruccion: EXIT 
+
+[INFO] 14:53:28:449 CPU/(4477:4480): EXECUTE
+[INFO] 14:53:28:449 CPU/(4477:4480): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:53:28:450 CPU/(4477:4480): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:53:28:450 CPU/(4477:4480): la syscall fue enviada
+[INFO] 14:53:28:450 CPU/(4477:4480): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:53:28:450 CPU/(4477:4480): CHECK INTERRUPT
+[INFO] 14:53:28:450 CPU/(4477:4480): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:53:28:450 CPU/(4477:4480): se detecto una syscall bloqueante 
+
+
+[INFO] 14:53:28:450 CPU/(4477:4480): se limpio la tlb
+[INFO] 14:54:00:792 CPU/(5210:5210): se realizo la conexion al kernel (dispatch)
+[INFO] 14:54:01:793 CPU/(5210:5210): se realizo la conexion al kernel (interrupt)
+[INFO] 14:54:01:794 CPU/(5210:5210): se realizo la conexion a memoria
+[INFO] 14:54:01:794 CPU/(5210:5210): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:54:01:795 CPU/(5210:5210): se creo la tlb
+[INFO] 14:54:01:795 CPU/(5210:5210): se creo la tlb
+[INFO] 14:54:01:795 CPU/(5210:5210): se creo la tlb
+[INFO] 14:54:01:795 CPU/(5210:5210): se creo la tlb
+[INFO] 14:54:01:795 CPU/(5210:5217): hilo executer iniciado 
+
+[INFO] 14:54:06:793 CPU/(5210:5217): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:54:06:793 CPU/(5210:5217): FETCH NEXT INSTRUCTION
+[INFO] 14:54:06:793 CPU/(5210:5217): siguiente instruccion: I/O 1000 
+
+[INFO] 14:54:06:793 CPU/(5210:5217): EXECUTE
+[INFO] 14:54:06:793 CPU/(5210:5217): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:54:06:793 CPU/(5210:5217): Se comienza a ejecutar la instruccion IO
+[INFO] 14:54:06:794 CPU/(5210:5217): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:54:06:794 CPU/(5210:5217): CHECK INTERRUPT
+[INFO] 14:54:06:794 CPU/(5210:5217): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:54:06:794 CPU/(5210:5217): se detecto una syscall bloqueante 
+
+
+[INFO] 14:54:06:794 CPU/(5210:5217): se limpio la tlb
+[INFO] 14:54:07:797 CPU/(5210:5217): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:54:07:797 CPU/(5210:5217): FETCH NEXT INSTRUCTION
+[INFO] 14:54:07:797 CPU/(5210:5217): siguiente instruccion: EXIT 
+
+[INFO] 14:54:07:797 CPU/(5210:5217): EXECUTE
+[INFO] 14:54:07:797 CPU/(5210:5217): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:54:07:797 CPU/(5210:5217): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:54:07:797 CPU/(5210:5217): la syscall fue enviada
+[INFO] 14:54:07:797 CPU/(5210:5217): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:54:07:797 CPU/(5210:5217): CHECK INTERRUPT
+[INFO] 14:54:07:797 CPU/(5210:5217): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:54:07:797 CPU/(5210:5217): se detecto una syscall bloqueante 
+
+
+[INFO] 14:54:07:797 CPU/(5210:5217): se limpio la tlb
+[INFO] 14:54:58:539 CPU/(5406:5406): se realizo la conexion al kernel (dispatch)
+[INFO] 14:54:58:540 CPU/(5406:5406): se realizo la conexion al kernel (interrupt)
+[INFO] 14:54:58:541 CPU/(5406:5406): se realizo la conexion a memoria
+[INFO] 14:54:58:541 CPU/(5406:5406): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:54:58:542 CPU/(5406:5406): se creo la tlb
+[INFO] 14:54:58:542 CPU/(5406:5406): se creo la tlb
+[INFO] 14:54:58:542 CPU/(5406:5406): se creo la tlb
+[INFO] 14:54:58:542 CPU/(5406:5406): se creo la tlb
+[INFO] 14:54:58:543 CPU/(5406:5409): hilo executer iniciado 
+
+[INFO] 14:55:02:211 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:02:211 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:02:211 CPU/(5406:5409): siguiente instruccion: I/O 1500 
+
+[INFO] 14:55:02:211 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:02:211 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:55:02:211 CPU/(5406:5409): Se comienza a ejecutar la instruccion IO
+[INFO] 14:55:02:212 CPU/(5406:5409): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:55:02:212 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:02:212 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:02:212 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:02:212 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:03:713 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:03:714 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:03:714 CPU/(5406:5409): siguiente instruccion: EXIT 
+
+[INFO] 14:55:03:714 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:03:714 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:55:03:714 CPU/(5406:5409): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:55:03:714 CPU/(5406:5409): la syscall fue enviada
+[INFO] 14:55:03:714 CPU/(5406:5409): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:55:03:714 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:03:714 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:03:714 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:03:714 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:09:721 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:09:721 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:09:721 CPU/(5406:5409): siguiente instruccion: I/O 1500 
+
+[INFO] 14:55:09:721 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:09:721 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:55:09:721 CPU/(5406:5409): Se comienza a ejecutar la instruccion IO
+[INFO] 14:55:09:721 CPU/(5406:5409): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:55:09:721 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:09:721 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:09:721 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:09:721 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:11:222 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:11:222 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:11:222 CPU/(5406:5409): siguiente instruccion: EXIT 
+
+[INFO] 14:55:11:222 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:11:222 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:55:11:222 CPU/(5406:5409): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:55:11:222 CPU/(5406:5409): la syscall fue enviada
+[INFO] 14:55:11:223 CPU/(5406:5409): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:55:11:223 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:11:223 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:11:223 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:11:223 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:16:169 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:16:169 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:16:169 CPU/(5406:5409): siguiente instruccion: I/O 1500 
+
+[INFO] 14:55:16:169 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:16:169 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:55:16:169 CPU/(5406:5409): Se comienza a ejecutar la instruccion IO
+[INFO] 14:55:16:170 CPU/(5406:5409): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:55:16:170 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:16:170 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:16:170 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:16:170 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:17:671 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:17:671 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:17:671 CPU/(5406:5409): siguiente instruccion: EXIT 
+
+[INFO] 14:55:17:671 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:17:671 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:55:17:671 CPU/(5406:5409): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:55:17:671 CPU/(5406:5409): la syscall fue enviada
+[INFO] 14:55:17:672 CPU/(5406:5409): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:55:17:672 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:17:672 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:17:672 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:17:672 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:29:161 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:29:161 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:29:161 CPU/(5406:5409): siguiente instruccion: I/O 1500 
+
+[INFO] 14:55:29:161 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:29:161 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:55:29:161 CPU/(5406:5409): Se comienza a ejecutar la instruccion IO
+[INFO] 14:55:29:161 CPU/(5406:5409): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:55:29:162 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:29:162 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:29:162 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:29:162 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:31:163 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:31:163 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:31:163 CPU/(5406:5409): siguiente instruccion: WRITE 1 5 
+
+[INFO] 14:55:31:163 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:31:163 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:55:31:164 CPU/(5406:5409): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:55:31:164 CPU/(5406:5409): se escribira en la direccion logica 1 el valor 5
+[INFO] 14:55:31:164 CPU/(5406:5409): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:55:31:164 CPU/(5406:5409): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:55:35:208 CPU/(5406:5409): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:55:35:208 CPU/(5406:5409): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:55:35:208 CPU/(5406:5409): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:55:35:208 CPU/(5406:5409): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:55:35:208 CPU/(5406:5409): se escribira en el frame 0, offset 1
+[INFO] 14:55:36:210 CPU/(5406:5409): se escribio con exito en el frame
+[INFO] 14:55:36:210 CPU/(5406:5409): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:55:36:210 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:36:210 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:36:210 CPU/(5406:5409): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:55:36:210 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:36:210 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:36:210 CPU/(5406:5409): siguiente instruccion: I/O 5000 
+
+[INFO] 14:55:36:210 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:36:210 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:55:36:210 CPU/(5406:5409): Se comienza a ejecutar la instruccion IO
+[INFO] 14:55:36:211 CPU/(5406:5409): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:55:36:211 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:36:211 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:36:211 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:36:211 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:36:212 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:36:212 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:36:212 CPU/(5406:5409): siguiente instruccion: EXIT 
+
+[INFO] 14:55:36:212 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:36:212 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:55:36:212 CPU/(5406:5409): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:55:36:212 CPU/(5406:5409): la syscall fue enviada
+[INFO] 14:55:36:212 CPU/(5406:5409): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:55:36:213 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:36:213 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:36:213 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:36:213 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:55:41:212 CPU/(5406:5409): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:55:41:212 CPU/(5406:5409): FETCH NEXT INSTRUCTION
+[INFO] 14:55:41:212 CPU/(5406:5409): siguiente instruccion: EXIT 
+
+[INFO] 14:55:41:212 CPU/(5406:5409): EXECUTE
+[INFO] 14:55:41:212 CPU/(5406:5409): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:55:41:213 CPU/(5406:5409): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:55:41:213 CPU/(5406:5409): la syscall fue enviada
+[INFO] 14:55:41:213 CPU/(5406:5409): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:55:41:213 CPU/(5406:5409): CHECK INTERRUPT
+[INFO] 14:55:41:213 CPU/(5406:5409): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:55:41:213 CPU/(5406:5409): se detecto una syscall bloqueante 
+
+
+[INFO] 14:55:41:213 CPU/(5406:5409): se limpio la tlb
+[INFO] 14:56:29:319 CPU/(5684:5684): se realizo la conexion al kernel (dispatch)
+[INFO] 14:56:29:320 CPU/(5684:5684): se realizo la conexion al kernel (interrupt)
+[INFO] 14:56:29:320 CPU/(5684:5684): se realizo la conexion a memoria
+[INFO] 14:56:29:320 CPU/(5684:5684): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:56:29:322 CPU/(5684:5684): se creo la tlb
+[INFO] 14:56:29:322 CPU/(5684:5684): se creo la tlb
+[INFO] 14:56:29:322 CPU/(5684:5684): se creo la tlb
+[INFO] 14:56:29:322 CPU/(5684:5684): se creo la tlb
+[INFO] 14:56:29:322 CPU/(5684:5687): hilo executer iniciado 
+
+[INFO] 14:56:34:240 CPU/(5684:5687): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:56:34:240 CPU/(5684:5687): FETCH NEXT INSTRUCTION
+[INFO] 14:56:34:240 CPU/(5684:5687): siguiente instruccion: I/O 1500 
+
+[INFO] 14:56:34:240 CPU/(5684:5687): EXECUTE
+[INFO] 14:56:34:240 CPU/(5684:5687): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:56:34:240 CPU/(5684:5687): Se comienza a ejecutar la instruccion IO
+[INFO] 14:56:34:241 CPU/(5684:5687): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:56:34:241 CPU/(5684:5687): CHECK INTERRUPT
+[INFO] 14:56:34:241 CPU/(5684:5687): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:56:34:241 CPU/(5684:5687): se detecto una syscall bloqueante 
+
+
+[INFO] 14:56:34:241 CPU/(5684:5687): se limpio la tlb
+[INFO] 14:56:36:243 CPU/(5684:5687): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:56:36:243 CPU/(5684:5687): FETCH NEXT INSTRUCTION
+[INFO] 14:56:36:243 CPU/(5684:5687): siguiente instruccion: WRITE 1 5 
+
+[INFO] 14:56:36:243 CPU/(5684:5687): EXECUTE
+[INFO] 14:56:36:243 CPU/(5684:5687): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:56:36:243 CPU/(5684:5687): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:56:36:244 CPU/(5684:5687): se escribira en la direccion logica 1 el valor 5
+[INFO] 14:56:36:244 CPU/(5684:5687): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:56:36:244 CPU/(5684:5687): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:56:40:281 CPU/(5684:5687): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:56:40:282 CPU/(5684:5687): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:56:40:282 CPU/(5684:5687): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:56:40:282 CPU/(5684:5687): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:56:40:282 CPU/(5684:5687): se escribira en el frame 0, offset 1
+[INFO] 14:56:41:284 CPU/(5684:5687): se escribio con exito en el frame
+[INFO] 14:56:41:284 CPU/(5684:5687): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:56:41:284 CPU/(5684:5687): CHECK INTERRUPT
+[INFO] 14:56:41:284 CPU/(5684:5687): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:56:41:284 CPU/(5684:5687): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:56:41:284 CPU/(5684:5687): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:56:41:284 CPU/(5684:5687): FETCH NEXT INSTRUCTION
+[INFO] 14:56:41:285 CPU/(5684:5687): siguiente instruccion: I/O 5000 
+
+[INFO] 14:56:41:285 CPU/(5684:5687): EXECUTE
+[INFO] 14:56:41:285 CPU/(5684:5687): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:56:41:285 CPU/(5684:5687): Se comienza a ejecutar la instruccion IO
+[INFO] 14:56:41:286 CPU/(5684:5687): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:56:41:286 CPU/(5684:5687): CHECK INTERRUPT
+[INFO] 14:56:41:286 CPU/(5684:5687): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:56:41:286 CPU/(5684:5687): se detecto una syscall bloqueante 
+
+
+[INFO] 14:56:41:286 CPU/(5684:5687): se limpio la tlb
+[INFO] 14:56:41:286 CPU/(5684:5687): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:56:41:286 CPU/(5684:5687): FETCH NEXT INSTRUCTION
+[INFO] 14:56:41:286 CPU/(5684:5687): siguiente instruccion: EXIT 
+
+[INFO] 14:56:41:286 CPU/(5684:5687): EXECUTE
+[INFO] 14:56:41:287 CPU/(5684:5687): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:56:41:287 CPU/(5684:5687): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:56:41:287 CPU/(5684:5687): la syscall fue enviada
+[INFO] 14:56:41:290 CPU/(5684:5687): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:56:41:290 CPU/(5684:5687): CHECK INTERRUPT
+[INFO] 14:56:41:290 CPU/(5684:5687): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:56:41:290 CPU/(5684:5687): se detecto una syscall bloqueante 
+
+
+[INFO] 14:56:41:290 CPU/(5684:5687): se limpio la tlb
+[INFO] 14:56:46:291 CPU/(5684:5687): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:56:46:291 CPU/(5684:5687): FETCH NEXT INSTRUCTION
+[INFO] 14:56:46:291 CPU/(5684:5687): siguiente instruccion: EXIT 
+
+[INFO] 14:56:46:292 CPU/(5684:5687): EXECUTE
+[INFO] 14:56:46:292 CPU/(5684:5687): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:56:46:292 CPU/(5684:5687): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:56:46:292 CPU/(5684:5687): la syscall fue enviada
+[INFO] 14:56:46:292 CPU/(5684:5687): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:56:46:292 CPU/(5684:5687): CHECK INTERRUPT
+[INFO] 14:56:46:292 CPU/(5684:5687): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:56:46:292 CPU/(5684:5687): se detecto una syscall bloqueante 
+
+
+[INFO] 14:56:46:292 CPU/(5684:5687): se limpio la tlb
+[INFO] 14:57:20:782 CPU/(5862:5862): se realizo la conexion al kernel (dispatch)
+[INFO] 14:57:20:783 CPU/(5862:5862): se realizo la conexion al kernel (interrupt)
+[INFO] 14:57:20:783 CPU/(5862:5862): se realizo la conexion a memoria
+[INFO] 14:57:20:783 CPU/(5862:5862): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:57:20:785 CPU/(5862:5862): se creo la tlb
+[INFO] 14:57:20:785 CPU/(5862:5862): se creo la tlb
+[INFO] 14:57:20:785 CPU/(5862:5862): se creo la tlb
+[INFO] 14:57:20:785 CPU/(5862:5862): se creo la tlb
+[INFO] 14:57:20:785 CPU/(5862:5865): hilo executer iniciado 
+
+[INFO] 14:57:25:926 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:57:25:926 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:57:25:926 CPU/(5862:5865): siguiente instruccion: I/O 1500 
+
+[INFO] 14:57:25:926 CPU/(5862:5865): EXECUTE
+[INFO] 14:57:25:926 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:57:25:926 CPU/(5862:5865): Se comienza a ejecutar la instruccion IO
+[INFO] 14:57:25:928 CPU/(5862:5865): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:57:25:928 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:57:25:928 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:57:25:928 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:57:25:928 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:57:27:930 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:57:27:930 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:57:27:930 CPU/(5862:5865): siguiente instruccion: WRITE 1 5 
+
+[INFO] 14:57:27:930 CPU/(5862:5865): EXECUTE
+[INFO] 14:57:27:930 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 14:57:27:930 CPU/(5862:5865): se comienza a ejecutar la instruccion WRITE
+[INFO] 14:57:27:930 CPU/(5862:5865): se escribira en la direccion logica 1 el valor 5
+[INFO] 14:57:27:930 CPU/(5862:5865): comienza a buscarse la pagina 0 en la TLB
+[INFO] 14:57:27:930 CPU/(5862:5865): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 14:57:31:972 CPU/(5862:5865): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 14:57:31:972 CPU/(5862:5865): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 14:57:31:972 CPU/(5862:5865): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 14:57:31:972 CPU/(5862:5865): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 14:57:31:972 CPU/(5862:5865): se escribira en el frame 0, offset 1
+[INFO] 14:57:32:974 CPU/(5862:5865): se escribio con exito en el frame
+[INFO] 14:57:32:974 CPU/(5862:5865): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 14:57:32:974 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:57:32:974 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:57:32:974 CPU/(5862:5865): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 14:57:32:974 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:57:32:974 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:57:32:974 CPU/(5862:5865): siguiente instruccion: I/O 5000 
+
+[INFO] 14:57:32:974 CPU/(5862:5865): EXECUTE
+[INFO] 14:57:32:974 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:57:32:974 CPU/(5862:5865): Se comienza a ejecutar la instruccion IO
+[INFO] 14:57:32:975 CPU/(5862:5865): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:57:32:975 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:57:32:975 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:57:32:975 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:57:32:975 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:57:32:975 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:57:32:975 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:57:32:976 CPU/(5862:5865): siguiente instruccion: EXIT 
+
+[INFO] 14:57:32:976 CPU/(5862:5865): EXECUTE
+[INFO] 14:57:32:976 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:57:32:976 CPU/(5862:5865): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:57:32:976 CPU/(5862:5865): la syscall fue enviada
+[INFO] 14:57:32:976 CPU/(5862:5865): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:57:32:976 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:57:32:976 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:57:32:976 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:57:32:976 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:57:37:976 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:57:37:976 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:57:37:976 CPU/(5862:5865): siguiente instruccion: EXIT 
+
+[INFO] 14:57:37:976 CPU/(5862:5865): EXECUTE
+[INFO] 14:57:37:977 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:57:37:977 CPU/(5862:5865): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:57:37:977 CPU/(5862:5865): la syscall fue enviada
+[INFO] 14:57:37:977 CPU/(5862:5865): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:57:37:977 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:57:37:977 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:57:37:977 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:57:37:977 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:58:08:200 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:58:08:200 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:58:08:200 CPU/(5862:5865): siguiente instruccion: I/O 1500 
+
+[INFO] 14:58:08:200 CPU/(5862:5865): EXECUTE
+[INFO] 14:58:08:200 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:58:08:200 CPU/(5862:5865): Se comienza a ejecutar la instruccion IO
+[INFO] 14:58:08:201 CPU/(5862:5865): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:58:08:201 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:58:08:201 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:58:08:201 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:58:08:201 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:58:10:202 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:58:10:202 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:58:10:202 CPU/(5862:5865): siguiente instruccion: I/O 1500 
+
+[INFO] 14:58:10:202 CPU/(5862:5865): EXECUTE
+[INFO] 14:58:10:202 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 14:58:10:202 CPU/(5862:5865): Se comienza a ejecutar la instruccion IO
+[INFO] 14:58:10:202 CPU/(5862:5865): Se termino de ejecutar la instruccion IO 
+
+[INFO] 14:58:10:202 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:58:10:202 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:58:10:202 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:58:10:202 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:58:10:202 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:58:10:202 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:58:10:202 CPU/(5862:5865): siguiente instruccion: EXIT 
+
+[INFO] 14:58:10:202 CPU/(5862:5865): EXECUTE
+[INFO] 14:58:10:202 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:58:10:202 CPU/(5862:5865): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:58:10:202 CPU/(5862:5865): la syscall fue enviada
+[INFO] 14:58:10:202 CPU/(5862:5865): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:58:10:202 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:58:10:202 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:58:10:202 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:58:10:202 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:58:12:250 CPU/(5862:5865): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 14:58:12:250 CPU/(5862:5865): FETCH NEXT INSTRUCTION
+[INFO] 14:58:12:250 CPU/(5862:5865): siguiente instruccion: EXIT 
+
+[INFO] 14:58:12:250 CPU/(5862:5865): EXECUTE
+[INFO] 14:58:12:250 CPU/(5862:5865): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 14:58:12:251 CPU/(5862:5865): se comienza a ejecutar la instruccion EXIT
+[INFO] 14:58:12:251 CPU/(5862:5865): la syscall fue enviada
+[INFO] 14:58:12:251 CPU/(5862:5865): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 14:58:12:251 CPU/(5862:5865): CHECK INTERRUPT
+[INFO] 14:58:12:251 CPU/(5862:5865): chequeando interrupciones y/o syscall bloqueante
+[INFO] 14:58:12:251 CPU/(5862:5865): se detecto una syscall bloqueante 
+
+
+[INFO] 14:58:12:251 CPU/(5862:5865): se limpio la tlb
+[INFO] 14:59:22:316 CPU/(6181:6181): se realizo la conexion al kernel (dispatch)
+[INFO] 14:59:22:317 CPU/(6181:6181): se realizo la conexion al kernel (interrupt)
+[INFO] 14:59:22:318 CPU/(6181:6181): se realizo la conexion a memoria
+[INFO] 14:59:22:318 CPU/(6181:6181): se recibio la informacion para traduccion de direccion logica
+[INFO] 14:59:22:319 CPU/(6181:6181): se creo la tlb
+[INFO] 14:59:22:319 CPU/(6181:6181): se creo la tlb
+[INFO] 14:59:22:319 CPU/(6181:6181): se creo la tlb
+[INFO] 14:59:22:319 CPU/(6181:6181): se creo la tlb
+[INFO] 14:59:22:320 CPU/(6181:6184): hilo executer iniciado 
+

@@ -73,6 +73,7 @@ void* hilo_io(){
         bloqueado = queue_pop(cola_blocked);
 		printf("Proceso %i # Ejecutando I/O \n", bloqueado->pcb->id_proceso);
         usleep(bloqueado->tiempo_de_bloqueo * 1000);
+        printf("Proceso %i # Fin I/O \n", bloqueado->pcb->id_proceso);
         sem_wait(&suspendiendo);
             if(bloqueado->esta_suspendido == 1) {
                 //printf("###### PROCESO %i PASADO A SUSPENDED READY #######\n", bloqueado->pcb->id_proceso);
