@@ -1,0 +1,67 @@
+[INFO] 23:45:30:720 HILO KERNEL/(24472:24479): hilo kernel iniciado
+[INFO] 23:45:32:461 HILO KERNEL/(24472:24479): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 23:45:32:461 HILO KERNEL/(24472:24479): # CREAR_TABLAS
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): datos recibidos: 
+process id: 4, espacio de direcciones: 160
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): El proceso necesitara 3 paginas
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): Tablas de segundo nivel creadas
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): tabla 1er nivel numero 0 creada
+[INFO] 23:45:32:502 HILO KERNEL/(24472:24479): puntero numero 0 creado, inicializado en 0
+[INFO] 23:45:34:510 HILO KERNEL/(24472:24479): archivo ./../swap/4.swap creado
+[INFO] 23:45:34:511 HILO KERNEL/(24472:24479): # FIN CREAR_TABLAS 
+
+
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): # SUSPENSION_PROCESO
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Datos recibidos: process id 4, numero_primer_tabla 0
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): # Suspendiendo procesos tabla 0
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Mirando entrada 0 de la tabla de primer nivel
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): frame 0 liberado
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Bit de presencia en 1, liberando frame 0 
+
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): Tablas suspendidas.
+[INFO] 23:45:40:607 HILO KERNEL/(24472:24479): # FIN SUSPENSION_PROCESO
+[INFO] 23:52:03:999 HILO KERNEL/(25920:25925): hilo kernel iniciado
+[INFO] 23:52:14:048 HILO KERNEL/(25920:25925): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 23:52:14:048 HILO KERNEL/(25920:25925): # CREAR_TABLAS
+[INFO] 23:52:14:086 HILO KERNEL/(25920:25925): datos recibidos: 
+process id: 4, espacio de direcciones: 200
+[INFO] 23:52:14:086 HILO KERNEL/(25920:25925): El proceso necesitara 4 paginas
+[INFO] 23:52:14:086 HILO KERNEL/(25920:25925): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 23:52:14:086 HILO KERNEL/(25920:25925): Se crearon 1 tablas
+[INFO] 23:52:14:087 HILO KERNEL/(25920:25925): Tablas de segundo nivel creadas
+[INFO] 23:52:14:087 HILO KERNEL/(25920:25925): tabla 1er nivel numero 0 creada
+[INFO] 23:52:14:087 HILO KERNEL/(25920:25925): puntero numero 0 creado, inicializado en 0
+[INFO] 23:52:16:091 HILO KERNEL/(25920:25925): archivo ./../swap/4.swap creado
+[INFO] 23:52:16:093 HILO KERNEL/(25920:25925): # FIN CREAR_TABLAS 
+
+
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): # SUSPENSION_PROCESO
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Datos recibidos: process id 4, numero_primer_tabla 0
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): # Suspendiendo procesos tabla 0
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Mirando entrada 0 de la tabla de primer nivel
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): frame 0 liberado
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Bit de presencia en 1, liberando frame 0 
+
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): Tablas suspendidas.
+[INFO] 23:52:22:152 HILO KERNEL/(25920:25925): # FIN SUSPENSION_PROCESO
+[INFO] 23:52:26:152 HILO KERNEL/(25920:25925): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 23:52:26:152 HILO KERNEL/(25920:25925): # FINALIZACION_PROCESO
+[INFO] 23:52:26:191 HILO KERNEL/(25920:25925): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 23:52:28:191 HILO KERNEL/(25920:25925): archivo 4.swap borradp
+[INFO] 23:52:28:191 HILO KERNEL/(25920:25925): memoria ocupada por la tabla 0 liberada
