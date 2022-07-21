@@ -65,6 +65,8 @@ typedef struct {
 typedef struct {
 	t_pcb* pcb;
 	uint32_t tiempo_de_bloqueo;
+	pthread_t suspensor;
+	int esta_suspendido;
 } t_bloqueado;
 
 

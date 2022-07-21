@@ -548,7 +548,6 @@ t_pcb recibir_PCB(){
     t_pcb_buffer buffer;
 
     recv(socket_dispatch, &(buffer.size), sizeof(uint32_t), MSG_WAITALL);
-    printf("SE RECIBIO UN PCB \n");
     recv(socket_dispatch, &(buffer.size_instrucciones), sizeof(uint32_t), MSG_WAITALL);
 //    printf("buffer->size_instrucciones: %i \n", buffer.size_instrucciones);
     buffer.stream = malloc(buffer.size);
@@ -566,7 +565,6 @@ t_pcb recibir_PCB(){
     pcb.lista_instrucciones = malloc(buffer.size_instrucciones + 1);
     memcpy(pcb.lista_instrucciones, buffer.stream+offset, buffer.size_instrucciones);
     offset+=buffer.size_instrucciones;
-    printf("SE RECIBIERON LAS INSTRUCCIONES %s \n", pcb.lista_instrucciones);
 //    printf("pcb.lista_instrucciones = %s \n", pcb.lista_instrucciones);
 //    printf("strlen: %i \n", (int)strlen(pcb.lista_instrucciones));
 

@@ -132,7 +132,6 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 	buffer->size = sizeof(uint32_t) * 7 + strlen(syscall_a_enviar->pcb.lista_instrucciones);
 	buffer->size_instrucciones = strlen(syscall_a_enviar->pcb.lista_instrucciones);
-	printf("instrucciones = %s \n", syscall_a_enviar->pcb.lista_instrucciones);
 	buffer->stream = malloc(buffer->size);
 
 	int offset = 0;

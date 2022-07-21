@@ -21,3 +21,6 @@ sem_t proceso_finalizado; // = 0
 sem_t fin_de_ejecucion; // = 1
 sem_t se_inicio_el_hilo; // = 0
 sem_t proceso_en_io; // = 0
+sem_t se_inicio_suspensor;
+sem_t suspendiendo;
+sem_t esperando_respuesta_memoria; // = 1

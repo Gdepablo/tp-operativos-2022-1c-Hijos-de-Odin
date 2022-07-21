@@ -13,9 +13,7 @@ void* ready_a_executing(){
 			sem_wait(&fin_de_ejecucion);
 
 			sem_wait(&mx_lista_ready);
-				printf("########SIZE DE COLA READY %i ####### \n", queue_size(cola_ready));
 				t_pcb* pcb_a_enviar = queue_pop(cola_ready);
-				printf("################## id del pcb popeado: %i ################ \n", pcb_a_enviar->id_proceso);
 				enviar_a_CPU( pcb_a_enviar );
 				free(pcb_a_enviar->instrucciones);
 				free(pcb_a_enviar);
@@ -42,7 +40,7 @@ void* ready_a_executing(){
 void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 
-	printf("INSTRUCCIONES A ENVIAR: \n%s \n", pcb_a_enviar->instrucciones);
+//	printf("INSTRUCCIONES A ENVIAR: \n%s \n", pcb_a_enviar->instrucciones);
 
 	buffer->size = sizeof(uint32_t) * 5 + strlen(pcb_a_enviar->instrucciones) + 1;
 	buffer->size_instrucciones = strlen(pcb_a_enviar->instrucciones) + 1;
@@ -52,12 +50,12 @@ void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 	// COPY DEL ID DE PROCESO
 	memcpy(buffer->stream+offset, &(pcb_a_enviar->id_proceso), sizeof(uint32_t));
 	offset+=sizeof(uint32_t);
-	printf("%i \n", *(int*)buffer->stream);
+//	printf("%i \n", *(int*)buffer->stream);
 	// COPY DE TAMANIO DE DIRECCIONES
 	memcpy(buffer->stream+offset, &(pcb_a_enviar->tamanio_direcciones), sizeof(uint32_t));
 	offset+=sizeof(uint32_t);
-	printf("%i \n", pcb_a_enviar->tamanio_direcciones);
-	printf("%i \n", *(uint32_t*)(buffer->stream+sizeof(uint32_t)));
+//	printf("%i \n", pcb_a_enviar->tamanio_direcciones);
+//	printf("%i \n", *(uint32_t*)(buffer->stream+sizeof(uint32_t)));
 	// COPY LISTA DE INSTRUCCIONES
 	memcpy(buffer->stream+offset, pcb_a_enviar->instrucciones, buffer->size_instrucciones);
 	offset+=buffer->size_instrucciones;

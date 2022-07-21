@@ -8,7 +8,6 @@ void ingreso_a_new(t_pcb* pcb) {
 	// guardar en memoria XD
 	sem_wait(&mx_cola_new);
 		queue_push(cola_new, pcb);
-		printf("se metio en queue al pcb \n");
 	sem_post(&mx_cola_new);
 
 	sem_post(&procesos_para_ready);
@@ -20,27 +19,25 @@ void* pasar_a_ready(){
 	sem_post(&se_inicio_el_hilo);
 	while(1){
 		sem_wait(&procesos_para_ready);
-		printf("########### PROCESOS PARA READY ############ \n");
 		sem_wait(&grado_multiprogramacion);
 
 		if( queue_size(cola_suspended_ready) == 0 ){ // => agarro la queue NEW
-			printf("################ ENTRO AL IF ################ \n");
 			sem_wait(&mx_lista_ready);
-			printf("########## mx_lista_ready ########## \n");
 			sem_wait(&mx_cola_new);
-			printf("########## mx_cola_new ########## \n");
 			if(es_FIFO()) {
 				// FIFO
 
 				t_pcb* pcb = queue_pop(cola_new);
 
 				crear_tabla_proceso(pcb);
+
 				queue_push(cola_ready, pcb);
-				printf("############## ID PUSHEADO: %i ############## \n", pcb->id_proceso);
 			} else {
 				// SJF
 				t_pcb* pcb = queue_pop(cola_new);
+
 				crear_tabla_proceso(pcb);
+
 				list_add(lista_ready, queue_pop(cola_new));
 			}
 			sem_post(&mx_cola_new);
@@ -80,6 +77,7 @@ void* pasar_a_ready(){
 void crear_tabla_proceso(t_pcb* pcb){
 	// CODIGO DE OPERACION = 4
 	int codop = 4;
+	sem_wait(&esperando_respuesta_memoria);
 	send(socket_memoria, &codop, sizeof(uint32_t), 0);
 
 	// FULBO
@@ -87,7 +85,9 @@ void crear_tabla_proceso(t_pcb* pcb){
 	send(socket_memoria, &(pcb->tamanio_direcciones), sizeof(uint32_t), 0);
 
 	// RECIBO NUMERO DE TABLA
+
 	recv(socket_memoria, &(pcb->tabla_paginas), sizeof(uint32_t), MSG_WAITALL);
+	sem_post(&esperando_respuesta_memoria);
 }
 
 void executing_a_exit(t_syscall* una_syscall){
@@ -97,6 +97,7 @@ void executing_a_exit(t_syscall* una_syscall){
 	uint32_t codop = 6;
 	uint32_t respuesta;
 
+	sem_wait(&esperando_respuesta_memoria);
 	send( socket_memoria, &codop, sizeof(uint32_t), 0);
 	// PROCESS ID
 	send( socket_memoria, &(una_syscall->pcb.id_proceso), sizeof(uint32_t), 0);
@@ -106,6 +107,7 @@ void executing_a_exit(t_syscall* una_syscall){
 	// RESPUESTA
 	printf("ESPERANDO RESPUESTA \n");
 	recv( socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
+	sem_post(&esperando_respuesta_memoria);
 
 	if(respuesta == 100){
 		printf("Se libero la memoria del proceso %i \n", una_syscall->pcb.id_proceso);

@@ -95,6 +95,9 @@ int main(void){
 	sem_init(&procesos_para_ready, 0, 0);
 	sem_init(&proceso_en_io, 0, 0);
 	sem_init(&mx_cola_suspended_ready, 0, 1);
+	sem_init(&se_inicio_suspensor, 0, 0);
+	sem_init(&suspendiendo, 0, 1);
+	sem_init(&esperando_respuesta_memoria, 0, 1);
 
 	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
 	pthread_create(&lp_new_ready_fifo, NULL, pasar_a_ready, NULL);
@@ -134,7 +137,6 @@ void* recibir_procesos() {
 		t_buffer* buffer = malloc(sizeof(buffer));
 
 		recv(*socket_nuevo, &codop, sizeof(uint32_t), MSG_WAITALL);
-		printf("codop %i \n", codop);
 		recv(*socket_nuevo, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
 		buffer -> stream = malloc(buffer->size);
 		recv(*socket_nuevo, buffer->stream, buffer->size, MSG_WAITALL);
@@ -155,7 +157,7 @@ void* recibir_procesos() {
 
 //		printf("%i \n", pcb->id_proceso);
 //		printf("%i \n", pcb->tamanio_direcciones);
-		printf("INSTRUCCINES MALDITAS:\n%s \n", pcb->instrucciones);
+//		printf("INSTRUCCINES MALDITAS:\n%s \n", pcb->instrucciones);
 //		printf("%i \n", pcb->program_counter);
 //		printf("%i \n", pcb->tabla_paginas);
 //		printf("%i \n", pcb->estimacion_rafagas);
@@ -165,7 +167,7 @@ void* recibir_procesos() {
 		free(proceso);
 
 		ingreso_a_new(pcb); // planificador largo plazo
-		printf("############# SE INGRESO A NEW ############# \n");
+//		printf("############# SE INGRESO A NEW ############# \n");
 		id++;
 	}
 	return "";
@@ -179,13 +181,11 @@ void* esperar_syscall() {
 		t_syscall* una_syscall = recibirSyscall();
 		switch(una_syscall->instruccion) {
 		case IO:
-			printf("IO RECIBIDA \n");
 			executing_a_blocked(una_syscall);
 			free(una_syscall->pcb.instrucciones);
 			free(una_syscall);
 			break;
 		case EXIT:
-			printf("ENTRO EN EXIT \n");
 			executing_a_exit(una_syscall);
 			free(una_syscall->pcb.instrucciones);
 			free(una_syscall);
@@ -230,10 +230,10 @@ t_syscall* recibirSyscall(){
 
 
     recv(socket_cpu_dispatch, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
-    printf("#### RECIBIENDO SYSCALL #### \n");
-    printf("tamanio recibido: %i \n", buffer->size);
+//    printf("#### RECIBIENDO SYSCALL #### \n");
+//    printf("tamanio recibido: %i \n", buffer->size);
     recv(socket_cpu_dispatch, &(buffer->size_instrucciones), sizeof(uint32_t), 0);
-    printf("size de instrucciones es: %i \n", buffer->size_instrucciones);
+//    printf("size de instrucciones es: %i \n", buffer->size_instrucciones);
 
     buffer->stream = malloc(buffer->size);
 
@@ -244,38 +244,38 @@ t_syscall* recibirSyscall(){
     int offset = 0;
     // INSTRUCCION
     memcpy(&(syscall_recibida->instruccion), buffer->stream+offset, sizeof(uint32_t));
-    printf("syscall instruccion es: %i \n", syscall_recibida->instruccion);
+//    printf("syscall instruccion es: %i \n", syscall_recibida->instruccion);
     offset+=sizeof(uint32_t);
     // TIEMPO DE BLOQUEO
     memcpy(&(syscall_recibida->tiempo_de_bloqueo), buffer->stream+offset, sizeof(uint32_t));
-    printf("syscall tiempo de bloqueo es: %i \n", syscall_recibida->tiempo_de_bloqueo);
+//    printf("syscall tiempo de bloqueo es: %i \n", syscall_recibida->tiempo_de_bloqueo);
     offset+=sizeof(uint32_t);
     // PCB
     // ID PROCESO
     memcpy(&(syscall_recibida->pcb.id_proceso), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-    printf("syscall pcb id proceso es: %i \n", syscall_recibida->pcb.id_proceso);
+//    printf("syscall pcb id proceso es: %i \n", syscall_recibida->pcb.id_proceso);
     // TAMANIO DIRECCIONES
     memcpy(&(syscall_recibida->pcb.tamanio_direcciones), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-    printf("syscall pcb tamanio direcciones es: %i \n", syscall_recibida->pcb.tamanio_direcciones);
+//    printf("syscall pcb tamanio direcciones es: %i \n", syscall_recibida->pcb.tamanio_direcciones);
     // LISTA DE INSTRUCCIONES (PELIGRO)
     syscall_recibida->pcb.instrucciones = malloc(buffer->size_instrucciones + 1);
     memcpy(syscall_recibida->pcb.instrucciones, buffer->stream+offset, buffer->size_instrucciones);
     offset+=buffer->size_instrucciones;
-    printf("la lista de instrucciones es: %s \n", syscall_recibida->pcb.instrucciones);
+//    printf("la lista de instrucciones es: %s \n", syscall_recibida->pcb.instrucciones);
     // PROGRAM COUNTER
     memcpy(&(syscall_recibida->pcb.program_counter), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-    printf("el program counter es: %i \n", syscall_recibida->pcb.program_counter);
+//    printf("el program counter es: %i \n", syscall_recibida->pcb.program_counter);
     // TABLA DE PAGINAS
     memcpy(&(syscall_recibida->pcb.tabla_paginas), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-    printf("la tabla de paginas es: %i \n", syscall_recibida->pcb.tabla_paginas);
+//    printf("la tabla de paginas es: %i \n", syscall_recibida->pcb.tabla_paginas);
     // ESTIMACION DE RAFAGAS
     memcpy(&(syscall_recibida->pcb.estimacion_rafagas), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-    printf("la estimacion de rafagas es: %i \n", syscall_recibida->pcb.estimacion_rafagas);
+//    printf("la estimacion de rafagas es: %i \n", syscall_recibida->pcb.estimacion_rafagas);
 
     // TODO liberar memoria, ver struct
 
@@ -289,11 +289,11 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 
 	memcpy(&(procesoNuevo->tamanio_direcciones), stream, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	printf("procesonuevo->tamanio_direcciones = %i \n", procesoNuevo->tamanio_direcciones);
+//	printf("procesonuevo->tamanio_direcciones = %i \n", procesoNuevo->tamanio_direcciones);
 
 	memcpy(&(procesoNuevo->largo_instrucciones), stream+offset, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
+//	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
 
 	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones);
 	memcpy(procesoNuevo->instrucciones, stream+offset, procesoNuevo->largo_instrucciones);
