@@ -23,14 +23,17 @@ void* ready_a_executing(){
 			// SJF
 			t_pcb* pcb_a_enviar = algoritmo_sjf();
 			if(pcb_a_enviar->id_proceso != PCB_EJECUCION.id_proceso) {
+
 				uint32_t interrupcion = 55;
 				send(socket_cpu_interrupcion, &interrupcion, sizeof(uint32_t), 0);
 
 				sem_wait(&pcb_recibido);
-				enviar_a_CPU(pcb_a_enviar);
-				printf("Proceso %i # Enviado a CPU \n", pcb_a_enviar->id_proceso);
-				asignar_pcb_ejecucion(pcb_a_enviar);
 
+				enviar_a_CPU(pcb_a_enviar);
+
+				printf("Proceso %i # Enviado a CPU \n", pcb_a_enviar->id_proceso);
+
+				asignar_pcb_ejecucion(pcb_a_enviar);
 				gettimeofday(&HORA_INICIO_EJECUCION, NULL);
 			} else {
 				printf("Proceso %i # Permanece en CPU \n", pcb_a_enviar->id_proceso);
@@ -115,20 +118,41 @@ t_pcb* algoritmo_sjf() {
 	printf("Ejecutando algoritmo SJF \n");
 	t_pcb* pcb_minimo = list_get_minimum(lista_ready, comparar_rafagas );
 
-	struct timeval hora_actual;
-	gettimeofday(&hora_actual, NULL);
+	struct timeval HORA_ACTUAL;
+	gettimeofday(&HORA_ACTUAL, NULL);
 
-	long seconds = hora_actual.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
-	long milisegundos = (((seconds * 1000000) + hora_actual.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
-	uint32_t rafaga_restante_pcb_en_ejecucion = PCB_EJECUCION.estimacion_rafagas - milisegundos;
+    int tiempo_actual_de_ejecucion_milisegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
+    int rafaga_restante_pcb_en_ejecucion = PCB_EJECUCION.estimacion_rafagas - tiempo_actual_de_ejecucion_milisegundos;
 
-	if( ( pcb_minimo->estimacion_rafagas < rafaga_restante_pcb_en_ejecucion ) || (  PCB_EJECUCION.id_proceso == -1 )) {
-		pcb_minimo = list_remove_by_condition(lista_ready, sacar_proceso);
-		return pcb_minimo;
-	} else {
-		return &PCB_EJECUCION;
-	}
+
+    if( (rafaga_restante_pcb_en_ejecucion) > (int)(pcb_minimo->estimacion_rafagas) || (int)(PCB_EJECUCION.id_proceso) == -1 ){
+        return pcb_minimo;
+    }
+    else
+    {
+        return &PCB_EJECUCION;
+    }
 }
+
+//t_pcb* algoritmo_sjf() {
+//	// TODO TESTEAR
+//	printf("Ejecutando algoritmo SJF \n");
+//	t_pcb* pcb_minimo = list_get_minimum(lista_ready, comparar_rafagas );
+//
+//	struct timeval hora_actual;
+//	gettimeofday(&hora_actual, NULL);
+//
+//	long seconds = hora_actual.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
+//	long milisegundos = (((seconds * 1000000) + hora_actual.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
+//	uint32_t rafaga_restante_pcb_en_ejecucion = PCB_EJECUCION.estimacion_rafagas - milisegundos;
+//
+//	if( ( pcb_minimo->estimacion_rafagas < rafaga_restante_pcb_en_ejecucion ) || (  PCB_EJECUCION.id_proceso == 99999 )) {
+//		pcb_minimo = list_remove_by_condition(lista_ready, sacar_proceso);
+//		return pcb_minimo;
+//	} else {
+//		return &PCB_EJECUCION;
+//	}
+//}
 
 void* comparar_rafagas(void* pcb1, void* pcb2){
     t_pcb *pcbUno = pcb1;
@@ -144,9 +168,10 @@ void* comparar_rafagas(void* pcb1, void* pcb2){
 void asignar_pcb_ejecucion(t_pcb* pcb){
 	PCB_EJECUCION.estimacion_rafagas = pcb->estimacion_rafagas;
 	PCB_EJECUCION.id_proceso = pcb->id_proceso;
+	PCB_EJECUCION.instrucciones = malloc(strlen(pcb->instrucciones) + 1);
 	PCB_EJECUCION.instrucciones = pcb->instrucciones;
 	PCB_EJECUCION.program_counter = pcb->program_counter;
-	PCB_EJECUCION.size_instrucciones = pcb->size_instrucciones;
+//	PCB_EJECUCION.size_instrucciones = pcb->size_instrucciones; este campo creo que nunca lo usamos, no borrar por las dudas
 	PCB_EJECUCION.tabla_paginas = pcb->tabla_paginas;
 	PCB_EJECUCION.tamanio_direcciones = pcb->tamanio_direcciones;
 }

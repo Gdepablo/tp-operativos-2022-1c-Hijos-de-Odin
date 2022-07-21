@@ -174,6 +174,16 @@ void copiar_pcb(t_pcb* pcb_nuevo, t_pcb pcb) {
 	strcpy(pcb_nuevo->instrucciones, pcb.instrucciones);
 	pcb_nuevo->program_counter = pcb.program_counter;
 	pcb_nuevo->tabla_paginas = pcb.tabla_paginas;
+
+	// TODO no hay que actualizar la estimacion si es SJF? y si es FIFO creo que si actualizamos no afecta nada xD
+
+//	struct timeval HORA_ACTUAL;
+//	gettimeofday(&HORA_ACTUAL, NULL);
+//
+//	int tiempo_actual_de_ejecucion_milisegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
+//	printf("TIEMPO ACTUAL DE EJECUCION EN MILISEGUNDOS: %i \n", tiempo_actual_de_ejecucion_milisegundos);
+//	pcb_nuevo->estimacion_rafagas = tiempo_actual_de_ejecucion_milisegundos;
+
 	pcb_nuevo->estimacion_rafagas = pcb.estimacion_rafagas;
 }
 
