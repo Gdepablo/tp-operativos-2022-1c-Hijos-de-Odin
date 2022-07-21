@@ -7,12 +7,8 @@
 // VARIABLES GLOBALES
 char* PUERTO_ESCUCHA;
 
-
-
-
-
-int main(void){
-	printf("# KERNEL # \n");
+int main(){
+	printf("#################### KERNEL #################### \n");
 
 	PCB_EJECUCION.id_proceso = -1;
 
@@ -40,12 +36,11 @@ int main(void){
 	cola_suspended_blocked  = queue_create();
 	cola_suspended_ready    = queue_create();
 
-
 	// SOCKETS
 	uint32_t handshake;
 	uint32_t respuesta;
 
-	socket_consola_proceso  = iniciar_servidor("anashe", PUERTO_ESCUCHA); // por aca se comunican las consolas XD
+	socket_consola_proceso  = iniciar_servidor("", PUERTO_ESCUCHA);
 
 	socket_memoria = crear_conexion(IP_MEMORIA, PUERTO_MEMORIA);
 	handshake = 555;
@@ -58,8 +53,8 @@ int main(void){
 		printf("Error en la conexión con la memoria \n");
 		return 1;
 	}
-
-	socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH); // se conecta a cpu
+	// CONEXIÓN CON CPU
+	socket_cpu_dispatch = crear_conexion(IP_CPU, PUERTO_CPU_DISPATCH);
 	handshake = 333;
 	send(socket_cpu_dispatch, &handshake, sizeof(uint32_t), 0);
 	respuesta = 0;
@@ -71,7 +66,7 @@ int main(void){
 		return 1;
 	}
 
-	int socket_cpu_interrupcion = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT); // se conecta a cpu
+	int socket_cpu_interrupcion = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT);
 	handshake = 111;
 		send(socket_cpu_interrupcion, &handshake, sizeof(uint32_t), 0);
 		respuesta = 0;
@@ -99,27 +94,27 @@ int main(void){
 	sem_init(&suspendiendo, 0, 1);
 	sem_init(&esperando_respuesta_memoria, 0, 1);
 
-	// INICIO DE HILOS, SE ESPERA A QUE TERMINEN ANTES DE CONTINUAR
+	// INICIO DE HILOS
 	pthread_create(&lp_new_ready_fifo, NULL, pasar_a_ready, NULL);
-//	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
 	pthread_create(&cp_ready_exec_fifo, NULL, ready_a_executing, NULL);
 	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
 	pthread_create(&recibir_syscall_cpu, NULL, esperar_syscall, NULL);
 	pthread_create(&hiloIO , NULL, hilo_io, NULL);
+//	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
+
 
 	pthread_detach(lp_new_ready_fifo);
-//	pthread_detach(mp_suspendedready_ready);
 	pthread_detach(cp_ready_exec_fifo);
 	pthread_detach(atender_consolas);
 	pthread_detach(hiloIO);
-	pthread_detach(recibir_syscall_cpu);
+	pthread_join(recibir_syscall_cpu);
+//	pthread_detach(mp_suspendedready_ready);
+	
 
-	for(int i = 0; i < 5; i++){
-		sem_wait(&se_inicio_el_hilo);
-	}
-	printf("se iniciaron todos los hilos \n");
-
-	while(1); // ver esto xd
+//	for(int i = 0; i < 5; i++){
+//		sem_wait(&se_inicio_el_hilo);
+//	}
+//	printf("se iniciaron todos los hilos \n");
 
 	return 0;
 }
@@ -127,8 +122,7 @@ int main(void){
 // RECEPCIÓN DE PROCESOS DESDE CONSOLA Y CARGA EN NEW
 
 void* recibir_procesos() {
-	sem_post(&se_inicio_el_hilo);
-	int id = 0;
+//	sem_post(&se_inicio_el_hilo);
 	uint32_t codop;
 	while(1) {
 		int* socket_nuevo = malloc(sizeof(int));
@@ -167,62 +161,59 @@ void* recibir_procesos() {
 		free(proceso);
 
 		ingreso_a_new(pcb); // planificador largo plazo
-//		printf("############# SE INGRESO A NEW ############# \n");
-		id++;
+		printf("Proceso %i # Ingreso a new \n", pcb.id_proceso);
 	}
 	return "";
 }
 
-// ESPERA DE SYSCALLS PROVENIENTES DEL CPU (IO Y EXIT)
-
 void* esperar_syscall() {
-	sem_post(&se_inicio_el_hilo);
+//	sem_post(&se_inicio_el_hilo);
 	while(1) {
-		t_syscall* una_syscall = recibirSyscall();
-		switch(una_syscall->instruccion) {
+		t_syscall* syscall = recibirSyscall();
+		switch(syscall->instruccion) {
 		case IO:
-			executing_a_blocked(una_syscall);
-			free(una_syscall->pcb.instrucciones);
-			free(una_syscall);
+			printf("Proceso %i # Syscall recibida -> I/O \n", syscall->pcb.id_proceso);
+			executing_a_blocked(syscall);
+			free(syscall->pcb.instrucciones);
+			free(syscall);
 			break;
 		case EXIT:
-			executing_a_exit(una_syscall);
-			free(una_syscall->pcb.instrucciones);
-			free(una_syscall);
+			printf("Proceso %i # Syscall recibida -> EXIT \n", syscall->pcb.id_proceso);
+			executing_a_exit(syscall);
+			free(syscall->pcb.instrucciones);
+			free(syscall);
 			break;
 		case DESALOJO:{
-			// VER
+			printf("Proceso %i # Se desaloja \n", syscall->pcb.id_proceso);
+			// TODO
 			// recibir pcb
 			// meter pcb en ready
 			t_pcb* pcb_nuevo = malloc(sizeof(t_pcb));
-			// ID PROCESO
-			pcb_nuevo->id_proceso = una_syscall->pcb.id_proceso;
-			// TAMANIO INSTRUCCIONES
-			pcb_nuevo->tamanio_direcciones = una_syscall->pcb.tamanio_direcciones;
-			// SIZE INSTRUCCIONES
-			pcb_nuevo->size_instrucciones = una_syscall->pcb.size_instrucciones;
-			// INSTRUCCIONES
-			pcb_nuevo->instrucciones = malloc(strlen(una_syscall->pcb.instrucciones));
-			strcpy(pcb_nuevo->instrucciones, una_syscall->pcb.instrucciones);
-			// PROGRAM COUNTER
-			pcb_nuevo->program_counter = una_syscall->pcb.program_counter;
-			// TABLA PAGINAS
-			pcb_nuevo->tabla_paginas = una_syscall->pcb.tabla_paginas;
-			// ESTIMACION RAFAGA
-			pcb_nuevo->estimacion_rafagas = una_syscall->pcb.estimacion_rafagas;
-			// LISTO
+			copiar_pcb(pcb_nuevo, syscall->pcb);
 
-			free(una_syscall->pcb.instrucciones);
-			free(una_syscall);
+			free(syscall->pcb.instrucciones);
+			free(syscall);
 
 			list_add(lista_ready, pcb_nuevo);
 			// TODO CREAR PCB NUEVO, VER EN CPU EL CODIGO 2
 			sem_post(&pcb_recibido);
-			break;}
+			break;
+			}
 		default:
-			printf("Error de código de instrucción \n");
+			printf("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN \n", syscall->pcb.id_proceso);
 		}
 	}
+}
+
+void copiar_pcb(t_pcb* pcb_nuevo, pcb) {
+	pcb_nuevo->id_proceso = pcb.id_proceso;
+	pcb_nuevo->tamanio_direcciones = pcb.tamanio_direcciones;
+	pcb_nuevo->size_instrucciones = pcb.size_instrucciones;
+	pcb_nuevo->instrucciones = malloc(strlen(pcb.instrucciones));
+	strcpy(pcb_nuevo->instrucciones, pcb.instrucciones);
+	pcb_nuevo->program_counter = pcb.program_counter;
+	pcb_nuevo->tabla_paginas = pcb.tabla_paginas;
+	pcb_nuevo->estimacion_rafagas = pcb.estimacion_rafagas;
 }
 
 t_syscall* recibirSyscall(){
@@ -301,8 +292,7 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 	return procesoNuevo;
 }
 
-int crear_conexion(char *ip, char* puerto)
-{
+int crear_conexion(char *ip, char* puerto) {
 	t_log* log_fallas = log_create("./../logs/log de fallas.log", "log fulbo", true, LOG_LEVEL_INFO);
 
 	struct addrinfo hints;
@@ -365,7 +355,7 @@ int iniciar_servidor(char* ip, char* puerto) {
 	return socket_servidor;
 }
 
-t_config* inicializarConfigs(void) {
+t_config* inicializarConfigs() {
 	t_config* nuevo_config;
 
 	nuevo_config = config_create("./../kernel.config");
