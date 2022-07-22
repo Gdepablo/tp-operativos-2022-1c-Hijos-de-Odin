@@ -373,7 +373,8 @@ char* obtener_ruta_archivo(uint32_t process_id){
 	string_append(&nombre_archivo,".swap");
 
 	char* ruta_archivo = string_new();
-	string_append(&ruta_archivo, "./../swap/");
+	string_append(&ruta_archivo, PATH_SWAP);
+	string_append(&ruta_archivo, "/");
 	string_append(&ruta_archivo, nombre_archivo);
 
 	free(nombre_archivo);

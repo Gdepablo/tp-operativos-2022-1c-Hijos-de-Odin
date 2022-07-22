@@ -35,28 +35,15 @@ void executing_a_blocked(t_syscall* syscall) {
 	strcpy(pcb_nuevo->instrucciones, syscall->pcb.instrucciones);
 	pcb_nuevo->program_counter = syscall->pcb.program_counter;
 	pcb_nuevo->tabla_paginas = syscall->pcb.tabla_paginas;
-
-	// TODO no hay que actualizar la estimacion si es SJF? y si es FIFO creo que si actualizamos no afecta nada xD
-
-//	struct timeval HORA_ACTUAL;
-//	gettimeofday(&HORA_ACTUAL, NULL);
-//
-//	int tiempo_actual_de_ejecucion_milisegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
-//	printf("TIEMPO ACTUAL DE EJECUCION EN MILISEGUNDOS: %i \n", tiempo_actual_de_ejecucion_milisegundos);
-//	pcb_nuevo->estimacion_rafagas = tiempo_actual_de_ejecucion_milisegundos;
-
 	pcb_nuevo->estimacion_rafagas = syscall->pcb.estimacion_rafagas;
+
+	printf("estimacion de rafagas executing a blocked XD %i \n", pcb_nuevo->estimacion_rafagas);
 
 	t_bloqueado* proceso_bloqueado = malloc(sizeof(t_bloqueado));
 
 	proceso_bloqueado->pcb = pcb_nuevo;
 	proceso_bloqueado->tiempo_de_bloqueo = syscall->tiempo_de_bloqueo;
 	proceso_bloqueado->esta_suspendido = 0;
-
-	if(!es_FIFO()){
-		// ACTUALIZA LA ESTIMACION?
-		pcb_nuevo->estimacion_rafagas = calcular_rafaga(&syscall->pcb);
-	}
 
 	queue_push(cola_blocked, proceso_bloqueado);
 	//printf("PROCESO PASADO DE EXECUTING A BLOCKED: %i \n", pcb_nuevo->id_proceso);
@@ -71,6 +58,7 @@ void executing_a_blocked(t_syscall* syscall) {
 	}
 	else
 	{
+		PCB_EJECUCION.id_proceso = -1;
 		sem_post(&procesos_en_ready);
 	}
 }
@@ -130,10 +118,18 @@ void suspended_blocked_a_suspended_ready(t_pcb* pcb) {
 uint32_t calcular_rafaga(t_pcb* pcb){
 	uint32_t rafaga;
 
-	long seconds = HORA_FIN_EJECUCION.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
-	long milisegundos = (((seconds * 1000000) + HORA_FIN_EJECUCION.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
+	int tiempo_actual_de_ejecucion_microsegundos = (HORA_FIN_EJECUCION.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000000 + HORA_FIN_EJECUCION.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
 
-	rafaga = ALFA * (uint32_t)milisegundos + (1.0-ALFA) * pcb->estimacion_rafagas;
+	rafaga = ALFA * (uint32_t)(tiempo_actual_de_ejecucion_microsegundos / 1000) + (1.0-ALFA) * pcb->estimacion_rafagas;
+
+//	long seconds = HORA_FIN_EJECUCION.tv_sec - HORA_INICIO_EJECUCION.tv_sec;
+//	long milisegundos = (((seconds * 1000000) + HORA_FIN_EJECUCION.tv_usec) - (HORA_INICIO_EJECUCION.tv_usec)) * 1000;
+//
+//	rafaga = ALFA * (uint32_t)milisegundos + (1.0-ALFA) * pcb->estimacion_rafagas;
+
+	printf("####### RAFAGA CALCULADA %i #######\n", rafaga);
+	printf("tiempo actual: %i \n", tiempo_actual_de_ejecucion_microsegundos);
+	printf("estimacion previa: %i \n", pcb->estimacion_rafagas);
 
 	return rafaga;
 }

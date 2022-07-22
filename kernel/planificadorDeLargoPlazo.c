@@ -71,7 +71,7 @@ void crear_tabla_proceso(t_pcb* pcb){
 
 	recv(socket_memoria, &(pcb->tabla_paginas), sizeof(uint32_t), MSG_WAITALL);
 	
-	printf("Proceso %i # Tabla creada \n ", pcb->id_proceso);
+	printf("Proceso %i # Tabla creada \n", pcb->id_proceso);
 
 	sem_post(&esperando_respuesta_memoria);
 }

@@ -17,7 +17,7 @@ uint32_t TAMANIO_MEMORIA;
 
 
 
-char* PATH_SWAP;
+
 
 
 t_list* tabla_de_paginas_global;

@@ -1,1 +1,188 @@
-[INFO] 15:17:32:911 CPU - INTERRUPT/(5000:5005): hilo interrupt iniciado
+[INFO] 02:53:35:564 CPU - INTERRUPT/(2938:2946): hilo interrupt iniciado
+[INFO] 02:56:40:333 CPU - INTERRUPT/(3379:3384): hilo interrupt iniciado
+[INFO] 02:59:09:016 CPU - INTERRUPT/(3720:3728): hilo interrupt iniciado
+[INFO] 03:00:49:499 CPU - INTERRUPT/(3926:3938): hilo interrupt iniciado
+[INFO] 03:03:25:582 CPU - INTERRUPT/(4285:4290): hilo interrupt iniciado
+[INFO] 03:04:45:274 CPU - INTERRUPT/(4521:4526): hilo interrupt iniciado
+[INFO] 03:06:39:244 CPU - INTERRUPT/(4814:4819): hilo interrupt iniciado
+[INFO] 03:06:50:004 CPU - INTERRUPT/(4814:4819): Se recibio una interrupcion de kernel
+[INFO] 03:11:17:901 CPU - INTERRUPT/(5737:5742): hilo interrupt iniciado
+[INFO] 03:11:38:629 CPU - INTERRUPT/(5793:5798): hilo interrupt iniciado
+[INFO] 03:12:35:417 CPU - INTERRUPT/(6141:6146): hilo interrupt iniciado
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:244 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[ERROR] 03:12:51:245 CPU - INTERRUPT/(6141:6146): se recibio una interrupcion pero con valor erroneo
+[INFO] 03:13:35:070 CPU - INTERRUPT/(6300:6308): hilo interrupt iniciado
+[INFO] 03:13:48:504 CPU - INTERRUPT/(6366:6371): hilo interrupt iniciado
+[INFO] 03:14:35:791 CPU - INTERRUPT/(6486:6491): hilo interrupt iniciado
+[INFO] 03:16:01:527 CPU - INTERRUPT/(6693:6698): hilo interrupt iniciado
+[INFO] 03:16:16:375 CPU - INTERRUPT/(6758:6763): hilo interrupt iniciado
+[INFO] 03:16:32:058 CPU - INTERRUPT/(6821:6825): hilo interrupt iniciado
+[INFO] 03:21:36:689 CPU - INTERRUPT/(8046:8053): hilo interrupt iniciado
+[INFO] 03:23:02:333 CPU - INTERRUPT/(8268:8276): hilo interrupt iniciado
+[INFO] 03:27:55:300 CPU - INTERRUPT/(8973:8978): hilo interrupt iniciado

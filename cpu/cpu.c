@@ -105,7 +105,8 @@ int main(void){
 	// CREAR POOL DE HILOS
 	pthread_t executerThread, interruptsThread;
 	sem_init(&hiloCreado, 0, 0);
-	sem_init(&sem_interrupcion, 0, 0);
+	sem_init(&sem_interrupcion, 0, 1);
+
 
 	pthread_create(&executerThread, NULL, executer, NULL);
 	pthread_detach(executerThread);
@@ -247,10 +248,17 @@ void* executer(){
 			log_info(log_ejecucion_cpu, "se detecto una interrupcion \n\n");
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
-			enviar_PCB();
+
+			t_syscall* pcb_desalojada = malloc(sizeof(t_syscall));
+			pcb_desalojada->pcb.lista_instrucciones = malloc(string_length(pcb_ejecutando.lista_instrucciones));
+			pcb_desalojada->pcb = pcb_ejecutando;
+			pcb_desalojada->instruccion = 2;
+			pcb_desalojada->tiempo_de_bloqueo = 0;
+			enviar_syscall(pcb_desalojada);
+
 //			free(pcb_ejecutando.lista_instrucciones);
 			sem_wait(&sem_interrupcion);
-			interrupcion = 0;
+				interrupcion = 0;
 			sem_post(&sem_interrupcion);
 		}
 		else if (se_hizo_una_syscall_bloqueante()){
@@ -289,9 +297,9 @@ void* interrupt(){
 
 		if(valor_recibido == 55){
 			sem_wait(&sem_interrupcion);
-			interrupcion = 1;
+				interrupcion = 1;
 			sem_post(&sem_interrupcion);
-			printf("#### SE RECIBIO UNA INTERRUPCION ####");
+			printf("#### SE RECIBIO UNA INTERRUPCION #### \n");
 			log_info(log_ejecucion_cpu_interrupt, "Se recibio una interrupcion de kernel");
 		}
 		else

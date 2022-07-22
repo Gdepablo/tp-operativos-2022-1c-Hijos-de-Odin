@@ -11,6 +11,7 @@ int main(){
 	printf("#################### KERNEL #################### \n");
 
 	PCB_EJECUCION.id_proceso = -1;
+	gettimeofday(&HORA_INICIO_EJECUCION , NULL);
 
 	// VARIABLES DEL CONFIG
 	t_config* config = inicializarConfigs();
@@ -66,7 +67,7 @@ int main(){
 		return 1;
 	}
 
-	int socket_cpu_interrupcion = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT);
+	socket_cpu_interrupcion = crear_conexion(IP_CPU, PUERTO_CPU_INTERRUPT);
 	handshake = 111;
 		send(socket_cpu_interrupcion, &handshake, sizeof(uint32_t), 0);
 		respuesta = 0;
@@ -174,26 +175,17 @@ void copiar_pcb(t_pcb* pcb_nuevo, t_pcb pcb) {
 	strcpy(pcb_nuevo->instrucciones, pcb.instrucciones);
 	pcb_nuevo->program_counter = pcb.program_counter;
 	pcb_nuevo->tabla_paginas = pcb.tabla_paginas;
-
-	// TODO no hay que actualizar la estimacion si es SJF? y si es FIFO creo que si actualizamos no afecta nada xD
-
-//	struct timeval HORA_ACTUAL;
-//	gettimeofday(&HORA_ACTUAL, NULL);
-//
-//	int tiempo_actual_de_ejecucion_milisegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
-//	printf("TIEMPO ACTUAL DE EJECUCION EN MILISEGUNDOS: %i \n", tiempo_actual_de_ejecucion_milisegundos);
-//	pcb_nuevo->estimacion_rafagas = tiempo_actual_de_ejecucion_milisegundos;
-
 	pcb_nuevo->estimacion_rafagas = pcb.estimacion_rafagas;
 }
 
 void* esperar_syscall() {
-//	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		t_syscall* syscall = recibirSyscall();
 		switch(syscall->instruccion) {
 		case IO:
 			printf("Proceso %i # Syscall recibida -> I/O \n", syscall->pcb.id_proceso);
+			syscall->pcb.estimacion_rafagas = calcular_rafaga(&(syscall->pcb));
+			printf("estimacion de rafagas post: %i \n", syscall->pcb.estimacion_rafagas);
 			executing_a_blocked(syscall);
 			free(syscall->pcb.instrucciones);
 			free(syscall);
@@ -206,9 +198,8 @@ void* esperar_syscall() {
 			break;
 		case DESALOJO:{
 			printf("Proceso %i # Se desaloja \n", syscall->pcb.id_proceso);
-			// TODO
-			// recibir pcb
-			// meter pcb en ready
+			syscall->pcb.estimacion_rafagas = calcular_rafaga(&(syscall->pcb));
+			printf("estimacion de rafagas post: %i \n", syscall->pcb.estimacion_rafagas);
 			t_pcb* pcb_nuevo = malloc(sizeof(t_pcb));
 			copiar_pcb(pcb_nuevo, syscall->pcb);
 
@@ -216,8 +207,7 @@ void* esperar_syscall() {
 			free(syscall);
 
 			list_add(lista_ready, pcb_nuevo);
-			// TODO CREAR PCB NUEVO, VER EN CPU EL CODIGO 2
-			sem_post(&pcb_recibido);
+			sem_post(&procesos_en_ready);
 			break;
 			}
 		default:
@@ -278,7 +268,9 @@ t_syscall* recibirSyscall(){
     offset+=sizeof(uint32_t);
 //    printf("la estimacion de rafagas es: %i \n", syscall_recibida->pcb.estimacion_rafagas);
 
-    // TODO liberar memoria, ver struct
+    gettimeofday(&HORA_FIN_EJECUCION, NULL);
+
+
 
 	return syscall_recibida;
 }
@@ -296,7 +288,7 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 	offset += sizeof(uint32_t);
 //	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
 
-	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones);
+	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones + 1); // sin el +1 XD
 	memcpy(procesoNuevo->instrucciones, stream+offset, procesoNuevo->largo_instrucciones);
 
 	return procesoNuevo;
@@ -377,6 +369,9 @@ int es_FIFO(){
 	return !strcmp(ALGORITMO_PLANIFICACION, "FIFO");
 }
 
+void* hilo_contador(void){
 
+	return "";
+}
 
 

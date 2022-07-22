@@ -21,22 +21,38 @@ void* ready_a_executing(){
 			sem_post(&mx_lista_ready);
 		} else {
 			// SJF
-			t_pcb* pcb_a_enviar = algoritmo_sjf();
-			if(pcb_a_enviar->id_proceso != PCB_EJECUCION.id_proceso) {
+			if( list_size(lista_ready) != 0 ){
 
-				uint32_t interrupcion = 55;
-				send(socket_cpu_interrupcion, &interrupcion, sizeof(uint32_t), 0);
+				t_pcb* pcb_a_enviar = algoritmo_sjf();
+				if( pcb_a_enviar->id_proceso != PCB_EJECUCION.id_proceso) {
+					pcb_a_enviar = list_remove_by_condition(lista_ready, sacar_proceso);
 
-				sem_wait(&pcb_recibido);
+					if( (int)PCB_EJECUCION.id_proceso != -1 ){
+						printf("Hay proceso ejecutandose # Se envia interrupcion \n");
+						uint32_t interrupcion = 55;
+						send(socket_cpu_interrupcion, &interrupcion, sizeof(uint32_t), 0);
+//						sem_wait(&pcb_recibido);
+						sem_wait(&procesos_en_ready);
+					}
+					else
+					{
+						printf("No hay proceso ejecutandose # No se envia interrupcion \n");
+					}
 
-				enviar_a_CPU(pcb_a_enviar);
+					enviar_a_CPU(pcb_a_enviar);
 
-				printf("Proceso %i # Enviado a CPU \n", pcb_a_enviar->id_proceso);
+					printf("Proceso %i # Enviado a CPU \n", pcb_a_enviar->id_proceso);
 
-				asignar_pcb_ejecucion(pcb_a_enviar);
-				gettimeofday(&HORA_INICIO_EJECUCION, NULL);
-			} else {
-				printf("Proceso %i # Permanece en CPU \n", pcb_a_enviar->id_proceso);
+					asignar_pcb_ejecucion(pcb_a_enviar);
+					gettimeofday(&HORA_INICIO_EJECUCION, NULL);
+
+					// set en 1
+
+					free(pcb_a_enviar->instrucciones);
+					free(pcb_a_enviar);
+				} else {
+					printf("Proceso %i # Permanece en CPU \n", pcb_a_enviar->id_proceso);
+				}
 			}
 		}
 	}
@@ -121,15 +137,24 @@ t_pcb* algoritmo_sjf() {
 	struct timeval HORA_ACTUAL;
 	gettimeofday(&HORA_ACTUAL, NULL);
 
-    int tiempo_actual_de_ejecucion_milisegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
-    int rafaga_restante_pcb_en_ejecucion = PCB_EJECUCION.estimacion_rafagas - tiempo_actual_de_ejecucion_milisegundos;
+    int tiempo_actual_de_ejecucion_microsegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
+    int rafaga_restante_pcb_en_ejecucion =  PCB_EJECUCION.estimacion_rafagas - ( tiempo_actual_de_ejecucion_microsegundos  / 1000 );
 
+    printf("tiempo que lleva ejecutando el proceso actual en milisegundos = %i \n", tiempo_actual_de_ejecucion_microsegundos / 1000);
+    printf("rafaga estimada pcb_minimo en microsegundos = %i \n", pcb_minimo->estimacion_rafagas);
+    printf("rafaga_restante_pcb_en_ejecucion = %i \n", rafaga_restante_pcb_en_ejecucion);
 
     if( (rafaga_restante_pcb_en_ejecucion) > (int)(pcb_minimo->estimacion_rafagas) || (int)(PCB_EJECUCION.id_proceso) == -1 ){
+    	printf("rafaga restante mayor que estimacion de rafagas \n");
+    	if( (int)(PCB_EJECUCION.id_proceso) == -1 ){
+    		printf("no hay ningun proceso en ejecucion XD \n");
+    	}
         return pcb_minimo;
     }
     else
     {
+    	printf("rafaga restante menor que estimacion de rafagas \n");
+    	printf("no hay que enviar un proceso a ejecutarse \n");
         return &PCB_EJECUCION;
     }
 }

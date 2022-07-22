@@ -46,9 +46,9 @@ int main(int argc, char** argv){
 
 	infoProceso.tamanioDirecciones = (uint32_t)atoi(argv[2]);
 	printf("TAMANIO: %d \n", infoProceso.tamanioDirecciones);
-	infoProceso.largoListaInstrucciones = (uint32_t)(size+1);
+	infoProceso.largoListaInstrucciones = (uint32_t)(size); //  este llevaba + 1
 	printf("LARGO LISTA: %d \n", infoProceso.largoListaInstrucciones);
-	infoProceso.listaInstrucciones = malloc(size+1);
+	infoProceso.listaInstrucciones = malloc(size + 1); // este llevaba + 1
 	strcpy(infoProceso.listaInstrucciones, buffer);
 	printf("LISTA DE INSTRUCCIONES:\n%s \nFIN LISTA \n", infoProceso.listaInstrucciones);
 	//t_info_proceso listo

@@ -33,3 +33,5 @@ void* pasar_a_ready();
 void executing_a_exit();
 
 void crear_tabla_proceso(t_pcb* pcb);
+
+
