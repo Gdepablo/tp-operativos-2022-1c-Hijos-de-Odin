@@ -129,7 +129,7 @@ void* recibir_procesos() {
 		int* socket_nuevo = malloc(sizeof(int));
 		*socket_nuevo = accept(socket_consola_proceso, NULL, NULL);
 
-		t_buffer* buffer = malloc(sizeof(buffer));
+		t_buffer* buffer = malloc(sizeof(t_buffer));
 
 		recv(*socket_nuevo, &codop, sizeof(uint32_t), MSG_WAITALL);
 		recv(*socket_nuevo, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
@@ -141,15 +141,20 @@ void* recibir_procesos() {
 //		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
 //		printf("\n");
 
-		t_pcb* pcb = malloc( sizeof(uint32_t) * 5 + proceso->largo_instrucciones + sizeof(char*) );
+		t_pcb* pcb = malloc( sizeof(t_pcb) * 5 + proceso->largo_instrucciones);
 
 		pcb->id_proceso = *socket_nuevo;
 		pcb->tamanio_direcciones = proceso->tamanio_direcciones;
 		pcb->instrucciones = proceso->instrucciones;
+//		printf("###################################### \n");
+//		printf("instrucciones lol: %s \n", pcb->instrucciones);
+//		printf("###################################### \n");
+
+//		pcb->instrucciones = malloc(strlen(proceso->instrucciones) + 1);
+//		strcpy(pcb->instrucciones, proceso->instrucciones);
 		pcb->program_counter = 0;
 		pcb->tabla_paginas = 0;
 		pcb->estimacion_rafagas = ESTIMACION_INICIAL;
-
 //		printf("%i \n", pcb->id_proceso);
 //		printf("%i \n", pcb->tamanio_direcciones);
 //		printf("INSTRUCCINES MALDITAS:\n%s \n", pcb->instrucciones);
@@ -221,10 +226,7 @@ t_syscall* recibirSyscall(){
 
 
     recv(socket_cpu_dispatch, &(buffer->size), sizeof(uint32_t), MSG_WAITALL);
-//    printf("#### RECIBIENDO SYSCALL #### \n");
-//    printf("tamanio recibido: %i \n", buffer->size);
     recv(socket_cpu_dispatch, &(buffer->size_instrucciones), sizeof(uint32_t), 0);
-//    printf("size de instrucciones es: %i \n", buffer->size_instrucciones);
 
     buffer->stream = malloc(buffer->size);
 
@@ -251,8 +253,9 @@ t_syscall* recibirSyscall(){
     offset+=sizeof(uint32_t);
 //    printf("syscall pcb tamanio direcciones es: %i \n", syscall_recibida->pcb.tamanio_direcciones);
     // LISTA DE INSTRUCCIONES (PELIGRO)
-    syscall_recibida->pcb.instrucciones = malloc(buffer->size_instrucciones + 1);
+    syscall_recibida->pcb.instrucciones = malloc(buffer->size_instrucciones);
     memcpy(syscall_recibida->pcb.instrucciones, buffer->stream+offset, buffer->size_instrucciones);
+
     offset+=buffer->size_instrucciones;
 //    printf("la lista de instrucciones es: %s \n", syscall_recibida->pcb.instrucciones);
     // PROGRAM COUNTER
@@ -277,6 +280,7 @@ t_syscall* recibirSyscall(){
 
 t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 	t_info_proceso* procesoNuevo = malloc(sizeof(t_info_proceso));
+
 	int offset = 0;
 	void* stream = buffer -> stream;
 
@@ -288,7 +292,7 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 	offset += sizeof(uint32_t);
 //	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
 
-	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones + 1); // sin el +1 XD
+	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones); // sin el +1 XD
 	memcpy(procesoNuevo->instrucciones, stream+offset, procesoNuevo->largo_instrucciones);
 
 	return procesoNuevo;

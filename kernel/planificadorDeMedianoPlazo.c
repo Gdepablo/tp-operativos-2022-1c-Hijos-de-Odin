@@ -8,7 +8,15 @@ void* hilo_suspensor(void* bloqueado_void){
     uint32_t confirmacion = 0;
     uint32_t codop = 5;
 
+    printf("################################# \n");
+    printf("se inicia suspensor de proceso %i \n", proceso_bloqueado->pcb->id_proceso);
+    printf("################################# \n");
+
     usleep(TIEMPO_MAXIMO_BLOQUEADO * 1000);
+
+    printf("################################# \n");
+    printf("se suspende el proceso %i \n", proceso_bloqueado->pcb->id_proceso);
+    printf("################################# \n");
 
     sem_wait(&suspendiendo);
     sem_wait(&esperando_respuesta_memoria);
@@ -30,12 +38,15 @@ void executing_a_blocked(t_syscall* syscall) {
 
 	pcb_nuevo->id_proceso = syscall->pcb.id_proceso;
 	pcb_nuevo->tamanio_direcciones = syscall->pcb.tamanio_direcciones;
-	pcb_nuevo->size_instrucciones = syscall->pcb.size_instrucciones;
 	pcb_nuevo->instrucciones = malloc(strlen(syscall->pcb.instrucciones) + 1);
 	strcpy(pcb_nuevo->instrucciones, syscall->pcb.instrucciones);
 	pcb_nuevo->program_counter = syscall->pcb.program_counter;
 	pcb_nuevo->tabla_paginas = syscall->pcb.tabla_paginas;
 	pcb_nuevo->estimacion_rafagas = syscall->pcb.estimacion_rafagas;
+
+    printf("################################################### \n");
+    printf("executing a blocked \n");
+    printf("INSTRUCCIONES SYSCALL: %s \n", pcb_nuevo->instrucciones);
 
 	printf("estimacion de rafagas executing a blocked XD %i \n", pcb_nuevo->estimacion_rafagas);
 

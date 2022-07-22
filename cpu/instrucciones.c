@@ -130,8 +130,8 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	extern int socket_dispatch;
 
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
-	buffer->size = sizeof(uint32_t) * 7 + strlen(syscall_a_enviar->pcb.lista_instrucciones);
-	buffer->size_instrucciones = strlen(syscall_a_enviar->pcb.lista_instrucciones);
+	buffer->size_instrucciones = strlen(syscall_a_enviar->pcb.lista_instrucciones) + 1;
+	buffer->size = sizeof(uint32_t) * 7 + buffer->size_instrucciones;
 	buffer->stream = malloc(buffer->size);
 
 	int offset = 0;
@@ -148,6 +148,10 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	offset+=sizeof(uint32_t);
 	// ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO
 	memcpy(buffer->stream + offset, syscall_a_enviar->pcb.lista_instrucciones, buffer->size_instrucciones);
+
+	printf("######################################################### \n");
+	printf("enviar syscall \n");
+	printf("instrucciones: %s \n", syscall_a_enviar->pcb.lista_instrucciones);
 
 	char* instrucciones_enviadas = malloc(buffer->size_instrucciones);
 	memcpy(instrucciones_enviadas , buffer->stream + offset, buffer->size_instrucciones);

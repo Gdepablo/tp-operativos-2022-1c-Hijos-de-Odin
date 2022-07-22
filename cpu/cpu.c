@@ -13,7 +13,7 @@ int socket_interrupt;					// socket por el cual el kernel envia interrupciones
 uint32_t interrupcion = 0;				// si == 1 hay interrupcion, si == 0 no hay interrupcion
 uint32_t entradas_tlb;					// recibido por config
 char* reemplazo_tlb;					// modo de reemplazo TLB, puede ser FIFO o LRU
-
+sem_t nada_ejecutando;
 
 int main(void){
 	printf("# CPU # \n");
@@ -23,6 +23,7 @@ int main(void){
 
 	lista_tlb = list_create(); 			// La lista representa la TLB
 	sem_init(&ejecutar, 0, 0);
+	sem_init(&nada_ejecutando, 0, 1);
 
 	//CONFIG
 	t_config* config = inicializarConfigs();;					// abro el config, se encuentra en la carpeta padre y se llama cpu.config
@@ -129,11 +130,13 @@ int main(void){
 
 	// COMIENZO A RECIBIR COSAS POR DISPATCH
 	while(1){
+		sem_wait(&nada_ejecutando);
 		pcb_ejecutando = recibir_PCB(); // debe recibir la lista de instrucciones como char*
 		lista_de_instrucciones_actual = string_array_new();
 		lista_de_instrucciones_actual = string_split( pcb_ejecutando.lista_instrucciones, "\n" );
 		printf("\nCOMIENZA LA EJECUCION DEL PROCESO %i \n", pcb_ejecutando.id_proceso);
 		sem_post(&ejecutar);
+
 	}
 	// FIN DE RECIBIR COSAS POR DISPATCH
 
@@ -237,6 +240,7 @@ void* executer(){
 				break;
 			default:
 				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);
+				getchar();
 		}
 
 
@@ -246,6 +250,7 @@ void* executer(){
 		log_info(log_ejecucion_cpu, "chequeando interrupciones y/o syscall bloqueante");
 		if( hay_interrupcion() ){
 			log_info(log_ejecucion_cpu, "se detecto una interrupcion \n\n");
+			printf("###### HAY UNA INTERRUPCION ###### \n");
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 
@@ -257,6 +262,7 @@ void* executer(){
 			enviar_syscall(pcb_desalojada);
 
 //			free(pcb_ejecutando.lista_instrucciones);
+			sem_post(&nada_ejecutando);
 			sem_wait(&sem_interrupcion);
 				interrupcion = 0;
 			sem_post(&sem_interrupcion);
@@ -266,6 +272,7 @@ void* executer(){
 			// el pcb se envia en la instruccion IO o EXIT
 			limpiar_TLB();
 //			free(pcb_ejecutando.lista_instrucciones);
+			sem_post(&nada_ejecutando);
 			syscall_bloqueante=0;
 		} else {
 			log_info(log_ejecucion_cpu, "no hay interrupcion ni syscall bloqueante \n\n");
@@ -556,6 +563,7 @@ t_pcb recibir_PCB(){
     t_pcb_buffer buffer;
 
     recv(socket_dispatch, &(buffer.size), sizeof(uint32_t), MSG_WAITALL);
+
     recv(socket_dispatch, &(buffer.size_instrucciones), sizeof(uint32_t), MSG_WAITALL);
 //    printf("buffer->size_instrucciones: %i \n", buffer.size_instrucciones);
     buffer.stream = malloc(buffer.size);
@@ -573,6 +581,11 @@ t_pcb recibir_PCB(){
     pcb.lista_instrucciones = malloc(buffer.size_instrucciones + 1);
     memcpy(pcb.lista_instrucciones, buffer.stream+offset, buffer.size_instrucciones);
     offset+=buffer.size_instrucciones;
+
+    log_info(log_ejecucion_cpu, "INSTRUCCIONES RECIBIDAS: %s \n", pcb.lista_instrucciones);
+    printf("####################################### \n");
+    printf("instrucciones recibidas: %s \n", pcb.lista_instrucciones);
+
 //    printf("pcb.lista_instrucciones = %s \n", pcb.lista_instrucciones);
 //    printf("strlen: %i \n", (int)strlen(pcb.lista_instrucciones));
 
@@ -581,6 +594,7 @@ t_pcb recibir_PCB(){
 //    printf("pcb.program_counter = %i \n", pcb.program_counter);
     memcpy(&(pcb.tabla_paginas), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
+
 //    printf("pcb.tabla_paginas = %i \n", pcb.tabla_paginas);
     memcpy(&(pcb.estimacion_rafagas), buffer.stream+offset, sizeof(uint32_t));
 //    printf("pcb.estimacion_rafagas = %i \n", pcb.estimacion_rafagas);

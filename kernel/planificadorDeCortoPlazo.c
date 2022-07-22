@@ -62,10 +62,8 @@ void* ready_a_executing(){
 void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 	t_pcb_buffer* buffer = malloc(sizeof(t_pcb_buffer));
 
-//	printf("INSTRUCCIONES A ENVIAR: \n%s \n", pcb_a_enviar->instrucciones);
-
-	buffer->size = sizeof(uint32_t) * 5 + strlen(pcb_a_enviar->instrucciones) + 1;
-	buffer->size_instrucciones = strlen(pcb_a_enviar->instrucciones) + 1;
+	buffer->size = sizeof(uint32_t) * 5 + strlen(pcb_a_enviar->instrucciones) + 1; // este +1 es dudoso
+	buffer->size_instrucciones = strlen(pcb_a_enviar->instrucciones) + 1; // + 1
 	buffer->stream = malloc(buffer->size);
 
 	int offset = 0;
@@ -101,7 +99,7 @@ void enviar_a_CPU(t_pcb* pcb_a_enviar) {
 
 	memcpy(a_enviar+offset, buffer->stream, buffer->size);
 
-	send(socket_cpu_dispatch, a_enviar, tamanio_a_enviar, 0);
+	send(socket_cpu_dispatch, a_enviar, sizeof(uint32_t) * 7 + strlen(pcb_a_enviar->instrucciones) + 1, 0);
 }
 
 // Se ejecuta en SJF al desalojar un proceso

@@ -1457,3 +1457,1381 @@ process id: 4, espacio de direcciones: 160
 # SOLICITUD RECIBIDA DE CPU #
 [INFO] 03:30:19:362 MEMORIA - MAIN/(8972:8984): 
 # SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:21:35:118 MEMORIA - MAIN/(9611:9611): se conecto con el kernel
+[INFO] 04:21:35:120 MEMORIA - MAIN/(9611:9611): se conecto con el CPU
+[INFO] 04:21:35:120 MEMORIA - MAIN/(9611:9611): datos de traduccion enviados al CPU
+[INFO] 04:21:35:120 MEMORIA - MAIN/(9611:9611): memoria inicializada con un tamaño de 4096
+[INFO] 04:21:35:120 MEMORIA - MAIN/(9611:9611): la cantidad de frames en esta ejecucion es de 64
+[INFO] 04:21:35:120 MEMORIA - MAIN/(9611:9611): bitmap creado con un tamaño de 64
+[INFO] 04:21:35:122 MEMORIA - MAIN/(9611:9642): hilo cpu iniciado
+[INFO] 04:21:42:458 MEMORIA - MAIN/(9611:9642): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:21:42:458 MEMORIA - MAIN/(9611:9642): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:21:42:466 MEMORIA - MAIN/(9611:9642): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 04:23:19:266 MEMORIA - MAIN/(9869:9869): se conecto con el kernel
+[INFO] 04:23:19:267 MEMORIA - MAIN/(9869:9869): se conecto con el CPU
+[INFO] 04:23:19:267 MEMORIA - MAIN/(9869:9869): datos de traduccion enviados al CPU
+[INFO] 04:23:19:267 MEMORIA - MAIN/(9869:9869): memoria inicializada con un tamaño de 4096
+[INFO] 04:23:19:267 MEMORIA - MAIN/(9869:9869): la cantidad de frames en esta ejecucion es de 64
+[INFO] 04:23:19:267 MEMORIA - MAIN/(9869:9869): bitmap creado con un tamaño de 64
+[INFO] 04:23:19:268 MEMORIA - MAIN/(9869:9884): hilo cpu iniciado
+[INFO] 04:25:43:509 MEMORIA - MAIN/(9869:9884): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:25:43:509 MEMORIA - MAIN/(9869:9884): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:25:43:509 MEMORIA - MAIN/(9869:9884): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 04:25:43:509 MEMORIA - MAIN/(9869:9884): Numero de tabla 2 encontrado: -1237319616
+[INFO] 04:25:44:509 MEMORIA - MAIN/(9869:9884): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 04:25:44:509 MEMORIA - MAIN/(9869:9884): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:25:44:509 MEMORIA - MAIN/(9869:9884): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:25:44:509 MEMORIA - MAIN/(9869:9884): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 04:25:44:509 MEMORIA - MAIN/(9869:9884): Numero de tabla 2 encontrado: -1237319616
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): se conecto con el kernel
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): se conecto con el CPU
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): datos de traduccion enviados al CPU
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): memoria inicializada con un tamaño de 4096
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): la cantidad de frames en esta ejecucion es de 64
+[INFO] 04:26:26:532 MEMORIA - MAIN/(10405:10405): bitmap creado con un tamaño de 64
+[INFO] 04:26:26:533 MEMORIA - MAIN/(10405:10416): hilo cpu iniciado
+[INFO] 04:26:55:384 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:26:55:384 MEMORIA - MAIN/(10405:10416): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:26:55:420 MEMORIA - MAIN/(10405:10416): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 04:26:55:420 MEMORIA - MAIN/(10405:10416): Numero de tabla 2 encontrado: 0
+[INFO] 04:26:56:420 MEMORIA - MAIN/(10405:10416): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 04:26:56:421 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:26:59:422 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:00:423 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:01:424 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:02:425 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:49:391 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:49:391 MEMORIA - MAIN/(10405:10416): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:27:49:391 MEMORIA - MAIN/(10405:10416): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 04:27:49:391 MEMORIA - MAIN/(10405:10416): Numero de tabla 2 encontrado: 2
+[INFO] 04:27:50:392 MEMORIA - MAIN/(10405:10416): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 04:27:50:392 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:53:393 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:54:394 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:55:395 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:27:56:396 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:28:09:780 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 04:28:09:780 MEMORIA - MAIN/(10405:10416): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 04:28:09:780 MEMORIA - MAIN/(10405:10416): datos recibidos: numero_tabla_1er_nivel_leer 2 numero_de_entrada 0
+[INFO] 04:28:09:780 MEMORIA - MAIN/(10405:10416): Numero de tabla 2 encontrado: 4
+[INFO] 04:28:10:780 MEMORIA - MAIN/(10405:10416): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 04:28:10:781 MEMORIA - MAIN/(10405:10416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:01:870 MEMORIA - MAIN/(4063:4063): se conecto con el kernel
+[INFO] 13:34:01:875 MEMORIA - MAIN/(4063:4063): se conecto con el CPU
+[INFO] 13:34:01:875 MEMORIA - MAIN/(4063:4063): datos de traduccion enviados al CPU
+[INFO] 13:34:01:875 MEMORIA - MAIN/(4063:4063): memoria inicializada con un tamaño de 4096
+[INFO] 13:34:01:875 MEMORIA - MAIN/(4063:4063): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:34:01:876 MEMORIA - MAIN/(4063:4063): bitmap creado con un tamaño de 64
+[INFO] 13:34:01:880 MEMORIA - MAIN/(4063:4100): hilo cpu iniciado
+[INFO] 13:34:03:639 MEMORIA - MAIN/(4063:4100): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:03:639 MEMORIA - MAIN/(4063:4100): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:34:03:640 MEMORIA - MAIN/(4063:4100): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:34:10:993 MEMORIA - MAIN/(4125:4125): se conecto con el kernel
+[INFO] 13:34:11:011 MEMORIA - MAIN/(4125:4125): se conecto con el CPU
+[INFO] 13:34:11:011 MEMORIA - MAIN/(4125:4125): datos de traduccion enviados al CPU
+[INFO] 13:34:11:011 MEMORIA - MAIN/(4125:4125): memoria inicializada con un tamaño de 4096
+[INFO] 13:34:11:011 MEMORIA - MAIN/(4125:4125): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:34:11:011 MEMORIA - MAIN/(4125:4125): bitmap creado con un tamaño de 64
+[INFO] 13:34:11:016 MEMORIA - MAIN/(4125:4130): hilo cpu iniciado
+[INFO] 13:34:24:636 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:24:636 MEMORIA - MAIN/(4125:4130): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:34:24:678 MEMORIA - MAIN/(4125:4130): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:34:24:679 MEMORIA - MAIN/(4125:4130): Numero de tabla 2 encontrado: 0
+[INFO] 13:34:25:683 MEMORIA - MAIN/(4125:4130): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:34:25:683 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:28:684 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:29:686 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:30:688 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:34:31:690 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:29:379 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:29:379 MEMORIA - MAIN/(4125:4130): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:36:29:379 MEMORIA - MAIN/(4125:4130): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 13:36:29:379 MEMORIA - MAIN/(4125:4130): Numero de tabla 2 encontrado: 1
+[INFO] 13:36:30:380 MEMORIA - MAIN/(4125:4130): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:36:30:380 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:33:382 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:34:384 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:35:385 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:36:36:387 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:38:27:340 MEMORIA - MAIN/(4125:4130): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:38:30:084 MEMORIA - MAIN/(4892:4892): se conecto con el kernel
+[INFO] 13:38:30:089 MEMORIA - MAIN/(4892:4892): se conecto con el CPU
+[INFO] 13:38:30:089 MEMORIA - MAIN/(4892:4892): datos de traduccion enviados al CPU
+[INFO] 13:38:30:089 MEMORIA - MAIN/(4892:4892): memoria inicializada con un tamaño de 4096
+[INFO] 13:38:30:089 MEMORIA - MAIN/(4892:4892): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:38:30:089 MEMORIA - MAIN/(4892:4892): bitmap creado con un tamaño de 64
+[INFO] 13:38:30:092 MEMORIA - MAIN/(4892:4898): hilo cpu iniciado
+[INFO] 13:40:13:053 MEMORIA - MAIN/(4892:4898): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:40:13:053 MEMORIA - MAIN/(4892:4898): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:40:13:053 MEMORIA - MAIN/(4892:4898): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:40:13:053 MEMORIA - MAIN/(4892:4898): Numero de tabla 2 encontrado: -1237317952
+[INFO] 13:40:16:194 MEMORIA - MAIN/(5201:5201): se conecto con el kernel
+[INFO] 13:40:16:197 MEMORIA - MAIN/(5201:5201): se conecto con el CPU
+[INFO] 13:40:16:197 MEMORIA - MAIN/(5201:5201): datos de traduccion enviados al CPU
+[INFO] 13:40:16:197 MEMORIA - MAIN/(5201:5201): memoria inicializada con un tamaño de 4096
+[INFO] 13:40:16:197 MEMORIA - MAIN/(5201:5201): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:40:16:197 MEMORIA - MAIN/(5201:5201): bitmap creado con un tamaño de 64
+[INFO] 13:40:16:206 MEMORIA - MAIN/(5201:5212): hilo cpu iniciado
+[INFO] 13:42:06:473 MEMORIA - MAIN/(5201:5212): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:42:06:473 MEMORIA - MAIN/(5201:5212): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:42:06:473 MEMORIA - MAIN/(5201:5212): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:42:06:473 MEMORIA - MAIN/(5201:5212): Numero de tabla 2 encontrado: -1237317952
+[INFO] 13:42:09:570 MEMORIA - MAIN/(5480:5480): se conecto con el kernel
+[INFO] 13:42:09:574 MEMORIA - MAIN/(5480:5480): se conecto con el CPU
+[INFO] 13:42:09:574 MEMORIA - MAIN/(5480:5480): datos de traduccion enviados al CPU
+[INFO] 13:42:09:574 MEMORIA - MAIN/(5480:5480): memoria inicializada con un tamaño de 4096
+[INFO] 13:42:09:574 MEMORIA - MAIN/(5480:5480): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:42:09:574 MEMORIA - MAIN/(5480:5480): bitmap creado con un tamaño de 64
+[INFO] 13:42:09:578 MEMORIA - MAIN/(5480:5492): hilo cpu iniciado
+[INFO] 13:49:17:335 MEMORIA - MAIN/(5480:5492): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:49:17:335 MEMORIA - MAIN/(5480:5492): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:49:17:335 MEMORIA - MAIN/(5480:5492): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:49:17:335 MEMORIA - MAIN/(5480:5492): Numero de tabla 2 encontrado: -1237317952
+[INFO] 13:49:19:890 MEMORIA - MAIN/(6312:6312): se conecto con el kernel
+[INFO] 13:49:19:894 MEMORIA - MAIN/(6312:6312): se conecto con el CPU
+[INFO] 13:49:19:894 MEMORIA - MAIN/(6312:6312): datos de traduccion enviados al CPU
+[INFO] 13:49:19:894 MEMORIA - MAIN/(6312:6312): memoria inicializada con un tamaño de 4096
+[INFO] 13:49:19:894 MEMORIA - MAIN/(6312:6312): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:49:19:894 MEMORIA - MAIN/(6312:6312): bitmap creado con un tamaño de 64
+[INFO] 13:49:19:897 MEMORIA - MAIN/(6312:6322): hilo cpu iniciado
+[INFO] 13:51:30:818 MEMORIA - MAIN/(6312:6322): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:51:30:818 MEMORIA - MAIN/(6312:6322): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:51:30:818 MEMORIA - MAIN/(6312:6322): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:51:30:818 MEMORIA - MAIN/(6312:6322): Numero de tabla 2 encontrado: -1237317952
+[INFO] 13:51:31:818 MEMORIA - MAIN/(6312:6322): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:51:31:818 MEMORIA - MAIN/(6312:6322): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:51:31:818 MEMORIA - MAIN/(6312:6322): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:51:31:818 MEMORIA - MAIN/(6312:6322): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:51:31:818 MEMORIA - MAIN/(6312:6322): Numero de tabla 2 encontrado: -1237317952
+[INFO] 13:51:40:314 MEMORIA - MAIN/(6623:6623): se conecto con el kernel
+[INFO] 13:51:40:317 MEMORIA - MAIN/(6623:6623): se conecto con el CPU
+[INFO] 13:51:40:317 MEMORIA - MAIN/(6623:6623): datos de traduccion enviados al CPU
+[INFO] 13:51:40:317 MEMORIA - MAIN/(6623:6623): memoria inicializada con un tamaño de 4096
+[INFO] 13:51:40:317 MEMORIA - MAIN/(6623:6623): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:51:40:317 MEMORIA - MAIN/(6623:6623): bitmap creado con un tamaño de 64
+[INFO] 13:51:40:324 MEMORIA - MAIN/(6623:6634): hilo cpu iniciado
+[INFO] 13:51:58:208 MEMORIA - MAIN/(6623:6634): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:51:58:208 MEMORIA - MAIN/(6623:6634): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:51:58:208 MEMORIA - MAIN/(6623:6634): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:51:58:209 MEMORIA - MAIN/(6623:6634): Numero de tabla 2 encontrado: 0
+[INFO] 13:51:59:209 MEMORIA - MAIN/(6623:6634): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:51:59:209 MEMORIA - MAIN/(6623:6634): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:51:59:209 MEMORIA - MAIN/(6623:6634): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:51:59:209 MEMORIA - MAIN/(6623:6634): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:51:59:209 MEMORIA - MAIN/(6623:6634): Numero de tabla 2 encontrado: 0
+[INFO] 13:52:56:353 MEMORIA - MAIN/(6820:6820): se conecto con el kernel
+[INFO] 13:52:56:357 MEMORIA - MAIN/(6820:6820): se conecto con el CPU
+[INFO] 13:52:56:357 MEMORIA - MAIN/(6820:6820): datos de traduccion enviados al CPU
+[INFO] 13:52:56:357 MEMORIA - MAIN/(6820:6820): memoria inicializada con un tamaño de 4096
+[INFO] 13:52:56:357 MEMORIA - MAIN/(6820:6820): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:52:56:357 MEMORIA - MAIN/(6820:6820): bitmap creado con un tamaño de 64
+[INFO] 13:52:56:363 MEMORIA - MAIN/(6820:6826): hilo cpu iniciado
+[INFO] 13:53:05:698 MEMORIA - MAIN/(6820:6826): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:53:05:698 MEMORIA - MAIN/(6820:6826): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:53:05:698 MEMORIA - MAIN/(6820:6826): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:53:05:698 MEMORIA - MAIN/(6820:6826): Numero de tabla 2 encontrado: 0
+[INFO] 13:53:23:769 MEMORIA - MAIN/(6926:6926): se conecto con el kernel
+[INFO] 13:53:23:773 MEMORIA - MAIN/(6926:6926): se conecto con el CPU
+[INFO] 13:53:23:773 MEMORIA - MAIN/(6926:6926): datos de traduccion enviados al CPU
+[INFO] 13:53:23:773 MEMORIA - MAIN/(6926:6926): memoria inicializada con un tamaño de 4096
+[INFO] 13:53:23:773 MEMORIA - MAIN/(6926:6926): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:53:23:773 MEMORIA - MAIN/(6926:6926): bitmap creado con un tamaño de 64
+[INFO] 13:53:23:779 MEMORIA - MAIN/(6926:6933): hilo cpu iniciado
+[INFO] 13:53:34:415 MEMORIA - MAIN/(6926:6933): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:53:34:415 MEMORIA - MAIN/(6926:6933): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:53:34:415 MEMORIA - MAIN/(6926:6933): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:53:34:415 MEMORIA - MAIN/(6926:6933): Numero de tabla 2 encontrado: 0
+[INFO] 13:53:35:415 MEMORIA - MAIN/(6926:6933): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:53:35:415 MEMORIA - MAIN/(6926:6933): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:53:35:415 MEMORIA - MAIN/(6926:6933): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:53:35:415 MEMORIA - MAIN/(6926:6933): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:53:35:416 MEMORIA - MAIN/(6926:6933): Numero de tabla 2 encontrado: 0
+[INFO] 13:56:31:428 MEMORIA - MAIN/(7167:7167): se conecto con el kernel
+[INFO] 13:56:31:432 MEMORIA - MAIN/(7167:7167): se conecto con el CPU
+[INFO] 13:56:31:432 MEMORIA - MAIN/(7167:7167): datos de traduccion enviados al CPU
+[INFO] 13:56:31:432 MEMORIA - MAIN/(7167:7167): memoria inicializada con un tamaño de 4096
+[INFO] 13:56:31:432 MEMORIA - MAIN/(7167:7167): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:56:31:432 MEMORIA - MAIN/(7167:7167): bitmap creado con un tamaño de 64
+[INFO] 13:56:31:436 MEMORIA - MAIN/(7167:7447): hilo cpu iniciado
+[INFO] 13:56:54:829 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:56:54:829 MEMORIA - MAIN/(7167:7447): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:56:54:866 MEMORIA - MAIN/(7167:7447): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:56:54:866 MEMORIA - MAIN/(7167:7447): Numero de tabla 2 encontrado: 0
+[INFO] 13:56:55:867 MEMORIA - MAIN/(7167:7447): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:56:55:867 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:56:58:869 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:56:59:871 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:00:872 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:01:873 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:05:547 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:06:548 MEMORIA - MAIN/(7167:7447): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:23:873 MEMORIA - MAIN/(7580:7580): se conecto con el kernel
+[INFO] 13:57:23:877 MEMORIA - MAIN/(7580:7580): se conecto con el CPU
+[INFO] 13:57:23:877 MEMORIA - MAIN/(7580:7580): datos de traduccion enviados al CPU
+[INFO] 13:57:23:877 MEMORIA - MAIN/(7580:7580): memoria inicializada con un tamaño de 4096
+[INFO] 13:57:23:877 MEMORIA - MAIN/(7580:7580): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:57:23:877 MEMORIA - MAIN/(7580:7580): bitmap creado con un tamaño de 64
+[INFO] 13:57:23:880 MEMORIA - MAIN/(7580:7590): hilo cpu iniciado
+[INFO] 13:57:32:552 MEMORIA - MAIN/(7580:7590): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:32:552 MEMORIA - MAIN/(7580:7590): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:57:32:552 MEMORIA - MAIN/(7580:7590): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:57:32:552 MEMORIA - MAIN/(7580:7590): Numero de tabla 2 encontrado: 0
+[INFO] 13:57:39:565 MEMORIA - MAIN/(7636:7636): se conecto con el kernel
+[INFO] 13:57:39:569 MEMORIA - MAIN/(7636:7636): se conecto con el CPU
+[INFO] 13:57:39:569 MEMORIA - MAIN/(7636:7636): datos de traduccion enviados al CPU
+[INFO] 13:57:39:569 MEMORIA - MAIN/(7636:7636): memoria inicializada con un tamaño de 4096
+[INFO] 13:57:39:569 MEMORIA - MAIN/(7636:7636): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:57:39:569 MEMORIA - MAIN/(7636:7636): bitmap creado con un tamaño de 64
+[INFO] 13:57:39:575 MEMORIA - MAIN/(7636:7643): hilo cpu iniciado
+[INFO] 13:57:42:777 MEMORIA - MAIN/(7636:7643): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:42:777 MEMORIA - MAIN/(7636:7643): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:57:42:780 MEMORIA - MAIN/(7636:7643): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:57:42:780 MEMORIA - MAIN/(7636:7643): Numero de tabla 2 encontrado: 0
+[INFO] 13:57:43:780 MEMORIA - MAIN/(7636:7643): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:57:43:780 MEMORIA - MAIN/(7636:7643): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:57:43:780 MEMORIA - MAIN/(7636:7643): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:57:43:781 MEMORIA - MAIN/(7636:7643): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:57:43:781 MEMORIA - MAIN/(7636:7643): Numero de tabla 2 encontrado: 0
+[INFO] 13:58:02:208 MEMORIA - MAIN/(7733:7733): se conecto con el kernel
+[INFO] 13:58:02:212 MEMORIA - MAIN/(7733:7733): se conecto con el CPU
+[INFO] 13:58:02:212 MEMORIA - MAIN/(7733:7733): datos de traduccion enviados al CPU
+[INFO] 13:58:02:212 MEMORIA - MAIN/(7733:7733): memoria inicializada con un tamaño de 4096
+[INFO] 13:58:02:212 MEMORIA - MAIN/(7733:7733): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:58:02:212 MEMORIA - MAIN/(7733:7733): bitmap creado con un tamaño de 64
+[INFO] 13:58:02:221 MEMORIA - MAIN/(7733:7740): hilo cpu iniciado
+[INFO] 13:59:09:020 MEMORIA - MAIN/(7733:7740): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:59:09:020 MEMORIA - MAIN/(7733:7740): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:59:09:020 MEMORIA - MAIN/(7733:7740): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:59:09:020 MEMORIA - MAIN/(7733:7740): Numero de tabla 2 encontrado: 0
+[INFO] 13:59:12:538 MEMORIA - MAIN/(7909:7909): se conecto con el kernel
+[INFO] 13:59:12:542 MEMORIA - MAIN/(7909:7909): se conecto con el CPU
+[INFO] 13:59:12:542 MEMORIA - MAIN/(7909:7909): datos de traduccion enviados al CPU
+[INFO] 13:59:12:542 MEMORIA - MAIN/(7909:7909): memoria inicializada con un tamaño de 4096
+[INFO] 13:59:12:542 MEMORIA - MAIN/(7909:7909): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:59:12:542 MEMORIA - MAIN/(7909:7909): bitmap creado con un tamaño de 64
+[INFO] 13:59:12:545 MEMORIA - MAIN/(7909:7915): hilo cpu iniciado
+[INFO] 13:59:43:742 MEMORIA - MAIN/(7909:7915): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:59:43:742 MEMORIA - MAIN/(7909:7915): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:59:43:743 MEMORIA - MAIN/(7909:7915): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:59:43:743 MEMORIA - MAIN/(7909:7915): Numero de tabla 2 encontrado: 0
+[INFO] 13:59:44:743 MEMORIA - MAIN/(7909:7915): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 13:59:44:743 MEMORIA - MAIN/(7909:7915): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 13:59:44:743 MEMORIA - MAIN/(7909:7915): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 13:59:44:743 MEMORIA - MAIN/(7909:7915): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 13:59:44:743 MEMORIA - MAIN/(7909:7915): Numero de tabla 2 encontrado: 0
+[INFO] 13:59:47:311 MEMORIA - MAIN/(8015:8015): se conecto con el kernel
+[INFO] 13:59:47:314 MEMORIA - MAIN/(8015:8015): se conecto con el CPU
+[INFO] 13:59:47:314 MEMORIA - MAIN/(8015:8015): datos de traduccion enviados al CPU
+[INFO] 13:59:47:314 MEMORIA - MAIN/(8015:8015): memoria inicializada con un tamaño de 4096
+[INFO] 13:59:47:314 MEMORIA - MAIN/(8015:8015): la cantidad de frames en esta ejecucion es de 64
+[INFO] 13:59:47:314 MEMORIA - MAIN/(8015:8015): bitmap creado con un tamaño de 64
+[INFO] 13:59:47:319 MEMORIA - MAIN/(8015:8021): hilo cpu iniciado
+[INFO] 14:00:29:937 MEMORIA - MAIN/(8202:8202): se conecto con el kernel
+[INFO] 14:00:29:944 MEMORIA - MAIN/(8202:8202): se conecto con el CPU
+[INFO] 14:00:29:944 MEMORIA - MAIN/(8202:8202): datos de traduccion enviados al CPU
+[INFO] 14:00:29:944 MEMORIA - MAIN/(8202:8202): memoria inicializada con un tamaño de 4096
+[INFO] 14:00:29:944 MEMORIA - MAIN/(8202:8202): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:00:29:944 MEMORIA - MAIN/(8202:8202): bitmap creado con un tamaño de 64
+[INFO] 14:00:29:947 MEMORIA - MAIN/(8202:8208): hilo cpu iniciado
+[INFO] 14:01:46:513 MEMORIA - MAIN/(8202:8208): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:01:46:513 MEMORIA - MAIN/(8202:8208): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:01:46:514 MEMORIA - MAIN/(8202:8208): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:01:46:514 MEMORIA - MAIN/(8202:8208): Numero de tabla 2 encontrado: -1237317952
+[INFO] 14:01:47:514 MEMORIA - MAIN/(8202:8208): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:01:47:515 MEMORIA - MAIN/(8202:8208): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:01:47:515 MEMORIA - MAIN/(8202:8208): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:01:47:515 MEMORIA - MAIN/(8202:8208): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:01:47:515 MEMORIA - MAIN/(8202:8208): Numero de tabla 2 encontrado: -1237317952
+[INFO] 14:01:50:022 MEMORIA - MAIN/(8424:8424): se conecto con el kernel
+[INFO] 14:01:50:025 MEMORIA - MAIN/(8424:8424): se conecto con el CPU
+[INFO] 14:01:50:025 MEMORIA - MAIN/(8424:8424): datos de traduccion enviados al CPU
+[INFO] 14:01:50:025 MEMORIA - MAIN/(8424:8424): memoria inicializada con un tamaño de 4096
+[INFO] 14:01:50:025 MEMORIA - MAIN/(8424:8424): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:01:50:025 MEMORIA - MAIN/(8424:8424): bitmap creado con un tamaño de 64
+[INFO] 14:01:50:030 MEMORIA - MAIN/(8424:8430): hilo cpu iniciado
+[INFO] 14:02:00:976 MEMORIA - MAIN/(8424:8430): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:02:00:976 MEMORIA - MAIN/(8424:8430): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:02:00:976 MEMORIA - MAIN/(8424:8430): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:02:00:976 MEMORIA - MAIN/(8424:8430): Numero de tabla 2 encontrado: 0
+[INFO] 14:02:01:976 MEMORIA - MAIN/(8424:8430): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:02:01:976 MEMORIA - MAIN/(8424:8430): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:02:01:976 MEMORIA - MAIN/(8424:8430): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:02:01:977 MEMORIA - MAIN/(8424:8430): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:02:01:977 MEMORIA - MAIN/(8424:8430): Numero de tabla 2 encontrado: 0
+[INFO] 14:03:08:786 MEMORIA - MAIN/(8702:8702): se conecto con el kernel
+[INFO] 14:03:08:792 MEMORIA - MAIN/(8702:8702): se conecto con el CPU
+[INFO] 14:03:08:792 MEMORIA - MAIN/(8702:8702): datos de traduccion enviados al CPU
+[INFO] 14:03:08:792 MEMORIA - MAIN/(8702:8702): memoria inicializada con un tamaño de 4096
+[INFO] 14:03:08:792 MEMORIA - MAIN/(8702:8702): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:03:08:792 MEMORIA - MAIN/(8702:8702): bitmap creado con un tamaño de 64
+[INFO] 14:03:08:798 MEMORIA - MAIN/(8702:8713): hilo cpu iniciado
+[INFO] 14:05:27:861 MEMORIA - MAIN/(9008:9008): se conecto con el kernel
+[INFO] 14:05:27:866 MEMORIA - MAIN/(9008:9008): se conecto con el CPU
+[INFO] 14:05:27:866 MEMORIA - MAIN/(9008:9008): datos de traduccion enviados al CPU
+[INFO] 14:05:27:866 MEMORIA - MAIN/(9008:9008): memoria inicializada con un tamaño de 4096
+[INFO] 14:05:27:866 MEMORIA - MAIN/(9008:9008): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:05:27:866 MEMORIA - MAIN/(9008:9008): bitmap creado con un tamaño de 64
+[INFO] 14:05:27:869 MEMORIA - MAIN/(9008:9014): hilo cpu iniciado
+[INFO] 14:06:04:052 MEMORIA - MAIN/(9008:9014): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:06:04:053 MEMORIA - MAIN/(9008:9014): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:06:04:057 MEMORIA - MAIN/(9008:9014): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:06:04:057 MEMORIA - MAIN/(9008:9014): Numero de tabla 2 encontrado: 0
+[INFO] 14:06:05:058 MEMORIA - MAIN/(9008:9014): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:06:05:058 MEMORIA - MAIN/(9008:9014): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:06:05:058 MEMORIA - MAIN/(9008:9014): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:06:05:058 MEMORIA - MAIN/(9008:9014): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:06:05:058 MEMORIA - MAIN/(9008:9014): Numero de tabla 2 encontrado: 0
+[INFO] 14:06:08:372 MEMORIA - MAIN/(9123:9123): se conecto con el kernel
+[INFO] 14:06:08:375 MEMORIA - MAIN/(9123:9123): se conecto con el CPU
+[INFO] 14:06:08:375 MEMORIA - MAIN/(9123:9123): datos de traduccion enviados al CPU
+[INFO] 14:06:08:375 MEMORIA - MAIN/(9123:9123): memoria inicializada con un tamaño de 4096
+[INFO] 14:06:08:375 MEMORIA - MAIN/(9123:9123): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:06:08:375 MEMORIA - MAIN/(9123:9123): bitmap creado con un tamaño de 64
+[INFO] 14:06:08:382 MEMORIA - MAIN/(9123:9129): hilo cpu iniciado
+[INFO] 14:06:46:292 MEMORIA - MAIN/(9123:9129): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:06:46:293 MEMORIA - MAIN/(9123:9129): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:06:46:293 MEMORIA - MAIN/(9123:9129): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:06:46:293 MEMORIA - MAIN/(9123:9129): Numero de tabla 2 encontrado: 0
+[INFO] 14:06:49:103 MEMORIA - MAIN/(9249:9249): se conecto con el kernel
+[INFO] 14:06:49:107 MEMORIA - MAIN/(9249:9249): se conecto con el CPU
+[INFO] 14:06:49:107 MEMORIA - MAIN/(9249:9249): datos de traduccion enviados al CPU
+[INFO] 14:06:49:107 MEMORIA - MAIN/(9249:9249): memoria inicializada con un tamaño de 4096
+[INFO] 14:06:49:107 MEMORIA - MAIN/(9249:9249): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:06:49:107 MEMORIA - MAIN/(9249:9249): bitmap creado con un tamaño de 64
+[INFO] 14:06:49:110 MEMORIA - MAIN/(9249:9259): hilo cpu iniciado
+[INFO] 14:07:12:410 MEMORIA - MAIN/(9249:9259): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:07:12:410 MEMORIA - MAIN/(9249:9259): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:07:12:415 MEMORIA - MAIN/(9249:9259): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:07:12:415 MEMORIA - MAIN/(9249:9259): Numero de tabla 2 encontrado: 0
+[INFO] 14:07:13:415 MEMORIA - MAIN/(9249:9259): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:07:13:415 MEMORIA - MAIN/(9249:9259): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:07:13:416 MEMORIA - MAIN/(9249:9259): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:07:13:416 MEMORIA - MAIN/(9249:9259): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:07:13:416 MEMORIA - MAIN/(9249:9259): Numero de tabla 2 encontrado: 0
+[INFO] 14:07:48:202 MEMORIA - MAIN/(9456:9456): se conecto con el kernel
+[INFO] 14:07:48:205 MEMORIA - MAIN/(9456:9456): se conecto con el CPU
+[INFO] 14:07:48:205 MEMORIA - MAIN/(9456:9456): datos de traduccion enviados al CPU
+[INFO] 14:07:48:205 MEMORIA - MAIN/(9456:9456): memoria inicializada con un tamaño de 4096
+[INFO] 14:07:48:205 MEMORIA - MAIN/(9456:9456): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:07:48:205 MEMORIA - MAIN/(9456:9456): bitmap creado con un tamaño de 64
+[INFO] 14:07:48:210 MEMORIA - MAIN/(9456:9461): hilo cpu iniciado
+[INFO] 14:08:15:402 MEMORIA - MAIN/(9456:9461): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:08:15:402 MEMORIA - MAIN/(9456:9461): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:08:15:403 MEMORIA - MAIN/(9456:9461): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:08:15:403 MEMORIA - MAIN/(9456:9461): Numero de tabla 2 encontrado: 0
+[INFO] 14:08:18:172 MEMORIA - MAIN/(9562:9562): se conecto con el kernel
+[INFO] 14:08:18:176 MEMORIA - MAIN/(9562:9562): se conecto con el CPU
+[INFO] 14:08:18:176 MEMORIA - MAIN/(9562:9562): datos de traduccion enviados al CPU
+[INFO] 14:08:18:176 MEMORIA - MAIN/(9562:9562): memoria inicializada con un tamaño de 4096
+[INFO] 14:08:18:176 MEMORIA - MAIN/(9562:9562): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:08:18:176 MEMORIA - MAIN/(9562:9562): bitmap creado con un tamaño de 64
+[INFO] 14:08:18:180 MEMORIA - MAIN/(9562:9568): hilo cpu iniciado
+[INFO] 14:11:20:535 MEMORIA - MAIN/(9931:9931): se conecto con el kernel
+[INFO] 14:11:20:538 MEMORIA - MAIN/(9931:9931): se conecto con el CPU
+[INFO] 14:11:20:538 MEMORIA - MAIN/(9931:9931): datos de traduccion enviados al CPU
+[INFO] 14:11:20:538 MEMORIA - MAIN/(9931:9931): memoria inicializada con un tamaño de 4096
+[INFO] 14:11:20:538 MEMORIA - MAIN/(9931:9931): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:11:20:538 MEMORIA - MAIN/(9931:9931): bitmap creado con un tamaño de 64
+[INFO] 14:11:20:543 MEMORIA - MAIN/(9931:9937): hilo cpu iniciado
+[INFO] 14:14:36:698 MEMORIA - MAIN/(9931:9937): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:14:36:698 MEMORIA - MAIN/(9931:9937): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:14:36:699 MEMORIA - MAIN/(9931:9937): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:14:36:699 MEMORIA - MAIN/(9931:9937): Numero de tabla 2 encontrado: 0
+[INFO] 14:14:38:996 MEMORIA - MAIN/(10521:10521): se conecto con el kernel
+[INFO] 14:14:38:999 MEMORIA - MAIN/(10521:10521): se conecto con el CPU
+[INFO] 14:14:38:999 MEMORIA - MAIN/(10521:10521): datos de traduccion enviados al CPU
+[INFO] 14:14:38:999 MEMORIA - MAIN/(10521:10521): memoria inicializada con un tamaño de 4096
+[INFO] 14:14:38:999 MEMORIA - MAIN/(10521:10521): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:14:38:999 MEMORIA - MAIN/(10521:10521): bitmap creado con un tamaño de 64
+[INFO] 14:14:39:005 MEMORIA - MAIN/(10521:10527): hilo cpu iniciado
+[INFO] 14:15:31:341 MEMORIA - MAIN/(10521:10527): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:15:31:342 MEMORIA - MAIN/(10521:10527): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:15:31:342 MEMORIA - MAIN/(10521:10527): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:15:31:342 MEMORIA - MAIN/(10521:10527): Numero de tabla 2 encontrado: -1238366480
+[INFO] 14:15:33:736 MEMORIA - MAIN/(10664:10664): se conecto con el kernel
+[INFO] 14:15:33:740 MEMORIA - MAIN/(10664:10664): se conecto con el CPU
+[INFO] 14:15:33:740 MEMORIA - MAIN/(10664:10664): datos de traduccion enviados al CPU
+[INFO] 14:15:33:740 MEMORIA - MAIN/(10664:10664): memoria inicializada con un tamaño de 4096
+[INFO] 14:15:33:740 MEMORIA - MAIN/(10664:10664): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:15:33:740 MEMORIA - MAIN/(10664:10664): bitmap creado con un tamaño de 64
+[INFO] 14:15:33:746 MEMORIA - MAIN/(10664:10670): hilo cpu iniciado
+[INFO] 14:16:55:270 MEMORIA - MAIN/(10664:10670): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:16:55:270 MEMORIA - MAIN/(10664:10670): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:16:55:271 MEMORIA - MAIN/(10664:10670): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:16:55:271 MEMORIA - MAIN/(10664:10670): Numero de tabla 2 encontrado: 1
+[INFO] 14:17:35:347 MEMORIA - MAIN/(10982:10982): se conecto con el kernel
+[INFO] 14:17:35:350 MEMORIA - MAIN/(10982:10982): se conecto con el CPU
+[INFO] 14:17:35:350 MEMORIA - MAIN/(10982:10982): datos de traduccion enviados al CPU
+[INFO] 14:17:35:350 MEMORIA - MAIN/(10982:10982): memoria inicializada con un tamaño de 4096
+[INFO] 14:17:35:350 MEMORIA - MAIN/(10982:10982): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:17:35:351 MEMORIA - MAIN/(10982:10982): bitmap creado con un tamaño de 64
+[INFO] 14:17:35:355 MEMORIA - MAIN/(10982:10997): hilo cpu iniciado
+[INFO] 14:18:09:894 MEMORIA - MAIN/(11097:11097): se conecto con el kernel
+[INFO] 14:18:09:900 MEMORIA - MAIN/(11097:11097): se conecto con el CPU
+[INFO] 14:18:09:900 MEMORIA - MAIN/(11097:11097): datos de traduccion enviados al CPU
+[INFO] 14:18:09:900 MEMORIA - MAIN/(11097:11097): memoria inicializada con un tamaño de 4096
+[INFO] 14:18:09:900 MEMORIA - MAIN/(11097:11097): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:18:09:900 MEMORIA - MAIN/(11097:11097): bitmap creado con un tamaño de 64
+[INFO] 14:18:09:906 MEMORIA - MAIN/(11097:11107): hilo cpu iniciado
+[INFO] 14:18:57:747 MEMORIA - MAIN/(11097:11107): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:18:57:747 MEMORIA - MAIN/(11097:11107): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:18:57:747 MEMORIA - MAIN/(11097:11107): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:18:57:747 MEMORIA - MAIN/(11097:11107): Numero de tabla 2 encontrado: 0
+[INFO] 14:19:01:876 MEMORIA - MAIN/(11251:11251): se conecto con el kernel
+[INFO] 14:19:01:879 MEMORIA - MAIN/(11251:11251): se conecto con el CPU
+[INFO] 14:19:01:879 MEMORIA - MAIN/(11251:11251): datos de traduccion enviados al CPU
+[INFO] 14:19:01:879 MEMORIA - MAIN/(11251:11251): memoria inicializada con un tamaño de 4096
+[INFO] 14:19:01:879 MEMORIA - MAIN/(11251:11251): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:19:01:879 MEMORIA - MAIN/(11251:11251): bitmap creado con un tamaño de 64
+[INFO] 14:19:01:883 MEMORIA - MAIN/(11251:11261): hilo cpu iniciado
+[INFO] 14:23:44:964 MEMORIA - MAIN/(12038:12038): se conecto con el kernel
+[INFO] 14:23:44:971 MEMORIA - MAIN/(12038:12038): se conecto con el CPU
+[INFO] 14:23:44:971 MEMORIA - MAIN/(12038:12038): datos de traduccion enviados al CPU
+[INFO] 14:23:44:971 MEMORIA - MAIN/(12038:12038): memoria inicializada con un tamaño de 4096
+[INFO] 14:23:44:971 MEMORIA - MAIN/(12038:12038): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:23:44:971 MEMORIA - MAIN/(12038:12038): bitmap creado con un tamaño de 64
+[INFO] 14:23:44:977 MEMORIA - MAIN/(12038:12044): hilo cpu iniciado
+[INFO] 14:24:27:226 MEMORIA - MAIN/(12038:12044): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:24:27:226 MEMORIA - MAIN/(12038:12044): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:24:27:227 MEMORIA - MAIN/(12038:12044): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:24:27:227 MEMORIA - MAIN/(12038:12044): Numero de tabla 2 encontrado: 0
+[INFO] 14:24:30:490 MEMORIA - MAIN/(12162:12162): se conecto con el kernel
+[INFO] 14:24:30:494 MEMORIA - MAIN/(12162:12162): se conecto con el CPU
+[INFO] 14:24:30:494 MEMORIA - MAIN/(12162:12162): datos de traduccion enviados al CPU
+[INFO] 14:24:30:494 MEMORIA - MAIN/(12162:12162): memoria inicializada con un tamaño de 4096
+[INFO] 14:24:30:494 MEMORIA - MAIN/(12162:12162): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:24:30:494 MEMORIA - MAIN/(12162:12162): bitmap creado con un tamaño de 64
+[INFO] 14:24:30:498 MEMORIA - MAIN/(12162:12168): hilo cpu iniciado
+[INFO] 14:26:04:751 MEMORIA - MAIN/(12162:12168): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:26:04:751 MEMORIA - MAIN/(12162:12168): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:26:04:753 MEMORIA - MAIN/(12162:12168): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:26:04:753 MEMORIA - MAIN/(12162:12168): Numero de tabla 2 encontrado: 0
+[INFO] 14:26:07:220 MEMORIA - MAIN/(12369:12369): se conecto con el kernel
+[INFO] 14:26:07:224 MEMORIA - MAIN/(12369:12369): se conecto con el CPU
+[INFO] 14:26:07:224 MEMORIA - MAIN/(12369:12369): datos de traduccion enviados al CPU
+[INFO] 14:26:07:224 MEMORIA - MAIN/(12369:12369): memoria inicializada con un tamaño de 4096
+[INFO] 14:26:07:224 MEMORIA - MAIN/(12369:12369): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:26:07:224 MEMORIA - MAIN/(12369:12369): bitmap creado con un tamaño de 64
+[INFO] 14:26:07:228 MEMORIA - MAIN/(12369:12379): hilo cpu iniciado
+[INFO] 14:26:30:226 MEMORIA - MAIN/(12457:12457): se conecto con el kernel
+[INFO] 14:26:31:311 MEMORIA - MAIN/(12457:12457): se conecto con el CPU
+[INFO] 14:26:31:312 MEMORIA - MAIN/(12457:12457): datos de traduccion enviados al CPU
+[INFO] 14:26:31:312 MEMORIA - MAIN/(12457:12457): memoria inicializada con un tamaño de 4096
+[INFO] 14:26:31:312 MEMORIA - MAIN/(12457:12457): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:26:31:312 MEMORIA - MAIN/(12457:12457): bitmap creado con un tamaño de 64
+[INFO] 14:26:31:331 MEMORIA - MAIN/(12457:12466): hilo cpu iniciado
+[INFO] 14:27:13:088 MEMORIA - MAIN/(12615:12615): se conecto con el kernel
+[INFO] 14:27:13:092 MEMORIA - MAIN/(12615:12615): se conecto con el CPU
+[INFO] 14:27:13:092 MEMORIA - MAIN/(12615:12615): datos de traduccion enviados al CPU
+[INFO] 14:27:13:092 MEMORIA - MAIN/(12615:12615): memoria inicializada con un tamaño de 4096
+[INFO] 14:27:13:092 MEMORIA - MAIN/(12615:12615): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:27:13:092 MEMORIA - MAIN/(12615:12615): bitmap creado con un tamaño de 64
+[INFO] 14:27:13:101 MEMORIA - MAIN/(12615:12621): hilo cpu iniciado
+[INFO] 14:27:56:112 MEMORIA - MAIN/(12615:12621): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:27:56:112 MEMORIA - MAIN/(12615:12621): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:27:56:113 MEMORIA - MAIN/(12615:12621): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:27:56:113 MEMORIA - MAIN/(12615:12621): Numero de tabla 2 encontrado: 0
+[INFO] 14:27:59:283 MEMORIA - MAIN/(12732:12732): se conecto con el kernel
+[INFO] 14:27:59:287 MEMORIA - MAIN/(12732:12732): se conecto con el CPU
+[INFO] 14:27:59:287 MEMORIA - MAIN/(12732:12732): datos de traduccion enviados al CPU
+[INFO] 14:27:59:287 MEMORIA - MAIN/(12732:12732): memoria inicializada con un tamaño de 4096
+[INFO] 14:27:59:287 MEMORIA - MAIN/(12732:12732): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:27:59:287 MEMORIA - MAIN/(12732:12732): bitmap creado con un tamaño de 64
+[INFO] 14:27:59:290 MEMORIA - MAIN/(12732:12742): hilo cpu iniciado
+[INFO] 14:29:31:398 MEMORIA - MAIN/(12732:12742): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:29:31:398 MEMORIA - MAIN/(12732:12742): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:29:31:398 MEMORIA - MAIN/(12732:12742): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:29:31:398 MEMORIA - MAIN/(12732:12742): Numero de tabla 2 encontrado: -1237317952
+[INFO] 14:29:32:399 MEMORIA - MAIN/(12732:12742): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:29:32:399 MEMORIA - MAIN/(12732:12742): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:29:32:399 MEMORIA - MAIN/(12732:12742): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:29:32:399 MEMORIA - MAIN/(12732:12742): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:29:32:399 MEMORIA - MAIN/(12732:12742): Numero de tabla 2 encontrado: -1237317952
+[INFO] 14:29:35:229 MEMORIA - MAIN/(12963:12963): se conecto con el kernel
+[INFO] 14:29:35:232 MEMORIA - MAIN/(12963:12963): se conecto con el CPU
+[INFO] 14:29:35:232 MEMORIA - MAIN/(12963:12963): datos de traduccion enviados al CPU
+[INFO] 14:29:35:232 MEMORIA - MAIN/(12963:12963): memoria inicializada con un tamaño de 4096
+[INFO] 14:29:35:232 MEMORIA - MAIN/(12963:12963): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:29:35:232 MEMORIA - MAIN/(12963:12963): bitmap creado con un tamaño de 64
+[INFO] 14:29:35:241 MEMORIA - MAIN/(12963:12973): hilo cpu iniciado
+[INFO] 14:31:08:069 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:31:08:069 MEMORIA - MAIN/(12963:12973): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:31:08:111 MEMORIA - MAIN/(12963:12973): datos recibidos: numero_tabla_1er_nivel_leer 2 numero_de_entrada 0
+[INFO] 14:31:08:111 MEMORIA - MAIN/(12963:12973): Numero de tabla 2 encontrado: 2
+[INFO] 14:31:09:112 MEMORIA - MAIN/(12963:12973): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:31:09:112 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:31:12:115 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:31:13:116 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:31:14:118 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:31:15:119 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:32:24:993 MEMORIA - MAIN/(12963:12973): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:35:03:719 MEMORIA - MAIN/(13698:13698): se conecto con el kernel
+[INFO] 14:35:03:722 MEMORIA - MAIN/(13698:13698): se conecto con el CPU
+[INFO] 14:35:03:722 MEMORIA - MAIN/(13698:13698): datos de traduccion enviados al CPU
+[INFO] 14:35:03:722 MEMORIA - MAIN/(13698:13698): memoria inicializada con un tamaño de 4096
+[INFO] 14:35:03:722 MEMORIA - MAIN/(13698:13698): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:35:03:722 MEMORIA - MAIN/(13698:13698): bitmap creado con un tamaño de 64
+[INFO] 14:35:03:741 MEMORIA - MAIN/(13698:13710): hilo cpu iniciado
+[INFO] 14:35:08:984 MEMORIA - MAIN/(13698:13710): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:35:08:984 MEMORIA - MAIN/(13698:13710): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:35:08:993 MEMORIA - MAIN/(13698:13710): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:35:45:780 MEMORIA - MAIN/(13803:13803): se conecto con el kernel
+[INFO] 14:35:45:782 MEMORIA - MAIN/(13803:13803): se conecto con el CPU
+[INFO] 14:35:45:782 MEMORIA - MAIN/(13803:13803): datos de traduccion enviados al CPU
+[INFO] 14:35:45:782 MEMORIA - MAIN/(13803:13803): memoria inicializada con un tamaño de 4096
+[INFO] 14:35:45:782 MEMORIA - MAIN/(13803:13803): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:35:45:783 MEMORIA - MAIN/(13803:13803): bitmap creado con un tamaño de 64
+[INFO] 14:35:45:786 MEMORIA - MAIN/(13803:13817): hilo cpu iniciado
+[INFO] 14:35:59:747 MEMORIA - MAIN/(13803:13817): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:35:59:747 MEMORIA - MAIN/(13803:13817): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:35:59:747 MEMORIA - MAIN/(13803:13817): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:35:59:747 MEMORIA - MAIN/(13803:13817): Numero de tabla 2 encontrado: 0
+[INFO] 14:37:47:023 MEMORIA - MAIN/(14152:14152): se conecto con el kernel
+[INFO] 14:37:47:026 MEMORIA - MAIN/(14152:14152): se conecto con el CPU
+[INFO] 14:37:47:026 MEMORIA - MAIN/(14152:14152): datos de traduccion enviados al CPU
+[INFO] 14:37:47:027 MEMORIA - MAIN/(14152:14152): memoria inicializada con un tamaño de 4096
+[INFO] 14:37:47:027 MEMORIA - MAIN/(14152:14152): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:37:47:027 MEMORIA - MAIN/(14152:14152): bitmap creado con un tamaño de 64
+[INFO] 14:37:47:029 MEMORIA - MAIN/(14152:14164): hilo cpu iniciado
+[INFO] 14:57:52:193 MEMORIA - MAIN/(14152:14164): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:57:52:193 MEMORIA - MAIN/(14152:14164): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:57:52:193 MEMORIA - MAIN/(14152:14164): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:57:52:193 MEMORIA - MAIN/(14152:14164): Numero de tabla 2 encontrado: 1836017711
+[INFO] 14:57:53:194 MEMORIA - MAIN/(14152:14164): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 14:57:53:194 MEMORIA - MAIN/(14152:14164): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 14:57:53:194 MEMORIA - MAIN/(14152:14164): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 14:57:53:194 MEMORIA - MAIN/(14152:14164): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 14:57:53:194 MEMORIA - MAIN/(14152:14164): Numero de tabla 2 encontrado: 1836017711
+[INFO] 14:57:57:246 MEMORIA - MAIN/(16937:16937): se conecto con el kernel
+[INFO] 14:57:57:249 MEMORIA - MAIN/(16937:16937): se conecto con el CPU
+[INFO] 14:57:57:249 MEMORIA - MAIN/(16937:16937): datos de traduccion enviados al CPU
+[INFO] 14:57:57:249 MEMORIA - MAIN/(16937:16937): memoria inicializada con un tamaño de 4096
+[INFO] 14:57:57:249 MEMORIA - MAIN/(16937:16937): la cantidad de frames en esta ejecucion es de 64
+[INFO] 14:57:57:249 MEMORIA - MAIN/(16937:16937): bitmap creado con un tamaño de 64
+[INFO] 14:57:57:251 MEMORIA - MAIN/(16937:16953): hilo cpu iniciado
+[INFO] 15:00:11:774 MEMORIA - MAIN/(16937:16953): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:00:11:774 MEMORIA - MAIN/(16937:16953): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:00:11:774 MEMORIA - MAIN/(16937:16953): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:00:11:774 MEMORIA - MAIN/(16937:16953): Numero de tabla 2 encontrado: 1836017711
+[INFO] 15:00:14:930 MEMORIA - MAIN/(17191:17191): se conecto con el kernel
+[INFO] 15:00:14:934 MEMORIA - MAIN/(17191:17191): se conecto con el CPU
+[INFO] 15:00:14:934 MEMORIA - MAIN/(17191:17191): datos de traduccion enviados al CPU
+[INFO] 15:00:14:934 MEMORIA - MAIN/(17191:17191): memoria inicializada con un tamaño de 4096
+[INFO] 15:00:14:934 MEMORIA - MAIN/(17191:17191): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:00:14:935 MEMORIA - MAIN/(17191:17191): bitmap creado con un tamaño de 64
+[INFO] 15:00:14:946 MEMORIA - MAIN/(17191:17209): hilo cpu iniciado
+[INFO] 15:00:27:840 MEMORIA - MAIN/(17191:17209): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:00:27:840 MEMORIA - MAIN/(17191:17209): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:00:27:840 MEMORIA - MAIN/(17191:17209): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:00:27:840 MEMORIA - MAIN/(17191:17209): Numero de tabla 2 encontrado: 0
+[INFO] 15:01:48:094 MEMORIA - MAIN/(17405:17405): se conecto con el kernel
+[INFO] 15:01:48:097 MEMORIA - MAIN/(17405:17405): se conecto con el CPU
+[INFO] 15:01:48:097 MEMORIA - MAIN/(17405:17405): datos de traduccion enviados al CPU
+[INFO] 15:01:48:097 MEMORIA - MAIN/(17405:17405): memoria inicializada con un tamaño de 4096
+[INFO] 15:01:48:097 MEMORIA - MAIN/(17405:17405): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:01:48:097 MEMORIA - MAIN/(17405:17405): bitmap creado con un tamaño de 64
+[INFO] 15:01:48:100 MEMORIA - MAIN/(17405:17416): hilo cpu iniciado
+[INFO] 15:03:35:363 MEMORIA - MAIN/(17405:17416): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:03:35:363 MEMORIA - MAIN/(17405:17416): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:03:35:363 MEMORIA - MAIN/(17405:17416): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:03:35:363 MEMORIA - MAIN/(17405:17416): Numero de tabla 2 encontrado: 1836017711
+[INFO] 15:04:48:138 MEMORIA - MAIN/(17776:17776): se conecto con el kernel
+[INFO] 15:04:48:139 MEMORIA - MAIN/(17776:17776): se conecto con el CPU
+[INFO] 15:04:48:139 MEMORIA - MAIN/(17776:17776): datos de traduccion enviados al CPU
+[INFO] 15:04:48:139 MEMORIA - MAIN/(17776:17776): memoria inicializada con un tamaño de 4096
+[INFO] 15:04:48:139 MEMORIA - MAIN/(17776:17776): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:04:48:139 MEMORIA - MAIN/(17776:17776): bitmap creado con un tamaño de 64
+[INFO] 15:04:48:140 MEMORIA - MAIN/(17776:17788): hilo cpu iniciado
+[INFO] 15:07:42:464 MEMORIA - MAIN/(17776:17788): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:07:42:464 MEMORIA - MAIN/(17776:17788): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:07:42:464 MEMORIA - MAIN/(17776:17788): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:07:42:464 MEMORIA - MAIN/(17776:17788): Numero de tabla 2 encontrado: -1237317912
+[INFO] 15:07:45:923 MEMORIA - MAIN/(18135:18135): se conecto con el kernel
+[INFO] 15:07:45:926 MEMORIA - MAIN/(18135:18135): se conecto con el CPU
+[INFO] 15:07:45:926 MEMORIA - MAIN/(18135:18135): datos de traduccion enviados al CPU
+[INFO] 15:07:45:926 MEMORIA - MAIN/(18135:18135): memoria inicializada con un tamaño de 4096
+[INFO] 15:07:45:926 MEMORIA - MAIN/(18135:18135): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:07:45:926 MEMORIA - MAIN/(18135:18135): bitmap creado con un tamaño de 64
+[INFO] 15:07:45:929 MEMORIA - MAIN/(18135:18146): hilo cpu iniciado
+[INFO] 15:08:14:245 MEMORIA - MAIN/(18135:18146): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:08:14:245 MEMORIA - MAIN/(18135:18146): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:08:14:245 MEMORIA - MAIN/(18135:18146): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:08:14:245 MEMORIA - MAIN/(18135:18146): Numero de tabla 2 encontrado: 0
+[INFO] 15:08:15:246 MEMORIA - MAIN/(18135:18146): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 15:08:15:246 MEMORIA - MAIN/(18135:18146): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:08:15:246 MEMORIA - MAIN/(18135:18146): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:08:15:246 MEMORIA - MAIN/(18135:18146): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:08:15:246 MEMORIA - MAIN/(18135:18146): Numero de tabla 2 encontrado: 0
+[INFO] 15:09:49:191 MEMORIA - MAIN/(18389:18389): se conecto con el kernel
+[INFO] 15:09:49:194 MEMORIA - MAIN/(18389:18389): se conecto con el CPU
+[INFO] 15:09:49:194 MEMORIA - MAIN/(18389:18389): datos de traduccion enviados al CPU
+[INFO] 15:09:49:194 MEMORIA - MAIN/(18389:18389): memoria inicializada con un tamaño de 4096
+[INFO] 15:09:49:194 MEMORIA - MAIN/(18389:18389): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:09:49:194 MEMORIA - MAIN/(18389:18389): bitmap creado con un tamaño de 64
+[INFO] 15:09:49:206 MEMORIA - MAIN/(18389:18400): hilo cpu iniciado
+[INFO] 15:10:11:681 MEMORIA - MAIN/(18389:18400): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:10:11:681 MEMORIA - MAIN/(18389:18400): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:10:11:681 MEMORIA - MAIN/(18389:18400): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:10:11:681 MEMORIA - MAIN/(18389:18400): Numero de tabla 2 encontrado: 0
+[INFO] 15:10:12:682 MEMORIA - MAIN/(18389:18400): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 15:10:12:682 MEMORIA - MAIN/(18389:18400): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:10:12:682 MEMORIA - MAIN/(18389:18400): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:10:12:682 MEMORIA - MAIN/(18389:18400): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:10:12:682 MEMORIA - MAIN/(18389:18400): Numero de tabla 2 encontrado: 0
+[INFO] 15:10:28:225 MEMORIA - MAIN/(18512:18512): se conecto con el kernel
+[INFO] 15:10:28:235 MEMORIA - MAIN/(18512:18512): se conecto con el CPU
+[INFO] 15:10:28:235 MEMORIA - MAIN/(18512:18512): datos de traduccion enviados al CPU
+[INFO] 15:10:28:235 MEMORIA - MAIN/(18512:18512): memoria inicializada con un tamaño de 4096
+[INFO] 15:10:28:235 MEMORIA - MAIN/(18512:18512): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:10:28:236 MEMORIA - MAIN/(18512:18512): bitmap creado con un tamaño de 64
+[INFO] 15:10:28:237 MEMORIA - MAIN/(18512:18523): hilo cpu iniciado
+[INFO] 15:10:51:458 MEMORIA - MAIN/(18512:18523): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:10:51:458 MEMORIA - MAIN/(18512:18523): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:10:51:458 MEMORIA - MAIN/(18512:18523): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:10:51:458 MEMORIA - MAIN/(18512:18523): Numero de tabla 2 encontrado: 0
+[INFO] 15:10:52:459 MEMORIA - MAIN/(18512:18523): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 15:10:52:459 MEMORIA - MAIN/(18512:18523): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:10:52:459 MEMORIA - MAIN/(18512:18523): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:10:52:459 MEMORIA - MAIN/(18512:18523): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:10:52:459 MEMORIA - MAIN/(18512:18523): Numero de tabla 2 encontrado: 0
+[INFO] 15:12:29:656 MEMORIA - MAIN/(18785:18785): se conecto con el kernel
+[INFO] 15:12:29:659 MEMORIA - MAIN/(18785:18785): se conecto con el CPU
+[INFO] 15:12:29:659 MEMORIA - MAIN/(18785:18785): datos de traduccion enviados al CPU
+[INFO] 15:12:29:659 MEMORIA - MAIN/(18785:18785): memoria inicializada con un tamaño de 4096
+[INFO] 15:12:29:659 MEMORIA - MAIN/(18785:18785): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:12:29:660 MEMORIA - MAIN/(18785:18785): bitmap creado con un tamaño de 64
+[INFO] 15:12:29:671 MEMORIA - MAIN/(18785:18797): hilo cpu iniciado
+[INFO] 15:12:53:697 MEMORIA - MAIN/(18785:18797): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:12:53:697 MEMORIA - MAIN/(18785:18797): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:12:53:697 MEMORIA - MAIN/(18785:18797): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:12:53:697 MEMORIA - MAIN/(18785:18797): Numero de tabla 2 encontrado: 0
+[INFO] 15:12:54:700 MEMORIA - MAIN/(18785:18797): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 15:12:54:700 MEMORIA - MAIN/(18785:18797): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:12:54:700 MEMORIA - MAIN/(18785:18797): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:12:54:700 MEMORIA - MAIN/(18785:18797): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:12:54:700 MEMORIA - MAIN/(18785:18797): Numero de tabla 2 encontrado: 0
+[INFO] 15:15:50:025 MEMORIA - MAIN/(19178:19178): se conecto con el kernel
+[INFO] 15:15:50:027 MEMORIA - MAIN/(19178:19178): se conecto con el CPU
+[INFO] 15:15:50:027 MEMORIA - MAIN/(19178:19178): datos de traduccion enviados al CPU
+[INFO] 15:15:50:028 MEMORIA - MAIN/(19178:19178): memoria inicializada con un tamaño de 4096
+[INFO] 15:15:50:028 MEMORIA - MAIN/(19178:19178): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:15:50:028 MEMORIA - MAIN/(19178:19178): bitmap creado con un tamaño de 64
+[INFO] 15:15:50:030 MEMORIA - MAIN/(19178:19192): hilo cpu iniciado
+[INFO] 15:16:11:143 MEMORIA - MAIN/(19178:19192): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:16:11:143 MEMORIA - MAIN/(19178:19192): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:16:11:143 MEMORIA - MAIN/(19178:19192): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:16:11:143 MEMORIA - MAIN/(19178:19192): Numero de tabla 2 encontrado: 0
+[INFO] 15:16:12:143 MEMORIA - MAIN/(19178:19192): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 15:16:12:143 MEMORIA - MAIN/(19178:19192): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:16:12:143 MEMORIA - MAIN/(19178:19192): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:16:12:143 MEMORIA - MAIN/(19178:19192): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:16:12:143 MEMORIA - MAIN/(19178:19192): Numero de tabla 2 encontrado: 0
+[INFO] 15:20:27:960 MEMORIA - MAIN/(19741:19741): se conecto con el kernel
+[INFO] 15:20:27:965 MEMORIA - MAIN/(19741:19741): se conecto con el CPU
+[INFO] 15:20:27:965 MEMORIA - MAIN/(19741:19741): datos de traduccion enviados al CPU
+[INFO] 15:20:27:965 MEMORIA - MAIN/(19741:19741): memoria inicializada con un tamaño de 4096
+[INFO] 15:20:27:965 MEMORIA - MAIN/(19741:19741): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:20:27:965 MEMORIA - MAIN/(19741:19741): bitmap creado con un tamaño de 64
+[INFO] 15:20:27:966 MEMORIA - MAIN/(19741:19752): hilo cpu iniciado
+[INFO] 15:21:13:287 MEMORIA - MAIN/(19741:19752): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:21:13:287 MEMORIA - MAIN/(19741:19752): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:21:13:287 MEMORIA - MAIN/(19741:19752): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:21:13:287 MEMORIA - MAIN/(19741:19752): Numero de tabla 2 encontrado: 0
+[INFO] 15:21:26:581 MEMORIA - MAIN/(19895:19895): se conecto con el kernel
+[INFO] 15:21:26:583 MEMORIA - MAIN/(19895:19895): se conecto con el CPU
+[INFO] 15:21:26:583 MEMORIA - MAIN/(19895:19895): datos de traduccion enviados al CPU
+[INFO] 15:21:26:583 MEMORIA - MAIN/(19895:19895): memoria inicializada con un tamaño de 4096
+[INFO] 15:21:26:583 MEMORIA - MAIN/(19895:19895): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:21:26:583 MEMORIA - MAIN/(19895:19895): bitmap creado con un tamaño de 64
+[INFO] 15:21:26:586 MEMORIA - MAIN/(19895:19906): hilo cpu iniciado
+[INFO] 15:30:41:789 MEMORIA - MAIN/(19895:19906): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:30:41:789 MEMORIA - MAIN/(19895:19906): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:30:41:789 MEMORIA - MAIN/(19895:19906): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:30:41:789 MEMORIA - MAIN/(19895:19906): Numero de tabla 2 encontrado: 0
+[INFO] 15:30:44:874 MEMORIA - MAIN/(20950:20950): se conecto con el kernel
+[INFO] 15:30:44:888 MEMORIA - MAIN/(20950:20950): se conecto con el CPU
+[INFO] 15:30:44:888 MEMORIA - MAIN/(20950:20950): datos de traduccion enviados al CPU
+[INFO] 15:30:44:888 MEMORIA - MAIN/(20950:20950): memoria inicializada con un tamaño de 4096
+[INFO] 15:30:44:888 MEMORIA - MAIN/(20950:20950): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:30:44:888 MEMORIA - MAIN/(20950:20950): bitmap creado con un tamaño de 64
+[INFO] 15:30:44:889 MEMORIA - MAIN/(20950:20966): hilo cpu iniciado
+[INFO] 15:32:16:216 MEMORIA - MAIN/(20950:20966): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:32:16:216 MEMORIA - MAIN/(20950:20966): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:32:16:218 MEMORIA - MAIN/(20950:20966): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:32:16:218 MEMORIA - MAIN/(20950:20966): Numero de tabla 2 encontrado: 1836017711
+[INFO] 15:32:18:503 MEMORIA - MAIN/(21188:21188): se conecto con el kernel
+[INFO] 15:32:18:519 MEMORIA - MAIN/(21188:21188): se conecto con el CPU
+[INFO] 15:32:18:519 MEMORIA - MAIN/(21188:21188): datos de traduccion enviados al CPU
+[INFO] 15:32:18:519 MEMORIA - MAIN/(21188:21188): memoria inicializada con un tamaño de 4096
+[INFO] 15:32:18:519 MEMORIA - MAIN/(21188:21188): la cantidad de frames en esta ejecucion es de 64
+[INFO] 15:32:18:519 MEMORIA - MAIN/(21188:21188): bitmap creado con un tamaño de 64
+[INFO] 15:32:18:520 MEMORIA - MAIN/(21188:21200): hilo cpu iniciado
+[INFO] 15:34:07:165 MEMORIA - MAIN/(21188:21200): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 15:34:07:165 MEMORIA - MAIN/(21188:21200): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 15:34:07:166 MEMORIA - MAIN/(21188:21200): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 15:34:07:166 MEMORIA - MAIN/(21188:21200): Numero de tabla 2 encontrado: 1836017711
+[INFO] 16:04:15:078 MEMORIA - MAIN/(25026:25026): se conecto con el kernel
+[INFO] 16:04:15:081 MEMORIA - MAIN/(25026:25026): se conecto con el CPU
+[INFO] 16:04:15:081 MEMORIA - MAIN/(25026:25026): datos de traduccion enviados al CPU
+[INFO] 16:04:15:081 MEMORIA - MAIN/(25026:25026): memoria inicializada con un tamaño de 4096
+[INFO] 16:04:15:081 MEMORIA - MAIN/(25026:25026): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:04:15:081 MEMORIA - MAIN/(25026:25026): bitmap creado con un tamaño de 64
+[INFO] 16:04:15:084 MEMORIA - MAIN/(25026:25038): hilo cpu iniciado
+[INFO] 16:05:39:027 MEMORIA - MAIN/(25026:25038): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:05:39:027 MEMORIA - MAIN/(25026:25038): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:05:39:028 MEMORIA - MAIN/(25026:25038): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:05:41:603 MEMORIA - MAIN/(25204:25204): se conecto con el kernel
+[INFO] 16:05:41:604 MEMORIA - MAIN/(25204:25204): se conecto con el CPU
+[INFO] 16:05:41:604 MEMORIA - MAIN/(25204:25204): datos de traduccion enviados al CPU
+[INFO] 16:05:41:604 MEMORIA - MAIN/(25204:25204): memoria inicializada con un tamaño de 4096
+[INFO] 16:05:41:604 MEMORIA - MAIN/(25204:25204): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:05:41:604 MEMORIA - MAIN/(25204:25204): bitmap creado con un tamaño de 64
+[INFO] 16:05:41:605 MEMORIA - MAIN/(25204:25214): hilo cpu iniciado
+[INFO] 16:06:29:457 MEMORIA - MAIN/(25204:25214): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:06:29:457 MEMORIA - MAIN/(25204:25214): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:06:29:457 MEMORIA - MAIN/(25204:25214): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:06:29:457 MEMORIA - MAIN/(25204:25214): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:06:30:458 MEMORIA - MAIN/(25204:25214): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:06:30:458 MEMORIA - MAIN/(25204:25214): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:06:30:458 MEMORIA - MAIN/(25204:25214): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:06:30:458 MEMORIA - MAIN/(25204:25214): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:06:30:458 MEMORIA - MAIN/(25204:25214): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:06:36:631 MEMORIA - MAIN/(25413:25413): se conecto con el kernel
+[INFO] 16:06:36:632 MEMORIA - MAIN/(25413:25413): se conecto con el CPU
+[INFO] 16:06:36:632 MEMORIA - MAIN/(25413:25413): datos de traduccion enviados al CPU
+[INFO] 16:06:36:632 MEMORIA - MAIN/(25413:25413): memoria inicializada con un tamaño de 4096
+[INFO] 16:06:36:632 MEMORIA - MAIN/(25413:25413): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:06:36:632 MEMORIA - MAIN/(25413:25413): bitmap creado con un tamaño de 64
+[INFO] 16:06:36:633 MEMORIA - MAIN/(25413:25429): hilo cpu iniciado
+[INFO] 16:07:23:376 MEMORIA - MAIN/(25413:25429): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:07:23:376 MEMORIA - MAIN/(25413:25429): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:07:23:376 MEMORIA - MAIN/(25413:25429): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:07:23:376 MEMORIA - MAIN/(25413:25429): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:10:35:855 MEMORIA - MAIN/(25911:25911): se conecto con el kernel
+[INFO] 16:10:35:857 MEMORIA - MAIN/(25911:25911): se conecto con el CPU
+[INFO] 16:10:35:857 MEMORIA - MAIN/(25911:25911): datos de traduccion enviados al CPU
+[INFO] 16:10:35:857 MEMORIA - MAIN/(25911:25911): memoria inicializada con un tamaño de 4096
+[INFO] 16:10:35:857 MEMORIA - MAIN/(25911:25911): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:10:35:857 MEMORIA - MAIN/(25911:25911): bitmap creado con un tamaño de 64
+[INFO] 16:10:35:859 MEMORIA - MAIN/(25911:25923): hilo cpu iniciado
+[INFO] 16:11:20:907 MEMORIA - MAIN/(25911:25923): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:11:20:907 MEMORIA - MAIN/(25911:25923): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:11:20:907 MEMORIA - MAIN/(25911:25923): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:11:20:907 MEMORIA - MAIN/(25911:25923): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:11:21:908 MEMORIA - MAIN/(25911:25923): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:11:21:908 MEMORIA - MAIN/(25911:25923): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:11:21:908 MEMORIA - MAIN/(25911:25923): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:11:21:908 MEMORIA - MAIN/(25911:25923): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:11:21:908 MEMORIA - MAIN/(25911:25923): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:11:36:622 MEMORIA - MAIN/(26119:26119): se conecto con el kernel
+[INFO] 16:11:36:651 MEMORIA - MAIN/(26119:26119): se conecto con el CPU
+[INFO] 16:11:36:651 MEMORIA - MAIN/(26119:26119): datos de traduccion enviados al CPU
+[INFO] 16:11:36:651 MEMORIA - MAIN/(26119:26119): memoria inicializada con un tamaño de 4096
+[INFO] 16:11:36:651 MEMORIA - MAIN/(26119:26119): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:11:36:651 MEMORIA - MAIN/(26119:26119): bitmap creado con un tamaño de 64
+[INFO] 16:11:36:653 MEMORIA - MAIN/(26119:26134): hilo cpu iniciado
+[INFO] 16:13:09:229 MEMORIA - MAIN/(26119:26134): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:13:09:229 MEMORIA - MAIN/(26119:26134): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:13:09:230 MEMORIA - MAIN/(26119:26134): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:13:09:230 MEMORIA - MAIN/(26119:26134): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:13:13:210 MEMORIA - MAIN/(26426:26426): se conecto con el kernel
+[INFO] 16:13:13:217 MEMORIA - MAIN/(26426:26426): se conecto con el CPU
+[INFO] 16:13:13:217 MEMORIA - MAIN/(26426:26426): datos de traduccion enviados al CPU
+[INFO] 16:13:13:217 MEMORIA - MAIN/(26426:26426): memoria inicializada con un tamaño de 4096
+[INFO] 16:13:13:217 MEMORIA - MAIN/(26426:26426): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:13:13:217 MEMORIA - MAIN/(26426:26426): bitmap creado con un tamaño de 64
+[INFO] 16:13:13:224 MEMORIA - MAIN/(26426:26437): hilo cpu iniciado
+[INFO] 16:13:52:171 MEMORIA - MAIN/(26426:26437): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:13:52:171 MEMORIA - MAIN/(26426:26437): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:13:52:171 MEMORIA - MAIN/(26426:26437): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:13:52:171 MEMORIA - MAIN/(26426:26437): Numero de tabla 2 encontrado: -1237317912
+[INFO] 16:13:58:008 MEMORIA - MAIN/(26543:26543): se conecto con el kernel
+[INFO] 16:13:58:028 MEMORIA - MAIN/(26543:26543): se conecto con el CPU
+[INFO] 16:13:58:028 MEMORIA - MAIN/(26543:26543): datos de traduccion enviados al CPU
+[INFO] 16:13:58:028 MEMORIA - MAIN/(26543:26543): memoria inicializada con un tamaño de 4096
+[INFO] 16:13:58:028 MEMORIA - MAIN/(26543:26543): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:13:58:028 MEMORIA - MAIN/(26543:26543): bitmap creado con un tamaño de 64
+[INFO] 16:13:58:029 MEMORIA - MAIN/(26543:26559): hilo cpu iniciado
+[INFO] 16:18:30:885 MEMORIA - MAIN/(26543:26559): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:18:30:885 MEMORIA - MAIN/(26543:26559): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:18:30:885 MEMORIA - MAIN/(26543:26559): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:18:30:885 MEMORIA - MAIN/(26543:26559): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:18:45:152 MEMORIA - MAIN/(27117:27117): se conecto con el kernel
+[INFO] 16:18:45:157 MEMORIA - MAIN/(27117:27117): se conecto con el CPU
+[INFO] 16:18:45:158 MEMORIA - MAIN/(27117:27117): datos de traduccion enviados al CPU
+[INFO] 16:18:45:158 MEMORIA - MAIN/(27117:27117): memoria inicializada con un tamaño de 4096
+[INFO] 16:18:45:158 MEMORIA - MAIN/(27117:27117): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:18:45:158 MEMORIA - MAIN/(27117:27117): bitmap creado con un tamaño de 64
+[INFO] 16:18:45:167 MEMORIA - MAIN/(27117:27127): hilo cpu iniciado
+[INFO] 16:22:56:086 MEMORIA - MAIN/(27117:27127): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:22:56:086 MEMORIA - MAIN/(27117:27127): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:22:56:087 MEMORIA - MAIN/(27117:27127): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:22:56:087 MEMORIA - MAIN/(27117:27127): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:22:57:090 MEMORIA - MAIN/(27117:27127): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:22:57:090 MEMORIA - MAIN/(27117:27127): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:22:57:090 MEMORIA - MAIN/(27117:27127): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:22:57:090 MEMORIA - MAIN/(27117:27127): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:22:57:090 MEMORIA - MAIN/(27117:27127): Numero de tabla 2 encontrado: -1237319616
+[INFO] 16:22:58:877 MEMORIA - MAIN/(27809:27809): se conecto con el kernel
+[INFO] 16:22:58:890 MEMORIA - MAIN/(27809:27809): se conecto con el CPU
+[INFO] 16:22:58:890 MEMORIA - MAIN/(27809:27809): datos de traduccion enviados al CPU
+[INFO] 16:22:58:890 MEMORIA - MAIN/(27809:27809): memoria inicializada con un tamaño de 4096
+[INFO] 16:22:58:890 MEMORIA - MAIN/(27809:27809): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:22:58:890 MEMORIA - MAIN/(27809:27809): bitmap creado con un tamaño de 64
+[INFO] 16:22:58:894 MEMORIA - MAIN/(27809:27821): hilo cpu iniciado
+[INFO] 16:24:13:201 MEMORIA - MAIN/(27809:27821): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:24:13:201 MEMORIA - MAIN/(27809:27821): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:24:13:202 MEMORIA - MAIN/(27809:27821): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:24:13:202 MEMORIA - MAIN/(27809:27821): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:24:15:529 MEMORIA - MAIN/(28012:28012): se conecto con el kernel
+[INFO] 16:24:15:547 MEMORIA - MAIN/(28012:28012): se conecto con el CPU
+[INFO] 16:24:15:547 MEMORIA - MAIN/(28012:28012): datos de traduccion enviados al CPU
+[INFO] 16:24:15:547 MEMORIA - MAIN/(28012:28012): memoria inicializada con un tamaño de 4096
+[INFO] 16:24:15:547 MEMORIA - MAIN/(28012:28012): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:24:15:547 MEMORIA - MAIN/(28012:28012): bitmap creado con un tamaño de 64
+[INFO] 16:24:15:549 MEMORIA - MAIN/(28012:28024): hilo cpu iniciado
+[INFO] 16:26:11:191 MEMORIA - MAIN/(28012:28024): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:26:11:191 MEMORIA - MAIN/(28012:28024): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:26:11:192 MEMORIA - MAIN/(28012:28024): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:26:11:192 MEMORIA - MAIN/(28012:28024): Numero de tabla 2 encontrado: -1238362088
+[INFO] 16:26:13:406 MEMORIA - MAIN/(28323:28323): se conecto con el kernel
+[INFO] 16:26:13:418 MEMORIA - MAIN/(28323:28323): se conecto con el CPU
+[INFO] 16:26:13:418 MEMORIA - MAIN/(28323:28323): datos de traduccion enviados al CPU
+[INFO] 16:26:13:418 MEMORIA - MAIN/(28323:28323): memoria inicializada con un tamaño de 4096
+[INFO] 16:26:13:418 MEMORIA - MAIN/(28323:28323): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:26:13:418 MEMORIA - MAIN/(28323:28323): bitmap creado con un tamaño de 64
+[INFO] 16:26:13:426 MEMORIA - MAIN/(28323:28339): hilo cpu iniciado
+[INFO] 16:27:53:990 MEMORIA - MAIN/(28323:28339): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:27:53:990 MEMORIA - MAIN/(28323:28339): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:27:53:991 MEMORIA - MAIN/(28323:28339): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:27:53:991 MEMORIA - MAIN/(28323:28339): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:27:55:830 MEMORIA - MAIN/(28587:28587): se conecto con el kernel
+[INFO] 16:27:55:842 MEMORIA - MAIN/(28587:28587): se conecto con el CPU
+[INFO] 16:27:55:842 MEMORIA - MAIN/(28587:28587): datos de traduccion enviados al CPU
+[INFO] 16:27:55:842 MEMORIA - MAIN/(28587:28587): memoria inicializada con un tamaño de 4096
+[INFO] 16:27:55:842 MEMORIA - MAIN/(28587:28587): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:27:55:842 MEMORIA - MAIN/(28587:28587): bitmap creado con un tamaño de 64
+[INFO] 16:27:55:846 MEMORIA - MAIN/(28587:28599): hilo cpu iniciado
+[INFO] 16:30:12:796 MEMORIA - MAIN/(28587:28599): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:30:12:797 MEMORIA - MAIN/(28587:28599): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:30:12:797 MEMORIA - MAIN/(28587:28599): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:30:12:797 MEMORIA - MAIN/(28587:28599): Numero de tabla 2 encontrado: -1237313512
+[INFO] 16:30:15:502 MEMORIA - MAIN/(28949:28949): se conecto con el kernel
+[INFO] 16:30:15:514 MEMORIA - MAIN/(28949:28949): se conecto con el CPU
+[INFO] 16:30:15:514 MEMORIA - MAIN/(28949:28949): datos de traduccion enviados al CPU
+[INFO] 16:30:15:514 MEMORIA - MAIN/(28949:28949): memoria inicializada con un tamaño de 4096
+[INFO] 16:30:15:514 MEMORIA - MAIN/(28949:28949): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:30:15:515 MEMORIA - MAIN/(28949:28949): bitmap creado con un tamaño de 64
+[INFO] 16:30:15:529 MEMORIA - MAIN/(28949:28960): hilo cpu iniciado
+[INFO] 16:31:33:963 MEMORIA - MAIN/(28949:28960): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:31:33:963 MEMORIA - MAIN/(28949:28960): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:31:33:964 MEMORIA - MAIN/(28949:28960): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:31:33:965 MEMORIA - MAIN/(28949:28960): Numero de tabla 2 encontrado: -1238362088
+[INFO] 16:31:37:317 MEMORIA - MAIN/(29180:29180): se conecto con el kernel
+[INFO] 16:31:37:323 MEMORIA - MAIN/(29180:29180): se conecto con el CPU
+[INFO] 16:31:37:323 MEMORIA - MAIN/(29180:29180): datos de traduccion enviados al CPU
+[INFO] 16:31:37:323 MEMORIA - MAIN/(29180:29180): memoria inicializada con un tamaño de 4096
+[INFO] 16:31:37:323 MEMORIA - MAIN/(29180:29180): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:31:37:323 MEMORIA - MAIN/(29180:29180): bitmap creado con un tamaño de 64
+[INFO] 16:31:37:336 MEMORIA - MAIN/(29180:29190): hilo cpu iniciado
+[INFO] 16:32:20:524 MEMORIA - MAIN/(29180:29190): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:32:20:524 MEMORIA - MAIN/(29180:29190): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:32:20:524 MEMORIA - MAIN/(29180:29190): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:32:20:524 MEMORIA - MAIN/(29180:29190): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:32:22:630 MEMORIA - MAIN/(29315:29315): se conecto con el kernel
+[INFO] 16:32:22:648 MEMORIA - MAIN/(29315:29315): se conecto con el CPU
+[INFO] 16:32:22:648 MEMORIA - MAIN/(29315:29315): datos de traduccion enviados al CPU
+[INFO] 16:32:22:648 MEMORIA - MAIN/(29315:29315): memoria inicializada con un tamaño de 4096
+[INFO] 16:32:22:648 MEMORIA - MAIN/(29315:29315): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:32:22:648 MEMORIA - MAIN/(29315:29315): bitmap creado con un tamaño de 64
+[INFO] 16:32:22:655 MEMORIA - MAIN/(29315:29327): hilo cpu iniciado
+[INFO] 16:33:28:812 MEMORIA - MAIN/(29315:29327): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:33:28:813 MEMORIA - MAIN/(29315:29327): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:33:28:813 MEMORIA - MAIN/(29315:29327): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:33:28:813 MEMORIA - MAIN/(29315:29327): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:33:32:004 MEMORIA - MAIN/(29528:29528): se conecto con el kernel
+[INFO] 16:33:32:015 MEMORIA - MAIN/(29528:29528): se conecto con el CPU
+[INFO] 16:33:32:015 MEMORIA - MAIN/(29528:29528): datos de traduccion enviados al CPU
+[INFO] 16:33:32:016 MEMORIA - MAIN/(29528:29528): memoria inicializada con un tamaño de 4096
+[INFO] 16:33:32:016 MEMORIA - MAIN/(29528:29528): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:33:32:016 MEMORIA - MAIN/(29528:29528): bitmap creado con un tamaño de 64
+[INFO] 16:33:32:023 MEMORIA - MAIN/(29528:29540): hilo cpu iniciado
+[INFO] 16:34:18:093 MEMORIA - MAIN/(29528:29540): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:34:18:093 MEMORIA - MAIN/(29528:29540): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:34:18:093 MEMORIA - MAIN/(29528:29540): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:34:18:093 MEMORIA - MAIN/(29528:29540): Numero de tabla 2 encontrado: -1237319616
+[INFO] 16:34:56:724 MEMORIA - MAIN/(29753:29753): se conecto con el kernel
+[INFO] 16:34:56:728 MEMORIA - MAIN/(29753:29753): se conecto con el CPU
+[INFO] 16:34:56:728 MEMORIA - MAIN/(29753:29753): datos de traduccion enviados al CPU
+[INFO] 16:34:56:728 MEMORIA - MAIN/(29753:29753): memoria inicializada con un tamaño de 4096
+[INFO] 16:34:56:728 MEMORIA - MAIN/(29753:29753): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:34:56:728 MEMORIA - MAIN/(29753:29753): bitmap creado con un tamaño de 64
+[INFO] 16:34:56:741 MEMORIA - MAIN/(29753:29763): hilo cpu iniciado
+[INFO] 16:36:01:970 MEMORIA - MAIN/(29753:29763): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:36:01:970 MEMORIA - MAIN/(29753:29763): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:36:01:970 MEMORIA - MAIN/(29753:29763): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:36:01:970 MEMORIA - MAIN/(29753:29763): Numero de tabla 2 encontrado: -1237317912
+[INFO] 16:36:05:061 MEMORIA - MAIN/(29945:29945): se conecto con el kernel
+[INFO] 16:36:05:066 MEMORIA - MAIN/(29945:29945): se conecto con el CPU
+[INFO] 16:36:05:066 MEMORIA - MAIN/(29945:29945): datos de traduccion enviados al CPU
+[INFO] 16:36:05:066 MEMORIA - MAIN/(29945:29945): memoria inicializada con un tamaño de 4096
+[INFO] 16:36:05:066 MEMORIA - MAIN/(29945:29945): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:36:05:066 MEMORIA - MAIN/(29945:29945): bitmap creado con un tamaño de 64
+[INFO] 16:36:05:070 MEMORIA - MAIN/(29945:29955): hilo cpu iniciado
+[INFO] 16:36:36:974 MEMORIA - MAIN/(29945:29955): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:36:36:974 MEMORIA - MAIN/(29945:29955): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:36:36:974 MEMORIA - MAIN/(29945:29955): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:36:36:974 MEMORIA - MAIN/(29945:29955): Numero de tabla 2 encontrado: -1237319528
+[INFO] 16:36:38:906 MEMORIA - MAIN/(30024:30024): se conecto con el kernel
+[INFO] 16:36:38:908 MEMORIA - MAIN/(30024:30024): se conecto con el CPU
+[INFO] 16:36:38:908 MEMORIA - MAIN/(30024:30024): datos de traduccion enviados al CPU
+[INFO] 16:36:38:908 MEMORIA - MAIN/(30024:30024): memoria inicializada con un tamaño de 4096
+[INFO] 16:36:38:908 MEMORIA - MAIN/(30024:30024): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:36:38:908 MEMORIA - MAIN/(30024:30024): bitmap creado con un tamaño de 64
+[INFO] 16:36:38:912 MEMORIA - MAIN/(30024:30039): hilo cpu iniciado
+[INFO] 16:38:12:661 MEMORIA - MAIN/(30024:30039): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:38:12:661 MEMORIA - MAIN/(30024:30039): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:38:12:661 MEMORIA - MAIN/(30024:30039): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:38:12:661 MEMORIA - MAIN/(30024:30039): Numero de tabla 2 encontrado: -1237318048
+[INFO] 16:38:15:871 MEMORIA - MAIN/(30254:30254): se conecto con el kernel
+[INFO] 16:38:15:875 MEMORIA - MAIN/(30254:30254): se conecto con el CPU
+[INFO] 16:38:15:875 MEMORIA - MAIN/(30254:30254): datos de traduccion enviados al CPU
+[INFO] 16:38:15:875 MEMORIA - MAIN/(30254:30254): memoria inicializada con un tamaño de 4096
+[INFO] 16:38:15:875 MEMORIA - MAIN/(30254:30254): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:38:15:875 MEMORIA - MAIN/(30254:30254): bitmap creado con un tamaño de 64
+[INFO] 16:38:15:876 MEMORIA - MAIN/(30254:30269): hilo cpu iniciado
+[INFO] 16:46:59:894 MEMORIA - MAIN/(31434:31434): se conecto con el kernel
+[INFO] 16:46:59:917 MEMORIA - MAIN/(31434:31434): se conecto con el CPU
+[INFO] 16:46:59:917 MEMORIA - MAIN/(31434:31434): datos de traduccion enviados al CPU
+[INFO] 16:46:59:917 MEMORIA - MAIN/(31434:31434): memoria inicializada con un tamaño de 4096
+[INFO] 16:46:59:917 MEMORIA - MAIN/(31434:31434): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:46:59:917 MEMORIA - MAIN/(31434:31434): bitmap creado con un tamaño de 64
+[INFO] 16:46:59:919 MEMORIA - MAIN/(31434:31449): hilo cpu iniciado
+[INFO] 16:47:06:549 MEMORIA - MAIN/(31434:31449): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:47:06:549 MEMORIA - MAIN/(31434:31449): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:47:06:550 MEMORIA - MAIN/(31434:31449): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:47:06:550 MEMORIA - MAIN/(31434:31449): Numero de tabla 2 encontrado: 0
+[INFO] 16:48:36:981 MEMORIA - MAIN/(31677:31677): se conecto con el kernel
+[INFO] 16:48:36:986 MEMORIA - MAIN/(31677:31677): se conecto con el CPU
+[INFO] 16:48:36:986 MEMORIA - MAIN/(31677:31677): datos de traduccion enviados al CPU
+[INFO] 16:48:36:986 MEMORIA - MAIN/(31677:31677): memoria inicializada con un tamaño de 4096
+[INFO] 16:48:36:986 MEMORIA - MAIN/(31677:31677): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:48:36:986 MEMORIA - MAIN/(31677:31677): bitmap creado con un tamaño de 64
+[INFO] 16:48:36:987 MEMORIA - MAIN/(31677:31692): hilo cpu iniciado
+[INFO] 16:48:46:105 MEMORIA - MAIN/(31677:31692): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:48:46:105 MEMORIA - MAIN/(31677:31692): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:48:46:105 MEMORIA - MAIN/(31677:31692): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:48:46:105 MEMORIA - MAIN/(31677:31692): Numero de tabla 2 encontrado: 0
+[INFO] 16:51:25:132 MEMORIA - MAIN/(32022:32022): se conecto con el kernel
+[INFO] 16:51:25:136 MEMORIA - MAIN/(32022:32022): se conecto con el CPU
+[INFO] 16:51:25:136 MEMORIA - MAIN/(32022:32022): datos de traduccion enviados al CPU
+[INFO] 16:51:25:136 MEMORIA - MAIN/(32022:32022): memoria inicializada con un tamaño de 4096
+[INFO] 16:51:25:136 MEMORIA - MAIN/(32022:32022): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:51:25:136 MEMORIA - MAIN/(32022:32022): bitmap creado con un tamaño de 64
+[INFO] 16:51:25:137 MEMORIA - MAIN/(32022:32034): hilo cpu iniciado
+[INFO] 16:51:32:831 MEMORIA - MAIN/(32022:32034): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:51:32:831 MEMORIA - MAIN/(32022:32034): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:51:32:831 MEMORIA - MAIN/(32022:32034): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:51:32:831 MEMORIA - MAIN/(32022:32034): Numero de tabla 2 encontrado: 0
+[INFO] 16:51:33:832 MEMORIA - MAIN/(32022:32034): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:51:33:832 MEMORIA - MAIN/(32022:32034): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:51:33:832 MEMORIA - MAIN/(32022:32034): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:51:33:832 MEMORIA - MAIN/(32022:32034): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:51:33:832 MEMORIA - MAIN/(32022:32034): Numero de tabla 2 encontrado: 0
+[INFO] 16:53:08:791 MEMORIA - MAIN/(32268:32268): se conecto con el kernel
+[INFO] 16:53:08:796 MEMORIA - MAIN/(32268:32268): se conecto con el CPU
+[INFO] 16:53:08:796 MEMORIA - MAIN/(32268:32268): datos de traduccion enviados al CPU
+[INFO] 16:53:08:796 MEMORIA - MAIN/(32268:32268): memoria inicializada con un tamaño de 4096
+[INFO] 16:53:08:796 MEMORIA - MAIN/(32268:32268): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:53:08:796 MEMORIA - MAIN/(32268:32268): bitmap creado con un tamaño de 64
+[INFO] 16:53:08:797 MEMORIA - MAIN/(32268:32280): hilo cpu iniciado
+[INFO] 16:53:13:636 MEMORIA - MAIN/(32268:32280): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:53:13:636 MEMORIA - MAIN/(32268:32280): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:53:13:636 MEMORIA - MAIN/(32268:32280): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:53:13:636 MEMORIA - MAIN/(32268:32280): Numero de tabla 2 encontrado: 0
+[INFO] 16:53:14:636 MEMORIA - MAIN/(32268:32280): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:53:14:637 MEMORIA - MAIN/(32268:32280): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:53:14:637 MEMORIA - MAIN/(32268:32280): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:53:14:637 MEMORIA - MAIN/(32268:32280): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:53:14:637 MEMORIA - MAIN/(32268:32280): Numero de tabla 2 encontrado: 0
+[INFO] 16:54:01:779 MEMORIA - MAIN/(32410:32410): se conecto con el kernel
+[INFO] 16:54:01:796 MEMORIA - MAIN/(32410:32410): se conecto con el CPU
+[INFO] 16:54:01:796 MEMORIA - MAIN/(32410:32410): datos de traduccion enviados al CPU
+[INFO] 16:54:01:796 MEMORIA - MAIN/(32410:32410): memoria inicializada con un tamaño de 4096
+[INFO] 16:54:01:796 MEMORIA - MAIN/(32410:32410): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:54:01:797 MEMORIA - MAIN/(32410:32410): bitmap creado con un tamaño de 64
+[INFO] 16:54:01:800 MEMORIA - MAIN/(32410:32422): hilo cpu iniciado
+[INFO] 16:55:45:128 MEMORIA - MAIN/(32410:32422): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:55:45:128 MEMORIA - MAIN/(32410:32422): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:55:45:128 MEMORIA - MAIN/(32410:32422): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:55:45:128 MEMORIA - MAIN/(32410:32422): Numero de tabla 2 encontrado: -1237319528
+[INFO] 16:55:54:264 MEMORIA - MAIN/(32709:32709): se conecto con el kernel
+[INFO] 16:55:54:280 MEMORIA - MAIN/(32709:32709): se conecto con el CPU
+[INFO] 16:55:54:280 MEMORIA - MAIN/(32709:32709): datos de traduccion enviados al CPU
+[INFO] 16:55:54:280 MEMORIA - MAIN/(32709:32709): memoria inicializada con un tamaño de 4096
+[INFO] 16:55:54:280 MEMORIA - MAIN/(32709:32709): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:55:54:280 MEMORIA - MAIN/(32709:32709): bitmap creado con un tamaño de 64
+[INFO] 16:55:54:281 MEMORIA - MAIN/(32709:32721): hilo cpu iniciado
+[INFO] 16:56:32:569 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:32:569 MEMORIA - MAIN/(32709:32721): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:56:32:606 MEMORIA - MAIN/(32709:32721): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 16:56:32:606 MEMORIA - MAIN/(32709:32721): Numero de tabla 2 encontrado: 0
+[INFO] 16:56:33:606 MEMORIA - MAIN/(32709:32721): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:56:33:606 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:36:608 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:37:610 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:38:612 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:39:617 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:54:345 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:54:345 MEMORIA - MAIN/(32709:32721): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 16:56:54:345 MEMORIA - MAIN/(32709:32721): datos recibidos: numero_tabla_1er_nivel_leer 1 numero_de_entrada 0
+[INFO] 16:56:54:345 MEMORIA - MAIN/(32709:32721): Numero de tabla 2 encontrado: 2
+[INFO] 16:56:55:345 MEMORIA - MAIN/(32709:32721): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 16:56:55:345 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:58:346 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:56:59:348 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:57:00:348 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:57:01:349 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:57:33:622 MEMORIA - MAIN/(32709:32721): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 16:59:58:471 MEMORIA - MAIN/(748:748): se conecto con el kernel
+[INFO] 16:59:59:479 MEMORIA - MAIN/(748:748): se conecto con el CPU
+[INFO] 16:59:59:479 MEMORIA - MAIN/(748:748): datos de traduccion enviados al CPU
+[INFO] 16:59:59:479 MEMORIA - MAIN/(748:748): memoria inicializada con un tamaño de 4096
+[INFO] 16:59:59:479 MEMORIA - MAIN/(748:748): la cantidad de frames en esta ejecucion es de 64
+[INFO] 16:59:59:479 MEMORIA - MAIN/(748:748): bitmap creado con un tamaño de 64
+[INFO] 16:59:59:488 MEMORIA - MAIN/(748:754): hilo cpu iniciado
+[INFO] 17:00:40:705 MEMORIA - MAIN/(748:754): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:00:40:705 MEMORIA - MAIN/(748:754): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:00:40:705 MEMORIA - MAIN/(748:754): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:00:40:705 MEMORIA - MAIN/(748:754): Numero de tabla 2 encontrado: -1237317912
+[INFO] 17:00:43:512 MEMORIA - MAIN/(835:835): se conecto con el kernel
+[INFO] 17:00:43:521 MEMORIA - MAIN/(835:835): se conecto con el CPU
+[INFO] 17:00:43:521 MEMORIA - MAIN/(835:835): datos de traduccion enviados al CPU
+[INFO] 17:00:43:521 MEMORIA - MAIN/(835:835): memoria inicializada con un tamaño de 4096
+[INFO] 17:00:43:521 MEMORIA - MAIN/(835:835): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:00:43:521 MEMORIA - MAIN/(835:835): bitmap creado con un tamaño de 64
+[INFO] 17:00:43:528 MEMORIA - MAIN/(835:846): hilo cpu iniciado
+[INFO] 17:02:21:705 MEMORIA - MAIN/(835:846): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:02:21:705 MEMORIA - MAIN/(835:846): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:02:21:705 MEMORIA - MAIN/(835:846): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:02:21:705 MEMORIA - MAIN/(835:846): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:02:22:706 MEMORIA - MAIN/(835:846): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 17:02:22:706 MEMORIA - MAIN/(835:846): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:02:22:706 MEMORIA - MAIN/(835:846): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:02:22:706 MEMORIA - MAIN/(835:846): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:02:22:706 MEMORIA - MAIN/(835:846): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:02:53:763 MEMORIA - MAIN/(1295:1295): se conecto con el kernel
+[INFO] 17:02:53:780 MEMORIA - MAIN/(1295:1295): se conecto con el CPU
+[INFO] 17:02:53:780 MEMORIA - MAIN/(1295:1295): datos de traduccion enviados al CPU
+[INFO] 17:02:53:780 MEMORIA - MAIN/(1295:1295): memoria inicializada con un tamaño de 4096
+[INFO] 17:02:53:780 MEMORIA - MAIN/(1295:1295): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:02:53:780 MEMORIA - MAIN/(1295:1295): bitmap creado con un tamaño de 64
+[INFO] 17:02:53:782 MEMORIA - MAIN/(1295:1307): hilo cpu iniciado
+[INFO] 17:04:25:182 MEMORIA - MAIN/(1295:1307): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:04:25:182 MEMORIA - MAIN/(1295:1307): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:04:25:182 MEMORIA - MAIN/(1295:1307): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:04:25:182 MEMORIA - MAIN/(1295:1307): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:04:26:183 MEMORIA - MAIN/(1295:1307): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 17:04:26:183 MEMORIA - MAIN/(1295:1307): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:04:26:183 MEMORIA - MAIN/(1295:1307): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:04:26:183 MEMORIA - MAIN/(1295:1307): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:04:26:183 MEMORIA - MAIN/(1295:1307): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:07:17:517 MEMORIA - MAIN/(1951:1951): se conecto con el kernel
+[INFO] 17:07:17:520 MEMORIA - MAIN/(1951:1951): se conecto con el CPU
+[INFO] 17:07:17:520 MEMORIA - MAIN/(1951:1951): datos de traduccion enviados al CPU
+[INFO] 17:07:17:520 MEMORIA - MAIN/(1951:1951): memoria inicializada con un tamaño de 4096
+[INFO] 17:07:17:520 MEMORIA - MAIN/(1951:1951): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:07:17:520 MEMORIA - MAIN/(1951:1951): bitmap creado con un tamaño de 64
+[INFO] 17:07:17:534 MEMORIA - MAIN/(1951:1963): hilo cpu iniciado
+[INFO] 17:08:06:015 MEMORIA - MAIN/(1951:1963): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:08:06:015 MEMORIA - MAIN/(1951:1963): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:08:06:015 MEMORIA - MAIN/(1951:1963): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:08:06:015 MEMORIA - MAIN/(1951:1963): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:08:09:153 MEMORIA - MAIN/(2103:2103): se conecto con el kernel
+[INFO] 17:08:09:155 MEMORIA - MAIN/(2103:2103): se conecto con el CPU
+[INFO] 17:08:09:155 MEMORIA - MAIN/(2103:2103): datos de traduccion enviados al CPU
+[INFO] 17:08:09:155 MEMORIA - MAIN/(2103:2103): memoria inicializada con un tamaño de 4096
+[INFO] 17:08:09:155 MEMORIA - MAIN/(2103:2103): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:08:09:155 MEMORIA - MAIN/(2103:2103): bitmap creado con un tamaño de 64
+[INFO] 17:08:09:157 MEMORIA - MAIN/(2103:2115): hilo cpu iniciado
+[INFO] 17:09:50:708 MEMORIA - MAIN/(2103:2115): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:09:50:708 MEMORIA - MAIN/(2103:2115): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:09:50:708 MEMORIA - MAIN/(2103:2115): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:09:50:708 MEMORIA - MAIN/(2103:2115): Numero de tabla 2 encontrado: 1836017711
+[INFO] 17:10:12:830 MEMORIA - MAIN/(2376:2376): se conecto con el kernel
+[INFO] 17:10:12:833 MEMORIA - MAIN/(2376:2376): se conecto con el CPU
+[INFO] 17:10:12:833 MEMORIA - MAIN/(2376:2376): datos de traduccion enviados al CPU
+[INFO] 17:10:12:833 MEMORIA - MAIN/(2376:2376): memoria inicializada con un tamaño de 4096
+[INFO] 17:10:12:833 MEMORIA - MAIN/(2376:2376): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:10:12:833 MEMORIA - MAIN/(2376:2376): bitmap creado con un tamaño de 64
+[INFO] 17:10:12:842 MEMORIA - MAIN/(2376:2388): hilo cpu iniciado
+[INFO] 17:13:52:902 MEMORIA - MAIN/(2376:2388): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:13:52:902 MEMORIA - MAIN/(2376:2388): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:13:52:902 MEMORIA - MAIN/(2376:2388): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:13:52:902 MEMORIA - MAIN/(2376:2388): Numero de tabla 2 encontrado: -1238366624
+[INFO] 17:13:54:898 MEMORIA - MAIN/(2814:2814): se conecto con el kernel
+[INFO] 17:13:54:902 MEMORIA - MAIN/(2814:2814): se conecto con el CPU
+[INFO] 17:13:54:902 MEMORIA - MAIN/(2814:2814): datos de traduccion enviados al CPU
+[INFO] 17:13:54:902 MEMORIA - MAIN/(2814:2814): memoria inicializada con un tamaño de 4096
+[INFO] 17:13:54:903 MEMORIA - MAIN/(2814:2814): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:13:54:903 MEMORIA - MAIN/(2814:2814): bitmap creado con un tamaño de 64
+[INFO] 17:13:54:910 MEMORIA - MAIN/(2814:2828): hilo cpu iniciado
+[INFO] 17:15:15:740 MEMORIA - MAIN/(2814:2828): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:15:15:740 MEMORIA - MAIN/(2814:2828): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:15:15:740 MEMORIA - MAIN/(2814:2828): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:15:15:740 MEMORIA - MAIN/(2814:2828): Numero de tabla 2 encontrado: -1237313440
+[INFO] 17:15:17:476 MEMORIA - MAIN/(3032:3032): se conecto con el kernel
+[INFO] 17:15:17:476 MEMORIA - MAIN/(3032:3032): se conecto con el CPU
+[INFO] 17:15:17:476 MEMORIA - MAIN/(3032:3032): datos de traduccion enviados al CPU
+[INFO] 17:15:17:476 MEMORIA - MAIN/(3032:3032): memoria inicializada con un tamaño de 4096
+[INFO] 17:15:17:476 MEMORIA - MAIN/(3032:3032): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:15:17:477 MEMORIA - MAIN/(3032:3032): bitmap creado con un tamaño de 64
+[INFO] 17:15:17:478 MEMORIA - MAIN/(3032:3054): hilo cpu iniciado
+[INFO] 17:16:03:798 MEMORIA - MAIN/(3032:3054): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:16:03:798 MEMORIA - MAIN/(3032:3054): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:16:03:806 MEMORIA - MAIN/(3032:3054): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:16:06:461 MEMORIA - MAIN/(3224:3224): se conecto con el kernel
+[INFO] 17:16:06:462 MEMORIA - MAIN/(3224:3224): se conecto con el CPU
+[INFO] 17:16:06:463 MEMORIA - MAIN/(3224:3224): datos de traduccion enviados al CPU
+[INFO] 17:16:06:463 MEMORIA - MAIN/(3224:3224): memoria inicializada con un tamaño de 4096
+[INFO] 17:16:06:463 MEMORIA - MAIN/(3224:3224): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:16:06:463 MEMORIA - MAIN/(3224:3224): bitmap creado con un tamaño de 64
+[INFO] 17:16:06:465 MEMORIA - MAIN/(3224:3240): hilo cpu iniciado
+[INFO] 17:21:59:312 MEMORIA - MAIN/(3224:3240): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:21:59:312 MEMORIA - MAIN/(3224:3240): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:21:59:312 MEMORIA - MAIN/(3224:3240): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:21:59:312 MEMORIA - MAIN/(3224:3240): Numero de tabla 2 encontrado: -1237313440
+[INFO] 17:22:01:430 MEMORIA - MAIN/(4007:4007): se conecto con el kernel
+[INFO] 17:22:01:433 MEMORIA - MAIN/(4007:4007): se conecto con el CPU
+[INFO] 17:22:01:433 MEMORIA - MAIN/(4007:4007): datos de traduccion enviados al CPU
+[INFO] 17:22:01:433 MEMORIA - MAIN/(4007:4007): memoria inicializada con un tamaño de 4096
+[INFO] 17:22:01:433 MEMORIA - MAIN/(4007:4007): la cantidad de frames en esta ejecucion es de 64
+[INFO] 17:22:01:433 MEMORIA - MAIN/(4007:4007): bitmap creado con un tamaño de 64
+[INFO] 17:22:01:442 MEMORIA - MAIN/(4007:4019): hilo cpu iniciado
+[INFO] 17:25:44:747 MEMORIA - MAIN/(4007:4019): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 17:25:44:747 MEMORIA - MAIN/(4007:4019): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 17:25:44:747 MEMORIA - MAIN/(4007:4019): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 17:25:44:747 MEMORIA - MAIN/(4007:4019): Numero de tabla 2 encontrado: -1237313440

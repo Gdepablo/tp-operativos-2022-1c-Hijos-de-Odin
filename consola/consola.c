@@ -46,7 +46,7 @@ int main(int argc, char** argv){
 
 	infoProceso.tamanioDirecciones = (uint32_t)atoi(argv[2]);
 	printf("TAMANIO: %d \n", infoProceso.tamanioDirecciones);
-	infoProceso.largoListaInstrucciones = (uint32_t)(size); //  este llevaba + 1
+	infoProceso.largoListaInstrucciones = (uint32_t)(size) + 1; //  este llevaba + 1
 	printf("LARGO LISTA: %d \n", infoProceso.largoListaInstrucciones);
 	infoProceso.listaInstrucciones = malloc(size + 1); // este llevaba + 1
 	strcpy(infoProceso.listaInstrucciones, buffer);
@@ -73,7 +73,7 @@ int main(int argc, char** argv){
 	paquete->codOp = CREAR_PROCESO;
 	paquete->buffer = bufferinho;
 
-	void* a_enviar = malloc( sizeof(uint32_t) * 2 + paquete -> buffer -> size );
+	void* a_enviar = malloc( sizeof(uint32_t) * 2 + paquete -> buffer -> size);
 	offset = 0;
 
 	memcpy(a_enviar+offset, &(paquete->codOp), sizeof(uint32_t));
@@ -82,7 +82,7 @@ int main(int argc, char** argv){
 	offset += sizeof(uint32_t);
 	memcpy(a_enviar+offset, paquete->buffer->stream, paquete->buffer->size);
 
-
+	printf("TAMANIO ENVIADO: %i \n", sizeof(uint32_t) * 2 + paquete -> buffer -> size);
 
 	send(socket_cliente, a_enviar, sizeof(uint32_t) * 2 + paquete -> buffer -> size, 0);
 
@@ -102,7 +102,7 @@ int main(int argc, char** argv){
 	free(infoProceso.listaInstrucciones);
 	close(socket_cliente);
 	config_destroy(config);
-	free(archivo);
+	fclose(archivo);
 	return EXIT_SUCCESS;
 }
 
