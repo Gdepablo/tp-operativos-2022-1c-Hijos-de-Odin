@@ -19,6 +19,7 @@ sem_t operacion_en_lista_de_tablas; // = 1
 uint32_t TAMANIO_PAGINA;
 uint32_t RETARDO_SWAP;
 char* PATH_SWAP;
+int ACCESOS_SWAP;
 
 // ENUM
 enum operaciones{

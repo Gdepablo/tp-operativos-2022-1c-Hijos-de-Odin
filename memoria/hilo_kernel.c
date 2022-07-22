@@ -244,6 +244,7 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 
 				if( (*puntero_a_tabla_2do_nivel)[j].bit_modificacion == 1 ){
 					guardar_pagina_en_swap((*puntero_a_tabla_2do_nivel)[j], process_id, i * ENTRADAS_POR_TABLA + j);
+					(*puntero_a_tabla_2do_nivel)[j].bit_modificacion = 0;
 				}
 
 				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
@@ -340,6 +341,9 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 	fseek(swap, numero_de_pagina * TAMANIO_PAGINA, SEEK_SET);
 
 	sem_wait(&operacion_swap);
+
+	ACCESOS_SWAP++;
+	printf("################ TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	usleep(RETARDO_SWAP * 1000);
 

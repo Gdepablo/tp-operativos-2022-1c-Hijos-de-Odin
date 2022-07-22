@@ -1,35 +1,35 @@
-#include "hilo_cpu.h"
-#include "main_memoria.h"
-#include "swap.h"
-#include "algoritmos.h"
-#include <commons/collections/list.h>
+//#include "hilo_cpu.h"
+//#include "main_memoria.h"
+//#include "swap.h"
+//#include "algoritmos.h"
+//#include <commons/collections/list.h>
 
 
-int es_clock() {
-	return strcmp(ALGORITMO_REEMPLAZO, "CLOCK") != 0;
-}
-
-
-
-void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t numero_de_pagina, uint32_t process_id){
-	t_list* paginas_presentes = buscar_paginas_presentes(tabla_primer_nivel);
-
-	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
-		int frame = buscar_frame_libre();
-		void* a_copiar = copiar_de_swap(numero_de_pagina, process_id);
-		memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
-		pagina_a_ubicar->bit_presencia = 1;
-		pagina_a_ubicar->bit_uso = 1;
-		// fijarse si falta algo TODO
-		free(a_copiar);
-	}
-	else // debe buscar cual reemplazar
-	{
-
-	}
-
-	list_destroy(paginas_presentes);
-}
+//int es_clock() {
+//	return strcmp(ALGORITMO_REEMPLAZO, "CLOCK") != 0;
+//}
+//
+//
+//
+//void algoritmo_clock(int (*tabla_primer_nivel)[], pagina_t* pagina_a_ubicar, uint32_t numero_de_pagina, uint32_t process_id){
+//	t_list* paginas_presentes = buscar_paginas_presentes(tabla_primer_nivel);
+//
+//	if( list_size(paginas_presentes) < MARCOS_POR_PROCESO && memoria_no_llena() ){
+//		int frame = buscar_frame_libre();
+//		void* a_copiar = copiar_de_swap(numero_de_pagina, process_id);
+//		memcpy(memoria_real + frame * TAMANIO_PAGINA , a_copiar, TAMANIO_PAGINA);
+//		pagina_a_ubicar->bit_presencia = 1;
+//		pagina_a_ubicar->bit_uso = 1;
+//		// fijarse si falta algo TODO
+//		free(a_copiar);
+//	}
+//	else // debe buscar cual reemplazar
+//	{
+//
+//	}
+//
+//	list_destroy(paginas_presentes);
+//}
 
 //void algoritmo_clock(t_list* lista_paginas, pagina_t* pagina_buscada) {
 //	pagina_t *unaPagina;

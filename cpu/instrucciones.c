@@ -239,7 +239,7 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 
 	if(list_any_satisfy(lista_tlb,encontrar_pagina)){
 		log_info(log_ejecucion_cpu, "hay una entrada con la misma pagina");
-		printf("LA DIRECCION LOGICA %i ESTA EN TLB, ", dir_logica);
+		printf("LA PAGINA %i ESTA EN TLB, ", numero_pagina);
 		t_tlb* tlb_a_retornar=list_find(lista_tlb, encontrar_pagina);
 		if(marco_obsoleto(tlb_a_retornar->marco)){
 			log_info(log_ejecucion_cpu, "la pagina esta obsoleta");
@@ -262,7 +262,7 @@ uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
 	else
 	{
 		log_info(log_ejecucion_cpu, "no hay ninguna entrada con esa pagina en la TLB");
-		printf("no esta en tlb \n");
+		printf("La pagina %i no esta en la TLB \n", numero_pagina);
 		// la pagina no esta en ninguna entrada
 		uint32_t numero_frame=pedir_todo_memoria();
 		log_info(log_ejecucion_cpu, "se pidio el frame a memoria, frame devuelto por memoria: %i", numero_frame);

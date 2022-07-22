@@ -3,6 +3,9 @@
 #include "hilo_cpu.h"
 #include <pthread.h>
 
+int PAGINAS_SACADAS = 0;
+
+
 void* hilo_cpu(void* socket_cpu_void){
 	sem_wait(&escritura_log);
 	log_info(log_ejecucion_main, "hilo cpu iniciado");
@@ -86,7 +89,8 @@ void* hilo_cpu(void* socket_cpu_void){
 				}
 				else
 				{
-					// CASO TRISTE: NO ESTA EN MEMORIA
+					// CASO TRISTE: NO ESTA EN MEMORIA :(
+
 					numero_pagina = calcular_num_pagina(numero_tabla_1er_nivel_leer, numero_tabla_2do_nivel_leer, numero_de_entrada_2);
 					cargar_a_memoria(numero_tabla_1er_nivel_leer,pagina_buscada,numero_pagina, process_id);
 					a_enviar = pagina_buscada->numero_frame;
@@ -223,6 +227,9 @@ void cargar_a_memoria(uint32_t numero_tabla_1er_nivel, pagina_t* pagina_a_cargar
 	}
 	else
 	{
+		PAGINAS_SACADAS++;
+		printf("SACO UNA PAGINA, TOTAL HASTA AHORA: %i \n", PAGINAS_SACADAS);
+		log_info(log_ejecucion_main, "PAGINA SACADA, TOTAL: %i", PAGINAS_SACADAS);
 		// SACO UNA PAGINA
 		pagina_t* pagina_a_reemplazar = elegir_pagina_a_sacar(numero_tabla_1er_nivel);
 
@@ -316,6 +323,8 @@ pagina_t* elegir_pagina_a_sacar(uint32_t numero_primer_tabla){
 		}
 	}
 
+	printf("CANTIDAD DE PAGINAS EN MEMORIA: %i \n", list_size(paginas_en_memoria));
+
 	pagina_t* puntero_pagina;
 
 	if( !strcmp(ALGORITMO_REEMPLAZO, "CLOCK") ){
@@ -323,6 +332,7 @@ pagina_t* elegir_pagina_a_sacar(uint32_t numero_primer_tabla){
 	}
 	else
 	{
+		printf("es clock modificado \n");
 		puntero_pagina = clock_mejorado(numero_primer_tabla, paginas_en_memoria);
 	}
 
@@ -338,6 +348,9 @@ void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame
 	void* a_copiar = malloc(TAMANIO_PAGINA);
 	// MOMENTO SWAP
 	sem_wait(&operacion_swap);
+
+	ACCESOS_SWAP++;
+	printf("#################### TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	usleep(RETARDO_SWAP * 1000);
 	fread(a_copiar, TAMANIO_PAGINA, 1 , archivo_swap);
@@ -359,6 +372,9 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 	FILE* archivo = fopen(ruta, "rb");
 	fseek( archivo, pagina * TAMANIO_PAGINA, SEEK_SET);
 	void* a_copiar = malloc(TAMANIO_PAGINA);
+
+	ACCESOS_SWAP++;
+	printf("TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	sem_wait(&operacion_swap);
 	usleep(RETARDO_SWAP * 1000);
@@ -485,6 +501,12 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 		 */
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			printf("@@@@@@@@@@@@ POSICION PUNTERO CLOCK = %i \n", *puntero_clock);
+			printf("BUSCANDO 0,0 \n");
+			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
+			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
+			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
+
 			(*puntero_clock)++;
             if( (*puntero_clock) == list_size(paginas_en_memoria) ){
                 (*puntero_clock) = 0;
@@ -497,10 +519,16 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		if( pagina_encontrada ) break;
 
+		printf("NO HAY NINGUNO EN 0,0 \n");
 
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			printf("@@@@@@@@@@@@ POSICION PUNTERO CLOCK = %i \n", *puntero_clock);
+			printf("BUSCANDO BIT DE USO EN 0 \n");
+			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
+			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
+			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
 			(*puntero_clock)++;
             if( (*puntero_clock) == list_size(paginas_en_memoria) ){
                 (*puntero_clock) = 0;
@@ -529,6 +557,13 @@ pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
     pagina_t* puntero_pagina;
     while(1){
         puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+        printf("@@@@@@@@@@ puntero_clock en posicion = %i \n", *puntero_clock);
+        printf("@@@@@@@@@@ pagina en el frame %i \n", puntero_pagina->numero_frame);
+
+        printf("puntero apuntado bit de uso en %i \n", puntero_pagina->bit_uso);
+        printf("puntero apuntado bit de presencia en %i \n", puntero_pagina->bit_presencia);
+        printf("puntero apuntado bit de modificacion en %i \n", puntero_pagina->bit_modificacion);
+
         if(puntero_pagina->bit_uso == 0){
             (*puntero_clock)++;
             break;
@@ -587,7 +622,7 @@ void bit_de_modificado_en_1(uint32_t numero_tabla_1er_nivel_leer, uint32_t numer
 
 	for( int i = 0; i < ENTRADAS_POR_TABLA ; i++ ){
 		if( ((*puntero_pagina)[i].bit_presencia == 1) && ((*puntero_pagina)[i].numero_frame == num_frame)){
-			(*puntero_pagina)[i].bit_uso = 1;
+			(*puntero_pagina)[i].bit_modificacion = 1;
 		}
 	}
 }

@@ -26,6 +26,8 @@ t_list* tabla_de_paginas_global;
 int main(void){
 	printf("# MEMORIA #\n");
 
+	ACCESOS_SWAP = 0;
+
 	log_ejecucion_main = log_create("./../logs/log_memoria_main.log", "MEMORIA - MAIN", 0, LOG_LEVEL_INFO);
 
 	sem_init(&escritura_log, 0, 1);

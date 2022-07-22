@@ -37029,3 +37029,48 @@
 [INFO] 17:15:17:477 CPU - INTERRUPT/(3037:3041): hilo interrupt iniciado
 [INFO] 17:16:06:464 CPU - INTERRUPT/(3225:3230): hilo interrupt iniciado
 [INFO] 17:22:01:434 CPU - INTERRUPT/(4008:4013): hilo interrupt iniciado
+[INFO] 17:57:09:116 CPU - INTERRUPT/(7950:7955): hilo interrupt iniciado
+[INFO] 18:05:18:577 CPU - INTERRUPT/(9072:9076): hilo interrupt iniciado
+[INFO] 18:08:05:560 CPU - INTERRUPT/(9435:9440): hilo interrupt iniciado
+[INFO] 18:14:54:105 CPU - INTERRUPT/(10283:10291): hilo interrupt iniciado
+[INFO] 18:19:56:784 CPU - INTERRUPT/(10926:10931): hilo interrupt iniciado
+[INFO] 18:23:33:383 CPU - INTERRUPT/(11365:11370): hilo interrupt iniciado
+[INFO] 18:24:09:892 CPU - INTERRUPT/(11479:11484): hilo interrupt iniciado
+[INFO] 18:26:57:233 CPU - INTERRUPT/(11830:11836): hilo interrupt iniciado
+[INFO] 18:30:28:298 CPU - INTERRUPT/(12286:12294): hilo interrupt iniciado
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[ERROR] 18:53:26:870 CPU - INTERRUPT/(12286:12294): se recibio una interrupcion pero con valor erroneo
+[INFO] 18:53:29:471 CPU - INTERRUPT/(15163:15169): hilo interrupt iniciado
+[INFO] 18:57:44:103 CPU - INTERRUPT/(15975:15981): hilo interrupt iniciado
+[INFO] 19:03:23:966 CPU - INTERRUPT/(16650:16656): hilo interrupt iniciado
+[INFO] 19:06:06:052 CPU - INTERRUPT/(17025:17033): hilo interrupt iniciado
+[INFO] 19:18:22:366 CPU - INTERRUPT/(18385:18389): hilo interrupt iniciado
+[INFO] 19:23:30:905 CPU - INTERRUPT/(19067:19073): hilo interrupt iniciado
+[INFO] 19:24:37:395 CPU - INTERRUPT/(19229:19235): hilo interrupt iniciado
+[INFO] 19:31:34:731 CPU - INTERRUPT/(20016:20022): hilo interrupt iniciado
+[INFO] 19:33:14:067 CPU - INTERRUPT/(20238:20244): hilo interrupt iniciado
+[INFO] 19:52:16:130 CPU - INTERRUPT/(22512:22518): hilo interrupt iniciado
+[INFO] 19:54:59:731 CPU - INTERRUPT/(22855:22861): hilo interrupt iniciado
+[INFO] 20:10:20:499 CPU - INTERRUPT/(24516:24522): hilo interrupt iniciado
+[INFO] 20:19:58:619 CPU - INTERRUPT/(25644:25654): hilo interrupt iniciado
+[INFO] 20:32:30:688 CPU - INTERRUPT/(26979:26985): hilo interrupt iniciado
