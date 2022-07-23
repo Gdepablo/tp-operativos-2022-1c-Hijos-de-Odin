@@ -405,13 +405,9 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-			printf("BUSCANDO 0,0 \n");
 			log_info(log_ejecucion_main,"BUSCANDO 0,0");
-			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
 			log_info(log_ejecucion_main,"Bit de uso: %i", puntero_pagina->bit_uso);
-			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
 			log_info(log_ejecucion_main,"Bit de modificacion: %i", puntero_pagina->bit_modificacion);
-			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
 			log_info(log_ejecucion_main,"Numero de frame: %i", puntero_pagina->numero_frame);
 
 			(*puntero_clock)++;
@@ -432,13 +428,9 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-			printf("BUSCANDO BIT DE USO EN 0 \n");
 			log_info(log_ejecucion_main,"BUSCANDO BIT DE USO EN 0");
-			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
 			log_info(log_ejecucion_main,"Bit de uso: %i", puntero_pagina->bit_uso);
-			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
 			log_info(log_ejecucion_main,"Bit de modificacion: %i", puntero_pagina->bit_modificacion);
-			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
 			log_info(log_ejecucion_main,"Numero de frame: %i", puntero_pagina->numero_frame);
 			(*puntero_clock)++;
             if( (*puntero_clock) == list_size(paginas_en_memoria) ){
@@ -464,13 +456,9 @@ pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
     pagina_t* puntero_pagina;
     while(1){
         puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-        printf("@@@@@@@@@@ pagina en el frame %i \n", puntero_pagina->numero_frame);
-        log_info(log_ejecucion_main,"@@@@@@@@@@ pagina en el frame %i ", puntero_pagina->numero_frame);
-        printf("puntero apuntado bit de uso en %i \n", puntero_pagina->bit_uso);
+        log_info(log_ejecucion_main,"########## pagina en el frame %i ", puntero_pagina->numero_frame);
         log_info(log_ejecucion_main,"puntero apuntado bit de uso en %i ", puntero_pagina->bit_uso);
-        printf("puntero apuntado bit de presencia en %i \n", puntero_pagina->bit_presencia);
         log_info(log_ejecucion_main,"puntero apuntado bit de presencia en %i", puntero_pagina->bit_presencia);
-        printf("puntero apuntado bit de modificacion en %i \n", puntero_pagina->bit_modificacion);
         log_info(log_ejecucion_main,"puntero apuntado bit de modificacion en %i", puntero_pagina->bit_modificacion);
         if(puntero_pagina->bit_uso == 0){
             (*puntero_clock)++;
