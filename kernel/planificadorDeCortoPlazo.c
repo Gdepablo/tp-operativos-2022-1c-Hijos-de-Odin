@@ -138,9 +138,7 @@ t_pcb* algoritmo_sjf() {
     int tiempo_actual_de_ejecucion_microsegundos = (HORA_ACTUAL.tv_sec - HORA_INICIO_EJECUCION.tv_sec) * 1000000 + HORA_ACTUAL.tv_usec - HORA_INICIO_EJECUCION.tv_usec;
     int rafaga_restante_pcb_en_ejecucion =  PCB_EJECUCION.estimacion_rafagas - ( tiempo_actual_de_ejecucion_microsegundos  / 1000 );
 
-    printf("tiempo que lleva ejecutando el proceso actual en milisegundos = %i \n", tiempo_actual_de_ejecucion_microsegundos / 1000);
-    printf("rafaga estimada pcb_minimo en microsegundos = %i \n", pcb_minimo->estimacion_rafagas);
-    printf("rafaga_restante_pcb_en_ejecucion = %i \n", rafaga_restante_pcb_en_ejecucion);
+
 
     if( (rafaga_restante_pcb_en_ejecucion) > (int)(pcb_minimo->estimacion_rafagas) || (int)(PCB_EJECUCION.id_proceso) == -1 ){
     	printf("rafaga restante mayor que estimacion de rafagas \n");

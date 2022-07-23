@@ -240,6 +240,7 @@ void* executer(){
 				break;
 			default:
 				printf("LA INSTRUCCION %s NO ES VALIDA \n", instruccion_spliteada[0]);
+				log_error(log_ejecucion_cpu, "instruccion no valida");
 				getchar();
 		}
 
@@ -250,7 +251,6 @@ void* executer(){
 		log_info(log_ejecucion_cpu, "chequeando interrupciones y/o syscall bloqueante");
 		if( hay_interrupcion() ){
 			log_info(log_ejecucion_cpu, "se detecto una interrupcion \n\n");
-			printf("###### HAY UNA INTERRUPCION ###### \n");
 			// LIMPIAR TLB, DEVOLVER PCB.
 			limpiar_TLB();
 
@@ -511,61 +511,13 @@ bool filtrar_por_marco(void* tlb_puntero_void){
     return (tlb_puntero->marco == numero_de_marco_glob);
 }
 
-// puede ser una funcion void que directamente modifique la var global?
-//t_pcb recibir_PCB(){
-//	t_pcb_buffer* pcb_buffer = malloc(sizeof(t_pcb_buffer));
-//	t_pcb nuevo_pcb;
-//    int offset = 0;
-//
-//	recv(socket_dispatch, &(pcb_buffer->size), sizeof(uint32_t), MSG_WAITALL);
-//    recv(socket_dispatch, &(pcb_buffer->size_instrucciones), sizeof(uint32_t), 0);
-//
-//    printf("tamanio: %i \n", pcb_buffer->size);
-//    printf("tamanio instrucciones: %i \n", pcb_buffer->size_instrucciones);
-//
-//    pcb_buffer->stream = malloc(pcb_buffer->size);
-//    recv(socket_dispatch, pcb_buffer->stream, sizeof(uint32_t) * 5 + pcb_buffer->size_instrucciones, 0);
-//
-//
-//    memcpy(&(nuevo_pcb.id_proceso), pcb_buffer->stream+offset, sizeof(uint32_t));
-//    offset += sizeof(uint32_t);
-//
-//    memcpy(&(nuevo_pcb.tamanio_direcciones), pcb_buffer->stream+offset, sizeof(uint32_t));
-//    offset += sizeof(uint32_t);
-//
-//    nuevo_pcb.lista_instrucciones = malloc( pcb_buffer->size_instrucciones );
-//    memcpy(nuevo_pcb.lista_instrucciones, (pcb_buffer->stream)+offset, pcb_buffer->size_instrucciones);
-//    offset += pcb_buffer->size_instrucciones;
-//
-//    memcpy(&(nuevo_pcb.program_counter), pcb_buffer->stream+offset, sizeof(uint32_t));
-//    offset += sizeof(uint32_t);
-//
-//    memcpy(&(nuevo_pcb.tabla_paginas), pcb_buffer->stream+offset, sizeof(uint32_t) );
-//    offset += sizeof(uint32_t);
-//
-//    memcpy(&(nuevo_pcb.estimacion_rafagas), pcb_buffer->stream+offset, sizeof(uint32_t));
-//
-//    printf("PCB ARMADO: \n");
-//    printf("id proceso: %i \n", nuevo_pcb.id_proceso);
-//    printf("tamanio direcciones: %i \n", nuevo_pcb.tamanio_direcciones);
-//    printf("lista instrucciones:  %s \n", nuevo_pcb.lista_instrucciones);
-//    printf("strlen: %i \n", (int)strlen(nuevo_pcb.lista_instrucciones));
-//    printf("program counter: %i \n", nuevo_pcb.program_counter);
-//    printf("tabla de paginas: %i \n", nuevo_pcb.tabla_paginas);
-//    printf("estimacion rafagas: %i \n", nuevo_pcb.estimacion_rafagas);
-//
-//    free(pcb_buffer->stream);
-//	free(pcb_buffer);
-//	return nuevo_pcb;
-//}
-
 t_pcb recibir_PCB(){
     t_pcb_buffer buffer;
 
     recv(socket_dispatch, &(buffer.size), sizeof(uint32_t), MSG_WAITALL);
 
     recv(socket_dispatch, &(buffer.size_instrucciones), sizeof(uint32_t), MSG_WAITALL);
-//    printf("buffer->size_instrucciones: %i \n", buffer.size_instrucciones);
+
     buffer.stream = malloc(buffer.size);
     recv(socket_dispatch, buffer.stream, buffer.size, MSG_WAITALL);
 
@@ -573,21 +525,18 @@ t_pcb recibir_PCB(){
     int offset=0;
     memcpy(&(pcb.id_proceso), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("pcb.id_proceso = %i \n", pcb.id_proceso);
+
     memcpy(&(pcb.tamanio_direcciones), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("pcb.tamanio_direcciones = %i \n", pcb.tamanio_direcciones);
+
 
     pcb.lista_instrucciones = malloc(buffer.size_instrucciones + 1);
     memcpy(pcb.lista_instrucciones, buffer.stream+offset, buffer.size_instrucciones);
     offset+=buffer.size_instrucciones;
 
+    log_info(log_ejecucion_cpu, "PCB RECIBIDO \n");
     log_info(log_ejecucion_cpu, "INSTRUCCIONES RECIBIDAS: %s \n", pcb.lista_instrucciones);
-    printf("####################################### \n");
-    printf("instrucciones recibidas: %s \n", pcb.lista_instrucciones);
 
-//    printf("pcb.lista_instrucciones = %s \n", pcb.lista_instrucciones);
-//    printf("strlen: %i \n", (int)strlen(pcb.lista_instrucciones));
 
     memcpy(&(pcb.program_counter), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
