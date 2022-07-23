@@ -405,6 +405,7 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			log_info(log_ejecucion_main,"########## pagina %i en el frame %i ", calcular_numero_de_pagina_a_reemplazar(puntero_pagina, numero_de_tabla), puntero_pagina->numero_frame);
 			log_info(log_ejecucion_main,"BUSCANDO 0,0");
 			log_info(log_ejecucion_main,"Bit de uso: %i", puntero_pagina->bit_uso);
 			log_info(log_ejecucion_main,"Bit de modificacion: %i", puntero_pagina->bit_modificacion);
@@ -428,6 +429,7 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
+			log_info(log_ejecucion_main,"########## pagina %i en el frame %i ", calcular_numero_de_pagina_a_reemplazar(puntero_pagina, numero_de_tabla), puntero_pagina->numero_frame);
 			log_info(log_ejecucion_main,"BUSCANDO BIT DE USO EN 0");
 			log_info(log_ejecucion_main,"Bit de uso: %i", puntero_pagina->bit_uso);
 			log_info(log_ejecucion_main,"Bit de modificacion: %i", puntero_pagina->bit_modificacion);
@@ -456,7 +458,7 @@ pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
     pagina_t* puntero_pagina;
     while(1){
         puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-        log_info(log_ejecucion_main,"########## pagina en el frame %i ", puntero_pagina->numero_frame);
+        log_info(log_ejecucion_main,"########## pagina %i en el frame %i ", calcular_numero_de_pagina_a_reemplazar(puntero_pagina, numero_de_tabla), puntero_pagina->numero_frame);
         log_info(log_ejecucion_main,"puntero apuntado bit de uso en %i ", puntero_pagina->bit_uso);
         log_info(log_ejecucion_main,"puntero apuntado bit de presencia en %i", puntero_pagina->bit_presencia);
         log_info(log_ejecucion_main,"puntero apuntado bit de modificacion en %i", puntero_pagina->bit_modificacion);
