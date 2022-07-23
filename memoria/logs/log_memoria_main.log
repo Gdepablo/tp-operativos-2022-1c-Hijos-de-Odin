@@ -28,3 +28,22 @@ gordo_semaforos[INFO] 21:55:57:000 MEMORIA - MAIN/(9632:9632): se conecto con el
 # SOLICITUD RECIBIDA DE CPU #
 [INFO] 21:57:10:231 MEMORIA - MAIN/(9632:9773): 
 # SOLICITUD RECIBIDA DE CPU #
+[INFO] 00:51:28:944 MEMORIA - MAIN/(29770:29770): se conecto con el kernel
+[INFO] 00:51:28:945 MEMORIA - MAIN/(29770:29770): se conecto con el CPU
+[INFO] 00:51:28:946 MEMORIA - MAIN/(29770:29770): datos de traduccion enviados al CPU
+[INFO] 00:51:28:946 MEMORIA - MAIN/(29770:29770): memoria inicializada con un tamaño de 4096
+[INFO] 00:51:28:946 MEMORIA - MAIN/(29770:29770): la cantidad de frames en esta ejecucion es de 64
+[INFO] 00:51:28:946 MEMORIA - MAIN/(29770:29770): bitmap creado con un tamaño de 64
+[INFO] 00:51:28:947 MEMORIA - MAIN/(29770:29779): hilo cpu iniciado
+[INFO] 00:52:14:094 MEMORIA - MAIN/(29770:29779): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 00:52:14:094 MEMORIA - MAIN/(29770:29779): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 00:52:14:094 MEMORIA - MAIN/(29770:29779): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 00:52:14:094 MEMORIA - MAIN/(29770:29779): Numero de tabla 2 encontrado: 1836017711
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): se conecto con el kernel
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): se conecto con el CPU
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): datos de traduccion enviados al CPU
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): memoria inicializada con un tamaño de 4096
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): la cantidad de frames en esta ejecucion es de 64
+[INFO] 00:52:34:796 MEMORIA - MAIN/(29929:29929): bitmap creado con un tamaño de 64
+[INFO] 00:52:34:797 MEMORIA - MAIN/(29929:29939): hilo cpu iniciado
