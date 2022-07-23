@@ -248,6 +248,7 @@ uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
 
     ACCESOS_MEMORIA++;
     printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+    log_info(log_ejecucion_cpu, "Acceso a memoria, solicitud tablas de segundo nivel, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     uint32_t num_tabla_2;
     recv(socket_memoria, &num_tabla_2, sizeof(uint32_t), MSG_WAITALL);
@@ -279,6 +280,7 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2, uint3
 
     ACCESOS_MEMORIA++;
     printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+    log_info(log_ejecucion_cpu, "Acceso a memoria, solicitud numero de frame, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     return num_frame;
 }
@@ -305,6 +307,7 @@ uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t ent
 
     ACCESOS_MEMORIA++;
     printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+    log_info(log_ejecucion_cpu, "Acceso a memoria, solicitud de contenido, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     return contenido;
 }
@@ -345,6 +348,7 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, u
 
     ACCESOS_MEMORIA++;
     printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+    log_info(log_ejecucion_cpu, "Acceso a memoria, solicitud de escritura, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     uint32_t respuesta;
     recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
