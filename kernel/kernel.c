@@ -109,13 +109,6 @@ int main(){
 	pthread_detach(atender_consolas);
 	pthread_detach(hiloIO);
 	pthread_join(recibir_syscall_cpu, NULL);
-//	pthread_detach(mp_suspendedready_ready);
-	
-
-//	for(int i = 0; i < 5; i++){
-//		sem_wait(&se_inicio_el_hilo);
-//	}
-//	printf("se iniciaron todos los hilos \n");
 
 	return 0;
 }
@@ -123,7 +116,6 @@ int main(){
 // RECEPCIÓN DE PROCESOS DESDE CONSOLA Y CARGA EN NEW
 
 void* recibir_procesos() {
-//	sem_post(&se_inicio_el_hilo);
 	uint32_t codop;
 	while(1) {
 		int* socket_nuevo = malloc(sizeof(int));
@@ -138,29 +130,16 @@ void* recibir_procesos() {
 
 		t_info_proceso* proceso = deserializar_proceso(buffer);
 
-//		printf("mi lista de instrucciones es: \n%s \nfin de la lista \n", proceso->instrucciones);
-//		printf("\n");
-
 		t_pcb* pcb = malloc( sizeof(t_pcb) * 5 + proceso->largo_instrucciones);
 
 		pcb->id_proceso = *socket_nuevo;
 		pcb->tamanio_direcciones = proceso->tamanio_direcciones;
 		pcb->instrucciones = proceso->instrucciones;
-//		printf("###################################### \n");
-//		printf("instrucciones lol: %s \n", pcb->instrucciones);
-//		printf("###################################### \n");
 
-//		pcb->instrucciones = malloc(strlen(proceso->instrucciones) + 1);
-//		strcpy(pcb->instrucciones, proceso->instrucciones);
 		pcb->program_counter = 0;
 		pcb->tabla_paginas = 0;
 		pcb->estimacion_rafagas = ESTIMACION_INICIAL;
-//		printf("%i \n", pcb->id_proceso);
-//		printf("%i \n", pcb->tamanio_direcciones);
-//		printf("INSTRUCCINES MALDITAS:\n%s \n", pcb->instrucciones);
-//		printf("%i \n", pcb->program_counter);
-//		printf("%i \n", pcb->tabla_paginas);
-//		printf("%i \n", pcb->estimacion_rafagas);
+
 
 		free(buffer->stream);
 		free(buffer);
@@ -190,7 +169,6 @@ void* esperar_syscall() {
 		case IO:
 			printf("Proceso %i # Syscall recibida -> I/O \n", syscall->pcb.id_proceso);
 			syscall->pcb.estimacion_rafagas = calcular_rafaga(&(syscall->pcb));
-			printf("estimacion de rafagas post: %i \n", syscall->pcb.estimacion_rafagas);
 			executing_a_blocked(syscall);
 			free(syscall->pcb.instrucciones);
 			free(syscall);
