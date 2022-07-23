@@ -43,8 +43,10 @@ void* hilo_cpu(void* socket_cpu_void){
 				printf("Datos recibidos: \n");
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de primer tabla: %i \n", numero_tabla_1er_nivel_leer);
+				log_info(log_ejecucion_main,"Numero de primer tabla: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada: %i \n", numero_de_entrada);
+				log_info(log_ejecucion_main,"Numero de entrada: %i \n", numero_de_entrada);
 
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_main,
@@ -58,6 +60,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				usleep(RETARDO_MEMORIA * 1000);
 
 				printf("# Valor devuelto: %i \n", numero_2da_tabla);
+				log_info(log_ejecucion_main,"# Valor devuelto: %i \n", numero_2da_tabla);
 
 				send(socket_cpu, &numero_2da_tabla, sizeof(uint32_t), 0);
 				printf("# Fin #\n\n");
@@ -69,14 +72,20 @@ void* hilo_cpu(void* socket_cpu_void){
 			case solicitud_num_frame:
 				printf("# Solicitud numero de frame (cpu) #\n");
 				printf("Datos recibidos: \n");
+				log_info(log_ejecucion_main,"# Solicitud numero de frame (cpu) #\n");
+				log_info(log_ejecucion_main,"Datos recibidos: \n");
 				recv(socket_cpu, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
+				log_info(log_ejecucion_main,"Process id: %i \n", process_id);
 				recv(socket_cpu, &numero_tabla_2do_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de tabla 2: %i \n", numero_tabla_2do_nivel_leer);
+				log_info(log_ejecucion_main,"Numero de tabla 2: %i \n", numero_tabla_2do_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada_2, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada 2: %i \n", numero_de_entrada_2);
+				log_info(log_ejecucion_main,"Numero de entrada 2: %i \n", numero_de_entrada_2);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de 1er tabla: %i \n", numero_tabla_1er_nivel_leer);
+				log_info(log_ejecucion_main,"Numero de 1er tabla: %i \n", numero_tabla_1er_nivel_leer);
 
 				pagina_t* pagina_buscada = buscar_pagina(numero_tabla_2do_nivel_leer, numero_de_entrada_2);
 
@@ -93,21 +102,29 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				printf("# Valor devuelto: %i \n", a_enviar);
+				log_info(log_ejecucion_main,"# Valor devuelto: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 				printf("# Fin # \n\n");
+				log_info(log_ejecucion_main,"# Fin # \n\n", a_enviar);
 				break;
 			case solicitud_lectura:
 				printf("# Solicitud de lectura (cpu) #\n");
+				log_info(log_ejecucion_main,"# Solicitud de lectura (cpu) #\n");
 				printf("Datos recibidos: \n");
+				log_info(log_ejecucion_main,"Datos recibidos: \n");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de frame: %i \n", numero_de_frame);
+				log_info(log_ejecucion_main,"Numero de frame: %i \n", numero_de_frame);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
 				printf("Offset: %i \n", offset);
+				log_info(log_ejecucion_main,"Offset: %i \n", offset);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de tabla primer nivel: %i \n", numero_tabla_1er_nivel_leer);
+				log_info(log_ejecucion_main,"Numero de tabla primer nivel: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
+				log_info(log_ejecucion_main,"Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
 
 				a_enviar = leer_de_memoria(numero_de_frame, offset);
 
@@ -115,24 +132,32 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				printf("# Valor devuelto: %i \n", a_enviar);
+				log_info("# Valor devuelto: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 
 				printf("# Fin # \n\n");
 				break;
 			case solicitud_escritura:
 				printf("# Solicitud escritura (cpu) #\n");
+				log_info("# Valor devuelto: %i \n", a_enviar);
 				printf("Datos recibidos: \n");
+				log_info("Datos recibidos: \n", a_enviar);
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de frame: %i \n", numero_de_frame);
+				log_info(log_ejecucion_main,"Numero de frame: %i \n", numero_de_frame);
 				recv(socket_cpu, &offset, sizeof(uint32_t), MSG_WAITALL);
 				printf("Offset: %i \n", offset);
+				log_info(log_ejecucion_main,"Offset: %i \n", offset);
 				recv(socket_cpu, &valor_a_escribir, sizeof(uint32_t), MSG_WAITALL);
 				printf("Valor a escribir: %i \n", valor_a_escribir);
+				log_info(log_ejecucion_main,"Valor a escribir: %i \n", valor_a_escribir);
 				recv(socket_cpu, &numero_tabla_1er_nivel_leer, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de tabla de primer nivel: %i \n", numero_tabla_1er_nivel_leer);
+				log_info(log_ejecucion_main,"Numero de tabla de primer nivel: %i \n", numero_tabla_1er_nivel_leer);
 				recv(socket_cpu, &numero_de_entrada, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
+				log_info(log_ejecucion_main,"Numero de entrada tabla nivel 1: %i \n", numero_de_entrada);
 
 				escribir_en_memoria(numero_de_frame, offset, valor_a_escribir);
 
@@ -143,6 +168,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				send(socket_cpu, &OK, sizeof(uint32_t), 0);
 
 				printf("# Fin # \n\n");
+				log_info(log_ejecucion_main, "# Fin # \n\n");
 				break;
 			default:
 				printf("codigo erroneo enviado por kernel \n");
@@ -259,6 +285,7 @@ pagina_t* elegir_pagina_a_sacar(uint32_t numero_primer_tabla){
 	}
 
 	printf("CANTIDAD DE PAGINAS EN MEMORIA: %i \n", list_size(paginas_en_memoria));
+	log_info(log_ejecucion_main,"CANTIDAD DE PAGINAS EN MEMORIA: %i \n", list_size(paginas_en_memoria));
 
 	pagina_t* puntero_pagina;
 
@@ -286,12 +313,12 @@ void cargar_pagina_a_memoria(uint32_t numero_de_pagina, uint32_t numero_de_frame
 
 	ACCESOS_SWAP++;
 	printf("#################### TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
+	log_info(log_ejecucion_main,"#################### TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	usleep(RETARDO_SWAP * 1000);
 	fread(a_copiar, TAMANIO_PAGINA, 1 , archivo_swap);
 
 	sem_post(&operacion_swap);
-	// MOMENTO SWAP
 
 	sem_wait(&operacion_en_memoria);
 		memcpy( memoria_real + numero_de_frame * TAMANIO_PAGINA, a_copiar, TAMANIO_PAGINA );
@@ -310,6 +337,7 @@ void* copiar_de_swap(uint32_t pagina, uint32_t process_id){
 
 	ACCESOS_SWAP++;
 	printf("TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
+	log_info(log_ejecucion_main,"TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	sem_wait(&operacion_swap);
 	usleep(RETARDO_SWAP * 1000);
@@ -377,11 +405,14 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-			printf("@@@@@@@@@@@@ POSICION PUNTERO CLOCK = %i \n", *puntero_clock);
 			printf("BUSCANDO 0,0 \n");
+			log_info(log_ejecucion_main,"BUSCANDO 0,0 \n");
 			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
+			log_info(log_ejecucion_main,"Bit de uso: %i \n", puntero_pagina->bit_uso);
 			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
+			log_info(log_ejecucion_main,"Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
 			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
+			log_info(log_ejecucion_main,"Numero de frame: %i \n", puntero_pagina->numero_frame);
 
 			(*puntero_clock)++;
             if( (*puntero_clock) == list_size(paginas_en_memoria) ){
@@ -396,15 +427,19 @@ pagina_t* clock_mejorado(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
 		if( pagina_encontrada ) break;
 
 		printf("NO HAY NINGUNO EN 0,0 \n");
+		log_info(log_ejecucion_main,"NO HAY NINGUNO EN 0,0 \n");
 
 
 		for(int i = 0 ; i < list_size(paginas_en_memoria) ; i++){
 			puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
-			printf("@@@@@@@@@@@@ POSICION PUNTERO CLOCK = %i \n", *puntero_clock);
 			printf("BUSCANDO BIT DE USO EN 0 \n");
+			log_info(log_ejecucion_main,"BUSCANDO BIT DE USO EN 0 \n");
 			printf("Bit de uso: %i \n", puntero_pagina->bit_uso);
+			log_info(log_ejecucion_main,"Bit de uso: %i \n", puntero_pagina->bit_uso);
 			printf("Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
+			log_info(log_ejecucion_main,"Bit de modificacion: %i \n", puntero_pagina->bit_modificacion);
 			printf("Numero de frame: %i \n", puntero_pagina->numero_frame);
+			log_info(log_ejecucion_main,"Numero de frame: %i \n", puntero_pagina->numero_frame);
 			(*puntero_clock)++;
             if( (*puntero_clock) == list_size(paginas_en_memoria) ){
                 (*puntero_clock) = 0;
@@ -430,10 +465,13 @@ pagina_t* clock_comun(uint32_t numero_de_tabla, t_list* paginas_en_memoria){
     while(1){
         puntero_pagina = list_get(paginas_en_memoria, *puntero_clock);
         printf("@@@@@@@@@@ pagina en el frame %i \n", puntero_pagina->numero_frame);
+        log_info(log_ejecucion_main,"@@@@@@@@@@ pagina en el frame %i \n", puntero_pagina->numero_frame);
         printf("puntero apuntado bit de uso en %i \n", puntero_pagina->bit_uso);
+        log_info(log_ejecucion_main,"puntero apuntado bit de uso en %i \n", puntero_pagina->bit_uso);
         printf("puntero apuntado bit de presencia en %i \n", puntero_pagina->bit_presencia);
+        log_info(log_ejecucion_main,"puntero apuntado bit de presencia en %i \n", puntero_pagina->bit_presencia);
         printf("puntero apuntado bit de modificacion en %i \n", puntero_pagina->bit_modificacion);
-
+        log_info(log_ejecucion_main,"puntero apuntado bit de modificacion en %i \n", puntero_pagina->bit_modificacion);
         if(puntero_pagina->bit_uso == 0){
             (*puntero_clock)++;
             break;

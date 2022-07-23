@@ -38,11 +38,15 @@ void* hilo_kernel(void* ptr_void_socket){
 				sem_post(&escritura_log);
 
 				printf("# Solicitud crear tablas (kernel) #\n");
+				log_info(log_ejecucion_kernel, "# Solicitud crear tablas (kernel) #\n");
 				printf("Datos recibidos: \n");
+				log_info(log_ejecucion_kernel, "Datos recibidos: \n");
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
+				log_info(log_ejecucion_kernel, "Process id: %i \n", process_id);
 				recv(socket_kernel, &espacio_de_direcciones, sizeof(uint32_t), MSG_WAITALL);
 				printf("Espacio de direcciones: %i \n", espacio_de_direcciones);
+				log_info(log_ejecucion_kernel, "Espacio de direcciones: %i \n", espacio_de_direcciones);
 
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "datos recibidos: \nprocess id: %i, espacio de direcciones: %i", process_id, espacio_de_direcciones);
@@ -65,18 +69,23 @@ void* hilo_kernel(void* ptr_void_socket){
 				sem_post(&escritura_log);
 
 				printf("# Solicitud suspender proceso (kernel) #\n");
+				log_info(log_ejecucion_kernel, "# Solicitud suspender proceso (kernel) #\n");
 				printf("Datos recibidos: \n");
+				log_info(log_ejecucion_kernel, "Datos recibidos: \n");
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
+				log_info(log_ejecucion_kernel, "Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
+				log_info(log_ejecucion_kernel, "Numero de primer tabla: %i \n", numero_primer_tabla);
 
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "Datos recibidos: process id %i, numero_primer_tabla %i", process_id, numero_primer_tabla);
 				sem_post(&escritura_log);
 				suspender_proceso(process_id, numero_primer_tabla);
 				printf("Tablas suspendidas \n");
+				log_info(log_ejecucion_kernel, "Tablas suspendidas \n");
 
 				sem_wait(&escritura_log);
 					log_info(log_ejecucion_kernel, "Tablas suspendidas.");
@@ -88,6 +97,7 @@ void* hilo_kernel(void* ptr_void_socket){
 				log_info(log_ejecucion_kernel, "# FIN SUSPENSION_PROCESO");
 				sem_post(&escritura_log);
 				printf("# Fin # \n\n");
+				log_info(log_ejecucion_kernel, "# Fin # \n\n");
 				break;
 			}
 
@@ -97,12 +107,16 @@ void* hilo_kernel(void* ptr_void_socket){
 				sem_post(&escritura_log);
 
 				printf("# Solicitud finalizar proceso (kernel) # \n");
+				log_info(log_ejecucion_kernel, "# Solicitud finalizar proceso (kernel) # \n");
 				printf("Datos recibidos: \n");
+				log_info(log_ejecucion_kernel, "Datos recibidos: \n");
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
+				log_info(log_ejecucion_kernel, "Process id: %i \n", process_id);
 				recv(socket_kernel, &numero_primer_tabla, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de primer tabla: %i \n", numero_primer_tabla);
+				log_info(log_ejecucion_kernel, "Numero de primer tabla: %i \n", numero_primer_tabla);
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "Datos recibidos: process id %i, numero primer tabla %i", process_id, numero_primer_tabla);
 				sem_post(&escritura_log);
@@ -112,10 +126,13 @@ void* hilo_kernel(void* ptr_void_socket){
 
 
 				printf("Archivo %i.swap eliminado \n", process_id);
+				log_info(log_ejecucion_kernel, "Archivo %i.swap eliminado \n", process_id);
 				printf("Memoria ocupada por el proceso %i eliminada \n", process_id);
+				log_info(log_ejecucion_kernel, "Memoria ocupada por el proceso %i eliminada \n", process_id);
 
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
 				printf("# Fin # \n\n");
+				log_info(log_ejecucion_kernel, "# Fin # \n\n");
 				break;
 
 			default:
@@ -313,6 +330,7 @@ void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numer
 
 	ACCESOS_SWAP++;
 	printf("################ TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
+	log_info(log_ejecucion_kernel,"################ TOTAL ACCESOS A SWAP: %i \n", ACCESOS_SWAP);
 
 	usleep(RETARDO_SWAP * 1000);
 
