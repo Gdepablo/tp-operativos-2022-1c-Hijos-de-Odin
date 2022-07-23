@@ -6,7 +6,7 @@ int main(int argc, char** argv){
 	log_consola = log_create("./../logs/log_consola.log", "LOG CONSOLA", 0, LOG_LEVEL_INFO);
 	if( argc != 3 ) {
 		printf("cantidad de parametros incorrecta \n");
-		log_error(log_consola,"cantidad de parametros incorrecta ");
+		log_error(log_consola,"cantidad de parametros incorrecta");
 		return EXIT_FAILURE;
 	}
 
@@ -95,7 +95,6 @@ int main(int argc, char** argv){
 
 	printf("Datos enviados, esperando respuesta de Kernel... \n");
 	log_info(log_consola,"Datos enviados, esperando respuesta de Kernel...");
-
 	uint32_t respuesta;
 	recv(socket_kernel, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 
