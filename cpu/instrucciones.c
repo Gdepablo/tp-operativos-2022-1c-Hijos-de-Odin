@@ -55,13 +55,6 @@ void instr_io(int tiempo_en_milisegundos){
 	//tiempo de bloqueo
 	syscall_a_enviar->tiempo_de_bloqueo = tiempo_en_milisegundos;
 	//pcb
-//	syscall_a_enviar->pcb.estimacion_rafagas = pcb_ejecutando.estimacion_rafagas;
-//	syscall_a_enviar->pcb.id_proceso = pcb_ejecutando.id_proceso;
-//	syscall_a_enviar->pcb.program_counter = pcb_ejecutando.program_counter;
-//	syscall_a_enviar->pcb.tabla_paginas = pcb_ejecutando.tabla_paginas;
-//	syscall_a_enviar->pcb.tamanio_direcciones = pcb_ejecutando.tamanio_direcciones;
-//	syscall_a_enviar->pcb.lista_instrucciones = malloc(string_length(pcb_ejecutando.lista_instrucciones) + 1);
-//	strcpy(syscall_a_enviar->pcb.lista_instrucciones, pcb_ejecutando.lista_instrucciones);
 	syscall_a_enviar->pcb = pcb_ejecutando;
 
 	enviar_syscall(syscall_a_enviar);
@@ -152,14 +145,16 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	memcpy(buffer->stream + offset, syscall_a_enviar->pcb.lista_instrucciones, buffer->size_instrucciones);
 
 	printf("######################################################### \n");
+	log_info(log_ejecucion_cpu,"######################################################### \n");
 	printf("enviar syscall \n");
+	log_info(log_ejecucion_cpu,"enviar syscall \n");
 	printf("instrucciones: %s \n", syscall_a_enviar->pcb.lista_instrucciones);
+	log_info(log_ejecucion_cpu,"instrucciones: %s \n", syscall_a_enviar->pcb.lista_instrucciones);
 
 	char* instrucciones_enviadas = malloc(buffer->size_instrucciones);
 	memcpy(instrucciones_enviadas , buffer->stream + offset, buffer->size_instrucciones);
 
 	offset+=buffer->size_instrucciones;
-	// FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO FIN ZONA DE PELIGRO
 	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.program_counter), sizeof(uint32_t));
 	offset+=sizeof(uint32_t);
 	memcpy(buffer->stream+offset, &(syscall_a_enviar->pcb.tabla_paginas), sizeof(uint32_t));
@@ -187,7 +182,7 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 
 
 // Descripcion:
-uint32_t buscar_frame(uint32_t dir_logica){ // @suppress("No return")
+uint32_t buscar_frame(uint32_t dir_logica){
 	numero_pagina = floor(dir_logica/info_traduccion.tamanio_paginas);
 	log_info(log_ejecucion_cpu, "comienza a buscarse la pagina %i en la TLB", numero_pagina);
 
@@ -327,10 +322,6 @@ uint32_t pedir_todo_memoria(){
 // Descripcion: escribe en el numero de frame con el offset dado, el valor del tercero parametro.
 // ejemplo: escribir_frame(1,5,8) escribe en el frame 1 con un offset de 5, el valor 8
 
-/* TODO
- * agregar el offset po aweonao XD
- * eso afecta instr_copy e instr_write, compilar antes de pushear anashe
- */
 void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, uint32_t entrada_1er_tabla){
 	//EL CODIGO DE OPERACION ES 3
 	uint32_t codigo_de_operacion =3;

@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../algoritmos.c \
 ../hilo_cpu.c \
 ../hilo_kernel.c \
 ../main_memoria.c 
 
 OBJS += \
+./algoritmos.o \
 ./hilo_cpu.o \
 ./hilo_kernel.o \
 ./main_memoria.o 
 
 C_DEPS += \
+./algoritmos.d \
 ./hilo_cpu.d \
 ./hilo_kernel.d \
 ./main_memoria.d 

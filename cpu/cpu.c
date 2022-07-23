@@ -2,7 +2,6 @@
 #include <time.h>
 #include <math.h>
 
-//	DOCUMENTACION COSMICA REALIZADA POR BATATA
 sem_t 	hiloCreado, // = 0
 		ejecutar,	// = 0
 		sem_interrupcion; // = 1
@@ -25,9 +24,7 @@ int main(void){
 	sem_init(&ejecutar, 0, 0);
 	sem_init(&nada_ejecutando, 0, 1);
 
-	//CONFIG
-	t_config* config = inicializarConfigs();;					// abro el config, se encuentra en la carpeta padre y se llama cpu.config
-	//config = inicializarConfigs();
+	t_config* config = inicializarConfigs();
 
 	char* ip = config_get_string_value(config, "IP_MEMORIA"); // ip de la memoria
 	char* puerto_memoria = config_get_string_value(config, "PUERTO_MEMORIA"); // puerto al cual el cpu se va a conectar con la memoria
@@ -45,8 +42,8 @@ int main(void){
 	uint32_t todo_mal = 0;
 
 	//SOCKETS
-	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch); // escucha de kernel
-	socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL); //bloqueante
+	int socket_escucha_dispatch = iniciar_servidor(ip, puerto_dispatch);
+	socket_dispatch = accept(socket_escucha_dispatch, NULL, NULL);
 	recv(socket_dispatch, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 333){
 		printf("Conexion con kernel realizada con exito... (DISPATCH) \n");
@@ -61,8 +58,8 @@ int main(void){
 		return 1;
 	}
 
-	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt); // escucha de kernel
-	socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL); //bloqueante
+	int socket_escucha_interrupt = iniciar_servidor(ip, puerto_interrupt);
+	socket_interrupt = accept(socket_escucha_interrupt, NULL, NULL);
 	recv(socket_interrupt, &handshake, sizeof(uint32_t), MSG_WAITALL);
 	if(handshake == 111){
 		printf("Conexion con kernel realizada con exito... (INTERRUPT) \n");
@@ -156,7 +153,7 @@ int main(void){
 }
 
 // HILOS
-// ejecuta las instrucciones del pcb - DONE
+// ejecuta las instrucciones del pcb
 void* executer(){
 	sem_post(&hiloCreado); // simplemente avisa que se creo el hilo
 	log_info(log_ejecucion_cpu, "hilo executer iniciado \n");
@@ -180,13 +177,13 @@ void* executer(){
 		//DECODE - ETAPA OPCIONAL - DONE
 		if(!strcmp(instruccion_spliteada[0], "COPY")){
 			log_info(log_ejecucion_cpu, "FETCH OPERAND");
-			operando = fetchOperand(atoi(instruccion_spliteada[2])); //instruccion_spliteada[2] = dir_logica_origen
+			operando = fetchOperand(atoi(instruccion_spliteada[2]));
 		}
 
 
 		//EXECUTE - DONE
 		log_info(log_ejecucion_cpu, "EXECUTE");
-		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]); // retorna 0,1,2,3,4,5
+		int numOperacion = seleccionarOperacion(instruccion_spliteada[0]);
 		log_info(log_ejecucion_cpu, "PROXIMA OPERACION A EJECUTAR: %s", instruccion_spliteada[0]);
 
 		switch(numOperacion){
@@ -246,7 +243,7 @@ void* executer(){
 
 
 
-		// CHECK INTERRUPT - DONE
+		// CHECK INTERRUPT
 		log_info(log_ejecucion_cpu, "CHECK INTERRUPT");
 		log_info(log_ejecucion_cpu, "chequeando interrupciones y/o syscall bloqueante");
 		if( hay_interrupcion() ){
@@ -260,8 +257,6 @@ void* executer(){
 			pcb_desalojada->instruccion = 2;
 			pcb_desalojada->tiempo_de_bloqueo = 0;
 			enviar_syscall(pcb_desalojada);
-
-//			free(pcb_ejecutando.lista_instrucciones);
 			sem_post(&nada_ejecutando);
 			sem_wait(&sem_interrupcion);
 				interrupcion = 0;
@@ -271,7 +266,6 @@ void* executer(){
 			log_info(log_ejecucion_cpu, "se detecto una syscall bloqueante \n\n");
 			// el pcb se envia en la instruccion IO o EXIT
 			limpiar_TLB();
-//			free(pcb_ejecutando.lista_instrucciones);
 			sem_post(&nada_ejecutando);
 			syscall_bloqueante=0;
 		} else {
@@ -286,8 +280,8 @@ void* executer(){
 	return 0;
 }
 
-// recibe el aviso del kernel de que hay que desalojar - DONE
-/*
+// recibe el aviso del kernel de que hay que desalojar
+/**
  * 	Este hilo solamente atiende lo recibido de KERNEL para detener la ejecucion
  *
  */
@@ -320,7 +314,7 @@ void* interrupt(){
 }
 
 // FUNCIONES
-// va a buscar el contenido de operando a memoria - DONE
+// va a buscar el contenido de operando a memoria
 uint32_t fetchOperand(uint32_t dir_logica){
 	printf("# FETCH OPERAND (PASO PREVIO INSTRUCCION COPY) \n");
 	uint32_t frame_a_buscar = buscar_frame(dir_logica);
@@ -333,7 +327,7 @@ uint32_t fetchOperand(uint32_t dir_logica){
 	return contenido_del_frame;
 }
 
-void crear_TLB(){ // DONE
+void crear_TLB(){
 	lista_tlb = list_create();
 	for(int i=0;entradas_tlb > i;i++){
 		t_tlb* tlb = malloc (sizeof(t_tlb));
@@ -346,12 +340,12 @@ void crear_TLB(){ // DONE
 	}
 }
 
-void limpiar_TLB(){ // DONE
+void limpiar_TLB(){
 	list_iterate(lista_tlb,cambiar_puntero_tlb);
 	log_info(log_ejecucion_cpu, "se limpio la tlb");
 }
 
-t_tlb* elegir_pagina_a_reemplazar_TLB(){ // DONE
+t_tlb* elegir_pagina_a_reemplazar_TLB(){
 	t_tlb* pagina_a_retornar;
 
 	//Algoritmo LRU
@@ -371,7 +365,7 @@ t_tlb* elegir_pagina_a_reemplazar_TLB(){ // DONE
 	return pagina_a_retornar;
 }
 
-void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){ // DONE
+void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
@@ -417,12 +411,12 @@ void* tlb_menos_referenciado(void* tlbA, void* tlbB){
 
 }
 
-// debe fijarse si la var global 'interrupcion' == 1 // DONE
+// debe fijarse si la var global 'interrupcion' == 1
 bool hay_interrupcion(){
 	return interrupcion==1;
 }
 
-// debe fijarse si se hizo una syscall bloqueante // DONE
+// debe fijarse si se hizo una syscall bloqueante
 bool se_hizo_una_syscall_bloqueante(){
 
 	return syscall_bloqueante ==1;
@@ -540,13 +534,9 @@ t_pcb recibir_PCB(){
 
     memcpy(&(pcb.program_counter), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("pcb.program_counter = %i \n", pcb.program_counter);
     memcpy(&(pcb.tabla_paginas), buffer.stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-
-//    printf("pcb.tabla_paginas = %i \n", pcb.tabla_paginas);
     memcpy(&(pcb.estimacion_rafagas), buffer.stream+offset, sizeof(uint32_t));
-//    printf("pcb.estimacion_rafagas = %i \n", pcb.estimacion_rafagas);
 
     return pcb;
 }
