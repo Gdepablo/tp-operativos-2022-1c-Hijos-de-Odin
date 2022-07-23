@@ -7,6 +7,10 @@
 // VARIABLES GLOBALES
 char* PUERTO_ESCUCHA;
 
+t_log* log_kernel = log_create("./../logs/log_kernel.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_recepcion = log_create("./../logs/recibir_proceso.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_com_cpu = log_create("./../logs/comunicacion_cpu.log", "log kernel", 0, LOG_LEVEL_INFO);
+
 int main(){
 	printf("#################### KERNEL #################### \n");
 
@@ -50,8 +54,10 @@ int main(){
 	recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta == 1) {
 		printf("Se conectó a memoria \n");
+		log_info(log_kernel, "Se conectó a memoria");
 	} else {
 		printf("Error en la conexión con la memoria \n");
+		log_error(log_kernel, "Error en la conexión con la memoria");
 		return 1;
 	}
 	// CONEXIÓN CON CPU
@@ -62,8 +68,10 @@ int main(){
 	recv(socket_cpu_dispatch, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 	if(respuesta == 1) {
 		printf("Se conectó al dispatch \n");
+		log_info(log_kernel, "Se conectó al dispatch");
 	} else {
 		printf("Error en la conexión con el dispatch \n");
+		log_error(log_kernel, "Error en la conexión con el dispatch");
 		return 1;
 	}
 
@@ -74,8 +82,10 @@ int main(){
 		recv(socket_cpu_interrupcion, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 		if(respuesta == 1) {
 			printf("Se conectó a interrupciones \n");
+			log_info(log_kernel, "Se conectó a interrupciones");
 		} else {
 			printf("Error en la conexión con las interrupciones \n");
+			log_error(log_kernel, "Error en la conexión con las interrupciones");
 			return 1;
 		}
 
@@ -101,8 +111,6 @@ int main(){
 	pthread_create(&atender_consolas, NULL, recibir_procesos, NULL);
 	pthread_create(&recibir_syscall_cpu, NULL, esperar_syscall, NULL);
 	pthread_create(&hiloIO , NULL, hilo_io, NULL);
-//	pthread_create(&mp_suspendedready_ready, NULL, suspended_ready_a_ready, NULL);
-
 
 	pthread_detach(lp_new_ready_fifo);
 	pthread_detach(cp_ready_exec_fifo);
@@ -145,8 +153,9 @@ void* recibir_procesos() {
 		free(buffer);
 		free(proceso);
 
-		ingreso_a_new(pcb); // planificador largo plazo
+		ingreso_a_new(pcb);
 		printf("Proceso %i # Ingreso a new \n", pcb->id_proceso);
+		log_info(log_recepcion, "Proceso %i # Ingreso a new ", pcb->id_proceso);
 	}
 	return "";
 }
@@ -168,6 +177,8 @@ void* esperar_syscall() {
 		switch(syscall->instruccion) {
 		case IO:
 			printf("Proceso %i # Syscall recibida -> I/O \n", syscall->pcb.id_proceso);
+			log_info(log_com_cpu, "Proceso %i # Syscall recibida -> I/O", syscall->pcb.id_proceso);
+
 			syscall->pcb.estimacion_rafagas = calcular_rafaga(&(syscall->pcb));
 			executing_a_blocked(syscall);
 			free(syscall->pcb.instrucciones);
@@ -175,14 +186,17 @@ void* esperar_syscall() {
 			break;
 		case EXIT:
 			printf("Proceso %i # Syscall recibida -> EXIT \n", syscall->pcb.id_proceso);
+			log_info(log_com_cpu, "Proceso %i # Syscall recibida -> EXIT", syscall->pcb.id_proceso);
+			
 			executing_a_exit(syscall);
 			free(syscall->pcb.instrucciones);
 			free(syscall);
 			break;
 		case DESALOJO:{
 			printf("Proceso %i # Se desaloja \n", syscall->pcb.id_proceso);
+			log_info(log_com_cpu, "Proceso %i # Se desaloja", syscall->pcb.id_proceso);
+
 			syscall->pcb.estimacion_rafagas = calcular_rafaga(&(syscall->pcb));
-			printf("estimacion de rafagas post: %i \n", syscall->pcb.estimacion_rafagas);
 			t_pcb* pcb_nuevo = malloc(sizeof(t_pcb));
 			copiar_pcb(pcb_nuevo, syscall->pcb);
 
@@ -195,6 +209,7 @@ void* esperar_syscall() {
 			}
 		default:
 			printf("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN \n", syscall->pcb.id_proceso);
+			log_error("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN", syscall->pcb.id_proceso);
 		}
 	}
 }
@@ -215,39 +230,31 @@ t_syscall* recibirSyscall(){
     int offset = 0;
     // INSTRUCCION
     memcpy(&(syscall_recibida->instruccion), buffer->stream+offset, sizeof(uint32_t));
-//    printf("syscall instruccion es: %i \n", syscall_recibida->instruccion);
     offset+=sizeof(uint32_t);
     // TIEMPO DE BLOQUEO
     memcpy(&(syscall_recibida->tiempo_de_bloqueo), buffer->stream+offset, sizeof(uint32_t));
-//    printf("syscall tiempo de bloqueo es: %i \n", syscall_recibida->tiempo_de_bloqueo);
     offset+=sizeof(uint32_t);
     // PCB
     // ID PROCESO
     memcpy(&(syscall_recibida->pcb.id_proceso), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("syscall pcb id proceso es: %i \n", syscall_recibida->pcb.id_proceso);
     // TAMANIO DIRECCIONES
     memcpy(&(syscall_recibida->pcb.tamanio_direcciones), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("syscall pcb tamanio direcciones es: %i \n", syscall_recibida->pcb.tamanio_direcciones);
     // LISTA DE INSTRUCCIONES (PELIGRO)
     syscall_recibida->pcb.instrucciones = malloc(buffer->size_instrucciones);
     memcpy(syscall_recibida->pcb.instrucciones, buffer->stream+offset, buffer->size_instrucciones);
 
     offset+=buffer->size_instrucciones;
-//    printf("la lista de instrucciones es: %s \n", syscall_recibida->pcb.instrucciones);
     // PROGRAM COUNTER
     memcpy(&(syscall_recibida->pcb.program_counter), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("el program counter es: %i \n", syscall_recibida->pcb.program_counter);
     // TABLA DE PAGINAS
     memcpy(&(syscall_recibida->pcb.tabla_paginas), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("la tabla de paginas es: %i \n", syscall_recibida->pcb.tabla_paginas);
     // ESTIMACION DE RAFAGAS
     memcpy(&(syscall_recibida->pcb.estimacion_rafagas), buffer->stream+offset, sizeof(uint32_t));
     offset+=sizeof(uint32_t);
-//    printf("la estimacion de rafagas es: %i \n", syscall_recibida->pcb.estimacion_rafagas);
 
     gettimeofday(&HORA_FIN_EJECUCION, NULL);
 
@@ -264,20 +271,18 @@ t_info_proceso* deserializar_proceso(t_buffer* buffer) {
 
 	memcpy(&(procesoNuevo->tamanio_direcciones), stream, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-//	printf("procesonuevo->tamanio_direcciones = %i \n", procesoNuevo->tamanio_direcciones);
 
 	memcpy(&(procesoNuevo->largo_instrucciones), stream+offset, sizeof(uint32_t));
 	offset += sizeof(uint32_t);
-//	printf("procesonuevo->largo_instrucciones = %i \n", procesoNuevo->largo_instrucciones);
 
-	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones); // sin el +1 XD
+	procesoNuevo->instrucciones = malloc(procesoNuevo->largo_instrucciones);
 	memcpy(procesoNuevo->instrucciones, stream+offset, procesoNuevo->largo_instrucciones);
 
 	return procesoNuevo;
 }
 
 int crear_conexion(char *ip, char* puerto) {
-	t_log* log_fallas = log_create("./../logs/log de fallas.log", "log fulbo", true, LOG_LEVEL_INFO);
+	t_log* log_fallas = log_create("./../logs/log de fallas.log", "log kernel", true, LOG_LEVEL_INFO);
 
 	struct addrinfo hints;
 	struct addrinfo *server_info;
@@ -349,11 +354,6 @@ t_config* inicializarConfigs() {
 
 int es_FIFO(){
 	return !strcmp(ALGORITMO_PLANIFICACION, "FIFO");
-}
-
-void* hilo_contador(void){
-
-	return "";
 }
 
 

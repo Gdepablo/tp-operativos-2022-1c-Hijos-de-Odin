@@ -53,17 +53,6 @@ void* hilo_io();
 
  CUANDO SE EJECUTA:
 */
-void suspended_blocked_a_suspended_ready(t_pcb* pcb);
-
-/*
- TIPO:
-
- DESCRIPCION:
-
- PARAMETROS:
-
- CUANDO SE EJECUTA:
-*/
 void* suspended_ready_a_ready();
 
 /*
