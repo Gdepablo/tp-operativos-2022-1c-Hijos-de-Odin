@@ -11,7 +11,7 @@ t_config* inicializarConfigs(void) {
 	nuevo_config = config_create("./../cpu.config");
 
 
-	return nuevo_config; //Creo que esto funciona así igual pero no estoy seguro
+	return nuevo_config;
 }
 
 
@@ -27,12 +27,9 @@ int crear_conexion(char *ip, char* puerto)
 
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
-	// Ahora vamos a crear el socket. LISTO
 	int socket_cliente = socket( server_info -> ai_family,
 								 server_info -> ai_socktype,
 								 server_info -> ai_protocol);
-
-	// Ahora que tenemos el socket, vamos a conectarlo LISTO
 
 	connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
 
@@ -56,17 +53,13 @@ int iniciar_servidor(char* ip, char* puerto) {
 
 	getaddrinfo(NULL, puerto, &hints, &servinfo);
 
-	// Creamos el socket de escucha del servidor
 	socket_servidor = 	socket( servinfo -> ai_family,
 								servinfo -> ai_socktype,
 								servinfo -> ai_protocol);
 
 	setsockopt(socket_servidor,SOL_SOCKET,SO_REUSEADDR,&activado,sizeof(activado));
 
-	// Asociamos el socket a un puerto
 	bind(socket_servidor, servinfo->ai_addr, servinfo->ai_addrlen);
-
-	// Escuchamos las conexiones entrantes
 	listen(socket_servidor, SOMAXCONN);
 
 	freeaddrinfo(servinfo);
