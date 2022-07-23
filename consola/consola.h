@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <commons/log.h>
 #define CREAR_PROCESO 1
 
 void pushearInstruccion(char* instruccion, char*** listaInstrucciones);
@@ -30,5 +31,7 @@ typedef struct {
 	uint32_t codOp;
 	t_buffer* buffer;
 } t_paquete;
+
+t_log* log_consola;
 
 #endif

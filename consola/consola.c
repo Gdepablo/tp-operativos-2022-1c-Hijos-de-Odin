@@ -3,17 +3,20 @@
 
 
 int main(int argc, char** argv){
+	log_consola = log_create("./../logs/log_consola.log", "LOG CONSOLA", 0, LOG_LEVEL_INFO);
 	if( argc != 3 ) {
 		printf("cantidad de parametros incorrecta \n");
+		log_error(log_consola,"cantidad de parametros incorrecta \n");
 		return EXIT_FAILURE;
 	}
 
 	printf("# CONSOLA # \n");
+	log_info(log_consola,"# CONSOLA # \n");
 	printf("Datos leidos: \n");
-
+	log_info(log_consola,"Datos leidos: \n");
 	// PARSEAR INSTRUCCIONES
 	t_config* config;
-	int socket_cliente;
+	int socket_kernel;
 	char* ip = string_new();
 	char* puerto = string_new();
 	char c = '\0';
@@ -38,20 +41,24 @@ int main(int argc, char** argv){
 	puerto = config_get_string_value(config, "PUERTO");
 
 	printf("ip: %s \n", ip);
+	log_info(log_consola,"Ip asignada: %s \n", ip);
 	printf("puerto: %s \n", puerto);
+	log_info(log_consola,"Puerto asignada: %s \n", puerto);
 
-	socket_cliente = crear_conexion(ip, puerto); // SE CONECTA AL KERNEL
+	socket_kernel = crear_conexion(ip, puerto); // SE CONECTA AL KERNEL
 
 	t_info_proceso infoProceso;
 
 	infoProceso.tamanioDirecciones = (uint32_t)atoi(argv[2]);
-	printf("TAMANIO: %d \n", infoProceso.tamanioDirecciones);
+	printf("Tamanio de Direcciones del Proceso %d \n", infoProceso.tamanioDirecciones);
+	log_info(log_consola,"Tamanio de Direcciones del Proceso: %d \n", infoProceso.tamanioDirecciones);
 	infoProceso.largoListaInstrucciones = (uint32_t)(size) + 1; //  este llevaba + 1
-	printf("LARGO LISTA: %d \n", infoProceso.largoListaInstrucciones);
+	printf("Largo de Lista de Instrucciones: %d \n", infoProceso.largoListaInstrucciones);
+	log_info(log_consola,"Largo de Lista de Instrucciones: %d \n", infoProceso.largoListaInstrucciones);
 	infoProceso.listaInstrucciones = malloc(size + 1); // este llevaba + 1
 	strcpy(infoProceso.listaInstrucciones, buffer);
 	printf("LISTA DE INSTRUCCIONES:\n%s \nFIN LISTA \n", infoProceso.listaInstrucciones);
-	//t_info_proceso listo
+	log_info(log_consola,"Lista de Instrucciones:\n%s \nFIN LISTA \n", infoProceso.listaInstrucciones);
 
 	t_buffer* bufferinho = malloc(sizeof(t_buffer));
 	size = sizeof(uint32_t) * 2 + infoProceso.largoListaInstrucciones;
@@ -66,7 +73,6 @@ int main(int argc, char** argv){
 	memcpy(stream+offset, infoProceso.listaInstrucciones, infoProceso.largoListaInstrucciones);
 
 	bufferinho->stream = stream;
-	//t_buffer listo
 
 	t_paquete* paquete = malloc( sizeof(t_paquete) );
 
@@ -82,25 +88,29 @@ int main(int argc, char** argv){
 	offset += sizeof(uint32_t);
 	memcpy(a_enviar+offset, paquete->buffer->stream, paquete->buffer->size);
 
-	printf("TAMANIO ENVIADO: %i \n", sizeof(uint32_t) * 2 + paquete -> buffer -> size);
+	printf("Tamanio enviado del paquete: %i \n", sizeof(uint32_t) * 2 + paquete -> buffer -> size);
+	log_info(log_consola,"Tamanio enviado del paquete: %i \n", sizeof(uint32_t) * 2 + paquete -> buffer -> size);
 
-	send(socket_cliente, a_enviar, sizeof(uint32_t) * 2 + paquete -> buffer -> size, 0);
+	send(socket_kernel, a_enviar, sizeof(uint32_t) * 2 + paquete -> buffer -> size, 0);
 
 	printf("Datos enviados, esperando respuesta de Kernel... \n");
+	log_info(log_consola,"Datos enviados, esperando respuesta de Kernel... \n");
 
 	uint32_t respuesta;
-	recv(socket_cliente, &respuesta, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket_kernel, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 
 	if(respuesta == 10){
 		printf("FINALIZACION OK \n");
+		log_info(log_consola,"FINALIZACION OK \n");
 	}
 	else
 	{
-		printf("FINALIZACION OKn't \n");
+		printf("ERROR DE COMUNICACION ENTRE KERNEL Y CONSOLA \n");
+		log_error(log_consola,"Ha ocurrido un error en la comunicacion entre Kernel y Consola");
 	}
 
 	free(infoProceso.listaInstrucciones);
-	close(socket_cliente);
+	close(socket_kernel);
 	config_destroy(config);
 	fclose(archivo);
 	return EXIT_SUCCESS;
@@ -129,17 +139,17 @@ int crear_conexion(char *ip, char* puerto)
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
 	// Ahora vamos a crear el socket. LISTO
-	int socket_cliente = socket( server_info -> ai_family,
+	int socket_kernel = socket( server_info -> ai_family,
 								 server_info -> ai_socktype,
 								 server_info -> ai_protocol);
 
 	// Ahora que tenemos el socket, vamos a conectarlo LISTO
 
-	connect(socket_cliente, server_info -> ai_addr, server_info -> ai_addrlen );
+	connect(socket_kernel, server_info -> ai_addr, server_info -> ai_addrlen );
 
 	freeaddrinfo(server_info);
 
-	return socket_cliente;
+	return socket_kernel;
 }
 
 

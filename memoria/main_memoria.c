@@ -10,6 +10,7 @@ t_list* tabla_de_paginas_global;
 
 int main(void){
 	printf("# MEMORIA #\n");
+	log_info(log_ejecucion_main, "# MEMORIA #\n");
 
 	ACCESOS_SWAP = 0;
 
