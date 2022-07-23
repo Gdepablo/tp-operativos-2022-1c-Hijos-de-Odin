@@ -1312,3 +1312,343 @@ process id: 4, espacio de direcciones: 4096
 [INFO] 20:34:26:225 HILO KERNEL/(26978:26983): frame 0 liberado
 [INFO] 20:34:26:225 HILO KERNEL/(26978:26983): frame 1 liberado
 [INFO] 20:34:26:225 HILO KERNEL/(26978:26983): memoria ocupada por la tabla 0 liberada
+[INFO] 20:42:38:077 HILO KERNEL/(28561:28566): hilo kernel iniciado
+[INFO] 20:43:34:377 HILO KERNEL/(28561:28566): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:43:34:377 HILO KERNEL/(28561:28566): # CREAR_TABLAS
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): datos recibidos: 
+process id: 4, espacio de direcciones: 2048
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): El proceso necesitara 16 paginas
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): Se crearon 4 tablas
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): Tablas de segundo nivel creadas
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): tabla 1er nivel numero 0 creada
+[INFO] 20:43:34:414 HILO KERNEL/(28561:28566): puntero numero 0 creado, inicializado en 0
+[INFO] 20:43:37:414 HILO KERNEL/(28561:28566): archivo /home/utnso/swap/4.swap creado
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): # CREAR_TABLAS
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): datos recibidos: 
+process id: 9, espacio de direcciones: 2048
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): El proceso necesitara 16 paginas
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:43:37:415 HILO KERNEL/(28561:28566): Se crearon 4 tablas
+[INFO] 20:43:37:416 HILO KERNEL/(28561:28566): Tablas de segundo nivel creadas
+[INFO] 20:43:37:416 HILO KERNEL/(28561:28566): tabla 1er nivel numero 1 creada
+[INFO] 20:43:37:416 HILO KERNEL/(28561:28566): puntero numero 1 creado, inicializado en 0
+[INFO] 20:43:40:416 HILO KERNEL/(28561:28566): archivo /home/utnso/swap/9.swap creado
+[INFO] 20:43:40:417 HILO KERNEL/(28561:28566): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:45:16:524 HILO KERNEL/(28561:28566): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:45:16:525 HILO KERNEL/(28561:28566): # FINALIZACION_PROCESO
+[INFO] 20:45:16:525 HILO KERNEL/(28561:28566): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 20:45:19:525 HILO KERNEL/(28561:28566): archivo 9.swap borradp
+[INFO] 20:45:19:525 HILO KERNEL/(28561:28566): frame 6 liberado
+[INFO] 20:45:19:525 HILO KERNEL/(28561:28566): frame 5 liberado
+[INFO] 20:45:19:525 HILO KERNEL/(28561:28566): memoria ocupada por la tabla 1 liberada
+[INFO] 20:45:37:544 HILO KERNEL/(28561:28566): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:45:37:544 HILO KERNEL/(28561:28566): # FINALIZACION_PROCESO
+[INFO] 20:45:37:545 HILO KERNEL/(28561:28566): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): archivo 4.swap borradp
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): frame 0 liberado
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): frame 1 liberado
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): frame 2 liberado
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): frame 3 liberado
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): frame 4 liberado
+[INFO] 20:45:40:545 HILO KERNEL/(28561:28566): memoria ocupada por la tabla 0 liberada
+[INFO] 20:49:55:607 HILO KERNEL/(29619:29626): hilo kernel iniciado
+[INFO] 20:49:59:545 HILO KERNEL/(29619:29626): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:49:59:545 HILO KERNEL/(29619:29626): # CREAR_TABLAS
+[INFO] 20:49:59:581 HILO KERNEL/(29619:29626): datos recibidos: 
+process id: 4, espacio de direcciones: 2048
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): El proceso necesitara 16 paginas
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): Se crearon 4 tablas
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): Tablas de segundo nivel creadas
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): tabla 1er nivel numero 0 creada
+[INFO] 20:49:59:582 HILO KERNEL/(29619:29626): puntero numero 0 creado, inicializado en 0
+[INFO] 20:50:02:582 HILO KERNEL/(29619:29626): archivo /home/utnso/swap/4.swap creado
+[INFO] 20:50:02:583 HILO KERNEL/(29619:29626): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:50:02:583 HILO KERNEL/(29619:29626): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:50:02:583 HILO KERNEL/(29619:29626): # CREAR_TABLAS
+[INFO] 20:50:02:584 HILO KERNEL/(29619:29626): datos recibidos: 
+process id: 9, espacio de direcciones: 2048
+[INFO] 20:50:02:584 HILO KERNEL/(29619:29626): El proceso necesitara 16 paginas
+[INFO] 20:50:02:584 HILO KERNEL/(29619:29626): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:50:02:585 HILO KERNEL/(29619:29626): Se crearon 4 tablas
+[INFO] 20:50:02:585 HILO KERNEL/(29619:29626): Tablas de segundo nivel creadas
+[INFO] 20:50:02:585 HILO KERNEL/(29619:29626): tabla 1er nivel numero 1 creada
+[INFO] 20:50:02:585 HILO KERNEL/(29619:29626): puntero numero 1 creado, inicializado en 0
+[INFO] 20:50:05:585 HILO KERNEL/(29619:29626): archivo /home/utnso/swap/9.swap creado
+[INFO] 20:50:05:585 HILO KERNEL/(29619:29626): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:51:41:696 HILO KERNEL/(29619:29626): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:51:41:696 HILO KERNEL/(29619:29626): # FINALIZACION_PROCESO
+[INFO] 20:51:41:696 HILO KERNEL/(29619:29626): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 20:51:44:696 HILO KERNEL/(29619:29626): archivo 9.swap borradp
+[INFO] 20:51:44:697 HILO KERNEL/(29619:29626): frame 6 liberado
+[INFO] 20:51:44:697 HILO KERNEL/(29619:29626): frame 5 liberado
+[INFO] 20:51:44:697 HILO KERNEL/(29619:29626): memoria ocupada por la tabla 1 liberada
+[INFO] 20:52:02:715 HILO KERNEL/(29619:29626): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:52:02:715 HILO KERNEL/(29619:29626): # FINALIZACION_PROCESO
+[INFO] 20:52:02:716 HILO KERNEL/(29619:29626): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 20:52:05:718 HILO KERNEL/(29619:29626): archivo 4.swap borradp
+[INFO] 20:52:05:718 HILO KERNEL/(29619:29626): frame 0 liberado
+[INFO] 20:52:05:719 HILO KERNEL/(29619:29626): frame 1 liberado
+[INFO] 20:52:05:719 HILO KERNEL/(29619:29626): frame 2 liberado
+[INFO] 20:52:05:719 HILO KERNEL/(29619:29626): frame 3 liberado
+[INFO] 20:52:05:719 HILO KERNEL/(29619:29626): frame 4 liberado
+[INFO] 20:52:05:719 HILO KERNEL/(29619:29626): memoria ocupada por la tabla 0 liberada
+[INFO] 20:53:15:185 HILO KERNEL/(30038:30043): hilo kernel iniciado
+[INFO] 20:54:01:585 HILO KERNEL/(30038:30043): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:54:01:585 HILO KERNEL/(30038:30043): # CREAR_TABLAS
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): datos recibidos: 
+process id: 4, espacio de direcciones: 2048
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): El proceso necesitara 16 paginas
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): Se crearon 4 tablas
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): Tablas de segundo nivel creadas
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): tabla 1er nivel numero 0 creada
+[INFO] 20:54:01:622 HILO KERNEL/(30038:30043): puntero numero 0 creado, inicializado en 0
+[INFO] 20:54:04:625 HILO KERNEL/(30038:30043): archivo /home/utnso/swap/4.swap creado
+[INFO] 20:54:04:626 HILO KERNEL/(30038:30043): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): # CREAR_TABLAS
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): datos recibidos: 
+process id: 9, espacio de direcciones: 2048
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): El proceso necesitara 16 paginas
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): La cantidad de tablas de 2do nivel necesaria es 4
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): Se crearon 4 tablas
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): Tablas de segundo nivel creadas
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): tabla 1er nivel numero 1 creada
+[INFO] 20:54:04:627 HILO KERNEL/(30038:30043): puntero numero 1 creado, inicializado en 0
+[INFO] 20:54:07:628 HILO KERNEL/(30038:30043): archivo /home/utnso/swap/9.swap creado
+[INFO] 20:54:07:629 HILO KERNEL/(30038:30043): # FIN CREAR_TABLAS 
+
+
+[INFO] 20:55:37:710 HILO KERNEL/(30038:30043): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:55:37:710 HILO KERNEL/(30038:30043): # FINALIZACION_PROCESO
+[INFO] 20:55:37:710 HILO KERNEL/(30038:30043): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 20:55:40:710 HILO KERNEL/(30038:30043): archivo 9.swap borradp
+[INFO] 20:55:40:710 HILO KERNEL/(30038:30043): frame 6 liberado
+[INFO] 20:55:40:711 HILO KERNEL/(30038:30043): frame 5 liberado
+[INFO] 20:55:40:711 HILO KERNEL/(30038:30043): memoria ocupada por la tabla 1 liberada
+[INFO] 20:55:58:719 HILO KERNEL/(30038:30043): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 20:55:58:719 HILO KERNEL/(30038:30043): # FINALIZACION_PROCESO
+[INFO] 20:55:58:719 HILO KERNEL/(30038:30043): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): archivo 4.swap borradp
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): frame 0 liberado
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): frame 1 liberado
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): frame 2 liberado
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): frame 3 liberado
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): frame 4 liberado
+[INFO] 20:56:01:719 HILO KERNEL/(30038:30043): memoria ocupada por la tabla 0 liberada
+[INFO] 20:59:38:144 HILO KERNEL/(30819:30824): hilo kernel iniciado
+[INFO] 21:01:52:539 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:01:52:539 HILO KERNEL/(30819:30824): # CREAR_TABLAS
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): datos recibidos: 
+process id: 4, espacio de direcciones: 2048
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): El proceso necesitara 8 paginas
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): Se crearon 2 tablas
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): Tablas de segundo nivel creadas
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): tabla 1er nivel numero 0 creada
+[INFO] 21:01:52:577 HILO KERNEL/(30819:30824): puntero numero 0 creado, inicializado en 0
+[INFO] 21:01:53:578 HILO KERNEL/(30819:30824): archivo /home/utnso/swap/4.swap creado
+[INFO] 21:01:53:580 HILO KERNEL/(30819:30824): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:01:53:580 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:01:53:580 HILO KERNEL/(30819:30824): # CREAR_TABLAS
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): datos recibidos: 
+process id: 9, espacio de direcciones: 2048
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): El proceso necesitara 8 paginas
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): Se crearon 2 tablas
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): Tablas de segundo nivel creadas
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): tabla 1er nivel numero 1 creada
+[INFO] 21:01:53:581 HILO KERNEL/(30819:30824): puntero numero 1 creado, inicializado en 0
+[INFO] 21:01:54:582 HILO KERNEL/(30819:30824): archivo /home/utnso/swap/9.swap creado
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): # CREAR_TABLAS
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): datos recibidos: 
+process id: 10, espacio de direcciones: 2048
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): El proceso necesitara 8 paginas
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): Se crearon 2 tablas
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): Tablas de segundo nivel creadas
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): tabla 1er nivel numero 2 creada
+[INFO] 21:01:54:583 HILO KERNEL/(30819:30824): puntero numero 2 creado, inicializado en 0
+[INFO] 21:01:55:584 HILO KERNEL/(30819:30824): archivo /home/utnso/swap/10.swap creado
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): # CREAR_TABLAS
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): datos recibidos: 
+process id: 11, espacio de direcciones: 2048
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): El proceso necesitara 8 paginas
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): Se crearon 2 tablas
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): Tablas de segundo nivel creadas
+[INFO] 21:01:55:585 HILO KERNEL/(30819:30824): tabla 1er nivel numero 3 creada
+[INFO] 21:01:55:586 HILO KERNEL/(30819:30824): puntero numero 3 creado, inicializado en 0
+[INFO] 21:01:57:585 HILO KERNEL/(30819:30824): archivo /home/utnso/swap/11.swap creado
+[INFO] 21:01:57:586 HILO KERNEL/(30819:30824): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:01:57:586 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:01:57:586 HILO KERNEL/(30819:30824): # CREAR_TABLAS
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): datos recibidos: 
+process id: 12, espacio de direcciones: 2048
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): El proceso necesitara 8 paginas
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): Se crearon 2 tablas
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): Tablas de segundo nivel creadas
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): tabla 1er nivel numero 4 creada
+[INFO] 21:01:57:588 HILO KERNEL/(30819:30824): puntero numero 4 creado, inicializado en 0
+[INFO] 21:01:58:589 HILO KERNEL/(30819:30824): archivo /home/utnso/swap/12.swap creado
+[INFO] 21:01:58:589 HILO KERNEL/(30819:30824): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:02:13:456 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:02:13:456 HILO KERNEL/(30819:30824): # SUSPENSION_PROCESO
+[INFO] 21:02:13:456 HILO KERNEL/(30819:30824): Datos recibidos: process id 4, numero_primer_tabla 0
+[INFO] 21:02:13:456 HILO KERNEL/(30819:30824): # Suspendiendo procesos tabla 0
+[INFO] 21:02:13:456 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de primer nivel
+[INFO] 21:02:13:457 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 21:02:14:457 HILO KERNEL/(30819:30824): pagina 0 guardada en /home/utnso/swap/4.swap
+[INFO] 21:02:14:457 HILO KERNEL/(30819:30824): frame 0 liberado
+[INFO] 21:02:14:457 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 0 
+
+[INFO] 21:02:14:457 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 21:02:15:458 HILO KERNEL/(30819:30824): pagina 1 guardada en /home/utnso/swap/4.swap
+[INFO] 21:02:15:458 HILO KERNEL/(30819:30824): frame 1 liberado
+[INFO] 21:02:15:458 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 1 
+
+[INFO] 21:02:15:458 HILO KERNEL/(30819:30824): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 21:02:16:459 HILO KERNEL/(30819:30824): pagina 2 guardada en /home/utnso/swap/4.swap
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): frame 2 liberado
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 2 
+
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de primer nivel
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 21:02:16:460 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 21:02:16:461 HILO KERNEL/(30819:30824): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 21:02:16:461 HILO KERNEL/(30819:30824): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 21:02:16:461 HILO KERNEL/(30819:30824): Tablas suspendidas.
+[INFO] 21:02:16:461 HILO KERNEL/(30819:30824): # FIN SUSPENSION_PROCESO
+[INFO] 21:02:36:834 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:02:36:834 HILO KERNEL/(30819:30824): # FINALIZACION_PROCESO
+[INFO] 21:02:36:834 HILO KERNEL/(30819:30824): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 21:02:37:835 HILO KERNEL/(30819:30824): archivo 4.swap borradp
+[INFO] 21:02:37:835 HILO KERNEL/(30819:30824): frame 0 liberado
+[INFO] 21:02:37:835 HILO KERNEL/(30819:30824): frame 1 liberado
+[INFO] 21:02:37:835 HILO KERNEL/(30819:30824): frame 2 liberado
+[INFO] 21:02:37:835 HILO KERNEL/(30819:30824): memoria ocupada por la tabla 0 liberada
+[INFO] 21:02:48:870 HILO KERNEL/(30819:30832): pagina 2 guardada en /home/utnso/swap/9.swap
+[INFO] 21:02:52:896 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:02:52:896 HILO KERNEL/(30819:30824): # SUSPENSION_PROCESO
+[INFO] 21:02:52:897 HILO KERNEL/(30819:30824): Datos recibidos: process id 9, numero_primer_tabla 1
+[INFO] 21:02:52:897 HILO KERNEL/(30819:30824): # Suspendiendo procesos tabla 1
+[INFO] 21:02:52:897 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de primer nivel
+[INFO] 21:02:52:897 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 21:02:53:897 HILO KERNEL/(30819:30824): pagina 0 guardada en /home/utnso/swap/9.swap
+[INFO] 21:02:53:898 HILO KERNEL/(30819:30824): frame 3 liberado
+[INFO] 21:02:53:898 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 3 
+
+[INFO] 21:02:53:898 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 21:02:53:898 HILO KERNEL/(30819:30824): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 21:02:55:898 HILO KERNEL/(30819:30824): pagina 2 guardada en /home/utnso/swap/9.swap
+[INFO] 21:02:55:899 HILO KERNEL/(30819:30824): frame 1 liberado
+[INFO] 21:02:55:899 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 1 
+
+[INFO] 21:02:55:899 HILO KERNEL/(30819:30824): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 21:02:56:899 HILO KERNEL/(30819:30824): pagina 3 guardada en /home/utnso/swap/9.swap
+[INFO] 21:02:56:899 HILO KERNEL/(30819:30824): frame 2 liberado
+[INFO] 21:02:56:900 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 2 
+
+[INFO] 21:02:56:900 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de primer nivel
+[INFO] 21:02:56:900 HILO KERNEL/(30819:30824): Mirando entrada 0 de la tabla de segundo nivel
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): pagina 4 guardada en /home/utnso/swap/9.swap
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): frame 0 liberado
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): Bit de presencia en 1, liberando frame 0 
+
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): Mirando entrada 1 de la tabla de segundo nivel
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): Mirando entrada 2 de la tabla de segundo nivel
+[INFO] 21:02:57:900 HILO KERNEL/(30819:30824): Mirando entrada 3 de la tabla de segundo nivel
+[INFO] 21:02:57:901 HILO KERNEL/(30819:30824): Tablas suspendidas.
+[INFO] 21:02:57:901 HILO KERNEL/(30819:30824): # FIN SUSPENSION_PROCESO
+[INFO] 21:03:29:504 HILO KERNEL/(30819:30832): pagina 1 guardada en /home/utnso/swap/10.swap
+[INFO] 21:03:32:519 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:03:32:519 HILO KERNEL/(30819:30824): # FINALIZACION_PROCESO
+[INFO] 21:03:32:520 HILO KERNEL/(30819:30824): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 21:03:33:520 HILO KERNEL/(30819:30824): archivo 9.swap borradp
+[INFO] 21:03:33:520 HILO KERNEL/(30819:30824): frame 2 liberado
+[INFO] 21:03:33:520 HILO KERNEL/(30819:30824): frame 5 liberado
+[INFO] 21:03:33:520 HILO KERNEL/(30819:30824): frame 3 liberado
+[INFO] 21:03:33:520 HILO KERNEL/(30819:30824): frame 0 liberado
+[INFO] 21:03:33:521 HILO KERNEL/(30819:30824): memoria ocupada por la tabla 1 liberada
+[INFO] 21:03:36:533 HILO KERNEL/(30819:30832): pagina 4 guardada en /home/utnso/swap/10.swap
+[INFO] 21:03:41:548 HILO KERNEL/(30819:30832): pagina 4 guardada en /home/utnso/swap/10.swap
+[INFO] 21:03:45:055 HILO KERNEL/(30819:30832): pagina 4 guardada en /home/utnso/swap/10.swap
+[INFO] 21:04:02:602 HILO KERNEL/(30819:30832): pagina 4 guardada en /home/utnso/swap/10.swap
+[INFO] 21:04:06:113 HILO KERNEL/(30819:30832): pagina 2 guardada en /home/utnso/swap/10.swap
+[INFO] 21:06:23:465 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:06:23:465 HILO KERNEL/(30819:30824): # FINALIZACION_PROCESO
+[INFO] 21:06:23:465 HILO KERNEL/(30819:30824): Datos recibidos: process id 10, numero primer tabla 2
+[INFO] 21:06:24:465 HILO KERNEL/(30819:30824): archivo 10.swap borradp
+[INFO] 21:06:24:466 HILO KERNEL/(30819:30824): frame 1 liberado
+[INFO] 21:06:24:466 HILO KERNEL/(30819:30824): frame 4 liberado
+[INFO] 21:06:24:466 HILO KERNEL/(30819:30824): frame 6 liberado
+[INFO] 21:06:24:466 HILO KERNEL/(30819:30824): frame 7 liberado
+[INFO] 21:06:24:466 HILO KERNEL/(30819:30824): memoria ocupada por la tabla 2 liberada
+[INFO] 21:07:03:692 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:07:03:692 HILO KERNEL/(30819:30824): # FINALIZACION_PROCESO
+[INFO] 21:07:03:692 HILO KERNEL/(30819:30824): Datos recibidos: process id 11, numero primer tabla 3
+[INFO] 21:07:04:696 HILO KERNEL/(30819:30824): archivo 11.swap borradp
+[INFO] 21:07:04:696 HILO KERNEL/(30819:30824): memoria ocupada por la tabla 3 liberada
+[INFO] 21:07:17:901 HILO KERNEL/(30819:30824): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:07:17:901 HILO KERNEL/(30819:30824): # FINALIZACION_PROCESO
+[INFO] 21:07:17:902 HILO KERNEL/(30819:30824): Datos recibidos: process id 12, numero primer tabla 4
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): archivo 12.swap borradp
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): frame 0 liberado
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): frame 1 liberado
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): frame 2 liberado
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): frame 3 liberado
+[INFO] 21:07:18:902 HILO KERNEL/(30819:30824): memoria ocupada por la tabla 4 liberada

@@ -37074,3 +37074,37 @@
 [INFO] 20:10:20:499 CPU - INTERRUPT/(24516:24522): hilo interrupt iniciado
 [INFO] 20:19:58:619 CPU - INTERRUPT/(25644:25654): hilo interrupt iniciado
 [INFO] 20:32:30:688 CPU - INTERRUPT/(26979:26985): hilo interrupt iniciado
+[INFO] 20:42:38:077 CPU - INTERRUPT/(28562:28568): hilo interrupt iniciado
+[INFO] 20:49:55:607 CPU - INTERRUPT/(29620:29628): hilo interrupt iniciado
+[INFO] 20:53:15:186 CPU - INTERRUPT/(30039:30045): hilo interrupt iniciado
+[INFO] 20:59:38:145 CPU - INTERRUPT/(30820:30826): hilo interrupt iniciado
+[INFO] 21:02:17:454 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:02:57:901 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:16:051 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:18:059 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:21:069 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:23:077 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:26:087 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:03:28:096 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:24:770 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:27:478 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:29:007 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:30:717 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:32:234 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:34:951 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:36:471 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:38:177 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:39:694 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:41:402 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:42:920 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:44:630 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:46:150 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:47:860 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:49:375 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:51:090 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:52:606 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:55:320 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:56:847 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:06:58:557 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:07:00:076 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:07:02:786 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel

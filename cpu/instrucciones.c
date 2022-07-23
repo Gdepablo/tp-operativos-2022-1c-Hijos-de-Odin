@@ -4,6 +4,8 @@
 #include <time.h>
 #include <unistd.h>
 
+int ACCESOS_MEMORIA = 0;
+
 int seleccionarOperacion(char* nombre_instruccion){
 	if(!strcmp(nombre_instruccion, "NO_OP")) {
 		return NO_OP;
@@ -292,6 +294,8 @@ uint32_t pedir_num_tabla_2(uint32_t entrada_1er_tabla){
     //ENVIAR ENTRADA DE TABLA 1
     send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
 
+    ACCESOS_MEMORIA++;
+    printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     uint32_t num_tabla_2;
     recv(socket_memoria, &num_tabla_2, sizeof(uint32_t), MSG_WAITALL);
@@ -320,6 +324,10 @@ uint32_t pedir_num_frame(uint32_t entrada_2da_tabla, uint32_t num_tabla_2, uint3
 
     uint32_t num_frame;
     recv(socket_memoria, &num_frame, sizeof(uint32_t), MSG_WAITALL);
+
+    ACCESOS_MEMORIA++;
+    printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+
     return num_frame;
 }
 
@@ -343,6 +351,9 @@ uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t ent
     uint32_t contenido;
     recv(socket_memoria, &contenido, sizeof(uint32_t), MSG_WAITALL);
 
+    ACCESOS_MEMORIA++;
+    printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
+
     return contenido;
 }
 
@@ -350,8 +361,10 @@ uint32_t pedir_contenido(uint32_t numero_de_frame, uint32_t offset, uint32_t ent
 uint32_t pedir_todo_memoria(){
 	uint32_t entrada_1er_tabla = floor(numero_pagina/info_traduccion.entradas_por_tabla);
 	uint32_t num_tabla_2 =pedir_num_tabla_2(entrada_1er_tabla);
+
 	uint32_t entrada_2da_tabla = numero_pagina % info_traduccion.entradas_por_tabla;
 	uint32_t numero_frame = pedir_num_frame(entrada_2da_tabla, num_tabla_2, entrada_1er_tabla);
+
 	return numero_frame;
 }
 
@@ -378,6 +391,8 @@ void escribir_frame(uint32_t numero_de_frame, uint32_t offset, uint32_t valor, u
     //ENVIAR ENTRADA 1RA TABLA
     send(socket_memoria, &entrada_1er_tabla, sizeof(uint32_t), 0);
 
+    ACCESOS_MEMORIA++;
+    printf("Acceso a memoria, total hasta ahora: %i \n", ACCESOS_MEMORIA);
 
     uint32_t respuesta;
     recv(socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
