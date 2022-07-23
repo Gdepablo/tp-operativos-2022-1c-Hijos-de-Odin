@@ -144,13 +144,6 @@ void enviar_syscall(t_syscall* syscall_a_enviar){
 	// ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO ATENCION ZONA DE PELIGRO
 	memcpy(buffer->stream + offset, syscall_a_enviar->pcb.lista_instrucciones, buffer->size_instrucciones);
 
-	printf("######################################################### \n");
-	log_info(log_ejecucion_cpu,"######################################################### \n");
-	printf("enviar syscall \n");
-	log_info(log_ejecucion_cpu,"enviar syscall \n");
-	printf("instrucciones: %s \n", syscall_a_enviar->pcb.lista_instrucciones);
-	log_info(log_ejecucion_cpu,"instrucciones: %s \n", syscall_a_enviar->pcb.lista_instrucciones);
-
 	char* instrucciones_enviadas = malloc(buffer->size_instrucciones);
 	memcpy(instrucciones_enviadas , buffer->stream + offset, buffer->size_instrucciones);
 

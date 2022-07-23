@@ -2,8 +2,8 @@
 #include "planificadorDeMedianoPlazo.h"
 #include "semaforos.h"
 
-t_log* log_mediano_plazo = log_create("./../logs/log_mediano_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
-t_log* log_io = log_create("./../logs/log_io.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_mediano_plazo;
+t_log* log_io;
 
 void* hilo_suspensor(void* bloqueado_void){
     sem_post(&se_inicio_suspensor);
@@ -71,6 +71,8 @@ void executing_a_blocked(t_syscall* syscall) {
 
 void* hilo_io(){
     sem_post(&se_inicio_el_hilo);
+	log_mediano_plazo = log_create("./../logs/log_mediano_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
+    log_io = log_create("./../logs/log_io.log", "log kernel", 0, LOG_LEVEL_INFO);
     t_bloqueado* bloqueado;
     while(1){
         sem_wait(&proceso_en_io);
@@ -88,7 +90,7 @@ void* hilo_io(){
                 sem_post(&mx_cola_suspended_ready);
 
 				printf("Proceso %i # Ingreso a suspendido ready \n", bloqueado->pcb->id_proceso);
-				log_info(log_mediano_plazo, "Proceso %i # Ingreso a suspendido ready", bloqueado->pcb->id_proceso)
+				log_info(log_mediano_plazo, "Proceso %i # Ingreso a suspendido ready", bloqueado->pcb->id_proceso);
 
                 sem_post(&grado_multiprogramacion);
                 sem_post(&procesos_para_ready);

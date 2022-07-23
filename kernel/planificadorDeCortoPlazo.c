@@ -4,10 +4,11 @@
 #include "semaforos.h"
 #include "kernel.h"
 
-t_log* log_corto_plazo = log_create("./../logs/log_corto_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_corto_plazo;
 
 
 void* ready_a_executing(){
+	log_corto_plazo = log_create("./../logs/log_corto_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
 	while(1) {
 		sem_wait(&procesos_en_ready);
 		if(es_FIFO()) {

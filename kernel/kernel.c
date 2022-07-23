@@ -7,12 +7,16 @@
 // VARIABLES GLOBALES
 char* PUERTO_ESCUCHA;
 
-t_log* log_kernel = log_create("./../logs/log_kernel.log", "log kernel", 0, LOG_LEVEL_INFO);
-t_log* log_recepcion = log_create("./../logs/recibir_proceso.log", "log kernel", 0, LOG_LEVEL_INFO);
-t_log* log_com_cpu = log_create("./../logs/comunicacion_cpu.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_kernel;
+t_log* log_recepcion;
+t_log* log_com_cpu;
 
 int main(){
 	printf("#################### KERNEL #################### \n");
+
+	log_kernel = log_create("./../logs/log_kernel.log", "log kernel", 0, LOG_LEVEL_INFO);
+	log_recepcion = log_create("./../logs/recibir_proceso.log", "log kernel", 0, LOG_LEVEL_INFO);
+	log_com_cpu = log_create("./../logs/comunicacion_cpu.log", "log kernel", 0, LOG_LEVEL_INFO);
 
 	PCB_EJECUCION.id_proceso = -1;
 	gettimeofday(&HORA_INICIO_EJECUCION , NULL);
@@ -209,7 +213,7 @@ void* esperar_syscall() {
 			}
 		default:
 			printf("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN \n", syscall->pcb.id_proceso);
-			log_error("Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN", syscall->pcb.id_proceso);
+			log_error(log_com_cpu ,"Proceso %i # ERROR DE CÓDIGO DE INSTRUCCIÓN", syscall->pcb.id_proceso);
 		}
 	}
 }

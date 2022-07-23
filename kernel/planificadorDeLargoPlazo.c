@@ -3,7 +3,7 @@
 #include "planificadorDeLargoPlazo.h"
 #include "semaforos.h"
 
-t_log* log_largo_plazo = log_create("./../logs/log_largo_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
+t_log* log_largo_plazo;
 
 void ingreso_a_new(t_pcb* pcb) {
 	sem_wait(&mx_cola_new);
@@ -16,6 +16,7 @@ void ingreso_a_new(t_pcb* pcb) {
 }
 
 void* pasar_a_ready() {
+	log_largo_plazo = log_create("./../logs/log_largo_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
 	while(1) {
 		sem_wait(&procesos_para_ready);
 		sem_wait(&grado_multiprogramacion);

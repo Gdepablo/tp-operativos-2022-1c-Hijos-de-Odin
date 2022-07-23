@@ -207,7 +207,7 @@ void* executer(){
 			case READ:				//DIR LOGICA
 				printf("# READ \n");
 				log_info(log_ejecucion_cpu, "Se comienza a ejecutar la instruccion READ");
-				instr_read(atoi(instruccion_spliteada[1]));
+				instr_read( atoi(instruccion_spliteada[1]));
 				pcb_ejecutando.program_counter++;
 				printf("# FIN READ \n\n");
 				log_info(log_ejecucion_cpu, "Se termino de ejecutar la instruccion READ \n");
@@ -369,6 +369,7 @@ void guardar_en_TLB(uint32_t numero_de_pagina, uint32_t numero_de_frame){
 	t_tlb* pagina_a_reemplazar = elegir_pagina_a_reemplazar_TLB();
 	pagina_a_reemplazar->pagina = numero_de_pagina;
 	pagina_a_reemplazar->marco = numero_de_frame;
+	log_info(log_ejecucion_cpu, "la pagina a reemplazar es %i, frame %i", pagina_a_reemplazar->pagina, pagina_a_reemplazar->marco);
 	log_info(log_ejecucion_cpu, "la pagina fue reemplazada por la numero %i, frame %i", numero_de_pagina, numero_de_frame);
 	pagina_a_reemplazar->primera_referencia=clock();
 	pagina_a_reemplazar->ultima_referencia=clock();

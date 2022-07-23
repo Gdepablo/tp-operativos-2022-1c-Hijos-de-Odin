@@ -126,6 +126,7 @@ int crear_conexion(char *ip, char* puerto);
 t_syscall* recibirSyscall();
 void* recibir_procesos();
 void* esperar_syscall();
+void* ready_a_executing();
 
 int es_FIFO();
 
