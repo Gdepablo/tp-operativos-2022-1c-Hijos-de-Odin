@@ -105,7 +105,7 @@ void* hilo_cpu(void* socket_cpu_void){
 				log_info(log_ejecucion_main,"# Valor devuelto: %i \n", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 				printf("# Fin # \n\n");
-				log_info(log_ejecucion_main,"# Fin # \n\n", a_enviar);
+				log_info(log_ejecucion_main,"# Fin # %i \n\n", a_enviar);
 				break;
 			case solicitud_lectura:
 				printf("# Solicitud de lectura (cpu) #\n");
@@ -132,16 +132,16 @@ void* hilo_cpu(void* socket_cpu_void){
 
 				usleep(RETARDO_MEMORIA * 1000);
 				printf("# Valor devuelto: %i \n", a_enviar);
-				log_info("# Valor devuelto: %i", a_enviar);
+				log_info(log_ejecucion_main,"# Valor devuelto: %i", a_enviar);
 				send(socket_cpu, &a_enviar, sizeof(uint32_t), 0);
 
 				printf("# Fin # \n\n");
 				break;
 			case solicitud_escritura:
 				printf("# Solicitud escritura (cpu) #\n");
-				log_info("# Valor devuelto: %i", a_enviar);
+				log_info(log_ejecucion_main,"# Valor devuelto: %i", a_enviar);
 				printf("Datos recibidos: \n");
-				log_info("Datos recibidos:", a_enviar);
+				log_info(log_ejecucion_main,"Datos recibidos:");
 
 				recv(socket_cpu, &numero_de_frame, sizeof(uint32_t), MSG_WAITALL);
 				printf("Numero de frame: %i \n", numero_de_frame);

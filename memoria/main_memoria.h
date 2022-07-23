@@ -15,6 +15,7 @@
 #include <commons/log.h>
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
+void* copiar_de_swap(uint32_t pagina, uint32_t process_id);
 
 t_config* inicializarConfigs(void);
 int crear_conexion(char *ip, char* puerto);
