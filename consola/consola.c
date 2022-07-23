@@ -51,7 +51,7 @@ int main(int argc, char** argv){
 
 	infoProceso.tamanioDirecciones = (uint32_t)atoi(argv[2]);
 	printf("Tamanio de Direcciones del Proceso %d \n", infoProceso.tamanioDirecciones);
-	log_info(log_consola,"Tamanio de Direcciones del Proceso: %d ", infoProceso.tamanioDirecciones);
+	log_info(log_consola,"Tamanio de Direcciones del Proceso: %d", infoProceso.tamanioDirecciones);
 	infoProceso.largoListaInstrucciones = (uint32_t)(size) + 1; //  este llevaba + 1
 	printf("Largo de Lista de Instrucciones: %d \n", infoProceso.largoListaInstrucciones);
 	log_info(log_consola,"Largo de Lista de Instrucciones: %d ", infoProceso.largoListaInstrucciones);
