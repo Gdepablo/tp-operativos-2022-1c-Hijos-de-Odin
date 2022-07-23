@@ -10,11 +10,11 @@ t_list* tabla_de_paginas_global;
 
 int main(void){
 	printf("# MEMORIA #\n");
-	log_info(log_ejecucion_main, "# MEMORIA #\n");
 
 	ACCESOS_SWAP = 0;
 
 	log_ejecucion_main = log_create("./../logs/log_memoria_main.log", "MEMORIA - MAIN", 0, LOG_LEVEL_INFO);
+	log_info(log_ejecucion_main, "# MEMORIA #\n");
 
 	sem_init(&escritura_log, 0, 1);
 	sem_init(&hilo_iniciado, 0, 0);
@@ -41,7 +41,7 @@ int main(void){
 	uint32_t todo_ok = 1;
 	uint32_t todo_mal = 0;
 
-	int socket_escucha = iniciar_servidor("", PUERTO_ESCUCHA);
+	int socket_escucha = iniciar_servidor("a", PUERTO_ESCUCHA);
 
 	int socket_kernel = accept(socket_escucha, 0, 0);
 	recv(socket_kernel, &handshake, sizeof(uint32_t), MSG_WAITALL);

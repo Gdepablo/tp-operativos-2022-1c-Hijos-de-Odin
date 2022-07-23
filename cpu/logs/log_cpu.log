@@ -1,0 +1,696 @@
+[INFO] 02:51:49:417 CPU/(12767:12767): se realizo la conexion al kernel (dispatch)
+[INFO] 02:51:49:419 CPU/(12767:12767): se realizo la conexion al kernel (interrupt)
+[INFO] 02:51:49:419 CPU/(12767:12767): se realizo la conexion a memoria
+[INFO] 02:51:49:419 CPU/(12767:12767): se recibio la informacion para traduccion de direccion logica
+[INFO] 02:51:49:420 CPU/(12767:12767): se creo la tlb
+[INFO] 02:51:49:420 CPU/(12767:12767): se creo la tlb
+[INFO] 02:51:49:420 CPU/(12767:12767): se creo la tlb
+[INFO] 02:51:49:420 CPU/(12767:12767): se creo la tlb
+[INFO] 02:51:49:421 CPU/(12767:12775): hilo executer iniciado 
+
+[INFO] 02:53:05:926 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:53:05:926 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+WRITE 4 2
+READ 4
+COPY 1 4
+EXIT 
+
+[INFO] 02:53:05:926 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:05:926 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:05:927 CPU/(12767:12775): siguiente instruccion: NO_OP 5 
+
+[INFO] 02:53:05:927 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:05:927 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:53:05:927 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:53:06:927 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:07:927 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:08:928 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:09:931 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:10:931 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:10:932 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:53:10:932 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:10:932 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:10:932 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:10:932 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:10:932 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:10:932 CPU/(12767:12775): siguiente instruccion: WRITE 4 2 
+
+[INFO] 02:53:10:932 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:10:932 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 02:53:10:932 CPU/(12767:12775): se comienza a ejecutar la instruccion WRITE
+[INFO] 02:53:10:932 CPU/(12767:12775): se escribira en la direccion logica 4 el valor 2
+[INFO] 02:53:10:932 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:10:932 CPU/(12767:12775): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 02:53:10:933 CPU/(12767:12775): Acceso a memoria, solicitud tablas de segundo nivel, total hasta ahora: 1 
+
+[INFO] 02:53:14:975 CPU/(12767:12775): Acceso a memoria, solicitud numero de frame, total hasta ahora: 2 
+
+[INFO] 02:53:14:975 CPU/(12767:12775): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 02:53:14:975 CPU/(12767:12775): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 02:53:14:975 CPU/(12767:12775): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 02:53:14:975 CPU/(12767:12775): la pagina a reemplazar es 0, frame 0
+[INFO] 02:53:14:975 CPU/(12767:12775): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 02:53:14:975 CPU/(12767:12775): se escribira en el frame 0, offset 4
+[INFO] 02:53:14:975 CPU/(12767:12775): Acceso a memoria, solicitud de escritura, total hasta ahora: 3 
+
+[INFO] 02:53:15:980 CPU/(12767:12775): se escribio con exito en el frame
+[INFO] 02:53:15:981 CPU/(12767:12775): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 02:53:15:981 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:15:981 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:15:981 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:15:981 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:15:981 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:15:981 CPU/(12767:12775): siguiente instruccion: READ 4 
+
+[INFO] 02:53:15:981 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:15:981 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: READ
+[INFO] 02:53:15:981 CPU/(12767:12775): Se comienza a ejecutar la instruccion READ
+[INFO] 02:53:15:981 CPU/(12767:12775): se leera la direccion logica 4
+[INFO] 02:53:15:981 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:15:981 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:15:981 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:15:981 CPU/(12767:12775): se leera del frame 0, offset 4
+[INFO] 02:53:16:983 CPU/(12767:12775): Acceso a memoria, solicitud de contenido, total hasta ahora: 4 
+
+[INFO] 02:53:16:983 CPU/(12767:12775): el dato leido fue 2
+[INFO] 02:53:16:983 CPU/(12767:12775): Se termino de ejecutar la instruccion READ 
+
+[INFO] 02:53:16:983 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:16:983 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:16:983 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:16:983 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:16:983 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:16:983 CPU/(12767:12775): siguiente instruccion: COPY 1 4 
+
+[INFO] 02:53:16:984 CPU/(12767:12775): FETCH OPERAND
+[INFO] 02:53:16:984 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:16:984 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:16:984 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:17:985 CPU/(12767:12775): Acceso a memoria, solicitud de contenido, total hasta ahora: 5 
+
+[INFO] 02:53:17:985 CPU/(12767:12775): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 02:53:17:985 CPU/(12767:12775): se termina de ejecutar fetchOperand
+[INFO] 02:53:17:985 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:17:985 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: COPY
+[INFO] 02:53:17:986 CPU/(12767:12775): se comienza a ejecutar la instruccion COPY
+[INFO] 02:53:17:986 CPU/(12767:12775): se escribira en la direccion logica 1 el valor 2
+[INFO] 02:53:17:986 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:17:986 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:17:986 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:17:986 CPU/(12767:12775): se escribira en el frame 0, offset 1
+[INFO] 02:53:17:986 CPU/(12767:12775): Acceso a memoria, solicitud de escritura, total hasta ahora: 6 
+
+[INFO] 02:53:18:987 CPU/(12767:12775): se escribio con exito en el frame
+[INFO] 02:53:18:988 CPU/(12767:12775): se termino de ejecutar la instruccion COPY 
+
+[INFO] 02:53:18:988 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:18:988 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:18:988 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:18:988 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:18:988 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:18:988 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:53:18:988 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:18:988 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:53:18:988 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:53:18:988 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:53:18:988 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:53:18:988 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:18:989 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:18:989 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:53:18:989 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:53:32:126 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:53:32:127 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+WRITE 4 2
+READ 4
+COPY 1 4
+EXIT 
+
+[INFO] 02:53:32:127 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:32:127 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:32:127 CPU/(12767:12775): siguiente instruccion: NO_OP 5 
+
+[INFO] 02:53:32:127 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:32:127 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:53:32:127 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:53:33:128 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:34:128 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:35:128 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:36:129 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:37:129 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:37:130 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:53:37:130 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:37:130 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:37:130 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:37:130 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:37:130 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:37:130 CPU/(12767:12775): siguiente instruccion: WRITE 4 2 
+
+[INFO] 02:53:37:130 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:37:130 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: WRITE
+[INFO] 02:53:37:130 CPU/(12767:12775): se comienza a ejecutar la instruccion WRITE
+[INFO] 02:53:37:130 CPU/(12767:12775): se escribira en la direccion logica 4 el valor 2
+[INFO] 02:53:37:130 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:37:130 CPU/(12767:12775): no hay ninguna entrada con esa pagina en la TLB
+[INFO] 02:53:37:131 CPU/(12767:12775): Acceso a memoria, solicitud tablas de segundo nivel, total hasta ahora: 7 
+
+[INFO] 02:53:41:134 CPU/(12767:12775): Acceso a memoria, solicitud numero de frame, total hasta ahora: 8 
+
+[INFO] 02:53:41:134 CPU/(12767:12775): se pidio el frame a memoria, frame devuelto por memoria: 0
+[INFO] 02:53:41:134 CPU/(12767:12775): se elegira una pagina a reemplazar con algoritmo LRU
+[INFO] 02:53:41:134 CPU/(12767:12775): la entrada reemplazada contenia la pagina numero -1 
+[INFO] 02:53:41:134 CPU/(12767:12775): la pagina a reemplazar es 0, frame 0
+[INFO] 02:53:41:134 CPU/(12767:12775): la pagina fue reemplazada por la numero 0, frame 0
+[INFO] 02:53:41:134 CPU/(12767:12775): se escribira en el frame 0, offset 4
+[INFO] 02:53:41:134 CPU/(12767:12775): Acceso a memoria, solicitud de escritura, total hasta ahora: 9 
+
+[INFO] 02:53:42:136 CPU/(12767:12775): se escribio con exito en el frame
+[INFO] 02:53:42:136 CPU/(12767:12775): se termino de ejecutar la instruccion WRITE 
+
+[INFO] 02:53:42:136 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:42:136 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:42:136 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:42:136 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:42:136 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:42:136 CPU/(12767:12775): siguiente instruccion: READ 4 
+
+[INFO] 02:53:42:136 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:42:136 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: READ
+[INFO] 02:53:42:136 CPU/(12767:12775): Se comienza a ejecutar la instruccion READ
+[INFO] 02:53:42:136 CPU/(12767:12775): se leera la direccion logica 4
+[INFO] 02:53:42:136 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:42:136 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:42:136 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:42:137 CPU/(12767:12775): se leera del frame 0, offset 4
+[INFO] 02:53:43:137 CPU/(12767:12775): Acceso a memoria, solicitud de contenido, total hasta ahora: 10 
+
+[INFO] 02:53:43:138 CPU/(12767:12775): el dato leido fue 2
+[INFO] 02:53:43:138 CPU/(12767:12775): Se termino de ejecutar la instruccion READ 
+
+[INFO] 02:53:43:138 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:43:138 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:43:138 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:43:138 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:43:138 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:43:138 CPU/(12767:12775): siguiente instruccion: COPY 1 4 
+
+[INFO] 02:53:43:138 CPU/(12767:12775): FETCH OPERAND
+[INFO] 02:53:43:138 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:43:138 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:43:138 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:44:139 CPU/(12767:12775): Acceso a memoria, solicitud de contenido, total hasta ahora: 11 
+
+[INFO] 02:53:44:139 CPU/(12767:12775): datos fetcheados: frame_a_buscar: 0, offset: 4, numero_entrada: 0, contenido_del_frame: 2
+[INFO] 02:53:44:139 CPU/(12767:12775): se termina de ejecutar fetchOperand
+[INFO] 02:53:44:139 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:44:139 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: COPY
+[INFO] 02:53:44:139 CPU/(12767:12775): se comienza a ejecutar la instruccion COPY
+[INFO] 02:53:44:139 CPU/(12767:12775): se escribira en la direccion logica 1 el valor 2
+[INFO] 02:53:44:139 CPU/(12767:12775): comienza a buscarse la pagina 0 en la TLB
+[INFO] 02:53:44:139 CPU/(12767:12775): hay una entrada con la misma pagina
+[INFO] 02:53:44:140 CPU/(12767:12775): la pagina no esta obsoleta
+[INFO] 02:53:44:140 CPU/(12767:12775): se escribira en el frame 0, offset 1
+[INFO] 02:53:44:140 CPU/(12767:12775): Acceso a memoria, solicitud de escritura, total hasta ahora: 12 
+
+[INFO] 02:53:45:142 CPU/(12767:12775): se escribio con exito en el frame
+[INFO] 02:53:45:142 CPU/(12767:12775): se termino de ejecutar la instruccion COPY 
+
+[INFO] 02:53:45:142 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:45:142 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:45:142 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:45:142 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:45:142 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:45:142 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:53:45:142 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:45:142 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:53:45:142 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:53:45:142 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:53:45:143 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:53:45:143 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:45:143 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:45:143 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:53:45:143 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:53:56:186 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:53:56:186 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+NO_OP 2
+EXIT 
+
+[INFO] 02:53:56:187 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:56:187 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:56:187 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:53:56:187 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:56:187 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:53:56:187 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:53:57:187 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:58:188 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:53:58:188 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:53:58:188 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:53:58:188 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:53:58:188 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:53:58:188 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:53:58:188 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:53:58:188 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:53:58:188 CPU/(12767:12775): EXECUTE
+[INFO] 02:53:58:188 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:53:58:188 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:53:59:188 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:00:189 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:00:189 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:00:190 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:00:190 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:00:190 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:00:190 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:00:190 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:00:190 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:00:190 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:00:190 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:00:190 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:01:190 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:02:191 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:02:191 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:02:191 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:02:191 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:02:191 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:02:191 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:02:191 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:02:191 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:02:191 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:02:191 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:02:192 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:03:192 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:04:192 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:04:193 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:04:193 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:04:193 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:04:193 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:04:193 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:04:193 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:04:193 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:04:193 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:04:193 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:04:193 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:05:194 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:06:194 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:06:195 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:06:195 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:06:195 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:06:195 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:06:195 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:06:195 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:06:195 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:06:195 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:06:195 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:06:195 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:07:196 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:08:196 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:08:197 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:08:197 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:08:197 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:08:197 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:08:198 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:08:198 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:08:198 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:08:198 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:08:198 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:08:198 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:09:198 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:10:199 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:10:199 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:10:199 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:10:199 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:10:199 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:10:199 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:10:199 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:10:199 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:10:199 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:10:199 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:10:200 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:11:200 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:12:200 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:12:201 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:12:201 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:12:201 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:12:201 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:12:201 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:12:201 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:12:201 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:12:201 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:12:201 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:12:201 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:13:202 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:14:202 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:14:203 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:14:203 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:14:203 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:14:203 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:14:203 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:14:203 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:14:203 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:14:203 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:14:203 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:14:203 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:15:203 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:16:203 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:16:204 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:16:204 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:16:204 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:16:204 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:16:204 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:16:204 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:16:204 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:16:204 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:16:204 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:16:204 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:17:204 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:18:205 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:18:205 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:18:205 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:18:205 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:18:205 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:18:205 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:18:205 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:18:205 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:18:205 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:18:205 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:18:205 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:19:206 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:20:206 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:20:207 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:20:207 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:20:207 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:20:207 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:20:207 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:20:207 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:20:207 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:20:207 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:20:207 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:20:208 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:21:208 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:22:208 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:22:209 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:22:209 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:22:209 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:22:209 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:22:209 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:22:209 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:22:209 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:22:209 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:22:209 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:22:209 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:23:210 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:24:210 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:24:210 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:24:211 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:24:211 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:24:211 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:24:211 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:24:211 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:24:211 CPU/(12767:12775): siguiente instruccion: NO_OP 2 
+
+[INFO] 02:54:24:211 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:24:211 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:54:24:211 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:54:25:211 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:26:212 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:54:26:212 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:54:26:212 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:26:212 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:26:212 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:54:26:212 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:54:26:212 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:54:26:212 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:54:26:212 CPU/(12767:12775): EXECUTE
+[INFO] 02:54:26:213 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:54:26:213 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:54:26:213 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:54:26:214 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:54:26:214 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:54:26:214 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:54:26:214 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:54:26:214 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:56:11:923 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:56:11:923 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+I/O 3000
+NO_OP 3
+EXIT 
+
+[INFO] 02:56:11:924 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:11:924 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:11:924 CPU/(12767:12775): siguiente instruccion: NO_OP 5 
+
+[INFO] 02:56:11:924 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:11:924 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:56:11:924 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:56:12:925 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:13:925 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:14:925 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:15:926 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:16:926 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:16:927 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:56:16:927 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:16:927 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:16:927 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:56:16:927 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:16:927 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:16:927 CPU/(12767:12775): siguiente instruccion: I/O 3000 
+
+[INFO] 02:56:16:927 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:16:927 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: I/O
+[INFO] 02:56:16:927 CPU/(12767:12775): Se comienza a ejecutar la instruccion IO
+[INFO] 02:56:16:929 CPU/(12767:12775): Se termino de ejecutar la instruccion IO 
+
+[INFO] 02:56:16:929 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:16:929 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:16:929 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:56:16:929 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:56:16:930 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:56:16:930 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+EXIT 
+
+[INFO] 02:56:16:930 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:16:930 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:16:930 CPU/(12767:12775): siguiente instruccion: NO_OP 5 
+
+[INFO] 02:56:16:930 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:16:930 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:56:16:930 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:56:17:931 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:18:931 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:19:933 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:20:933 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:21:933 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:21:934 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:56:21:934 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:21:934 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:21:934 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:56:21:934 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:21:934 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:21:934 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:56:21:934 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:21:934 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:56:21:934 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:56:21:934 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:56:21:935 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:56:21:935 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:21:935 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:21:935 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:56:21:936 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:56:23:937 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:56:23:937 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+EXIT 
+
+[INFO] 02:56:23:938 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:23:938 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:23:938 CPU/(12767:12775): siguiente instruccion: NO_OP 5 
+
+[INFO] 02:56:23:938 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:23:938 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:56:23:938 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:56:24:938 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:25:939 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:26:939 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:27:940 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:28:940 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:28:940 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:56:28:940 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:28:940 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:28:940 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:56:28:941 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:28:941 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:28:941 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:56:28:941 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:28:941 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:56:28:941 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:56:28:941 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:56:28:942 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:56:28:942 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:28:942 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:28:942 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:56:28:942 CPU/(12767:12775): se limpio la tlb
+[INFO] 02:56:30:944 CPU/(12767:12767): PCB RECIBIDO 
+
+[INFO] 02:56:30:944 CPU/(12767:12767): INSTRUCCIONES RECIBIDAS: NO_OP 5
+I/O 3000
+NO_OP 3
+EXIT 
+
+[INFO] 02:56:30:948 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:30:948 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:30:948 CPU/(12767:12775): siguiente instruccion: NO_OP 3 
+
+[INFO] 02:56:30:948 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:30:948 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: NO_OP
+[INFO] 02:56:30:948 CPU/(12767:12775): Se comienza a ejecutar la instruccion NO_OP
+[INFO] 02:56:31:948 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:32:949 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:33:949 CPU/(12767:12775): UN NO_OP EJECUTADO
+[INFO] 02:56:33:950 CPU/(12767:12775): Se termino de ejecutar la instruccion NO_OP 
+
+[INFO] 02:56:33:950 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:33:950 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:33:950 CPU/(12767:12775): no hay interrupcion ni syscall bloqueante 
+
+
+[INFO] 02:56:33:950 CPU/(12767:12775): ### COMIENZO CICLO DE INSTRUCCION ###
+[INFO] 02:56:33:950 CPU/(12767:12775): FETCH NEXT INSTRUCTION
+[INFO] 02:56:33:950 CPU/(12767:12775): siguiente instruccion: EXIT 
+
+[INFO] 02:56:33:950 CPU/(12767:12775): EXECUTE
+[INFO] 02:56:33:950 CPU/(12767:12775): PROXIMA OPERACION A EJECUTAR: EXIT
+[INFO] 02:56:33:950 CPU/(12767:12775): se comienza a ejecutar la instruccion EXIT
+[INFO] 02:56:33:951 CPU/(12767:12775): la syscall fue enviada
+[INFO] 02:56:33:952 CPU/(12767:12775): se termino de ejecutar la instruccion EXIT 
+
+[INFO] 02:56:33:952 CPU/(12767:12775): CHECK INTERRUPT
+[INFO] 02:56:33:952 CPU/(12767:12775): chequeando interrupciones y/o syscall bloqueante
+[INFO] 02:56:33:952 CPU/(12767:12775): se detecto una syscall bloqueante 
+
+
+[INFO] 02:56:33:952 CPU/(12767:12775): se limpio la tlb

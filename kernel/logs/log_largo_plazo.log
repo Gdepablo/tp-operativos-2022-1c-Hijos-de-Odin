@@ -1,0 +1,24 @@
+[INFO] 02:53:03:886 log kernel/(12773:12779): Proceso 13 # Ingreso en new
+[INFO] 02:53:05:925 log kernel/(12773:12777): Proceso 13 # Tabla de páginas creada
+[INFO] 02:53:05:926 log kernel/(12773:12777): Proceso 13 # Ingreso en ready desde new
+[INFO] 02:53:20:991 log kernel/(12773:12780): Proceso 13 # Memoria liberada
+[INFO] 02:53:30:124 log kernel/(12773:12779): Proceso 16 # Ingreso en new
+[INFO] 02:53:32:126 log kernel/(12773:12777): Proceso 16 # Tabla de páginas creada
+[INFO] 02:53:32:126 log kernel/(12773:12777): Proceso 16 # Ingreso en ready desde new
+[INFO] 02:53:47:144 log kernel/(12773:12780): Proceso 16 # Memoria liberada
+[INFO] 02:53:54:184 log kernel/(12773:12779): Proceso 17 # Ingreso en new
+[INFO] 02:53:56:185 log kernel/(12773:12777): Proceso 17 # Tabla de páginas creada
+[INFO] 02:53:56:185 log kernel/(12773:12777): Proceso 17 # Ingreso en ready desde new
+[INFO] 02:54:28:215 log kernel/(12773:12780): Proceso 17 # Memoria liberada
+[INFO] 02:56:09:921 log kernel/(12773:12779): Proceso 18 # Ingreso en new
+[INFO] 02:56:09:988 log kernel/(12773:12779): Proceso 19 # Ingreso en new
+[INFO] 02:56:10:015 log kernel/(12773:12779): Proceso 20 # Ingreso en new
+[INFO] 02:56:11:922 log kernel/(12773:12777): Proceso 18 # Tabla de páginas creada
+[INFO] 02:56:11:923 log kernel/(12773:12777): Proceso 18 # Ingreso en ready desde new
+[INFO] 02:56:13:926 log kernel/(12773:12777): Proceso 19 # Tabla de páginas creada
+[INFO] 02:56:13:927 log kernel/(12773:12777): Proceso 19 # Ingreso en ready desde new
+[INFO] 02:56:15:929 log kernel/(12773:12777): Proceso 20 # Tabla de páginas creada
+[INFO] 02:56:15:929 log kernel/(12773:12777): Proceso 20 # Ingreso en ready desde new
+[INFO] 02:56:23:937 log kernel/(12773:12780): Proceso 19 # Memoria liberada
+[INFO] 02:56:30:943 log kernel/(12773:12780): Proceso 20 # Memoria liberada
+[INFO] 02:56:35:952 log kernel/(12773:12780): Proceso 18 # Memoria liberada

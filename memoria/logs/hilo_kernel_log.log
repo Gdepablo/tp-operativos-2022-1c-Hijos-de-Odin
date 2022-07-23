@@ -191,3 +191,216 @@ process id: 10, espacio de direcciones: 300
 [INFO] 00:53:02:891 HILO KERNEL/(29929:29931): Datos recibidos: process id 4, numero primer tabla 0
 [INFO] 00:53:04:892 HILO KERNEL/(29929:29931): archivo 4.swap borradp
 [INFO] 00:53:04:892 HILO KERNEL/(29929:29931): memoria ocupada por la tabla 0 liberada
+[INFO] 02:51:49:421 HILO KERNEL/(12757:12774): hilo kernel iniciado
+[INFO] 02:53:03:886 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:53:03:886 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:53:03:886 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:53:03:886 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): Process id: 13
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): Espacio de direcciones: 512 
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 13, espacio de direcciones: 512
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): El proceso necesitara 8 paginas
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): tabla 1er nivel numero 0 creada
+[INFO] 02:53:03:925 HILO KERNEL/(12757:12774): puntero numero 0 creado, inicializado en 0
+[INFO] 02:53:05:925 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/13.swap creado
+[INFO] 02:53:05:927 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): Process id: 13 
+
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): Numero de primer tabla: 0
+[INFO] 02:53:18:988 HILO KERNEL/(12757:12774): Datos recibidos: process id 13, numero primer tabla 0
+[INFO] 02:53:20:990 HILO KERNEL/(12757:12774): archivo 13.swap borradp
+[INFO] 02:53:20:990 HILO KERNEL/(12757:12774): frame 0 liberado
+[INFO] 02:53:20:990 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 0 liberada
+[INFO] 02:53:20:991 HILO KERNEL/(12757:12774): Archivo 13.swap eliminado
+[INFO] 02:53:20:991 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 13 eliminada
+[INFO] 02:53:20:993 HILO KERNEL/(12757:12774): # Fin # 
+
+
+[INFO] 02:53:30:124 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:53:30:124 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:53:30:124 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): Process id: 16
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): Espacio de direcciones: 512 
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 16, espacio de direcciones: 512
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): El proceso necesitara 8 paginas
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): tabla 1er nivel numero 1 creada
+[INFO] 02:53:30:125 HILO KERNEL/(12757:12774): puntero numero 1 creado, inicializado en 0
+[INFO] 02:53:32:126 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/16.swap creado
+[INFO] 02:53:32:128 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): Process id: 16 
+
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): Numero de primer tabla: 1
+[INFO] 02:53:45:142 HILO KERNEL/(12757:12774): Datos recibidos: process id 16, numero primer tabla 1
+[INFO] 02:53:47:143 HILO KERNEL/(12757:12774): archivo 16.swap borradp
+[INFO] 02:53:47:143 HILO KERNEL/(12757:12774): frame 0 liberado
+[INFO] 02:53:47:143 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 1 liberada
+[INFO] 02:53:47:143 HILO KERNEL/(12757:12774): Archivo 16.swap eliminado
+[INFO] 02:53:47:143 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 16 eliminada
+[INFO] 02:53:47:148 HILO KERNEL/(12757:12774): # Fin # 
+
+
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): Process id: 17
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): Espacio de direcciones: 512 
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 17, espacio de direcciones: 512
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): El proceso necesitara 8 paginas
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): tabla 1er nivel numero 2 creada
+[INFO] 02:53:54:184 HILO KERNEL/(12757:12774): puntero numero 2 creado, inicializado en 0
+[INFO] 02:53:56:185 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/17.swap creado
+[INFO] 02:53:56:187 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): Process id: 17 
+
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): Numero de primer tabla: 2
+[INFO] 02:54:26:213 HILO KERNEL/(12757:12774): Datos recibidos: process id 17, numero primer tabla 2
+[INFO] 02:54:28:214 HILO KERNEL/(12757:12774): archivo 17.swap borradp
+[INFO] 02:54:28:214 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 2 liberada
+[INFO] 02:54:28:214 HILO KERNEL/(12757:12774): Archivo 17.swap eliminado
+[INFO] 02:54:28:215 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 17 eliminada
+[INFO] 02:54:28:217 HILO KERNEL/(12757:12774): # Fin # 
+
+
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): Process id: 18
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): Espacio de direcciones: 300 
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 18, espacio de direcciones: 300
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): El proceso necesitara 5 paginas
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): tabla 1er nivel numero 3 creada
+[INFO] 02:56:09:921 HILO KERNEL/(12757:12774): puntero numero 3 creado, inicializado en 0
+[INFO] 02:56:11:922 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/18.swap creado
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): Process id: 19
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): Espacio de direcciones: 300 
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 19, espacio de direcciones: 300
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): El proceso necesitara 5 paginas
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): tabla 1er nivel numero 4 creada
+[INFO] 02:56:11:925 HILO KERNEL/(12757:12774): puntero numero 4 creado, inicializado en 0
+[INFO] 02:56:13:926 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/19.swap creado
+[INFO] 02:56:13:927 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:56:13:927 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:13:927 HILO KERNEL/(12757:12774): # CREAR_TABLAS
+[INFO] 02:56:13:927 HILO KERNEL/(12757:12774): # Solicitud crear tablas (kernel) #
+[INFO] 02:56:13:927 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): Process id: 20
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): Espacio de direcciones: 300 
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): datos recibidos: 
+process id: 20, espacio de direcciones: 300
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): El proceso necesitara 5 paginas
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): La cantidad de tablas de 2do nivel necesaria es 2
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): Se crearon 2 tablas
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): Tablas de segundo nivel creadas
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): tabla 1er nivel numero 5 creada
+[INFO] 02:56:13:928 HILO KERNEL/(12757:12774): puntero numero 5 creado, inicializado en 0
+[INFO] 02:56:15:929 HILO KERNEL/(12757:12774): archivo /home/utnso/swap/20.swap creado
+[INFO] 02:56:15:929 HILO KERNEL/(12757:12774): # FIN CREAR_TABLAS 
+
+
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): Process id: 19 
+
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): Numero de primer tabla: 4
+[INFO] 02:56:21:935 HILO KERNEL/(12757:12774): Datos recibidos: process id 19, numero primer tabla 4
+[INFO] 02:56:23:936 HILO KERNEL/(12757:12774): archivo 19.swap borradp
+[INFO] 02:56:23:936 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 4 liberada
+[INFO] 02:56:23:936 HILO KERNEL/(12757:12774): Archivo 19.swap eliminado
+[INFO] 02:56:23:936 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 19 eliminada
+[INFO] 02:56:23:938 HILO KERNEL/(12757:12774): # Fin # 
+
+
+[INFO] 02:56:28:941 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): Process id: 20 
+
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): Numero de primer tabla: 5
+[INFO] 02:56:28:942 HILO KERNEL/(12757:12774): Datos recibidos: process id 20, numero primer tabla 5
+[INFO] 02:56:30:942 HILO KERNEL/(12757:12774): archivo 20.swap borradp
+[INFO] 02:56:30:943 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 5 liberada
+[INFO] 02:56:30:943 HILO KERNEL/(12757:12774): Archivo 20.swap eliminado
+[INFO] 02:56:30:943 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 20 eliminada
+[INFO] 02:56:30:948 HILO KERNEL/(12757:12774): # Fin # 
+
+
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): # FINALIZACION_PROCESO
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): # Solicitud finalizar proceso (kernel) #
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): Datos recibidos:
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): Process id: 18 
+
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): Numero de primer tabla: 3
+[INFO] 02:56:33:951 HILO KERNEL/(12757:12774): Datos recibidos: process id 18, numero primer tabla 3
+[INFO] 02:56:35:952 HILO KERNEL/(12757:12774): archivo 18.swap borradp
+[INFO] 02:56:35:952 HILO KERNEL/(12757:12774): memoria ocupada por la tabla 3 liberada
+[INFO] 02:56:35:952 HILO KERNEL/(12757:12774): Archivo 18.swap eliminado
+[INFO] 02:56:35:952 HILO KERNEL/(12757:12774): Memoria ocupada por el proceso 18 eliminada
+[INFO] 02:56:35:953 HILO KERNEL/(12757:12774): # Fin # 
+
+

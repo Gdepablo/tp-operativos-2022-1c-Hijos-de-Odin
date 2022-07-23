@@ -1,0 +1,7 @@
+[INFO] 02:53:18:988 log kernel/(12773:12780): Proceso 13 # Syscall recibida -> EXIT
+[INFO] 02:53:45:142 log kernel/(12773:12780): Proceso 16 # Syscall recibida -> EXIT
+[INFO] 02:54:26:213 log kernel/(12773:12780): Proceso 17 # Syscall recibida -> EXIT
+[INFO] 02:56:16:927 log kernel/(12773:12780): Proceso 18 # Syscall recibida -> I/O
+[INFO] 02:56:21:935 log kernel/(12773:12780): Proceso 19 # Syscall recibida -> EXIT
+[INFO] 02:56:28:941 log kernel/(12773:12780): Proceso 20 # Syscall recibida -> EXIT
+[INFO] 02:56:33:951 log kernel/(12773:12780): Proceso 18 # Syscall recibida -> EXIT
