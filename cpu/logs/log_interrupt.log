@@ -37108,3 +37108,4 @@
 [INFO] 21:06:58:557 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
 [INFO] 21:07:00:076 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
 [INFO] 21:07:02:786 CPU - INTERRUPT/(30820:30826): Se recibio una interrupcion de kernel
+[INFO] 21:56:09:017 CPU - INTERRUPT/(9761:9772): hilo interrupt iniciado

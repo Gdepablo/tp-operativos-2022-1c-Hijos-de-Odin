@@ -1,4 +1,30 @@
 No jueguen LOL, te quema la vida
 sem_post(&bala)
 sem_post(&parciales_malos)
-gordo_semaforos
+gordo_semaforos[INFO] 21:55:57:000 MEMORIA - MAIN/(9632:9632): se conecto con el kernel
+[INFO] 21:56:09:016 MEMORIA - MAIN/(9632:9632): se conecto con el CPU
+[INFO] 21:56:09:016 MEMORIA - MAIN/(9632:9632): datos de traduccion enviados al CPU
+[INFO] 21:56:09:016 MEMORIA - MAIN/(9632:9632): memoria inicializada con un tamaño de 10240
+[INFO] 21:56:09:016 MEMORIA - MAIN/(9632:9632): la cantidad de frames en esta ejecucion es de 40
+[INFO] 21:56:09:016 MEMORIA - MAIN/(9632:9632): bitmap creado con un tamaño de 40
+[INFO] 21:56:09:017 MEMORIA - MAIN/(9632:9773): hilo cpu iniciado
+[INFO] 21:56:36:192 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:56:36:192 MEMORIA - MAIN/(9632:9773): # SOLICITUD NUMERO DE TABLA 2
+[INFO] 21:56:36:233 MEMORIA - MAIN/(9632:9773): datos recibidos: numero_tabla_1er_nivel_leer 0 numero_de_entrada 0
+[INFO] 21:56:36:233 MEMORIA - MAIN/(9632:9773): Numero de tabla 2 encontrado: 0
+[INFO] 21:56:36:734 MEMORIA - MAIN/(9632:9773): # FIN SOLICITUD NUMERO DE TABLA 2 
+
+
+[INFO] 21:56:36:734 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:56:38:236 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:56:38:737 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:56:39:239 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:56:39:744 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #
+[INFO] 21:57:10:231 MEMORIA - MAIN/(9632:9773): 
+# SOLICITUD RECIBIDA DE CPU #

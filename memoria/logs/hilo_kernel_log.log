@@ -1,0 +1,44 @@
+[INFO] 21:56:09:017 HILO KERNEL/(9632:9770): hilo kernel iniciado
+[INFO] 21:56:34:647 HILO KERNEL/(9632:9770): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:56:34:647 HILO KERNEL/(9632:9770): # CREAR_TABLAS
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): datos recibidos: 
+process id: 4, espacio de direcciones: 500
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): El proceso necesitara 2 paginas
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): Se crearon 1 tablas
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): Tablas de segundo nivel creadas
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): tabla 1er nivel numero 0 creada
+[INFO] 21:56:34:685 HILO KERNEL/(9632:9770): puntero numero 0 creado, inicializado en 0
+[INFO] 21:56:35:686 HILO KERNEL/(9632:9770): archivo /home/utnso/swap/4.swap creado
+[INFO] 21:56:35:686 HILO KERNEL/(9632:9770): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:56:40:245 HILO KERNEL/(9632:9770): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:56:40:245 HILO KERNEL/(9632:9770): # FINALIZACION_PROCESO
+[INFO] 21:56:40:245 HILO KERNEL/(9632:9770): Datos recibidos: process id 4, numero primer tabla 0
+[INFO] 21:56:41:245 HILO KERNEL/(9632:9770): archivo 4.swap borradp
+[INFO] 21:56:41:245 HILO KERNEL/(9632:9770): frame 0 liberado
+[INFO] 21:56:41:245 HILO KERNEL/(9632:9770): memoria ocupada por la tabla 0 liberada
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): # CREAR_TABLAS
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): datos recibidos: 
+process id: 9, espacio de direcciones: 500
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): El proceso necesitara 2 paginas
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): La cantidad de tablas de 2do nivel necesaria es 1
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): Se crearon 1 tablas
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): Tablas de segundo nivel creadas
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): tabla 1er nivel numero 1 creada
+[INFO] 21:57:00:477 HILO KERNEL/(9632:9770): puntero numero 1 creado, inicializado en 0
+[INFO] 21:57:01:478 HILO KERNEL/(9632:9770): archivo /home/utnso/swap/9.swap creado
+[INFO] 21:57:01:478 HILO KERNEL/(9632:9770): # FIN CREAR_TABLAS 
+
+
+[INFO] 21:57:04:502 HILO KERNEL/(9632:9770): 
+# SOLICITUD RECIBIDA DE KERNEL #
+[INFO] 21:57:04:502 HILO KERNEL/(9632:9770): # FINALIZACION_PROCESO
+[INFO] 21:57:04:502 HILO KERNEL/(9632:9770): Datos recibidos: process id 9, numero primer tabla 1
+[INFO] 21:57:05:502 HILO KERNEL/(9632:9770): archivo 9.swap borradp
+[INFO] 21:57:05:502 HILO KERNEL/(9632:9770): memoria ocupada por la tabla 1 liberada
