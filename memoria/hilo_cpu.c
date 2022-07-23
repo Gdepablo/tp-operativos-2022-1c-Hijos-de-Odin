@@ -489,7 +489,7 @@ int calcular_numero_de_pagina_a_reemplazar(pagina_t* pagina_a_reemplazar, uint32
 		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
 
 		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
-			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 && (*puntero_a_tabla_2do_nivel)[j].numero_frame == 1){
+			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 && (*puntero_a_tabla_2do_nivel)[j].numero_frame == pagina_a_reemplazar->numero_frame){
 				contador = i * ENTRADAS_POR_TABLA + j;
 			}
 		}
