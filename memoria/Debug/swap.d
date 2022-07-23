@@ -1,1 +1,0 @@
-swap.o: ../swap.c
