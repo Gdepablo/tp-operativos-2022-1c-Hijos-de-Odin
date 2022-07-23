@@ -17,7 +17,6 @@ void* hilo_kernel(void* ptr_void_socket){
 	log_info(log_ejecucion_kernel, "hilo kernel iniciado");
 	sem_post(&escritura_log);
 
-	//atender peticiones del KERNEL
 	uint32_t OK = 100;
 	uint32_t codigo_recibido;
 	uint32_t process_id;
@@ -32,9 +31,7 @@ void* hilo_kernel(void* ptr_void_socket){
 		log_info(log_ejecucion_kernel, "\n# SOLICITUD RECIBIDA DE KERNEL #");
 		sem_post(&escritura_log);
 
-		// no sacar las llaves de los casem atte batata
 		switch(codigo_recibido){
-			// TESTEADO - FUNCIONA BIEN (o eso parece)
 			case crear_tablas:{
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "# CREAR_TABLAS");
@@ -42,11 +39,6 @@ void* hilo_kernel(void* ptr_void_socket){
 
 				printf("# Solicitud crear tablas (kernel) #\n");
 				printf("Datos recibidos: \n");
-				// recibe un PROCESS ID y TAMAÑO DEL ESPACIO DE DIRECCIONES
-				// basicamente un list add a la lista de tablas, y crear la cantidad de
-				// tablas de segundo nivel necesarias. Tambien se crea el archivo .swap
-
-				// recibo las cosas necesarias
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
 				recv(socket_kernel, &espacio_de_direcciones, sizeof(uint32_t), MSG_WAITALL);
@@ -56,10 +48,8 @@ void* hilo_kernel(void* ptr_void_socket){
 				log_info(log_ejecucion_kernel, "datos recibidos: \nprocess id: %i, espacio de direcciones: %i", process_id, espacio_de_direcciones);
 				sem_post(&escritura_log);
 
-				// hago la tarea necesaria
 				int num_tabla_creado = crear_tablas_necesarias(espacio_de_direcciones);
 				crear_archivo_swap(process_id);
-				//respondo con el numero de tabla creado
 
 				send(socket_kernel, &num_tabla_creado, sizeof(uint32_t), 0);
 				printf("# FIN CREAR TABLAS \n\n");
@@ -76,10 +66,6 @@ void* hilo_kernel(void* ptr_void_socket){
 
 				printf("# Solicitud suspender proceso (kernel) #\n");
 				printf("Datos recibidos: \n");
-				// sacar todos los frames del proceso que esten en memoria y actualizarlos en el
-				// swap si es necesario
-
-				// recibo las cosas necesarias para el laburo
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
@@ -89,7 +75,6 @@ void* hilo_kernel(void* ptr_void_socket){
 				sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "Datos recibidos: process id %i, numero_primer_tabla %i", process_id, numero_primer_tabla);
 				sem_post(&escritura_log);
-				// hago el laburo
 				suspender_proceso(process_id, numero_primer_tabla);
 				printf("Tablas suspendidas \n");
 
@@ -97,7 +82,6 @@ void* hilo_kernel(void* ptr_void_socket){
 					log_info(log_ejecucion_kernel, "Tablas suspendidas.");
 				sem_post(&escritura_log);
 
-				// se avisa que esta todo bien
 				send(socket_kernel, &OK, sizeof(uint32_t), 0);
 
 				sem_wait(&escritura_log);
@@ -114,7 +98,6 @@ void* hilo_kernel(void* ptr_void_socket){
 
 				printf("# Solicitud finalizar proceso (kernel) # \n");
 				printf("Datos recibidos: \n");
-				// borrar el .swap y sacar las entradas en memoria si es que hay.
 
 				recv(socket_kernel, &process_id, sizeof(uint32_t), MSG_WAITALL);
 				printf("Process id: %i \n", process_id);
@@ -124,7 +107,6 @@ void* hilo_kernel(void* ptr_void_socket){
 				log_info(log_ejecucion_kernel, "Datos recibidos: process id %i, numero primer tabla %i", process_id, numero_primer_tabla);
 				sem_post(&escritura_log);
 
-				// laburo
 				borrar_swap(process_id);
 				liberar_memoria(numero_primer_tabla);
 
@@ -146,13 +128,11 @@ void* hilo_kernel(void* ptr_void_socket){
 }
 
 
-/*
- * crea tanto la tabla de 1er nivel como las de segundo nivel que sean necesarias.
- */
+
 uint32_t crear_tablas_necesarias( uint32_t espacio_de_direcciones ){
 	int (*tabla)[ENTRADAS_POR_TABLA]= malloc(sizeof(int)*ENTRADAS_POR_TABLA);
 	for(int i=0 ; i < ENTRADAS_POR_TABLA ; i++){
-		(*tabla)[i] = -1; // facilita el momento de recorrer la tabla si tiene menos de ENTRADAS_POR_TABLA entradas
+		(*tabla)[i] = -1;
 	}
 	int cantidad_paginas_necesaria = calcular_cantidad_de_paginas(espacio_de_direcciones);
 
@@ -228,14 +208,12 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 	sem_wait(&escritura_log);
 		log_info(log_ejecucion_kernel, "# Suspendiendo procesos tabla %i", numero_primer_tabla);
 	sem_post(&escritura_log);
-	// empieza a ver cada posicion de la primer tabla hasta que haya un -1 o hasta que i == ENTRADAS_POR_TABLA
 	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
-		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+		if( (*puntero_a_tabla)[i] == -1 ) break;
 		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
 		sem_wait(&escritura_log);
 			log_info(log_ejecucion_kernel, "Mirando entrada %i de la tabla de primer nivel", i);
 		sem_post(&escritura_log);
-		// empieza a ver cada posicion de la tabla de segundo nivel
 		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
 			sem_wait(&escritura_log);
 				log_info(log_ejecucion_kernel, "Mirando entrada %i de la tabla de segundo nivel", j);
@@ -261,12 +239,10 @@ void suspender_proceso(uint32_t process_id, uint32_t numero_primer_tabla){
 void liberar_memoria(uint32_t numero_primer_tabla){
 	int (*puntero_a_tabla)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_primer_nivel, numero_primer_tabla);
 
-	// empieza a ver cada posicion de la primer tabla hasta que haya un -1 o hasta que i == ENTRADAS_POR_TABLA
 	for(int i = 0 ; i < ENTRADAS_POR_TABLA ; i++){
-		if( (*puntero_a_tabla)[i] == -1 ) break; // si hay un -1 entonces no hay mas tablas de 2do nivel
+		if( (*puntero_a_tabla)[i] == -1 ) break;
 		pagina_t (*puntero_a_tabla_2do_nivel)[ENTRADAS_POR_TABLA] = list_get(tabla_de_paginas_de_segundo_nivel, (*puntero_a_tabla)[i]);
 
-		// empieza a ver cada posicion de la tabla de segundo nivel
 		for(int j = 0 ; j < ENTRADAS_POR_TABLA; j++){
 			if( (*puntero_a_tabla_2do_nivel)[j].bit_presencia == 1 ){
 				(*puntero_a_tabla_2do_nivel)[j].bit_presencia = 0;
@@ -308,12 +284,6 @@ void* buscar_frame(uint32_t numero_de_frame){
 	return frame;
 }
 
-// ######################################################################################
-// 								ZONA SWAP Y ASOCIADOS
-// ######################################################################################
-
-// ATENCION: ESTO SOLAMENTE LO CREA. SI EXISTE UNO, ENTONCES LO VA A REEMPLAZAR
-// el archivo se crea en la carpeta swap
 void crear_archivo_swap(uint32_t process_id){
 	char* ruta_archivo = obtener_ruta_archivo(process_id);
 	printf("ruta archivo %s \n", ruta_archivo);
@@ -333,7 +303,6 @@ void crear_archivo_swap(uint32_t process_id){
 }
 
 void guardar_pagina_en_swap(pagina_t pagina, uint32_t process_id, uint32_t numero_de_pagina){
-	// abrir el archivo, leer el frame, guardar en la pagina correcta, yasta
 	char* ruta_archivo = obtener_ruta_archivo(process_id);
 	FILE* swap = fopen(ruta_archivo, "rb+");
 	void* frame_a_copiar = buscar_frame(pagina.numero_frame);

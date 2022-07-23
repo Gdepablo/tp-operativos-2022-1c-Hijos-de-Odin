@@ -5,7 +5,6 @@
 #include "variables_globales.h"
 
 
-// cosas compartidas xd fulbo
 void* memoria_real;
 pthread_t hiloKernel;
 sem_t hilo_iniciado; // = 0

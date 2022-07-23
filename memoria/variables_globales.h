@@ -21,7 +21,6 @@ uint32_t RETARDO_SWAP;
 char* PATH_SWAP;
 int ACCESOS_SWAP;
 
-// ENUM
 enum operaciones{
 	solicitud_num_tabla_2 ,
 	solicitud_num_frame ,
@@ -37,7 +36,7 @@ typedef struct {
 	uint32_t numero_frame;
 	uint32_t bit_presencia;
 	uint32_t bit_uso;
-	uint32_t bit_modificacion; // P U M
+	uint32_t bit_modificacion;
 } pagina_t;
 
 #endif
