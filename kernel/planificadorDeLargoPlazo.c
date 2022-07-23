@@ -3,17 +3,19 @@
 #include "planificadorDeLargoPlazo.h"
 #include "semaforos.h"
 
+t_log* log_largo_plazo = log_create("./../logs/log_largo_plazo.log", "log kernel", 0, LOG_LEVEL_INFO);
+
 void ingreso_a_new(t_pcb* pcb) {
 	sem_wait(&mx_cola_new);
 		queue_push(cola_new, pcb);
 	sem_post(&mx_cola_new);
 	printf("Proceso %i # Ingreso en new \n", pcb->id_proceso);
+	log_info(log_largo_plazo, "Proceso %i # Ingreso en new", pcb->id_proceso);
 
 	sem_post(&procesos_para_ready);
 }
 
 void* pasar_a_ready() {
-//	sem_post(&se_inicio_el_hilo);
 	while(1) {
 		sem_wait(&procesos_para_ready);
 		sem_wait(&grado_multiprogramacion);
@@ -37,6 +39,7 @@ void* pasar_a_ready() {
 				sem_post(&mx_lista_ready);
 			}
 			printf("Proceso %i # Ingreso en ready desde new \n", pcb->id_proceso);
+			log_info(log_largo_plazo, "Proceso %i # Ingreso en ready desde new", pcb->id_proceso);
 		}
 		else {
 			sem_wait(&mx_cola_suspended_ready);
@@ -47,14 +50,13 @@ void* pasar_a_ready() {
 				sem_wait(&mx_lista_ready);
 					queue_push(cola_ready, pcb);
 				sem_post(&mx_lista_ready);
-//				printf("PROCESO PASADO A READY DESDE SUSPENDED: %i \n", pcb->id_proceso);
 			} else {
 				sem_wait(&mx_lista_ready);
 					list_add(lista_ready, pcb);
 				sem_post(&mx_lista_ready);
-//				printf("PROCESO PASADO A READY DESDE SUSPENDED: %i \n", pcb->id_proceso);
 			}
 			printf("Proceso %i # Ingreso en ready desde suspendido \n", pcb->id_proceso);
+			log_info(log_largo_plazo, "Proceso %i # Ingreso en ready desde suspendido", pcb->id_proceso);
 		}
 		sem_post(&procesos_en_ready);
 	}
@@ -71,7 +73,8 @@ void crear_tabla_proceso(t_pcb* pcb){
 
 	recv(socket_memoria, &(pcb->tabla_paginas), sizeof(uint32_t), MSG_WAITALL);
 	
-	printf("Proceso %i # Tabla creada \n", pcb->id_proceso);
+	printf("Proceso %i # Tabla de páginas creada \n", pcb->id_proceso);
+	log_info(log_largo_plazo, "Proceso %i # Tabla de páginas creada", pcb->id_proceso);
 
 	sem_post(&esperando_respuesta_memoria);
 }
@@ -86,18 +89,18 @@ void executing_a_exit(t_syscall* syscall){
 
 	send( socket_memoria, &codop, sizeof(uint32_t), 0);
 	send( socket_memoria, &(syscall->pcb.id_proceso), sizeof(uint32_t), 0);
-//	printf("id proceso = %i \n", syscall->pcb.id_proceso);
 	send( socket_memoria, &(syscall->pcb.tabla_paginas), sizeof(uint32_t), 0);
-//	printf("ESPERANDO RESPUESTA \n");
 	recv( socket_memoria, &respuesta, sizeof(uint32_t), MSG_WAITALL);
 	sem_post(&esperando_respuesta_memoria);
 
 	if(respuesta == 100){
 		printf("Proceso %i # Memoria liberada \n", syscall->pcb.id_proceso);
+		log_info(log_largo_plazo, "Proceso %i # Memoria liberada", syscall->pcb.id_proceso);
 	}
 	else
 	{
 		printf("Proceso %i # No se pudo liberar la memoria \n", syscall->pcb.id_proceso);
+		log_error(log_largo_plazo, "Proceso %i # No se pudo liberar la memoria", syscall->pcb.id_proceso);
 	}
 
 	uint32_t OK = 10;
